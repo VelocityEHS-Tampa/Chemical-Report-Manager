@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewBag.Title = "Crestwood Transportation List";
+    string constring = crm.chemtelinc.com.Properties.Settings.Default.chemicalConnectionString; //Class-level variable containg the connection string to the database.
+    string constringTest = crm.chemtelinc.com.Properties.Settings.Default.chemicalTestConnectionString; //Class-level variable containg the connection string to the database.
+    List<string> names = new List<string>();
+    names = ChemicalLibrary.Search.GetTransportationNames(constring);
+}
+
+<h2>Crestwood Transportation List</h2>
+
+<br />
+<br />
+
+<div style="width: 49%; display:inline-block;">
+    Name
+    <input type="text" name="Name" id="Name" class="GLOFieldSpacing form-control" style="width:50%;" />
+    <br />
+    Email
+    <input type="text" name="Email" id="Email" class="GLOFieldSpacing form-control" style="width:50%;" />
+    <br />
+    <input type="checkbox" name="Indiana" id="Indiana" /> Indiana &nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="NewJersey" id="NewJersey" /> New Jersey&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="WestVirginia" id="WestVirginia" /> West Virginia
+    <br />
+    <input type="hidden" name="MemberID" id="MemberID" value="0" />
+    <input type="button" name="Add" value="Add" class="GLOFieldSpacing form-control" style="width:15%; font-weight: bold;" onclick="UpdateTransportList(this.value)" />
+    <input type="button" name="Update" value="Update" class="GLOFieldSpacing form-control" style="width: 15%; font-weight: bold;" onclick="UpdateTransportList(this.value)" />
+    <input type="button" name="Delete" value="Delete" class="GLOFieldSpacing form-control text-danger" style="width: 15%; font-weight: bold;" onclick="UpdateTransportList(this.value)" />
+</div>
+
+<div style="width: 49%; display: inline-block; vertical-align: top; ">
+    <select id="AgentsList" size="10" onchange="FillTransportForm(this.value)">
+        @foreach (string n in names)
+        {
+            <option value="@n">@n</option>
+        }
+    </select>
+</div>
+
+<script>
+    function FillTransportForm(Name) {
+        $.ajax({
+            url: '/Crestwood/TransportInfo',
+            data: { name: Name },
+            type: 'GET',
+            success: function (data) {
+                document.getElementById('MemberID').value = data.ID;
+                document.getElementById('Name').value = data.Name;
+                document.getElementById('Email').value = data.Email;
+                if (data.Indiana == 1) { document.getElementById('Indiana').checked = true; } else { document.getElementById('Indiana').checked = false; }
+                if (data.NewJersey == 1) { document.getElementById('NewJersey').checked = true; } else { document.getElementById('NewJersey').checked = false; }
+                if (data.WestVirginia == 1) { document.getElementById('WestVirginia').checked = true; } else { document.getElementById('WestVirginia').checked = false; }
+            }
+        })
+    }
+
+    function UpdateTransportList(btnvalue) {
+        var ID = document.getElementById('MemberID').value;
+        var Name = document.getElementById('Name').value;
+        var Email = document.getElementById('Email').value;
+        var Indiana = "";
+        var NewJersey = "";
+        var WestVirginia = "";
+        if (document.getElementById('Indiana').checked) { Indiana = 1 } else { Indiana = 0 };
+        if (document.getElementById('NewJersey').checked) { NewJersey = 1 } else { NewJersey = 0 };
+        if (document.getElementById('WestVirginia').checked) { WestVirginia = 1 } else { WestVirginia = 0 };
+
+        $.ajax({
+            url: '/Crestwood/UpdateTransport',
+            data: {ID: ID, Name: Name, Email: Email, Indiana: Indiana, NewJersey:NewJersey, WestVirginia:WestVirginia, btnType: btnvalue },
+            type: 'GET',
+            success: function (data) {
+                alert("Transport List has been successfully updated!");
+                window.location.reload();
+            },
+            error: function (data) {
+                alert("ERROR!");
+            }
+        });
+    }
+</script>

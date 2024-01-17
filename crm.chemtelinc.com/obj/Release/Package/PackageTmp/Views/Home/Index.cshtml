@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    string StringHourOfDay = DateTime.Now.ToShortTimeString().Substring(0, 2);
+    int IntHourOfDay = Int32.Parse(StringHourOfDay.Split(':')[0]);
+}
+
+@if (Session["Username"] == null && Session["FullName"] == null && Session["UserType"] == null)
+{
+    Html.RenderPartial("Login");
+}
+else
+{
+    <br />
+    <h4 style="text-align:center;">
+        @if (Request.QueryString["Result"] != null && Request.QueryString["Result"] == "Accepted")
+        {
+            <br />
+            <span class="alert-success">Your report was successfully submitted and emailed!</span>
+            <br />
+        }
+        else if (Request.QueryString["Result"] != null && Request.QueryString["Result"] == "BadRequest")
+        {
+            <br />
+            <span class="alert-warning">Your report has NOT been emailed, please try again.</span>
+            <br />
+        }
+    </h4>
+
+
+
+    <div class="OptionGroup">
+        <a href="@Url.Action("GLOReport", "GLO")" class="OptionGroupLink">
+            <div class="QuickSelectOption">
+                GLO Report
+            </div>
+        </a>
+        @*<a href="@Url.Action("TCEQReport", "TCEQ")" class="OptionGroupLink">
+                <div class="QuickSelectOption">
+                    TCEQ Report
+                </div>
+            </a>*@
+        <a href="@Url.Action("GeneralIncident", "Crestwood")" class="OptionGroupLink">
+            <div class="QuickSelectOption">
+                Crestwood General Incident Report
+            </div>
+        </a>
+        <a href="@Url.Action("PipelineReport", "Crestwood")" class="OptionGroupLink">
+            <div class="QuickSelectOption">
+                Crestwood Pipeline Report
+            </div>
+        </a>
+        <a href="@Url.Action("EightOneOneReport", "Crestwood")" class="OptionGroupLink">
+            <div class="QuickSelectOption">
+                Crestwood 811 Report
+            </div>
+        </a>
+        <a href="@Url.Action("LockedGateReport", "Crestwood")" class="OptionGroupLink">
+            <div class="QuickSelectOption">
+                Crestwood Locked Gate Report
+            </div>
+        </a>
+        <a href="@Url.Action("GeneralIncident", "OtherReports")" class="OptionGroupLink">
+            <div class="QuickSelectOption">
+                General Incident Report
+            </div>
+        </a>
+        <a href="@Url.Action("CleanShotReport", "OtherReports")" class="OptionGroupLink">
+            <div class="QuickSelectOption">
+                Clean Shot Report
+            </div>
+        </a>
+        <a href="@Url.Action("ShellOilReport", "OtherReports")" class="OptionGroupLink">
+            <div class="QuickSelectOption">
+                Shell Oil Report
+            </div>
+        </a>
+    </div>
+    <div class="OptionGroup">
+        @using (Html.BeginForm("LineReports", "GLO", FormMethod.Post))
+        {
+            <h3>Line and Monthly Reports</h3>
+            <hr />
+            <input type="radio" value="Line" name="ReportType" required="" /> <span>Line Report &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <input type="radio" value="Monthly" name="ReportType" required="" /> <span>Monthly Report </span>
+            <br />
+            <br />
+            <span>Start Date:</span> <input type="date" name="StartDate" required="" />
+            <br />
+            <br />
+            <span>End Date:</span> <input type="date" name="EndDate" />
+            <br />
+            <br />
+            <input type="submit" value="Generate Report" />
+        }
+    </div>
+}

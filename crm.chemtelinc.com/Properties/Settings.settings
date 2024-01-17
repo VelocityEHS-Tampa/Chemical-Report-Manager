@@ -1,0 +1,50 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="crm.chemtelinc.com.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="chemicalTestConnectionString" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;ConnectionString&gt;Data Source=chemdb1.c8ujbgtllu2u.us-east-2.rds.amazonaws.com;Initial Catalog=chemreportertest;Persist Security Info=True;User ID=admin;Password=LrtcXcIvlnNlWNDDeArq&lt;/ConnectionString&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=chemdb1.c8ujbgtllu2u.us-east-2.rds.amazonaws.com;Initial Catalog=chemreportertest;Persist Security Info=True;User ID=admin;Password=LrtcXcIvlnNlWNDDeArq</Value>
+    </Setting>
+    <Setting Name="StatesConnectionString" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;ConnectionString&gt;Data Source=chemdb1.c8ujbgtllu2u.us-east-2.rds.amazonaws.com;Initial Catalog=statesdb;Persist Security Info=True;User ID=admin;Password=LrtcXcIvlnNlWNDDeArq
+&lt;/ConnectionString&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=chemdb1.c8ujbgtllu2u.us-east-2.rds.amazonaws.com;Initial Catalog=statesdb;Persist Security Info=True;User ID=admin;Password=LrtcXcIvlnNlWNDDeArq
+</Value>
+    </Setting>
+    <Setting Name="chemicalConnectionString" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;ConnectionString&gt;Data Source=chemdb1.c8ujbgtllu2u.us-east-2.rds.amazonaws.com;Initial Catalog=chemreporter;Persist Security Info=True;User ID=admin;Password=LrtcXcIvlnNlWNDDeArq&lt;/ConnectionString&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=chemdb1.c8ujbgtllu2u.us-east-2.rds.amazonaws.com;Initial Catalog=chemreporter;Persist Security Info=True;User ID=admin;Password=LrtcXcIvlnNlWNDDeArq</Value>
+    </Setting>
+    <Setting Name="GoldmineConnectionString" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;ConnectionString&gt;Data Source=chemdb1.c8ujbgtllu2u.us-east-2.rds.amazonaws.com;Initial Catalog=Goldmine_Main;Persist Security Info=True;User ID=admin;Password=LrtcXcIvlnNlWNDDeArq&lt;/ConnectionString&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=chemdb1.c8ujbgtllu2u.us-east-2.rds.amazonaws.com;Initial Catalog=Goldmine_Main;Persist Security Info=True;User ID=admin;Password=LrtcXcIvlnNlWNDDeArq</Value>
+    </Setting>
+    <Setting Name="CustomSitesConnectionString" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;ConnectionString&gt;Data Source=chemdb1.c8ujbgtllu2u.us-east-2.rds.amazonaws.com;Initial Catalog=CustomSites;Persist Security Info=True;User ID=admin;Password=LrtcXcIvlnNlWNDDeArq&lt;/ConnectionString&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=chemdb1.c8ujbgtllu2u.us-east-2.rds.amazonaws.com;Initial Catalog=CustomSites;Persist Security Info=True;User ID=admin;Password=LrtcXcIvlnNlWNDDeArq</Value>
+    </Setting>
+    <Setting Name="VdocConnectionString" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;ConnectionString&gt;Data Source=chemdb1.c8ujbgtllu2u.us-east-2.rds.amazonaws.com;Initial Catalog=vdocs;Persist Security Info=True;User ID=admin;Password=LrtcXcIvlnNlWNDDeArq&lt;/ConnectionString&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=chemdb1.c8ujbgtllu2u.us-east-2.rds.amazonaws.com;Initial Catalog=vdocs;Persist Security Info=True;User ID=admin;Password=LrtcXcIvlnNlWNDDeArq</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

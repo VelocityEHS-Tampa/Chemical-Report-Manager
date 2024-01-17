@@ -1,0 +1,155 @@
+﻿@model IList<crm.chemtelinc.com.Models.MSDSSearch>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>MSDS Search</h2>
+
+<div class="GLOHeader" id="GRCPHeader">Control Panel</div>
+
+<div style="text-align:center;">
+    <br />
+    @using (Html.BeginForm("SearchMSDS", "MSDSSearch", FormMethod.Post))
+    {
+
+        <div style="width:25%; display:inline-block;">
+            <span>Search: </span>
+            <input type="text" name="Search" id="Search" value="@ViewBag.SearchTerm"/>
+        </div>
+
+        <div style="width: 25%; display: inline-block;">
+            <span>By: </span>
+            <select name="SearchBy" id="SearchBy">
+                <option value="Product Name/Product Number">Product Name/Product Number</option>
+                <option value="Company">Company</option>
+                <option value="Product Name">Product Name</option>
+                <option value="Language">Language</option>
+                <option value="Manufacturer">Manufacturer</option>
+                <option value="Product Number">Product Number</option>
+                <option value="Date">Date</option>
+            </select>
+        </div>
+
+        <div style="text-align: left; width: 10%; display: inline-block;">
+            <span>
+                <a href="#" onclick="ToggleAdvSearch()">Advanced Search</a>
+            </span>
+        </div>
+
+        <div style="width: 25%; display: inline-block;">
+            <input type="submit" name="SearchBtn" id="SearchBtn" value="Search" />
+            <input type="button" name="RefreshBtn" id="RefreshBtn" value="Refresh" onclick="RefreshPage()" />
+            <input type="button" name="ViewMSDS" id="ViewMSDS" value="View MSDS" onclick="MSDSView()">
+        </div>
+
+
+        <div id="AdvSearchBlock">
+            <hr />
+            <div style="width:20%; display:inline-block;">
+                <span>Search: </span>
+                <input type="text" name="AdvSearch" id="Search" value="@ViewBag.AdvSearchTerm" />
+            </div>
+
+            <div style="width: 15%; display: inline-block;">
+                <span>By: </span>
+                <select name="AdvSearchBy" id="AdvSearchBy">
+                    <option value=""></option>
+                    <option value="Company">Company</option>
+                    <option value="ProductName">Product Name</option>
+                    <option value="Language">Language</option>
+                    <option value="Manufacturer">Manufacturer</option>
+                    <option value="ProductNumber">Product Number</option>
+                    <option value="Date">Date</option>
+                </select>
+            </div>
+
+            <div style="width:20%; display:inline-block;">
+                <span>Order By: </span>
+                <select name="AdvSortBy" id="AdvSortBy">
+                    <option value=""></option>
+                    <option value="Company">Company</option>
+                    <option value="ProductName">Product Name</option>
+                    <option value="Language">Language</option>
+                    <option value="Manufacturer">Manufacturer</option>
+                    <option value="ProductNumber">Product Number</option>
+                </select>
+            </div>
+
+            <div style="width:20%; display:inline-block;">
+                <span>Sort Order: </span>
+                &nbsp;&nbsp;&nbsp;
+                <input type="radio" name="AdvSortOrder" id="AdvSortOrder" value="ASC" />ASC
+                <input type="radio" name="AdvSortOrder" id="AdvSortOrder" value="DESC" />DESC
+            </div>
+        </div>
+    }
+</div>
+<br />
+<div class="GLOHeader" id="GRCPHeader">MSDS Search Results - <b>@Model.Count() Records</b></div>
+<table cellpadding="5" class="MSDSSearchTable">
+    <tr>
+        <th></th>
+        <th>Company</th>
+        <th>Product Name</th>
+        <th>Language</th>
+        <th>Manufacturer</th>
+        <th>Product Number</th>
+        <th>Date</th>
+        <th>MIS</th>
+        <th>File Name</th>
+        <th>Common Name</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <input type="radio" name="SelectedMSDS_@item.ID" value="@item.ID" onclick="FillMSDSInfo('@item.Company', '@item.MIS', '@item.FileName')" />
+            </td>
+            <td>@item.Company</td>
+            <td>@item.ProductName</td>
+            <td>@item.Language</td>
+            <td>@item.Manufacturer</td>
+            <td>@item.ProductNumber</td>
+            <td>@item.Date</td>
+            <td>@item.MIS</td>
+            <td>@item.FileName</td>
+            <td>@item.CommonName</td>
+        </tr>
+    }
+</table>
+
+<input type="hidden" name="SelectedCompany" id="SelectedCompany" />
+<input type="hidden" name="SelectedMIS" id="SelectedMIS" />
+<input type="hidden" name="SelectedFileName" id="SelectedFileName" />
+
+<script>
+
+    $(document).ready(function () {
+        if ("@ViewBag.AdvSearchTerm" != "") {
+            $("#AdvSearchBlock").show();
+        } else {
+            $("#AdvSearchBlock").hide();
+        }
+    });
+
+    function RefreshPage() {
+        location.href = "/MSDSSearch/Index";
+    }
+
+    function ToggleAdvSearch() {
+        $("#AdvSearchBlock").slideToggle();
+    }
+
+    function FillMSDSInfo(Company, MIS, FileName) {
+        document.getElementById("SelectedCompany").value = Company;
+        document.getElementById("SelectedMIS").value = MIS;
+        document.getElementById("SelectedFileName").value = FileName;
+    }
+
+    function MSDSView() {
+        var Company = document.getElementById("SelectedCompany").value;
+        var MIS = document.getElementById("SelectedMIS").value;
+        var FileName = document.getElementById("SelectedFileName").value;
+        window.open("https://crm.chemtel.net/MSDS/" + Company + "-" + MIS + "/" + FileName, '_blank');
+    }
+</script>

@@ -1,0 +1,16 @@
+﻿@{
+    using (Html.BeginForm("UserChanges", "ManagerTools", FormMethod.Post))
+    {
+        <div style="width:25%; margin:0 auto;">
+            <input type="text" name="Name" id="Name" placeholder="Name *" class="form-control" required=""/> <br />
+            <input type="text" name="username" id="username" placeholder="Username *" class="form-control"  required=""/><br />
+            <input type="password" name="password" id="password" placeholder="Password *" class="form-control"  required=""/><br />
+            Type: *<br />
+            Manager User <input type="radio" value="Manager" name="UserOptions"  required=""/><br />
+            Basic User <input type="radio" value="User" name="UserOptions"  required=""/><br /><br />
+            <input type="submit" name="submit" id="submit" value="Submit Changes" class="form-control" /><br />
+            <span class="text-info">* - Required Field(s)</span>
+        </div>
+    }
+
+}

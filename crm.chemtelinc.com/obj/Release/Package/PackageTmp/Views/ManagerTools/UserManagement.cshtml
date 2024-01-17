@@ -1,0 +1,56 @@
+﻿@{ 
+    string constring = crm.chemtelinc.com.Properties.Settings.Default.chemicalConnectionString; //Class-level variable containg the connection string to the database.
+    string constringTest = crm.chemtelinc.com.Properties.Settings.Default.chemicalTestConnectionString; //Class-level variable containg the connection string to the database.
+    List<string> Users = ChemicalLibrary.Search.GetUsers(constring);
+}
+
+@using (Html.BeginForm("UserChanges", "ManagerTools", FormMethod.Post))
+{
+    <div style="width:25%; margin:0 auto;">
+        Username: 
+        <select name="username" id="username" class="form-control" onchange="GetUserInfo(this.value)">
+            <option value=""></option>
+            @foreach (string u in Users)
+            {
+                <option value="@u">@u</option>
+            }
+        </select>
+        <br />
+        
+        <input type="text" name="Name" id="Name" placeholder="Name *" class="form-control" required=""/> <br />
+        
+        <input type="password" name="password" id="password" placeholder="Password *" class="form-control" /><br />
+        
+        Account Type: *<br />
+        <select name="UserOptions" id="UserOptions"  required="">
+            <option value=""></option>
+            <option value="User">User</option>
+            <option value="Manager">Manager</option>
+        </select>
+        
+        <br /><br />
+        
+        <input type="submit" name="submit" id="submit" value="Submit Changes" class="form-control btn-success" /><br />
+        <input type="submit" name="submit" id="Remove" value="Remove User" class="form-control btn-danger" /><br />
+        
+        <span>* - Required Field(s)</span>
+    </div>
+}
+
+
+<script>
+    function GetUserInfo(username) {
+        $.ajax({
+            url: '/ManagerTools/GetUserInfo/',
+            data: { username: username },
+            type: 'GET',
+            success: function (data) {
+                document.getElementById("Name").value = data.Name;
+                document.getElementById("UserOptions").value = data.UserType;
+            },
+            error: function (data) {
+                alert("ERROR!");
+            }
+        })
+    }
+</script>

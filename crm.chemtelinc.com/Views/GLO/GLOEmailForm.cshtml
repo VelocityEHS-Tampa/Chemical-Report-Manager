@@ -1,0 +1,269 @@
+﻿@model ChemicalLibrary.GLOBaseReportData
+@{
+    ViewBag.Title = "GLOEmailForm";
+    string corrected = ViewBag.Corrected;
+    string ReminderLbl = ViewBag.ReminderLbl;
+    string Subject = ViewBag.Subject;
+    string FilePath = ViewBag.FilePath;
+}
+
+<h2>GLO Email Form</h2>
+
+<br />
+@if (Model != null)
+{
+    using (Html.BeginForm("CorrectedGLO", "GLO", FormMethod.Post))
+    {
+        <input type="hidden" value="@Model.Spill_ID" name="cbsearch" id="cbsearch" />
+        <input type="submit" value="Back To Report" name="UpdateOrCorrect" />
+    }
+}
+@*<a href="javascript:void(0);" id="backLink" style="font-weight:bold;"> &#8592; Back to Report</a>*@
+<br />
+<br />
+
+@using (Html.BeginForm("SendGLOEmail", "GLO", FormMethod.Post, new { @id = "GLOEmailForm" }))
+{
+    @* Email Options (GLO, TCEQ, RRC, Other) *@
+    <div class="GLOHeader" id="GRCPHeader">Agency Contacts</div>
+    <br />
+    <label id="ReminderLbl" style="color:red;font-weight:600;">@ReminderLbl</label>
+    <div style="text-align:center;">
+        <div style="display:inline-block; width:24%">
+            <h3>GLO</h3>
+            <select name="lbglo" id="lbglo" size="10" class="GLOEmailScrollBars" onchange="GetGLOEmails(this.value)">
+            </select>
+        </div>
+        <div style="display: inline-block; width: 24%">
+            <h3>TCEQ</h3>
+            <select name="lbtceq" id="lbtceq" size="10" style="width: 90%;" onchange="GetTCEQEmails(this.value)">
+            </select>
+        </div>
+        <div style="display: inline-block; width: 24%">
+            <h3>RRC</h3>
+            <select name="lbrrc" id="lbrrc" size="10" class="GLOEmailScrollBars" onchange="GetRRCEmails(this.value)">
+            </select>
+        </div>
+        <div style="display: inline-block; width: 24%">
+            <h3>Other</h3>
+            <select name="lbother" id="lbother" size="10" class="GLOEmailScrollBars" onchange="GetOtherEmails(this.value)">
+            </select>
+        </div>
+    </div>
+    <br />
+    <br />
+    <div class="GLOHeader" id="GRCPHeader">Message</div>
+    <br />
+    <label>To Emails</label>
+    <br />
+    <textarea name="txtEmails" id="txtEmails" class="form-control GLOFieldSpacing"></textarea>
+    <input type="button" value="Clear Emails" onclick="ClearEmails()" style="float:right;" />
+    <br />
+    <br />
+    <label>Email Subject</label>
+    <input type="text" name="txtemailsubject" id="txtemailsubject" class="form-control GLOFieldSpacing" value="@Subject" />
+    <br />
+    <label>Attachments</label>
+    <input type="text" name="txtemailattachment" id="txtemailattachment" class="form-control GLOFieldSpacing" value="@FilePath" />
+    <br />
+    <label>Email Body</label>
+    <textarea name="txtemailbody" id="txtemailbody" class="form-control GLOFieldSpacing"></textarea>
+    <br />
+    <div style="text-align:center;">
+        <input type="submit" value="Send" class="form-control GLOFieldSpacing" id="SubmitBtn" style="width:25%;color:red;font-weight:600;" />
+    </div>
+}
+
+<script>
+    $(document).ready(function () {
+
+        window.open("@ViewBag.GLOReportPath");
+
+        //Fill GLO Email list
+        var xglo = document.getElementById("lbglo");
+        $.ajax({
+            url: '/GLO/fillGLO/',
+            type: 'GET',
+            success: function (data) {
+                const emails = data.split(',');
+                emails.forEach(function (item) {
+                    var option = document.createElement("option");
+                    option.value = item;
+                    option.text = item;
+                    xglo.add(option);
+                })
+            },
+            error: function (data) {
+                alert("ERROR!");
+            }
+        });
+        //Fill TCEQ Email list
+        var xtceq = document.getElementById("lbtceq");
+        $.ajax({
+            url: '/GLO/fillTCEQ/',
+            type: 'GET',
+            success: function (data) {
+                const emails = data.split(',');
+                emails.forEach(function (item) {
+                    var option = document.createElement("option");
+                    option.value = item;
+                    option.text = item;
+                    xtceq.add(option);
+                })
+            },
+            error: function (data) {
+                alert("ERROR!");
+            }
+        });
+        //Fill RRC Email list
+        var xrrc = document.getElementById("lbrrc");
+        $.ajax({
+            url: '/GLO/fillRRC/',
+            type: 'GET',
+            success: function (data) {
+                const emails = data.split(',');
+                emails.forEach(function (item) {
+                    var option = document.createElement("option");
+                    option.value = item;
+                    option.text = item;
+                    xrrc.add(option);
+                })
+            },
+            error: function (data) {
+                alert("ERROR!");
+            }
+        });
+        //Fill Other Email list
+        var xother = document.getElementById("lbother");
+        $.ajax({
+            url: '/GLO/fillOther/',
+            type: 'GET',
+            success: function (data) {
+                const emails = data.split(',');
+                emails.forEach(function (item) {
+                    var option = document.createElement("option");
+                    option.value = item;
+                    option.text = item;
+                    xother.add(option);
+                })
+            },
+            error: function (data) {
+                alert("ERROR!");
+            }
+        });
+
+    });
+
+    $(document).on('click', '#backLink', function () {
+        history.go(-1);
+    });
+
+    function ClearEmails() {
+        $('#txtEmails').empty();
+    }
+    function GetGLOEmails(Selected) {
+        if (Selected == "A GLO Line Report") {
+            GLOCoreEmails();  //Get the Core GLO Emails
+            rrcHQOnlyEmails(); //Get RRC Emails
+            tceqRegionsOnlyEmails(); //Get TCEQ Regions Only
+        } else if (Selected == "GLO HQ") {
+            getEmailsByselection(Selected);
+        } else {
+            getEmailsByselection(Selected);
+            GLOCoreEmails();  //Get the Core GLO Emails
+        }
+    }
+    function GetTCEQEmails(selected) {
+        if (selected == "TCEQ HQ") {
+            getEmailsByselection(selected);
+        } else {
+            if (confirm("Do you want the group?")) {
+                GLOCoreEmails();  //Get the Core GLO Emails
+                getEPAEmails(); // Get EPA Emails
+            }
+            getEmailsByselection(selected);
+        }
+    }
+    function GetRRCEmails(selected) {
+        if (selected == "RRC HQ") {
+            getEmailsByselection(selected);
+        } else {
+            if (confirm("Do you want the group?")) {
+                GLOCoreEmails();  //Get the Core GLO Emails
+                rrcHQOnlyEmails();
+            }
+            getEmailsByselection(selected);
+        }
+    }
+    function GetOtherEmails(selected) {
+        getEmailsByselection(selected);
+    }
+
+    //Stand alone email functions
+    function GLOCoreEmails() {
+        //Get the Core GLO Emails
+        $.ajax({
+            url: '/GLO/coreGLO/',
+            type: 'GET',
+            success: function (data) {
+                $('#txtEmails').append(data);
+            },
+            error: function (data) {
+                alert("ERROR!");
+            }
+        });
+    }
+    function rrcHQOnlyEmails() {
+        //Get the Core GLO Emails
+        $.ajax({
+            url: '/GLO/rrcHQOnly/',
+            type: 'GET',
+            success: function (data) {
+                $('#txtEmails').append(data);
+            },
+            error: function (data) {
+                alert("ERROR!");
+            }
+        });
+    }
+    function tceqRegionsOnlyEmails() {
+        //Get the Core GLO Emails
+        $.ajax({
+            url: '/GLO/tceqRegionsOnly/',
+            type: 'GET',
+            success: function (data) {
+                $('#txtEmails').append(data);
+            },
+            error: function (data) {
+                alert("ERROR!");
+            }
+        });
+    }
+    function getEPAEmails() {
+        //Get the Core GLO Emails
+        $.ajax({
+            url: '/GLO/epaOnly/',
+            type: 'GET',
+            success: function (data) {
+                $('#txtEmails').append(data);
+            },
+            error: function (data) {
+                alert("ERROR!");
+            }
+        });
+    }
+    function getEmailsByselection(selected) {
+        //Get the Core GLO Emails
+        $.ajax({
+            url: '/GLO/getEmailsByselection/',
+            data: {name: selected},
+            type: 'GET',
+            success: function (data) {
+                $('#txtEmails').append(data);
+            },
+            error: function (data) {
+                alert("ERROR!");
+            }
+        });
+    }
+</script>

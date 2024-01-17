@@ -1,0 +1,209 @@
+﻿
+@{
+    ViewBag.Title = "ShellOilReport";
+    //Get the time right now and convert it to central time.
+    DateTime ConvertedTime = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time"));
+    string NewTime = ConvertedTime.ToString("HH:mm");
+}
+
+<h2>Shell Oil Report</h2>
+
+
+<div id="FormButtons" style="padding:2%;text-align:right;">
+    <input type="submit" value="Submit" class="form-control GRCPButtons required-field" id="btnsubmit" name="btnsubmit" onclick="SubmitForm()" tabindex="99">
+    <input type="button" value="Cancel" class="form-control GRCPButtons alert-info" id="btnclose" name="btnclose" onclick="ClearForm()">
+</div>
+@using (Html.BeginForm("SubmitShellReport", "OtherReports", FormMethod.Post, new { @id = "ShellReportForm", @name = "ShellReportForm" }))
+{
+
+    <div id="ShellOilSearch" style="font-size: 10pt;">
+        <div class="GLOHeader" id="GRCPHeader" style="font-size: 10pt;">Shell Oil Incident Report Search</div>
+        <br />
+        <span>Search </span> <input type="text" id="IDSearch" class="form-control GLOFieldSpacing" style="width:20%;" /> <input type="button" value="Search" class="form-control GLOFieldSpacing" style="width:10%;" />
+    </div>
+    <div id="ShellReportInfo" style="font-size: 10pt;">
+        <br />
+        <div class="GLOHeader" id="GRCPHeader" style="font-size: 10pt;">Report Information and Caller Information</div>
+        <br />
+        <div class="CrestInlineDisplay" style="width:50%;">
+            <span>Report Information</span>
+            <hr />
+            <span class="required-field">ERS Operator</span> <input type="text" id="txtersoperator" name="txtersoperator" class="form-control GLOFieldSpacing" style="width:50%;" value="@Session["Username"]" readonly=""/> <br />
+            <span class="required-field">Incident ID</span><input type="text" id="txtincidentid" name="txtincidentid" class="form-control GLOFieldSpacing" style="width:50%;"  readonly=""/> <br />
+            <span class="required-field">Date</span><input type="text" id="txtdate" name="txtdate" class="form-control GLOFieldSpacing" style="width:30%;" value="@DateTime.Now.ToShortDateString()" placeholder="__/__/____" tabindex="1"/> <br />
+            <span class="required-field">Time</span><input type="text" id="txttime" name="txttime" class="form-control GLOFieldSpacing" style="width:30%;" value="@NewTime" placeholder="__:__" tabindex="2"/> <br />
+        </div>
+        <div class="CrestInlineDisplay" style="width:49%;">
+            <span>Caller Information</span>
+            <hr />
+            <span class="required-field">Caller Name</span> <input type="text" id="txtcallername" name="txtcallername" class="form-control GLOFieldSpacing" style="width:75%;" tabindex="3"/> <br />
+            <span class="required-field">Phone #</span> <input type="text" id="txtphone" name="txtphone" class="form-control GLOFieldSpacing" style="width:30%;" placeholder="(___) ___-____" onblur="FormatPhone(this.value, this.id)" tabindex="3"/> <span>Ext</span><input type="text" id="txtext" name="txtext" class="form-control GLOFieldSpacing" style="width:20%;" tabindex="4"/>
+            <br />
+            <span class="required-field">Alt Phone #</span> <input type="text" id="txtaltphone" name="txtaltphone" class="form-control GLOFieldSpacing" style="width: 30%;"  placeholder="(___) ___-____" onblur="FormatPhone(this.value, this.id)" tabindex="5"/> <span>Ext</span><input type="text" id="txtaltext" name="txtaltext" class="form-control GLOFieldSpacing" style="width: 20%;" tabindex="6"/>
+        </div>
+    </div>
+    <div id="ShellOilComments" style="font-size: 10pt;">
+        <br />
+        <div class="GLOHeader" id="GRCPHeader" style="font-size: 10pt;">Comments</div>
+        <br />
+        <textarea rows="6" id="txtcomments" name="txtcomments" style="width:100%;" tabindex="7"></textarea>
+    </div>
+    <div id="ShellOilStaffInfo" style="font-size: 10pt;">
+        <br />
+        <div class="GLOHeader" id="GRCPHeader">Staff Information</div>
+        <br />
+        <span class="required-field">Staff Name</span> <input type="text" id="txtstaffname" name="txtstaffname" class="form-control GLOFieldSpacing" list="Staff" style="width:15%;" onchange="FillStafferForm(this.value)" tabindex="8"/>
+        <span class="required-field">Phone #</span> <input type="text" id="txtstaffphone" name="txtstaffphone" class="form-control GLOFieldSpacing" style="width:15%;" placeholder="(___) ___-____" onblur="FormatPhone(this.value, this.id)" tabindex="9"/>
+        <span>Ext</span> <input type="text" id="txtstaffext" name="txtstaffext" class="form-control GLOFieldSpacing" style="width:10%;" tabindex="10"/>
+        <br />
+        <span class="required-field">Report Time</span> <input type="text" id="txtstafftime" name="txtstafftime" class="form-control GLOFieldSpacing" style="width:10%;" onblur="FormatTime(this.value, this.id)" tabindex="11"/>
+
+        <h5 class="required-field" style="float:right;">E-mail a copy of report to the Crisis Management team ASAP!</h5>
+    </div>
+    <div id="FollowUpInfo" style="font-size: 10pt;">
+        <br />
+        <div class="GLOHeader" id="GRCPHeader">Follow-Up Information</div>
+        <br />
+        <div class="CrestInlineDisplay" style="width:10%;">
+            <span>Follow Up Name</span><br />
+            <input type="text" list="Staff" class="form-control GLOFieldSpacing" id="txtfollowupname1" name="txtfollowupname1" onchange="FillFollowUpForm(this.value, 1)" tabindex="12"/>
+            <input type="text" list="Staff" class="form-control GLOFieldSpacing" id="txtfollowupname2" name="txtfollowupname2" onchange="FillFollowUpForm(this.value, 2)" tabindex="17"/>
+            <input type="text" list="Staff" class="form-control GLOFieldSpacing" id="txtfollowupname3" name="txtfollowupname3" onchange="FillFollowUpForm(this.value, 3)" tabindex="22"/>
+            <input type="text" list="Staff" class="form-control GLOFieldSpacing" id="txtfollowupname4" name="txtfollowupname4" onchange="FillFollowUpForm(this.value, 4)" tabindex="27"/>
+            <input type="text" list="Staff" class="form-control GLOFieldSpacing" id="txtfollowupname5" name="txtfollowupname5" onchange="FillFollowUpForm(this.value, 5)" tabindex="32"/>
+        </div>
+        <div class="CrestInlineDisplay" style="width:10%;">
+            <span>Phone #</span><br />
+            <input type="text" class="form-control GLOFieldSpacing" placeholder="(___) ___-____" id="txtfollowupphone1" name="txtfollowupphone1" onblur="FormatPhone(this.value, this.id)" tabindex="13" />
+            <input type="text" class="form-control GLOFieldSpacing" placeholder="(___) ___-____" id="txtfollowupphone2" name="txtfollowupphone2" onblur="FormatPhone(this.value, this.id)" tabindex="18" />
+            <input type="text" class="form-control GLOFieldSpacing" placeholder="(___) ___-____" id="txtfollowupphone3" name="txtfollowupphone3" onblur="FormatPhone(this.value, this.id)" tabindex="23" />
+            <input type="text" class="form-control GLOFieldSpacing" placeholder="(___) ___-____" id="txtfollowupphone4" name="txtfollowupphone4" onblur="FormatPhone(this.value, this.id)" tabindex="28" />
+            <input type="text" class="form-control GLOFieldSpacing" placeholder="(___) ___-____" id="txtfollowupphone5" name="txtfollowupphone5" onblur="FormatPhone(this.value, this.id)" tabindex="33" />
+
+            <input type="hidden" id="txtfollowupemail1" name="txtfollowupemail1" value="" tabindex="14" />
+            <input type="hidden" id="txtfollowupemail2" name="txtfollowupemail2" value="" tabindex="19" />
+            <input type="hidden" id="txtfollowupemail3" name="txtfollowupemail3" value="" tabindex="24" />
+            <input type="hidden" id="txtfollowupemail4" name="txtfollowupemail4" value="" tabindex="29" />
+            <input type="hidden" id="txtfollowupemail5" name="txtfollowupemail5" value="" tabindex="34" />
+        </div>
+        <div class="CrestInlineDisplay" style="width:10%;">
+            <span>Ext</span><br />
+            <input type="text" class="form-control GLOFieldSpacing" id="txtfollowupext1" name="txtfollowupext1" tabindex="15" />
+            <input type="text" class="form-control GLOFieldSpacing" id="txtfollowupext2" name="txtfollowupext2" tabindex="20" />
+            <input type="text" class="form-control GLOFieldSpacing" id="txtfollowupext3" name="txtfollowupext3" tabindex="25" />
+            <input type="text" class="form-control GLOFieldSpacing" id="txtfollowupext4" name="txtfollowupext4" tabindex="30" />
+            <input type="text" class="form-control GLOFieldSpacing" id="txtfollowupext5" name="txtfollowupext5" tabindex="35" />
+        </div>
+        <div class="CrestInlineDisplay" style="width:5%;">
+            <span>Time</span><br />
+            <input type="text" class="form-control GLOFieldSpacing" id="txtfollowuptime1" name="txtfollowuptime1" placeholder="__:__" onblur="FormatTime(this.value, this.id)" tabindex="16" />
+            <input type="text" class="form-control GLOFieldSpacing" id="txtfollowuptime2" name="txtfollowuptime2" placeholder="__:__" onblur="FormatTime(this.value, this.id)" tabindex="21" />
+            <input type="text" class="form-control GLOFieldSpacing" id="txtfollowuptime3" name="txtfollowuptime3" placeholder="__:__" onblur="FormatTime(this.value, this.id)" tabindex="26" />
+            <input type="text" class="form-control GLOFieldSpacing" id="txtfollowuptime4" name="txtfollowuptime4" placeholder="__:__" onblur="FormatTime(this.value, this.id)" tabindex="31" />
+            <input type="text" class="form-control GLOFieldSpacing" id="txtfollowuptime5" name="txtfollowuptime5" placeholder="__:__" onblur="FormatTime(this.value, this.id)" tabindex="36" />
+        </div>
+        <div class="CrestInlineDisplay" style="width:55%; text-align:right;">
+            <span style="font-weight:bold; font-size:12pt;">Document any calls or actions that you take in response to this emergency call.</span>
+        </div>
+    </div>
+
+    @* Staff Name List *@
+<datalist id="Staff">
+    <option value="Jeff Bowes">Jeff Bowes</option>
+    <option value="Greg Hallet">Greg Hallet</option>
+    <option value="Tom Hopkins">Tom Hopkins</option>
+    <option value="Tim Langford">Tim Langford</option>
+    <option value="Shane Stuntz">Shane Stuntz</option>
+</datalist>
+}
+
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: '/OtherReports/GetNewShellID/',
+            type: 'GET',
+            success: function (data) {
+                $("#txtincidentid").val(data.NewID);
+            },
+            error: function (data) {
+                alert("ERROR!");
+            }
+        })
+    });
+
+    function SubmitForm() {
+        if (confirm("Please ensure all data entered is correct before submitting! Are you sure you want to submit this report?")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    function ClearForm() {
+        if (confirm("Are you sure you want to cancel this report?")) {
+            location.href = "";
+        }
+    }
+    function FormatDate(Date, FieldName) {
+        //Purely number input, no slashes.
+        if (Date.length == 8 && !Date.includes("/")) {
+            var ds = Date.split("");
+            var fulldate = ds[0] + ds[1] + "/" + ds[2] + ds[3] + "/" + ds[4] + ds[5] + ds[6] + ds[7];
+            document.getElementById(FieldName).value = fulldate;
+        }
+    }
+    function FormatTime(Time, FieldName) {
+        //Purely number input, no semi-colons.
+        if (Time.length == 4 && !Time.includes(":")) {
+            var ts = Time.split("");
+            var fulltime = ts[0] + ts[1] + ":" + ts[2] + ts[3];
+            document.getElementById(FieldName).value = fulltime;
+        }
+    }
+    function FormatPhone(Phone, FieldName) {
+        //Purely number input, no parenthesis, no hyphens.
+        if (Phone.length == 10 && !Phone.includes("-") && !Phone.includes("(") && !Phone.includes(")")) {
+            var ps = Phone.split("");
+            var fullphone = "(" + ps[0] + ps[1] + ps[2] + ") " + ps[3] + ps[4] + ps[5] + "-" + ps[6] + ps[7] + ps[8] + ps[9]
+            document.getElementById(FieldName).value = fullphone;
+        }
+    }
+    function FillFollowUpForm(Name, FollowUpNumber) {
+        if (Name == "Jeff Bowes") {
+            document.getElementById("txtfollowupphone" + FollowUpNumber).value = "(403) 465-0547";
+            document.getElementById("txtfollowupemail" + FollowUpNumber).value = "Jeffrey.bowes@shell.com";
+        }
+        else if (Name == "Greg Hallet") {
+            document.getElementById("txtfollowupphone" + FollowUpNumber).value = "(403) 606-8436";
+            document.getElementById("txtfollowupemail" + FollowUpNumber).value = "";
+        }
+        else if (Name == "Tom Hopkins") {
+            document.getElementById("txtfollowupphone" + FollowUpNumber).value = "(225) 921-6909";
+            document.getElementById("txtfollowupemail" + FollowUpNumber).value = "";
+        }
+        else if (Name == "Tim Langford") {
+            document.getElementById("txtfollowupphone" + FollowUpNumber).value = "(504) 208-8193";
+            document.getElementById("txtfollowupemail" + FollowUpNumber).value = "";
+        }
+        else if (Name == "Shane Stuntz") {
+            document.getElementById("txtfollowupphone" + FollowUpNumber).value = "(225) 384-9313";
+            document.getElementById("txtfollowupemail" + FollowUpNumber).value = "shane.stuntz@shell.com";
+        }
+    }
+    function FillStafferForm(Name) {
+        if (Name == "Jeff Bowes") {
+            document.getElementById("txtstaffphone").value = "(403) 465-0547";
+        }
+        else if (Name == "Greg Hallet") {
+            document.getElementById("txtstaffphone").value = "(403) 606-8436";
+        }
+        else if (Name == "Tom Hopkins") {
+            document.getElementById("txtstaffphone").value = "(225) 921-6909";
+        }
+        else if (Name == "Tim Langford") {
+            document.getElementById("txtstaffphone").value = "(504) 208-8193";
+        }
+        else if (Name == "Shane Stuntz") {
+            document.getElementById("txtstaffphone").value = "(225) 384-9313";
+        }
+    }
+</script>

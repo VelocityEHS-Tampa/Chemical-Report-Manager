@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewBag.Title = "Crestwood All Notifications";
+    string constring = crm.chemtelinc.com.Properties.Settings.Default.chemicalConnectionString; //Class-level variable containg the connection string to the database.
+    string constringTest = crm.chemtelinc.com.Properties.Settings.Default.chemicalTestConnectionString; //Class-level variable containg the connection string to the database.
+    List<string> names = new List<string>();
+    names = ChemicalLibrary.Search.GetAllNotifificationNames(constring);
+}
+
+<h2>Crestwood All Notifications</h2>
+
+<div style="width: 49%; display:inline-block;">
+    Name
+    <input type="text" name="Name" id="Name" class="GLOFieldSpacing form-control" style="width:50%;" />
+    <br />
+    Email
+    <input type="text" name="Email" id="Email" class="GLOFieldSpacing form-control" style="width:50%;" />
+    <br />
+    <br />
+    <input type="hidden" name="MemberID" id="MemberID" value="0" />
+    <input type="button" name="Add" value="Add" class="GLOFieldSpacing form-control" style="width:15%; font-weight: bold;" onclick="UpdateAllNotificationMembers(this.value)" />
+    <input type="button" name="Update" value="Update" class="GLOFieldSpacing form-control" style="width: 15%; font-weight: bold;" onclick="UpdateAllNotificationMembers(this.value)" />
+    <input type="button" name="Delete" value="Delete" class="GLOFieldSpacing form-control text-danger" style="width: 15%; font-weight: bold;" onclick="UpdateAllNotificationMembers(this.value)" />
+</div>
+
+<div style="width: 49%; display: inline-block; vertical-align: top; ">
+    <select id="AgentsList" size="5" onchange="FillNotificationsForm(this.value)">
+        @foreach (string n in names)
+        {
+            <option value="@n">@n</option>
+        }
+    </select>
+</div>
+
+<script>
+
+    function FillNotificationsForm(name) {
+        const id = name.split('_');
+        $.ajax({
+            url: '/Crestwood/AllNotificationsInfo',
+            data: { Name: name },
+            type: 'GET',
+            success: function (data) {
+                document.getElementById('MemberID').value = data.ID;
+                document.getElementById('Name').value = data.Name;
+                document.getElementById('Email').value = data.Email;
+            },
+            error: function (data) {
+                alert("ERROR!");
+            }
+        });
+    }
+
+    function UpdateAllNotificationMembers(btnvalue) {
+        var ID = document.getElementById('MemberID').value;
+        var Name = document.getElementById('Name').value;
+        var Email = document.getElementById('Email').value;
+
+        $.ajax({
+            url: '/Crestwood/UpdateAllNotificationMembers',
+            data: { ID: ID, Name: Name, Email: Email, BtnType: btnvalue },
+            type: 'GET',
+            success: function (data) {
+                alert("All Notifications Member has been successfully updated!");
+                window.location.reload();
+            },
+            error: function (data) {
+                alert("ERROR!");
+            }
+        });
+
+    }
+</script>

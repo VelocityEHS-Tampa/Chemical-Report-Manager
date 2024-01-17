@@ -1,0 +1,542 @@
+﻿
+@{
+    ViewBag.Title = "GeneralIncident";
+    string constring = crm.chemtelinc.com.Properties.Settings.Default.StatesConnectionString;
+    List<string> States = new List<string>();
+    List<string> Names = new List<string>();
+    States = ChemicalLibrary.Search.GetStates(constring);
+    Names = ViewBag.Names;
+    string today = DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss");
+}
+
+<h2>Crestwood General Incident </h2>
+
+@using (Html.BeginForm("SubmitCrestGenInc", "Crestwood", FormMethod.Post, new { @id = "crestGenIncForm" }))
+{
+    <div id="CrestGIReportContainer" style="font-size:10pt;">
+        <div id="FormButtons" style="padding:2%;text-align:right;">
+            <input type="submit" value="Submit" class="form-control GRCPButtons required-field" id="btnsubmit" name="btnsubmit" onclick="SubmitForm()"  tabindex="99">
+            <input type="button" value="Cancel" class="form-control GRCPButtons alert-info" id="btnclose" name="btnclose" onclick="ClearForm()">
+        </div>
+        @* Caller Info *@
+        <div id="CallerInfo" style="text-align:center;">
+            <div class="GLOHeader" id="GRCPHeader">Caller Information</div>
+            <div class="CrestInlineDisplay">
+                <span class="required-field">Name</span><input type="text" class="form-control GLOFieldSpacing" required="" id="txtcallername" name="txtcallername" style="width:75%" tabindex="1"/><br />
+                <span class="required-field">Email</span><input type="text" class="form-control GLOFieldSpacing" required="" id="txtcalleremail" name="txtcalleremail" style="width:75%" tabindex="2"/>
+            </div>
+            <div class="CrestInlineDisplay">
+                <span class="required-field">CW Employee, Contractor, or Private Citizen?</span> <br />
+                <select class="GLOFieldSpacing" name="EmpOrContract" id="EmpOrContract" tabindex="3">
+                    <option value="" selected=""></option>
+                    <option value="Contractor">Contractor</option>
+                    <option value="Employee">Employee</option>
+                    <option value="Private Citizen">Private Citizen</option>
+                </select>
+            </div>
+            <div class="CrestInlineDisplay">
+                <span class="required-field">Phone Number</span><br />
+                <input type="text" class="form-control GLOFieldSpacing" name="txtcallerphonenumber" id="txtcallerphonenumber" placeholder="(___) ___-____" style="width:55%;" onblur="FormatPhone(this.value, this.id)" tabindex="4"/>
+            </div>
+            <div class="CrestInlineDisplay">
+                <span class="required-field">Call Date</span><br />
+                <input type="text" class="form-control GLOFieldSpacing" name="txtcalldate" id="txtcalldate" placeholder="__/__/____" style="width:55%;" value="@DateTime.Now.ToShortDateString()" onblur="FormatDate(this.value, this.id)" tabindex="5"/>
+            </div>
+            <div class="CrestInlineDisplay">
+                <span class="required-field">Call Time</span><br />
+                <input type="text" class="form-control GLOFieldSpacing" name="txtcalltime" id="txtcalltime" placeholder="__:__" style="width:55%;" value="@DateTime.Now.ToString("HH:mm")" onblur="FormatTime(this.value, this.id)" tabindex="6"/>
+            </div>
+        </div>
+        @* Incident Info *@
+        <div id="IncidentInfo">
+            <div class="GLOHeader" id="GRCPHeader">Incident Information</div>
+            <div class="CrestInlineDisplay">
+                <span class="required-field">Date</span><input type="text" class="form-control GLOFieldSpacing" placeholder="__/__/____" required="" style="width:15%" name="txtincidentdate" id="txtincidentdate" onblur="FormatDate(this.value, this.id)" tabindex="7"/>
+                <span class="required-field">Time</span><input type="text" class="form-control GLOFieldSpacing" placeholder="__:__" required="" style="width:10%" name="txtincidenttime" id="txtincidenttime" onblur="FormatTime(this.value, this.id)" tabindex="8"/>
+                <span class="required-field">Time Zone</span>
+                <select name="txtincidenttimezone" id="txtincidenttimezone" tabindex="9">
+                    <option value="" selected=""></option>
+                    <option value="AKST">AKST</option>
+                    <option value="AST">AST</option>
+                    <option value="CST">CST</option>
+                    <option value="EST">EST</option>
+                    <option value="HAST">HAST</option>
+                    <option value="MST">MST</option>
+                    <option value="PST">PST</option>
+                    <option value="UTC">UTC</option>
+                </select>
+                <br />
+                <span class="required-field">City</span><input type="text" class="form-control GLOFieldSpacing" required="" style="width:35%" name="txtincidentcity" id="txtincidentcity" tabindex="10"/>
+                <span class="required-field">State</span>
+                <select id="txtstate" name="txtstate" tabindex="11">
+                    <option value="" selected=""></option>
+                    @foreach (string st in States)
+                    {
+                        <option value="@st">@st</option>
+                    }
+                </select>
+                <br />
+                <span class="required-field">County</span><input type="text" class="form-control GLOFieldSpacing" required="" style="width:35%" name="txtcounty" id="txtcounty" tabindex="12"/>
+                <br />
+                <br />
+                <br />
+                <span class="required-field">Did this incident occur on a Crestwood Pipeline?</span>
+                <select name="OccuredOnPipelineDDL" id="OccuredOnPipelineDDL" class="GLOFieldSpacing" tabindex="13">
+                    <option value="" selected=""></option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+                <br />
+                <span class="required-field">Facility, Project Location, or Address</span>
+                <input type="text" class="form-control GLOFieldSpacing" name="txtincidentintersection" id="txtincidentintersection" style="width:40%;" tabindex="14"/>
+                <br />
+                <span class="required-field">Did this occur on a Crestwood Facility/Crestwood Construction Project?</span>
+                <select name="ddlFacilityOrProject" id="ddlFacilityOrProject" class="GLOFieldSpacing" tabindex="15">
+                    <option value="" selected=""></option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+                <br />
+                <span class="required-field">Facility or Construction Project?</span>
+                <select name="ddlFacilityOrProjectSelection" id="ddlFacilityOrProjectSelection" class="GLOFieldSpacing" tabindex="16">
+                    <option value="" selected=""></option>
+                    <option value="Crestwood Construcion Project">Crestwood Construcion Project</option>
+                    <option value="Crestwood Site">Crestwood Site</option>
+                </select>
+                <br />
+                <span class="required-field">Facility/Corportate Office</span>
+                <select name="txtfacilityname" id="txtfacilityname" class="GLOFieldSpacing" tabindex="17">
+                    <option value="" selected=""></option>
+                    <option value="Corporate Office">Corporate Office</option>
+                    <option value="Facility">Facility</option>
+                </select>
+                <br />
+                <span class="required-field">Region/Site associated with incident</span>
+                <select name="TxtRegionOrFacility" id="TxtRegionOrFacility" class="GLOFieldSpacing" tabindex="18">
+                    <option value="" selected=""></option>
+                    <option value="N/A-refer to Incident Location Above">N/A-refer to Incident Location Above</option>
+                    <option value="Transportation - Bridgeton, NJ (East Region)">Transportation - Bridgeton, NJ (East Region)</option>
+                    <option value="Transportation - Waterloo, IN (Central Region)">Transportation - Waterloo, IN (Central Region)</option>
+                    <option value="Transportation - Wheeling, WV (Central Region)">Transportation - Wheeling, WV (Central Region)</option>
+                </select>
+                <br />
+                <span class="required-field" id="cbPC_CWLocOrTransportLbl">Did this take place at a CW location or transportation unit?</span>
+                <select name="cbPC_CWLocOrTransport" id="cbPC_CWLocOrTransport" class="GLOFieldSpacing" tabindex="19">
+                    <option value="" selected=""></option>
+                    <option value="Crestwood Location">Crestwood Location</option>
+                    <option value="Transportation Unit">Transportation Unit</option>
+                </select>
+                <br />
+                <span class="required-field" id="TxtContractorNameLbl">What is the contractor name?</span>
+                <input type="text" class="form-control GLOFieldSpacing" name="TxtContractorName" id="TxtContractorName" style="width:40%;" tabindex="20"/>
+            </div>
+
+            <div class="CrestInlineDisplay">
+                <span class="required-field">What is the nature of the incident? (Only select one category)</span>
+                <div id="IncidentTypeContainer" style="border: solid red 1px; border-radius:5px; font-size: 10pt; padding:10px;" >
+                    <div class="CrestInlineDisplay">
+                        <input type="radio" name="IncidentType" id="WPViolence" value="WPViolence" tabindex="21"/> 1. Workplace Violence<br />
+                        <input type="radio" name="IncidentType" id="TPComplaint" value="Third Party Complaint" /> 2. Third Party Complaint<br />
+                        <input type="radio" name="IncidentType" id="VehicleAccident" value="Vehicle Accident" /> 3. Vehicle Accident (in motion)<br />
+                        <input type="radio" name="IncidentType" id="SpillRelease" value="SpillRelease" /> 4. Spill Or Release<br />
+                        <input type="radio" name="IncidentType" id="Injury" value="Injury" /> 5. Injury
+                    </div>
+                    <div class="CrestInlineDisplay">
+                        <input type="radio" name="IncidentType" id="illnessExposure" value="illnessExposure" /> 6. Illness or Chemical Exposure<br />
+                        <input type="radio" name="IncidentType" id="Fire" value="Fire" /> 7. Fire<br />
+                        <input type="radio" name="IncidentType" id="LineStrike" value="LineStrike" /> 8. Line Strike<br />
+                        <input type="radio" name="IncidentType" id="Hazard" value="Hazard" /> 9. Hazard Report<br />
+                        <input type="radio" name="IncidentType" id="PropertyDamage" value="PropertyDamage" /> 10. Property Damage
+                    </div>
+                    <div class="CrestInlineDisplay">
+                        <input type="radio" name="IncidentType" id="Theft" value="Theft" /> 11. Theft<br />
+                        <input type="radio" name="IncidentType" id="RegVisit" value="RegVisit" /> 12. Reg. Visit<br />
+                        <input type="radio" name="IncidentType" id="Drill" value="Drill" /> 13. Drill or Safety System Test<br />
+                        <input type="radio" name="IncidentType" id="SusActivity" value="SusActivity" /> 14. Suspicious Activity/Security Threat
+                    </div>
+                </div>
+                <br />
+                <div class="CrestInlineDisplay" style="width:100%">
+                    <span class="required-field">Spill Details</span><br /><br />
+                    <span class="required-field">Was this a spill or release to air / atmosphere?</span>
+                    <select name="SpillOrReleaseIntoAtmo" id="SpillOrReleaseIntoAtmo" class="GLOFieldSpacing">
+                        <option value="" selected=""></option>
+                        <option value="Spill">Spill</option>
+                        <option value="Release">Release</option>
+                        <option value="Both">Both</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                    <br />
+                    <span class="required-field">What material was spilled/released?</span> <input type="text" class="form-control GLOFieldSpacing" required="" style="width:65%" name="MaterialSpilled" id="MaterialSpilled" /><br />
+                    <span class="required-field">Are there any suspected impacts to waterbodies?</span>
+                    <select name="WaterbodiesImpacted" id="WaterbodiesImpacted" class="GLOFieldSpacing">
+                        <option value="" selected=""></option>
+                        <option value="N/A">N/A</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                        <option value="Unknown">Unknown</option>
+                    </select>
+                    <br />
+                    <span class="required-field" id="ContainedOnSiteLbl">Is the spill contained on-site?</span>
+                    <select name="ContainedOnSite" id="ContainedOnSite" class="GLOFieldSpacing">
+                        <option value="" selected=""></option>
+                        <option value="N/A">N/A</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                        <option value="Unknown">Unknown</option>
+                    </select>
+                    <br />
+                    <span class="required-field" id="SpillContainedSecondaryLbl">Is the spill contained within seconday containment?</span>
+                    <select name="SpillContainedSecondary" id="SpillContainedSecondary" class="GLOFieldSpacing">
+                        <option value="" selected=""></option>
+                        <option value="N/A">N/A</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                        <option value="Unknown">Unknown</option>
+                    </select>
+                    <br />
+                    <span class="required-field" id="ControlDevicesLbl">What control devices are being used?</span>
+                    <select name="ControlDevices" id="ControlDevices" class="GLOFieldSpacing">
+                        <option value="" selected=""></option>
+                        <option value="Booms">Booms</option>
+                        <option value="Absorbants">Absorbants</option>
+                        <option value="Temporary Berm">Temporary Berm</option>
+                        <option value="See Details">See Details</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                    <br />
+                    <span class="required-field">Describe the impacted area(s)</span><br />
+                    <textarea id="txtimpactedareas" name="txtimpactedareas" cols="85" rows="4"></textarea>
+                </div>
+            </div>
+
+            <hr />
+            <span class="required-field">Incident Details</span><br />
+            <textarea id="txtincidentdetails" name="txtincidentdetails" cols="100" rows="4"></textarea>
+            @* Resposible Party *@
+            <div class="CrestInlineDisplay" style="width:40%">
+                <div id="CrestEmpResponsible">
+                    <div class="GLOHeader" id="GRCPHeader">Crestwood Employee Responsible for Completing Report</div>
+                    <span class="required-field">Name</span><input type="text" class="form-control GLOFieldSpacing" name="txtreporttakername" id="txtreporttakername" style="width:80%;" value="" /><br />
+                    <span class="required-field">Email</span><input type="text" class="form-control GLOFieldSpacing" name="txtreporttakeremail" id="txtreporttakeremail" style="width: 80%;" value="" />
+                </div>
+            </div>
+            <br />
+            <br />
+        </div>
+        @* On Call Team Member Notification *@
+        <div class="CrestInlineDisplay" style="width:45%">
+            <div id="CrestOnCall">
+                <div class="GLOHeader" id="GRCPHeader">On Call Team Member Notification</div>
+                <div class="CrestInlineDisplay" style="text-align: center;width:30%;">
+                    <span class="required-field">Name</span><br />
+                    <select class="GLOFieldSpacing" name="txtersname1" id="txtersname1" onchange="GetInfo(this.value)">
+                        <option value="" selected=""></option>
+                        @foreach (string name in Names)
+                        {
+                            string[] namesplit = name.Split('_');
+                            string nameonly = namesplit[0];
+                            <option value="@name">@nameonly</option>
+                        }
+                    </select>
+                </div>
+                <div class="CrestInlineDisplay" style="text-align: center; width: 30%;">
+                    <span class="required-field">Contact Number</span>
+                    <br />
+                    <input type="text" class="form-control GLOFieldSpacing" name="txterscontactnumber1" id="txterscontactnumber1" style="width: 100%;" placeholder="(___) ___-____" onblur="FormatPhone(this.value, this.id)" />
+                </div>
+                <div class="CrestInlineDisplay" style="text-align:center; width: 30%;">
+                    <span class="required-field">Location</span>
+                    <br />
+                    <input type="text" class="form-control GLOFieldSpacing" name="txterslocation1" id="txterslocation1" />
+                    <input type="hidden" id="txtersemail1" name="txtersemail1"/>
+                </div>
+                <br />
+                <br />
+                <span class="required-field">Notifcation Date</span> <input type="text" name="NotificationDate" id="NotificationDate" class="form-control GLOFieldSpacing" placeholder="__/__/____" style="width:20%;" onblur="FormatDate(this.value, this.id)" />
+                <span class="required-field">Notifcation Time</span> <input type="text" name="NotificationTime" id="NotificationTime" class="form-control GLOFieldSpacing" placeholder="__:__" maxlength="5" style="width:20%;" onblur="FormatTime(this.value, this.id)" />
+            </div>
+        </div>
+        @* DOT Information *@
+        <div class="CrestInlineDisplay" style="width:54.5%">
+            <div id="CrestDOTInfo" style="width:100%">
+                <div class="GLOHeader" id="GRCPHeader" style="background-color: #007cc0; color: white; font-weight: 600;">DOT Information</div>
+                <span class="required-field">Are you or anyone involved in the incident employedin the Crestwood 18 Wheeler Transportation Department?</span>
+                <select name="txtequipmentorpeople" id="txtequipmentorpeople" class="GLOFieldSpacing">
+                    <option value="Yes">Yes</option>
+                    <option value="No" selected="">No</option>
+                </select>
+                <br />
+                <span class="required-field">Are you a transportation dispatcher or a transportation employee reporting a tractor trailer incident?</span>
+                <select name="txtdispatcheroremployee" id="txtdispatcheroremployee" class="GLOFieldSpacing">
+                    <option value="Yes">Yes</option>
+                    <option value="No" selected="">No</option>
+                </select>
+                <br />
+                <span class="required-field">Is the driver a Crestwood employee, Contractor, or Owner Operator?</span>
+                <select name="txtcontractororemployee" id="txtcontractororemployee" class="GLOFieldSpacing">
+                    <option value="No" selected="">No</option>
+                    <option value="Employee">Employee</option>
+                    <option value="Contractor">Contractor</option>
+                    <option value="Owner Operator">Owner Operator</option>
+                </select>
+            </div>
+        </div>
+        @* High Profile Information *@
+        <div class="CrestHighProfile" style="text-align:center;">
+            <div class="GLOHeader" id="GRCPHeader" style="background-color: #ffff00; color:black;font-weight:600;width:100%;text-align:left;">High Profile Information</div>
+            <div class="CrestInlineDisplay" style="text-align:right;padding:10px;">
+                <span class="required-field">Was 9-1-1 notified?</span>
+                <select name="txtnotify911" id="txtnotify911" class="GLOFieldSpacing">
+                    <option value="Yes">Yes</option>
+                    <option value="No" selected="">No</option>
+                </select>
+                <br />
+                <span id="IndSafeTxtLabel" class="required-field">Was there an immediate threat to individual safety?</span>
+                <select name="IndSafeTxt" id="IndSafeTxt" class="GLOFieldSpacing">
+                    <option value="Yes">Yes</option>
+                    <option value="No" selected="">No</option>
+                </select>
+                <br />
+                <span id="ReportWeaponTxtLabel" class="required-field">Is there report of a weapon?</span>
+                <select name="ReportWeaponTxt" id="ReportWeaponTxt" class="GLOFieldSpacing">
+                    <option value="Yes">Yes</option>
+                    <option value="No" selected="">No</option>
+                </select>
+                <br />
+                <span id="WeaponTypeTxtLabel" class="required-field">What type of weapon was reported?</span>
+                <input type="text" class="form-control GLOFieldSpacing" style="width:35%;" name="WeaponTypeTxt" id="WeaponTypeTxt" />
+            </div>
+
+            <div class="CrestInlineDisplay" style="text-align: right; padding: 10px;">
+                <span class="required-field">Is an ambulance needed?</span>
+                <select name="txttransportedtohospital" id="txttransportedtohospital" class="GLOFieldSpacing">
+                    <option value="Yes">Yes</option>
+                    <option value="No" selected="">No</option>
+                </select>
+                <br />
+                <span class="required-field">Is news media on scene?</span>
+                <select name="txtmediaonscene" id="txtmediaonscene" class="GLOFieldSpacing">
+                    <option value="Yes">Yes</option>
+                    <option value="No" selected="">No</option>
+                </select>
+                <br />
+                <span class="required-field">Have emergency responders been on-scene?</span>
+                <select name="txtemergencyresponders" id="txtemergencyresponders" class="GLOFieldSpacing">
+                    <option value="Yes">Yes</option>
+                    <option value="No" selected="">No</option>
+                </select>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $(document).ready(function () {
+        //Hides and Disables some fields when page is loaded
+        $('#IndSafeTxtLabel').hide();
+        $('#IndSafeTxt').hide();
+        $('#ReportWeaponTxtLabel').hide();
+        $('#ReportWeaponTxt').hide();
+        $('#WeaponTypeTxtLabel').hide();
+        $('#WeaponTypeTxt').hide();
+        $('#TxtContractorNameLbl').hide();
+        $('#TxtContractorName').hide();
+        $('#cbPC_CWLocOrTransportLbl').hide();
+        $('#cbPC_CWLocOrTransport').hide();
+        $('#ddlFacilityOrProjectSelection').prop("disabled", true);
+        $('#ContainedOnSiteLbl').hide();
+        $('#ContainedOnSite').hide();
+        $('#SpillContainedSecondaryLbl').hide();
+        $('#SpillContainedSecondary').hide();
+        $('#ControlDevicesLbl').hide();
+        $('#ControlDevices').hide();
+
+        //Shows/Hides field based on "CW Employee, Contractor, or Private Citizen?" selection
+        $('#EmpOrContract').change(function () {
+            var radioValue = $("#EmpOrContract").val();
+            if (radioValue == "Contractor") {
+                $('#TxtContractorNameLbl').show();
+                $('#TxtContractorName').show();
+                $('#cbPC_CWLocOrTransportLbl').hide();
+                $('#cbPC_CWLocOrTransport').hide();
+                //Disable specific Incident Type radio buttons
+                $('#WPViolence').prop("disabled", false);
+                $('#VehicleAccident').prop("disabled", false);
+                $('#SpillRelease').prop("disabled", false);
+                $('#Injury').prop("disabled", false);
+                $('#illnessExposure').prop("disabled", false);
+                $('#Fire').prop("disabled", false);
+                $('#LineStrike').prop("disabled", false);
+                $('#Hazard').prop("disabled", false);
+                $('#PropertyDamage').prop("disabled", false);
+                $('#Theft').prop("disabled", false);
+                $('#RegVisit').prop("disabled", false);
+                $('#Drill').prop("disabled", false);
+                //Disable Responsible Party fields
+                $('#txtreporttakername').prop("disabled", false);
+                $('#txtreporttakeremail').prop("disabled", false);
+                //Disable DOT fields
+                $('#txtequipmentorpeople').prop("disabled", false);
+                $('#txtdispatcheroremployee').prop("disabled", false);
+                $('#txtcontractororemployee').prop("disabled", false);
+            } else if (radioValue == "Employee") {
+                $('#TxtContractorNameLbl').hide();
+                $('#TxtContractorName').hide();
+                $('#cbPC_CWLocOrTransportLbl').hide();
+                $('#cbPC_CWLocOrTransport').hide();
+                //Disable specific Incident Type radio buttons
+                $('#WPViolence').prop("disabled", false);
+                $('#VehicleAccident').prop("disabled", false);
+                $('#SpillRelease').prop("disabled", false);
+                $('#Injury').prop("disabled", false);
+                $('#illnessExposure').prop("disabled", false);
+                $('#Fire').prop("disabled", false);
+                $('#LineStrike').prop("disabled", false);
+                $('#Hazard').prop("disabled", false);
+                $('#PropertyDamage').prop("disabled", false);
+                $('#Theft').prop("disabled", false);
+                $('#RegVisit').prop("disabled", false);
+                $('#Drill').prop("disabled", false);
+                //Disable Responsible Party fields
+                $('#txtreporttakername').prop("disabled", false);
+                $('#txtreporttakeremail').prop("disabled", false);
+                //Disable DOT fields
+                $('#txtequipmentorpeople').prop("disabled", false);
+                $('#txtdispatcheroremployee').prop("disabled", false);
+                $('#txtcontractororemployee').prop("disabled", false);
+            } else if (radioValue == "Private Citizen") {
+                $('#TxtContractorNameLbl').hide();
+                $('#TxtContractorName').hide();
+                $('#cbPC_CWLocOrTransportLbl').show();
+                $('#cbPC_CWLocOrTransport').show();
+                //Disable specific Incident Type radio buttons
+                $('#WPViolence').prop("disabled", true);
+                $('#VehicleAccident').prop("disabled", true);
+                $('#SpillRelease').prop("disabled", true);
+                $('#Injury').prop("disabled", true);
+                $('#illnessExposure').prop("disabled", true);
+                $('#Fire').prop("disabled", true);
+                $('#LineStrike').prop("disabled", true);
+                $('#Hazard').prop("disabled", true);
+                $('#PropertyDamage').prop("disabled", true);
+                $('#Theft').prop("disabled", true);
+                $('#RegVisit').prop("disabled", true);
+                $('#Drill').prop("disabled", true);
+                //Disable Responsible Party fields
+                $('#txtreporttakername').prop("disabled", true);
+                $('#txtreporttakeremail').prop("disabled", true);
+                //Disable DOT fields
+                $('#txtequipmentorpeople').prop("disabled", true);
+                $('#txtdispatcheroremployee').prop("disabled", true);
+                $('#txtcontractororemployee').prop("disabled", true);
+            }
+        })
+
+        $('#ddlFacilityOrProject').change(function () {
+            var selectedValue = $("#ddlFacilityOrProject").val();
+            if (selectedValue == "Yes") {
+                $('#ddlFacilityOrProjectSelection').prop("disabled", false);
+                $('#TxtRegionOrFacility').prop("disabled", true);
+            } else {
+                $('#TxtRegionOrFacility').prop("disabled", false);
+                $('#ddlFacilityOrProjectSelection').prop("disabled", true);
+            }
+        })
+
+        //Shows fields when specific radio button is selected.
+        $("input[type='radio']").click(function () {
+            var radioValue = $("input[name='IncidentType']:checked").val();
+            if (radioValue == "WPViolence") {
+                $('#IndSafeTxtLabel').show();
+                $('#IndSafeTxt').show();
+                $('#ReportWeaponTxtLabel').show();
+                $('#ReportWeaponTxt').show();
+                $('#WeaponTypeTxtLabel').show();
+                $('#WeaponTypeTxt').show();
+            } else {
+                $('#IndSafeTxtLabel').hide();
+                $('#IndSafeTxt').hide();
+                $('#ReportWeaponTxtLabel').hide();
+                $('#ReportWeaponTxt').hide();
+                $('#WeaponTypeTxtLabel').hide();
+                $('#WeaponTypeTxt').hide();
+            }
+        })
+
+        //Shows fields for spills
+        $('#SpillOrReleaseIntoAtmo').change(function () {
+            var radioValue = $("#SpillOrReleaseIntoAtmo").val();
+            if (radioValue == "Spill" || radioValue == "Both") {
+                $('#ContainedOnSiteLbl').show();
+                $('#ContainedOnSite').show();
+                $('#SpillContainedSecondaryLbl').show();
+                $('#SpillContainedSecondary').show();
+                $('#ControlDevicesLbl').show();
+                $('#ControlDevices').show();
+            } else {
+                $('#ContainedOnSiteLbl').hide();
+                $('#ContainedOnSite').hide();
+                $('#SpillContainedSecondaryLbl').hide();
+                $('#SpillContainedSecondary').hide();
+                $('#ControlDevicesLbl').hide();
+                $('#ControlDevices').hide();
+            }
+        })
+    });
+    //get ers members phone number and location
+    function GetInfo(NameID) {
+        //separate name and ID to get the phone and location
+        var id = NameID.split('_');
+        id = id[1];
+        $.ajax({
+            url: '/Crestwood/SearchByID/',
+            data: { ID: id },
+            type: 'GET',
+            success: function (data) {
+                var phoneLoc = data.split('_');
+                document.getElementById("txterscontactnumber1").value = phoneLoc[0];
+                document.getElementById("txterslocation1").value = phoneLoc[1];
+                document.getElementById("txtersemail1").value = phoneLoc[2];
+            },
+            error: function (data) {
+                alert("ERROR!");
+            }
+        });
+    }
+    //Date, Time, and Phone formatting
+    function SubmitForm() {
+        if (confirm("Are you sure you want to submit this report?")) {
+            return true;
+        }
+    }
+    function FormatDate(Date, FieldName) {
+        //Purely number input, no slashes.
+        if (Date.length == 8 && !Date.includes("/")) {
+            var ds = Date.split("");
+            var fulldate = ds[0] + ds[1] + "/" + ds[2] + ds[3] + "/" + ds[4] + ds[5] + ds[6] + ds[7];
+            document.getElementById(FieldName).value = fulldate;
+        }
+    }
+    function FormatTime(Time, FieldName) {
+        //Purely number input, no semi-colons.
+        if (Time.length == 4 && !Time.includes(":")) {
+            var ts = Time.split("");
+            var fulltime = ts[0] + ts[1] + ":" + ts[2] + ts[3];
+            document.getElementById(FieldName).value = fulltime;
+        }
+    }
+    function FormatPhone(Phone, FieldName) {
+        //Purely number input, no parenthesis, no hyphens.
+        if (Phone.length == 10 && !Phone.includes("-") && !Phone.includes("(") && !Phone.includes(")")) {
+            var ps = Phone.split("");
+            var fullphone = "(" + ps[0] + ps[1] + ps[2] + ") " + ps[3] + ps[4] + ps[5] + "-" + ps[6] + ps[7] + ps[8] + ps[9]
+            document.getElementById(FieldName).value = fullphone;
+        }
+    }
+    function ClearForm() {
+        if (confirm("Are you sure you want to cancel this report?")) {
+            location.href = "";
+        }
+    }
+</script>

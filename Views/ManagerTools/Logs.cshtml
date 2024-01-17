@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Logs";
+    string LogsSelected = ViewBag.LogsSelected;
+}
+
+@if (LogsSelected == "CleanShot")
+{
+    <h2>Clean Shot Logs</h2>
+}
+else if (LogsSelected == "GenInc")
+{
+    <h2> General Incident Logs</h2>
+}
+else if (LogsSelected == "Shell")
+{
+    <h2> Shell Report Logs</h2>
+}

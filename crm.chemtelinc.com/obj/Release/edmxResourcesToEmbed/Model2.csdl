@@ -1,0 +1,1204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="chemreporterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="agencylist">
+    <Key>
+      <PropertyRef Name="agencyId" />
+    </Key>
+    <Property Name="agencyId" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="atandtassociatedata">
+    <Key>
+      <PropertyRef Name="rptid" />
+    </Key>
+    <Property Name="rptid" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="atandtvolunteerdata">
+    <Key>
+      <PropertyRef Name="rptid" />
+    </Key>
+    <Property Name="rptid" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="availablespillid">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="available" Type="Int32" />
+    <Property Name="usedBy" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="basfenvironmental">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="incidentdate" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="incidenttime" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="callername" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="callerphone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="plantname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="materialname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sdsonhand" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="contained" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="handlingcleanup" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="quantity" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+    <Property Name="quantityunits" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="releaseto" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="actions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="achievereportablequantity" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="notifications" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="ersoperator" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="calldate" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="calltime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="nrc" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="peas" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="basfenvironmentalid">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" />
+    <Property Name="available" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Name="user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="basfinjury">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="ersoperator" />
+    </Key>
+    <Property Name="id" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="incidentdate" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="incidenttime" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="callername" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="callerphone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="plantname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="injurytype" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="bodypartaffected" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="escorted" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="immediateactions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="evidencecollected" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="notifications" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="ersoperator" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="productname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="calldate" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="calltime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="nrc" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="peas" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="basfinjuryid">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" />
+    <Property Name="available" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Name="user" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="cleanshotid">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="available" Type="Int32" Nullable="false" />
+    <Property Name="user" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="companyinformation">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="crest811">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="todaydate" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="todaytime" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="excavationdate" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="excavationtime" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="normaloremergency" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="requestticketnumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="personcompanyname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="callbacknumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="emailaddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="city" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="state" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="county" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="workdate" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="intersection" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="nature" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="remarks" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="callername" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="callernumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="35" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="contactnumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FacilityName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="crestallnotification">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="crestdotincident">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="callername" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="callertitle" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="calleraffiliation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="callerphonenumber" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="incidentdate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="incidentlocation" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="incidentlatitude" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="incidentlongitude" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="incidentoccuron" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="incidentnature" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="incidentdescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="involvedname1" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="involvedcell1" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="involvedinjury1" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="involvedname2" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="involvedcell2" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="involvedinjury2" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="involvedname3" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="involvedcell3" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="involvedinjury3" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="weatherconditions" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="impactedareas" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="impactedbodyofwater" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="reporttakername" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="reporttakeremail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ersname1" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="erscontactnumber1" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="erslocation1" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ersname2" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="erscontactnumber2" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="erslocation2" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ersname3" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="erscontactnumber3" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="erslocation3" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="dispatcheroremployee" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="contractororemployee" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="crester">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="startdate" Type="DateTime" Precision="0" />
+    <Property Name="enddate" Type="DateTime" Precision="0" />
+    <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="location" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="crestgeneralincident">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="callername" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="callertitle" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="calleraffiliation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="callerphonenumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="incidentdate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="incidentlocation" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="incidentlatitude" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="incidentlongitude" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="incidentoccuron" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="incidentnature" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="incidentdescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="involvedname1" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="involvedcell1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="involvedinjury1" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="involvedname2" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="involvedcell2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="involvedinjury2" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="involvedname3" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="involvedcell3" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="involvedinjury3" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="weatherconditions" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="impactedareas" Type="String" MaxLength="1200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="impactedbodyofwater" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="reporttakername" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="reporttakeremail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ersname1" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="erscontactnumber1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="erslocation1" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ersname2" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="erscontactnumber2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="erslocation2" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ersname3" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="erscontactnumber3" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="erslocation3" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="incidentprivaterow" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="incidenttriballand" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="incidentblmland" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="incidentstateland" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="incidentaddress" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="incidentcity" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="incidentstate" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="incidentcounty" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="incidentintersection" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="incidentfacilityname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="fireorexplosion" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="pipelinestrike" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="injury" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="illnessorexposure" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="vehicleaccident" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="spillorrelease" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="theft" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="agencyinspectionofvisit" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="propertydamage" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="potentialhazardornearmiss" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="landownercomplaint" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="impactstowater" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="dispatcheroremployee" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="contractororemployee" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="notify911" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="immediatesupport" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="transporttohospital" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="emergencyresponders" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="fatalities" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="mediaonscene" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="landowner" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="incidenttime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="incidenttimezone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="calleremail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="calldate" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="calltime" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="other" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ersoperator" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="equipmentorpeople" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="numinjuries1" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Name="numinjuries2" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Name="numinjuries3" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Name="none" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="unknown" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="tractortrailer" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="equipment" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="dispatcheremployee" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="initials" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="county" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="drill" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Incident_Contractor_Or_Employee" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IndividualSafety" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Name="WeaponReported" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Name="WeaponType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="wpviolence" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="FacilityOrProject" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Name="RegionOrFacility" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ContractorName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="FacilityOrProjectSelection" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="OccuredOnPipeline" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Name="NotificationDate" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+    <Property Name="NotificationTime" Type="String" MaxLength="7" FixedLength="false" Unicode="true" />
+    <Property Name="PC_CWLocOrTransport" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SusAct" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="SpillOrReleaseIntoAtmo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="MaterialSpilled" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="WaterbodiesImpacted" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ContainedOnSite" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="SpillContainedSecondary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ControlDevices" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PrimaryWorkLocation" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="cresthighprofileincident">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="callername" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="callertitle" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="calleraffiliation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="callerphonenumber" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="incidentdate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="incidentlocation" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="incidentlatitude" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="incidentlongitude" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="incidentoccuron" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="incidentnature" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="incidentdescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="involvedname1" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="involvedcell1" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="involvedinjury1" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="involvedname2" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="involvedcell2" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="involvedinjury2" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="involvedname3" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="involvedcell3" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="involvedinjury3" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="weatherconditions" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="impactedareas" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="impactedbodyofwater" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="reporttakername" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="reporttakeremail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ersname1" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="erscontactnumber1" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="erslocation1" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ersname2" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="erscontactnumber2" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="erslocation2" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ersname3" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="erscontactnumber3" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="erslocation3" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="notify911" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="immediatesupport" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="transportedtohospital" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="emergencyresponders" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="fatalities" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="mediaonscene" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="crestmonthlyreport">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="incidentdate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="incidenttype" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="incidentlocation" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="incidentdescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="crestpipelinemember">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="operatorname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="state" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="county" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="contactname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="contact" Type="Int32" />
+  </EntityType>
+  <EntityType Name="crestpiplineincident">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="county" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="state" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="distancefromtown" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="distancefromlandmark" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="intersectionormilemarker" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="observing" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="seeinghearingsmelling" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="roworwellpad" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="tanks" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="landowner" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="callername" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="callerphone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="notify911" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="anyoneinjured" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="immediatedanger" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="temp" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="windspeed" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="winddirection" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="weatherconditions" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="relationtoincident" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="safelywarn" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="name1" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="name2" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="name3" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="contactnumber1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="contactnumber2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="contactnumber3" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="location1" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="location2" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="location3" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="leasewellname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="blackorwhitesmoke" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="flames" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="hissing" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="liquid" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="oilysheen" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="otherpipelinemarkers" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="rotteneggodor" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="vaporormist" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="directions" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="city" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="time" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="timezone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="numofinjuries" Type="Int32" Nullable="false" />
+    <Property Name="reporttakername" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="reporttakeremail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="calleremail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="callertitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="calleraffiliation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="name4" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="name5" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="contactnumber4" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="contactnumber5" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="location4" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="location5" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="calldate" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="calltime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ersoperator" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="initials" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="NotificationDate" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+    <Property Name="NotificationTime" Type="String" MaxLength="7" FixedLength="false" Unicode="true" />
+    <Property Name="Drill" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="crestwoodtransportationlist">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Indiana" Type="Int32" />
+    <Property Name="NewJersey" Type="Int32" />
+    <Property Name="WestVirginia" Type="Int32" />
+  </EntityType>
+  <EntityType Name="generalincidentedit">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="editdate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="numberofedits" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="generalincidentid">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="available" Type="Int32" />
+    <Property Name="user" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="generalincidentreportdata">
+    <Key>
+      <PropertyRef Name="IncidentId" />
+    </Key>
+    <Property Name="IncidentId" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ErsOperator" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="Date" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Time" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="CallersName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CallersPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="CallersAffiliation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CallersFaxOrEmail" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="IncidentStreet" Type="String" MaxLength="65" FixedLength="false" Unicode="false" />
+    <Property Name="IncidentCity" Type="String" MaxLength="65" FixedLength="false" Unicode="false" />
+    <Property Name="IncidentState" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IncidentCountry" Type="String" MaxLength="65" FixedLength="false" Unicode="false" />
+    <Property Name="IncidentDate" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="IncidentTime" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="IncidentTimeZone" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="MaterialName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ProductNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="QuantitySpilled" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="CleanUpCrewReqs" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="AgenciesOnSite" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="AccidentOrDeliberate" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="IncidentDetails" Type="String" MaxLength="3000" FixedLength="false" Unicode="false" />
+    <Property Name="InvolveFire" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="WhereDidYouGetOurNumber" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="SubscribersName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="SubscriberMIS" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="SpillOrExposure" Type="String" MaxLength="65" FixedLength="false" Unicode="false" />
+    <Property Name="TypeOfExposure" Type="String" MaxLength="65" FixedLength="false" Unicode="false" />
+    <Property Name="NumOfCasualties" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="NumOfInjuries" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="MedPersonnelName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="PatientName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="PatientCondition" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="HospitalClinicLocation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="EpaRegNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="StatusOfRelease" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="DispersionOfMsdsInfo" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="ReviewedBy" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="ReviewedDate" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="SentDate" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="Comments" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="DateChanged" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Username" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IncidentZipCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="ReportType" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="CallersPhoneExt" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="globasereportdata">
+    <Key>
+      <PropertyRef Name="cntSpillId" />
+    </Key>
+    <Property Name="cntSpillId" Type="Int32" Nullable="false" />
+    <Property Name="fDrill" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="txtDrillTxt" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="txtReportTakenBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtReportPartyAffiliation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="datReportTakenDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="datReportTakenTime" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="txtNotificationAgency" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="txtDischargeReportedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtDischargedPhone1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="txtDischargedPhone2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="datDischargeDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="datDischargeTime" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="txtMaterial1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="dblCASUN1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="dblAmtSpilled1" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="txtUnitRecovered1" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="txtMaterial2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="dblCASUN2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="dblAmtSpilled2" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="txtUnitRecovered2" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="txtMaterial3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="dblCASUN3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="dblAmtSpilled3" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="txtUnitRecovered3" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="txtMaterial4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="dblCASUN4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="dblAmtSpilled4" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="txtUnitRecovered4" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="txtMaterial5" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="dblCASUN5" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="dblAmtSpilled5" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="txtUnitRecovered5" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="wSpillCounty" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="wOrigin" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="fSpillInWater" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="fSpillAirRelease" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="fCoastalWater" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="fLand" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="txtSpillReceivingWater" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="dblSpillAmountInWater" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtSpillAmountInWaterUnits" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="memSpillLocation" Type="String" MaxLength="3000" FixedLength="false" Unicode="false" />
+    <Property Name="dblRRCLeaseNumber" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Name="txtRRCLeaseName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="txtRRCFieldName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="txtLandOwner" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="memActionsTakenCleanUpStatus" Type="String" MaxLength="3000" FixedLength="false" Unicode="false" />
+    <Property Name="txtNRCNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtAgencyName1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtAgencyName2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtAgencyName3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="datDate1" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="datDate2" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="datDate3" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="txtWhere1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtWhere2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtWhere3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtWho1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtWho2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtWho3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="datTime1" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="datTime2" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="datTime3" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="txtSpiller" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="txtSpillerAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="txtSpillerCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtSpillerState" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="txtSpillerZipCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="txtSpillerContact" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="txtSpillerContactPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="memComments" Type="String" MaxLength="3000" FixedLength="false" Unicode="false" />
+    <Property Name="txtAgcyName1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtAgcyName2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtAgcyName3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="datD1" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="datD2" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="datD3" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="txtWhr1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtWhr2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtWhr3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtW1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtW2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtW3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="datTi1" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="datTi2" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="datTi3" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="txtLastField" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DateSearch" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="glocountylist">
+    <Key>
+      <PropertyRef Name="countyCode" />
+    </Key>
+    <Property Name="countyCode" Type="Double" Nullable="false" />
+    <Property Name="countyName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="countyGLOVoiceNumber" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="countyGLORegionNumber" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="countyGLORegionCity" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="countyGLOBeeperNumber" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="countyRRCNumber" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="countyRRCDistrictNumber" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="countyRRCDistrictCity" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="countyTNRCCNumber" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="countyTNRCCDistrictNumber" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="countyTNRCCDistrictCity" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="gloemail">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="emailgroup" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email01" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email02" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email03" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email04" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email05" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email06" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email07" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email08" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email09" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email10" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="gloid">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="available" Type="Int32" Nullable="false" />
+    <Property Name="user" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="glolastid">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="reportid" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="y">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="emergency" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="facilityname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="location" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="city" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="state" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="zip" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="callername" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="callerphonenumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="contactonscenename" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="contactonscenephonenumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="callerunknown" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="contactunknown" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="iescontact">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="phonenumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="priority" Type="Int32" />
+  </EntityType>
+  <EntityType Name="knowledgebase">
+    <Key>
+      <PropertyRef Name="knowledgebase_id" />
+    </Key>
+    <Property Name="knowledgebase_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="body" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="link" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="modrequest">
+    <Key>
+      <PropertyRef Name="modrequestid" />
+    </Key>
+    <Property Name="modrequestid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ersoperator" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="companyname" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="nameofcaller" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="phone" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="ext" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="fax" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="sendingmethod" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="modclient" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="datereceived" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="datefulfilled" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="comments" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="prodname1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="manu1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="qty1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="locatedvia1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="prodname2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="manu2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="qty2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="locatedvia2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="prodname3" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="manu3" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="qty3" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="locatedvia3" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="prodname4" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="manu4" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="qty4" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="locatedvia4" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="prodname5" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="manu5" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="qty5" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="locatedvia5" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="prodname6" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="manu6" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="qty6" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="locatedvia6" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="prodname7" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="manu7" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="qty7" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="locatedvia7" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="prodname8" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="manu8" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="qty8" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="locatedvia8" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="prodname9" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="manu9" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="qty9" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="locatedvia9" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="prodname10" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="manu10" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="qty10" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="locatedvia10" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="totalcost" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Name="price1" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="price2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="price3" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="price4" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="price5" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="price6" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="price7" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="price8" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="price9" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="price10" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="totalqty" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="monthreceived" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="yearreceived" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="noncoastal">
+    <Key>
+      <PropertyRef Name="nonCoastalType" />
+    </Key>
+    <Property Name="nonCoastalType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="oldglo">
+    <Key>
+      <PropertyRef Name="cntSpillID" />
+    </Key>
+    <Property Name="cntSpillID" Type="Int32" Nullable="false" />
+    <Property Name="fDrill" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="txtDrillTxt" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="txtReportTakenBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtReportPartyAffliation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="datReportTakenDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="datReportTakenTime" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="txtNotificationAgency" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="txtDischargeReportedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtDischargePhone1" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Name="txtDischargePhone2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="datDischargeDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="datDischargeTime" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="txtMaterial1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="dblCASUN1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="dblAmtSpilled1" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="txtUnitRecovered1" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="txtMaterial2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="dblCASUN2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="dblAmtSpilled2" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="txtUnitRecovered2" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="txtMaterial3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="dblCASUN3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="dblAmtSpilled3" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="txtUnitRecovered3" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="txtMaterial4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="dblCASUN4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="dblAmtSpilled4" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="txtUnitRecovered4" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="txtMaterial5" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="dblCASUN5" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="dblAmtSpilled5" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="txtUnitRecovered5" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="wSpillCounty" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="wOrigin" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="fSpillInWater" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="fSpillAirRelease" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="fCoastalWater" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="fLand" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="txtSpillReceivingWater" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="dblSpillAmountInWater" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtSpillAmountInWaterUnits" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="memSpillLocation" Type="String" MaxLength="3000" FixedLength="false" Unicode="false" />
+    <Property Name="dblRRCLeaseNumber" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Name="txtRRCLeaseName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="txtRRCFieldName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="txtLandOwner" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="memActionsTakenCleanUpStatus" Type="String" MaxLength="3000" FixedLength="false" Unicode="false" />
+    <Property Name="txtNRCNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtAgencyName1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtAgencyName2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtAgencyName3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="datDate1" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="datDate2" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="datDate3" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="txtWhere1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtWhere2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtWhere3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtWho1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtWho2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtWho3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="datTime1" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="datTime2" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="datTime3" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="txtSpiller" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="txtSpillerAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="txtSpillerCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtSpillerState" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="txtSpillerZipCode" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="txtSpillerContact" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="txtSpillerContactPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="memComments" Type="String" MaxLength="3000" FixedLength="false" Unicode="false" />
+    <Property Name="txtAgcyName1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtAgcyName2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtAgcyName3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="datD1" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="datD2" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="datD3" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="txtWhr1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtWhr2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtWhr3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtW1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtW2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="txtW3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="datTi1" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="datTi2" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="datTi3" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="txtLastField" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="otherid">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="available" Type="Int32" Nullable="false" />
+    <Property Name="user" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="reportlog">
+    <Key>
+      <PropertyRef Name="ReportLogID" />
+    </Key>
+    <Property Name="ReportLogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StartTime" Type="Int32" Nullable="false" />
+    <Property Name="EndTime" Type="Int32" />
+    <Property Name="MinutesTaken" Type="Int32" />
+    <Property Name="Operator" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ReportType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ReportID" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ReportDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Corrected" Type="Binary" MaxLength="1" FixedLength="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="shelloilincidentdata">
+    <Key>
+      <PropertyRef Name="incid" />
+    </Key>
+    <Property Name="incid" Type="Int32" Nullable="false" />
+    <Property Name="ersop" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="date" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="time" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="callername1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="callername2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="callername3" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="callerphone1" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="callerphone2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="callerphone3" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="callerext1" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="callerext2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="callerext3" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="calleraltphone1" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="calleraltphone2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="calleraltphone3" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="calleraltext1" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="calleraltext2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="calleraltext3" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="staffname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="staffphone" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="staffext" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="staffreporttime" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="stafftimezone" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="followupname1" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="followupname2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="followupname3" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="followupname4" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="followupname5" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="followuptime1" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="followuptime2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="followuptime3" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="followuptime4" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="followuptime5" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="followuptimezone1" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="followuptimezone2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="followuptimezone3" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="followuptimezone4" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="followuptimezone5" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="followupphone1" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="followupphone2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="followupphone3" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="followupphone4" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="followupphone5" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="followupext1" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="followupext2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="followupext3" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="followupext4" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="followupext5" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="emailsent" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="notes" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="spillorigin">
+    <Key>
+      <PropertyRef Name="originId" />
+    </Key>
+    <Property Name="originId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="spillunit">
+    <Key>
+      <PropertyRef Name="unitId" />
+    </Key>
+    <Property Name="unitId" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tceqafterhour">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Region" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+    <Property Name="PrimaryContact" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+    <Property Name="SecondaryContact" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+    <Property Name="TertiaryContact" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+    <Property Name="RegionalDirector" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+    <Property Name="EmailAddress" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tceqreport">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Operator" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ReportDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ReportTime" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IncidentDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="IncidentTime" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ReportedBy" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContactNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNumber2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Emergency" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="County" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MediaAffected" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ReceivingWater" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="AmountWater" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="UnitWater" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="PRCompany" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="PRStreet" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="PRCity" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="PRState" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="PRZipCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="PRContact" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="PRPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Material1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Material2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Material3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Material4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Material5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CAS1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CAS2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CAS3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CAS4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CAS5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Amount1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Amount2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Amount3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Amount4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Amount5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Unit1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Unit2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Unit3" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Unit4" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Unit5" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="ResponderName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="NotificationTime" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="theochemcleanshotincident">
+    <Key>
+      <PropertyRef Name="incidentId" />
+    </Key>
+    <Property Name="incidentId" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ersOp" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="rptDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="rptTime" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="callerName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="callerPhone" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="callerAff" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="callerFaxEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="incStreet" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="incCity" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="incState" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="incCountry" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="incTimeZone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="incDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="incTime" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="quest1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="quest2Qty" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="quest2Units" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="quest3" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="quest4" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="quest5" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="quest6" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="quest7" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="quest8" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="quest9" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="quest10YesOrNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="quest10IfYesWhat" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="quest11YesOrNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="quest11IfYesWhat" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="quest12" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="quest13" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="quest14" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="quest15" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="quest16" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="quest17" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="additCommentsDetails" Type="String" MaxLength="3200" FixedLength="false" Unicode="false" />
+    <Property Name="subName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="subAdminContact" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="subPhone" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="subFax" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="subEmail" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="subAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="subCityStateZip" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="emailsent" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="comments" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="theochemcontactinfo">
+    <Key>
+      <PropertyRef Name="ContactID" />
+    </Key>
+    <Property Name="ContactID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Admin_Contact" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Phone" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Fax" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="City__State__Zip" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="theochemcontactinformation">
+    <Key>
+      <PropertyRef Name="contactid" />
+    </Key>
+    <Property Name="contactid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="admincontact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="phone" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fax" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="citystatezip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ticket">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="status" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="username" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="subject" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="description" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="veolianonincident">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="callername" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="callerphonenumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="calleraffiliation" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="incidentcity" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="incidentstate" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ersoperator" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="date" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="time" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="CRMWebU">
+    <Key>
+      <PropertyRef Name="UserID" />
+      <PropertyRef Name="Username" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Password" />
+      <PropertyRef Name="UserType" />
+      <PropertyRef Name="LastPassChange" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastPassChange" Type="DateTime" Nullable="false" Precision="0" />
+  </EntityType>
+  <EntityContainer Name="chemreporterEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="agencylists" EntityType="Self.agencylist" />
+    <EntitySet Name="atandtassociatedatas" EntityType="Self.atandtassociatedata" />
+    <EntitySet Name="atandtvolunteerdatas" EntityType="Self.atandtvolunteerdata" />
+    <EntitySet Name="availablespillids" EntityType="Self.availablespillid" />
+    <EntitySet Name="basfenvironmentals" EntityType="Self.basfenvironmental" />
+    <EntitySet Name="basfenvironmentalids" EntityType="Self.basfenvironmentalid" />
+    <EntitySet Name="basfinjuries" EntityType="Self.basfinjury" />
+    <EntitySet Name="basfinjuryids" EntityType="Self.basfinjuryid" />
+    <EntitySet Name="cleanshotids" EntityType="Self.cleanshotid" />
+    <EntitySet Name="companyinformations" EntityType="Self.companyinformation" />
+    <EntitySet Name="crest811" EntityType="Self.crest811" />
+    <EntitySet Name="crestallnotifications" EntityType="Self.crestallnotification" />
+    <EntitySet Name="crestdotincidents" EntityType="Self.crestdotincident" />
+    <EntitySet Name="cresters" EntityType="Self.crester" />
+    <EntitySet Name="crestgeneralincidents" EntityType="Self.crestgeneralincident" />
+    <EntitySet Name="cresthighprofileincidents" EntityType="Self.cresthighprofileincident" />
+    <EntitySet Name="crestmonthlyreports" EntityType="Self.crestmonthlyreport" />
+    <EntitySet Name="crestpipelinemembers" EntityType="Self.crestpipelinemember" />
+    <EntitySet Name="crestpiplineincidents" EntityType="Self.crestpiplineincident" />
+    <EntitySet Name="crestwoodtransportationlists" EntityType="Self.crestwoodtransportationlist" />
+    <EntitySet Name="generalincidentedits" EntityType="Self.generalincidentedit" />
+    <EntitySet Name="generalincidentids" EntityType="Self.generalincidentid" />
+    <EntitySet Name="generalincidentreportdatas" EntityType="Self.generalincidentreportdata" />
+    <EntitySet Name="globasereportdatas" EntityType="Self.globasereportdata" />
+    <EntitySet Name="glocountylists" EntityType="Self.glocountylist" />
+    <EntitySet Name="gloemails" EntityType="Self.gloemail" />
+    <EntitySet Name="gloids" EntityType="Self.gloid" />
+    <EntitySet Name="glolastids" EntityType="Self.glolastid" />
+    <EntitySet Name="ies" EntityType="Self.y" />
+    <EntitySet Name="iescontacts" EntityType="Self.iescontact" />
+    <EntitySet Name="knowledgebases" EntityType="Self.knowledgebase" />
+    <EntitySet Name="modrequests" EntityType="Self.modrequest" />
+    <EntitySet Name="noncoastals" EntityType="Self.noncoastal" />
+    <EntitySet Name="oldgloes" EntityType="Self.oldglo" />
+    <EntitySet Name="otherids" EntityType="Self.otherid" />
+    <EntitySet Name="reportlogs" EntityType="Self.reportlog" />
+    <EntitySet Name="shelloilincidentdatas" EntityType="Self.shelloilincidentdata" />
+    <EntitySet Name="spillorigins" EntityType="Self.spillorigin" />
+    <EntitySet Name="spillunits" EntityType="Self.spillunit" />
+    <EntitySet Name="tceqafterhours" EntityType="Self.tceqafterhour" />
+    <EntitySet Name="tceqreports" EntityType="Self.tceqreport" />
+    <EntitySet Name="theochemcleanshotincidents" EntityType="Self.theochemcleanshotincident" />
+    <EntitySet Name="theochemcontactinfoes" EntityType="Self.theochemcontactinfo" />
+    <EntitySet Name="theochemcontactinformations" EntityType="Self.theochemcontactinformation" />
+    <EntitySet Name="tickets" EntityType="Self.ticket" />
+    <EntitySet Name="veolianonincidents" EntityType="Self.veolianonincident" />
+    <EntitySet Name="CRMWebUs" EntityType="Self.CRMWebU" />
+  </EntityContainer>
+</Schema>

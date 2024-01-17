@@ -1,0 +1,57 @@
+﻿@model ChemicalLibrary.TCEQEmailContact
+
+@{
+    ViewBag.Title = "TCEQEmailForm";
+}
+
+<h2>TCEQ Email Form</h2>
+@using (Html.BeginForm("SendTCEQEmail", "TCEQ", FormMethod.Post, new { @id = "TCEQEmailForm" }))
+{
+    <div style="text-align:center;">
+        <label name="tceqregionnumb" id="tceqregionnumb" style="font-weight:600;">TCEQ REGION NUMBER: @Model.Reqion</label>
+        <br />
+        <select id="AgentsList" size="10" onchange="AddNewEmail(this.value)" style="width:33%;">
+            <option value="Spill01@tceq.texas.gov">Region 1 AMARILLO</option>
+            <option value="Spill02@tceq.texas.gov">Region 2 LUBBOCK</option>
+            <option value="Spill03@tceq.texas.gov">Region 3 ABILENE</option>
+            <option value="Spill04@tceq.texas.gov">Region 4 DALLAS/ FT WORTH</option>
+            <option value="Spill05@tceq.texas.gov">Region 5 TYLER</option>
+            <option value="Spill06@tceq.texas.gov">Region 6 EL PASO</option>
+            <option value="Spill07@tceq.texas.gov">Region 7 MIDLAND</option>
+            <option value="Spill08@tceq.texas.gov">Region 8 SAN ANGELO</option>
+            <option value="Spill09@tceq.texas.gov">Region 9 WACO</option>
+            <option value="Spill10@tceq.texas.gov">Region 10 BEAUMONT</option>
+            <option value="Spill11@tceq.texas.gov">Region 11 AUSTIN</option>
+            <option value="Spill12@tceq.texas.gov">Region 12 HOUSTON</option>
+            <option value="Spill13@tceq.texas.gov">Region 13 SAN ANTONIO</option>
+            <option value="Spill14@tceq.texas.gov">Region 14 CORPUS CHRISTI</option>
+            <option value="Spill15@tceq.texas.gov">Region 15 HARLINGEN</option>
+            <option value="Spill16@tceq.texas.gov">Region 16 LAREDO</option>
+        </select>
+    </div>
+
+    <div style="text-align:center;">
+        <div>
+            <span style="vertical-align:middle;display:inline">To</span> <textarea name="ToEmails" id="ToEmails" class="GLOFieldSpacing form-control" style="width: 80%; vertical-align: middle; display: inline;" required=""></textarea>
+        </div>
+        <br />
+        <div>
+            <span style="vertical-align:middle;display:inline">Subject</span> <input type="text" name="Subject" class="GLOFieldSpacing form-control" style="width: 80%; vertical-align: middle; display: inline;" value="TCEQ-@Model.ID"/>
+        </div>
+        <br />
+        <div>
+            <span style="vertical-align:middle;display:inline">Attached</span> <input type="text" name="Attachment" class="GLOFieldSpacing form-control" style="width: 80%; vertical-align: middle; display: inline;" readonly="" value="@Model.FilePath"/>
+        </div>
+        <br />
+        <div>
+            <span style="vertical-align:middle;display:inline">Message</span> <textarea name="Message" class="GLOFieldSpacing form-control" style="width: 80%; vertical-align: middle; display: inline;"></textarea>
+        </div>
+        <input type="submit" value="SEND" id="SendEmail" name="SendEmail" style="color:red;font-weight:600; width:25%;" class="GLOFieldSpacing form-control" />
+    </div>
+}
+
+<script>
+    function AddNewEmail(email) {
+        document.getElementById("ToEmails").append(email + ", ");
+    }
+</script>

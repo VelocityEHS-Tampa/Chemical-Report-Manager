@@ -1,0 +1,396 @@
+﻿@model ChemicalLibrary.GeneralIncidentReportData
+@{
+    ViewBag.Title = "GeneralIncident";
+    string Updated = ViewBag.Updated;
+    string constring = crm.chemtelinc.com.Properties.Settings.Default.StatesConnectionString;
+    string GMconstring = crm.chemtelinc.com.Properties.Settings.Default.GoldmineConnectionString;
+    int IncidentID = ViewBag.ID;
+    List<string> SubList = new List<string>();
+    SubList = ChemicalLibrary.Search.GetSubscribersList(GMconstring);
+    List<string> States = new List<string>();
+    States = ChemicalLibrary.Search.GetStates(constring);
+
+
+    List<SelectListItem> Countries = new List<SelectListItem>(); //Countries
+    Countries.Add(new SelectListItem { Text = "", Value = "" });
+    Countries.Add(new SelectListItem { Text = "USA", Value = "USA" });
+    Countries.Add(new SelectListItem { Text = "Canada", Value = "Canada" });
+
+    List<SelectListItem> StatesDDL = new List<SelectListItem>(); //Generic States List
+    StatesDDL.Add(new SelectListItem { Text = "", Value = "" });
+    foreach (string s in States)
+    {
+        StatesDDL.Add(new SelectListItem { Text = s, Value = s });
+    }
+
+    List<SelectListItem> ProvincesDDL = new List<SelectListItem>(); //Generic States List
+    ProvincesDDL.Add(new SelectListItem { Text = "", Value = "" });
+    ProvincesDDL.Add(new SelectListItem { Text = "Alberta", Value = "Alberta" });
+    ProvincesDDL.Add(new SelectListItem { Text = "British Columbia", Value = "British Columbia" });
+    ProvincesDDL.Add(new SelectListItem { Text = "Manitoba", Value = "Manitoba" });
+    ProvincesDDL.Add(new SelectListItem { Text = "New Brunswick", Value = "New Brunswick" });
+    ProvincesDDL.Add(new SelectListItem { Text = "Newfoundland", Value = "Newfoundland" });
+    ProvincesDDL.Add(new SelectListItem { Text = "Northwest Territories", Value = "Northwest Territories" });
+    ProvincesDDL.Add(new SelectListItem { Text = "Nova Scotia", Value = "Nova Scotia" });
+    ProvincesDDL.Add(new SelectListItem { Text = "Nunavut", Value = "Nunavut" });
+    ProvincesDDL.Add(new SelectListItem { Text = "Ontario", Value = "Ontario" });
+    ProvincesDDL.Add(new SelectListItem { Text = "Prince Edward Island", Value = "Prince Edward Island" });
+    ProvincesDDL.Add(new SelectListItem { Text = "Quebec", Value = "Quebec" });
+    ProvincesDDL.Add(new SelectListItem { Text = "Saskatchewan", Value = "Saskatchewan" });
+    ProvincesDDL.Add(new SelectListItem { Text = "Yukon Territory", Value = "Yukon Territory" });
+
+    List<SelectListItem> TimeZones = new List<SelectListItem>(); //Generic Yes or No
+    TimeZones.Add(new SelectListItem { Text = "", Value = "" });
+    TimeZones.Add(new SelectListItem { Text = "AKST", Value = "AKST" });
+    TimeZones.Add(new SelectListItem { Text = "AST", Value = "AST" });
+    TimeZones.Add(new SelectListItem { Text = "CST", Value = "CST" });
+    TimeZones.Add(new SelectListItem { Text = "EST", Value = "EST" });
+    TimeZones.Add(new SelectListItem { Text = "HAST", Value = "HAST" });
+    TimeZones.Add(new SelectListItem { Text = "MST", Value = "MST" });
+    TimeZones.Add(new SelectListItem { Text = "PST", Value = "PST" });
+    TimeZones.Add(new SelectListItem { Text = "UTC", Value = "UTC" });
+
+    List<SelectListItem> YesOrNo = new List<SelectListItem>(); //Yes Or No
+    YesOrNo.Add(new SelectListItem { Text = "", Value = "" });
+    YesOrNo.Add(new SelectListItem { Text = "Yes", Value = "Yes" });
+    YesOrNo.Add(new SelectListItem { Text = "No", Value = "No" });
+
+    List<SelectListItem> GetNumbLoc = new List<SelectListItem>(); //Get our number from
+    GetNumbLoc.Add(new SelectListItem { Text = "", Value = "" });
+    GetNumbLoc.Add(new SelectListItem { Text = "ERG", Value = "ERG" });
+    GetNumbLoc.Add(new SelectListItem { Text = "Friend", Value = "Friend" });
+    GetNumbLoc.Add(new SelectListItem { Text = "Google/Web Search", Value = "Google/Web Search" });
+    GetNumbLoc.Add(new SelectListItem { Text = "Manufacturer", Value = "Manufacturer" });
+    GetNumbLoc.Add(new SelectListItem { Text = "Product Label", Value = "Product Label" });
+    GetNumbLoc.Add(new SelectListItem { Text = "SDS", Value = "SDS" });
+    GetNumbLoc.Add(new SelectListItem { Text = "Shipping Papers", Value = "Shipping Papers" });
+    GetNumbLoc.Add(new SelectListItem { Text = "Website", Value = "Website" });
+    GetNumbLoc.Add(new SelectListItem { Text = "Other", Value = "Other" });
+    GetNumbLoc.Add(new SelectListItem { Text = "Unknown", Value = "Unknown" });
+
+    List<SelectListItem> AccOrDelib = new List<SelectListItem>(); //Accidental Or Deliberate
+    AccOrDelib.Add(new SelectListItem { Text = "", Value = "" });
+    AccOrDelib.Add(new SelectListItem { Text = "Accidental", Value = "Accidental" });
+    AccOrDelib.Add(new SelectListItem { Text = "Deliberate", Value = "Deliberate" });
+    AccOrDelib.Add(new SelectListItem { Text = "Not Applicable", Value = "Not Applicable" });
+    AccOrDelib.Add(new SelectListItem { Text = "Unknown", Value = "Unknown" });
+
+    List<SelectListItem> StatusOfRel = new List<SelectListItem>(); //Status of Release
+    StatusOfRel.Add(new SelectListItem { Text = "Not Applicable", Value = "Not Applicable" });
+    StatusOfRel.Add(new SelectListItem { Text = "Ongoing", Value = "Ongoing" });
+    StatusOfRel.Add(new SelectListItem { Text = "Stopped", Value = "Stopped" });
+    StatusOfRel.Add(new SelectListItem { Text = "Mitigated", Value = "Mitigated" });
+    StatusOfRel.Add(new SelectListItem { Text = "Awaiting disposition", Value = "Awaiting disposition" });
+    StatusOfRel.Add(new SelectListItem { Text = "Personnel is enroute to Medical Facility", Value = "Personnel is enroute to Medical Facility" });
+    StatusOfRel.Add(new SelectListItem { Text = "Personnel is receiving Medical Assistance", Value = "Personnel is receiving Medical Assistance" });
+    StatusOfRel.Add(new SelectListItem { Text = "Personnel has Received Medical Assistance", Value = "Personnel has Received Medical Assistance" });
+    StatusOfRel.Add(new SelectListItem { Text = "Other - See Details", Value = "Other - See Details" });
+    StatusOfRel.Add(new SelectListItem { Text = "Unknown", Value = "Unknown" });
+
+    List<SelectListItem> DispOfMsds = new List<SelectListItem>(); //Dispersion of MSDS Info
+    DispOfMsds.Add(new SelectListItem { Text = "Not Applicable", Value = "Not Applicable" });
+    DispOfMsds.Add(new SelectListItem { Text = "ER Info Read to Citizen", Value = "ER Info Read to Citizen" });
+    DispOfMsds.Add(new SelectListItem { Text = "ER Info Read to First Responder", Value = "ER Info Read to First Responder" });
+    DispOfMsds.Add(new SelectListItem { Text = "SDS Sent", Value = "SDS Sent" });
+    DispOfMsds.Add(new SelectListItem { Text = "SDS Declined", Value = "SDS Declined" });
+    DispOfMsds.Add(new SelectListItem { Text = "Other - See Details", Value = "Other - See Details" });
+    DispOfMsds.Add(new SelectListItem { Text = "Unknown", Value = "Unknown" });
+
+    List<SelectListItem> SpillOrExp = new List<SelectListItem>(); //Spill Or Exposure
+    SpillOrExp.Add(new SelectListItem { Text = "Not Applicable", Value = "Not Applicable" });
+    SpillOrExp.Add(new SelectListItem { Text = "Spill", Value = "Spill" });
+    SpillOrExp.Add(new SelectListItem { Text = "Exposure", Value = "Exposure" });
+    SpillOrExp.Add(new SelectListItem { Text = "Both", Value = "Both" });
+    SpillOrExp.Add(new SelectListItem { Text = "Neither", Value = "Neither" });
+    SpillOrExp.Add(new SelectListItem { Text = "Unknown", Value = "Unknown" });
+
+
+    List<SelectListItem> TypeOfExp = new List<SelectListItem>(); //Type of Exposure
+    TypeOfExp.Add(new SelectListItem { Text = "Not Applicable", Value = "Not Applicable" });
+    TypeOfExp.Add(new SelectListItem { Text = "Eye", Value = "Eye" });
+    TypeOfExp.Add(new SelectListItem { Text = "Inhalation", Value = "Inhalation" });
+    TypeOfExp.Add(new SelectListItem { Text = "Injection", Value = "Injection" });
+    TypeOfExp.Add(new SelectListItem { Text = "Ingestion", Value = "Ingestion" });
+    TypeOfExp.Add(new SelectListItem { Text = "Skin", Value = "Skin" });
+    TypeOfExp.Add(new SelectListItem { Text = "Other - See Details", Value = "Other - See Details" });
+    TypeOfExp.Add(new SelectListItem { Text = "Unknown", Value = "Unknown" });
+
+
+    List<SelectListItem> Numbers = new List<SelectListItem>(); //Yes Or No
+    Numbers.Add(new SelectListItem { Text = "None", Value = "None" });
+    Numbers.Add(new SelectListItem { Text = "1", Value = "1" });
+    Numbers.Add(new SelectListItem { Text = "2", Value = "2" });
+    Numbers.Add(new SelectListItem { Text = "3", Value = "3" });
+    Numbers.Add(new SelectListItem { Text = "4", Value = "4" });
+    Numbers.Add(new SelectListItem { Text = "5", Value = "5" });
+    Numbers.Add(new SelectListItem { Text = "6", Value = "6" });
+    Numbers.Add(new SelectListItem { Text = "7", Value = "7" });
+    Numbers.Add(new SelectListItem { Text = "8", Value = "8" });
+    Numbers.Add(new SelectListItem { Text = "9", Value = "9" });
+    Numbers.Add(new SelectListItem { Text = "10", Value = "10" });
+    Numbers.Add(new SelectListItem { Text = "Other - See Details", Value = "Other - See Details" });
+}
+
+<h2>General Incident Report</h2>
+
+<div id="GenIncReportContainer">
+    <div class="GLOHeader" id="GRCPHeader">General Incident Report Search</div>
+
+    @using (Html.BeginForm("SearchGenIncReport", "OtherReports", FormMethod.Post, new { id = "SearchGenIncForm" }))
+    {
+        <div id="GenIncSearch">
+            <br />
+            <span>Search </span> <input type="text" id="cbsearch" name="cbsearch" class="form-control GLOFieldSpacing" style="width:20%;" />
+            <input type="submit" value="Search" class="form-control GLOFieldSpacing" style="width:10%;" />
+        </div>
+    }
+
+    <br />
+    @using (Html.BeginForm("SubmitGenIncForm", "OtherReports", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.TextBox("Updated", Updated, new { @type="hidden" })
+        <div id="FormButtons" style="padding:2%;text-align:right;">
+            <input type="submit" value="Submit" class="form-control GRCPButtons required-field" id="btnsubmit" name="btnsubmit" onclick="SubmitForm()" tabindex="99">
+            <input type="button" value="Cancel" class="form-control GRCPButtons alert-info" id="btnclose" name="btnclose" onclick="ClearForm()">
+        </div>
+        <div id="ReportInfo">
+            <div class="GLOHeader" id="GRCPHeader">Report Information, Caller's Information, and Incident Specifics</div>
+            <br />
+            @* Left portion info *@
+            <div class="CrestInlineDisplay" style="width:20%;">
+                <span>Report Information</span>
+                <hr />
+                @if (Updated != "true")
+                {
+                    <span>Operator Name</span> @Html.TextBoxFor(m => m.Ers_Operator, new { id = "txtersop", @Name = "txtersop", @Class = "form-control GLOFieldSpacing", @Value = @Session["Username"].ToString(), style = "width:90%;", @readonly = "" }) <br />
+                    <span>Incident ID</span> @Html.TextBoxFor(m => m.Incident_ID, new { id = "txtincidentid", @Name = "txtincidentid", @class = "form-control GLOFieldSpacing", style = "width:90%;", @readonly = "", @Value = @IncidentID }) <br />
+                    <span>Date</span> @Html.TextBoxFor(m => m.Date, new { id = "txtdate", @Name = "txtdate", @class = "form-control GLOFieldSpacing", style = "width:90%;", placeholder = "__/__/____", @Value = @DateTime.Now.ToShortDateString(), onblur = "FormatDate(this.value, this.id)", tabindex = "1" }) <br />
+                    <span>Time</span> @Html.TextBoxFor(m => m.Time, new { id = "txttime", @Name = "txttime", @class = "form-control GLOFieldSpacing", style = "width:90%;", placeholder = "__:__", @Value = @DateTime.Now.ToString("HH:mm"), onblur = "FormatTime(this.value, this.id)", tabindex = "2" })<br />
+                }
+                else
+                {
+                    <span>Operator Name</span> @Html.TextBoxFor(m => m.Ers_Operator, new { id = "txtersop", @Name = "txtersop", @Class = "form-control GLOFieldSpacing", style = "width:90%;", @readonly = "" }) <br />
+                    <span>Incident ID</span> @Html.TextBoxFor(m => m.Incident_ID, new { id = "txtincidentid", @Name = "txtincidentid", @class = "form-control GLOFieldSpacing", style = "width:90%;", @readonly = "" }) <br />
+                    <span>Date</span> @Html.TextBoxFor(m => m.Date, new { id = "txtdate", @Name = "txtdate", @class = "form-control GLOFieldSpacing", style = "width:90%;", placeholder = "__/__/____", onblur = "FormatDate(this.value, this.id)", tabindex = "1" }) <br />
+                    <span>Time</span> @Html.TextBoxFor(m => m.Time, new { id = "txttime", @Name = "txttime", @class = "form-control GLOFieldSpacing", style = "width:90%;", placeholder = "__:__", onblur = "FormatTime(this.value, this.id)", tabindex = "2" })<br />
+                }
+
+            </div>
+                @* center portion info *@
+            <div class="CrestInlineDisplay" style="width:30%;">
+                <span>Caller's Information</span>
+                <hr />
+                <span class="required-field">Caller's Name </span> @Html.TextBoxFor(m => m.Callers_Name, new { id = "txtcallersname", @Name = "txtcallersname", @class = "form-control GLOFieldSpacing", style = "width:90%;", required = "", tabindex = "3", maxlength="100" }) <br />
+                <span class="required-field">Caller's Phone # </span> @Html.TextBoxFor(m => m.Callers_Phone, new { id = "txtcallersphone", @Name = "txtcallersphone", @class = "form-control GLOFieldSpacing", style = "width:35%;", placeholder = "(000) 000-0000", required = "", tabindex = "4", onblur = "FormatPhone(this.value, this.id)" })
+                <span>Ext </span> @Html.TextBoxFor(m => m.Callers_Phone_Ext, new { id = "txtcallersphoneext", @Name = "txtcallersphoneext", @class = "form-control GLOFieldSpacing", style = "width:20%;", tabindex = "5" }) <br />
+                <span>Caller's Affiliation </span> @Html.TextBoxFor(m => m.Callers_Affiliation, new { id = "txtcallersaffiliation", @Name = "txtcallersaffiliation", @class = "form-control GLOFieldSpacing", style = "width:90%;", tabindex = "6", maxlength="100" }) <br />
+                <span>Caller's Fax/Email </span> @Html.TextBoxFor(m => m.Callers_Fax_Or_Email, new { id = "txtcallersfaxoremail", @Name = "txtcallersfaxoremail", @class = "form-control GLOFieldSpacing", style = "width:90%;", tabindex = "7", maxlength="75" }) <br />
+            </div>
+            @* Right portion info *@
+        <div class="CrestInlineDisplay">
+            <span>Incident Specifics</span>
+            <hr />
+            <span>Incident Street</span> @Html.TextBoxFor(m => m.Incident_Street, new { @class = "form-control GLOFieldSpacing", id = "txtincidentstreet", @Name = "txtincidentstreet", style = "width:35%;", tabindex = "8", list = "NotProvided", maxlength="65" })
+            <span>Incident Country </span> @Html.DropDownListFor(m => m.Incident_Country, Countries, new { @class = "GLOFieldSpacing", id = "txtincidentcountry", @Name = "txtincidentcountry", tabindex = "12", onchange = "ChangeStateProv(this.value)" })
+            <br />
+            <span>Incident City</span> @Html.TextBoxFor(m => m.Incident_City, new { @class = "form-control GLOFieldSpacing", id = "txtincidentcity", @Name = "txtincidentcity", style = "width:35%;", tabindex = "9", maxlength="65" })
+            <span>Incident Date</span> @Html.TextBoxFor(m => m.Incident_Date, new { id = "txtincidentdate", @Name = "txtincidentdate", @class = "form-control GLOFieldSpacing", style = "width:20%;", placeholder = "__/__/____", onblur = "FormatDate(this.value, this.id)", tabindex = "13" })
+            <br />
+            <span>Incident State</span>
+            @Html.DropDownListFor(m => m.Incident_State, StatesDDL, new { id = "txtincidentstate", @Name = "txtincidentstate", @class = "GLOFieldSpacing", tabindex = "10" })
+            @Html.DropDownListFor(m => m.Incident_State, ProvincesDDL, new { id = "txtincidentProvidence", @Name = "txtincidentProvidence", @class = "GLOFieldSpacing", tabindex = "10" })
+            <span>Incident Time</span> @Html.TextBoxFor(m => m.Incident_Time, new { id = "txtincidenttime", @Name = "txtincidenttime", @class = "form-control GLOFieldSpacing", style = "width:20%;", placeholder = "__:__", onblur = "FormatTime(this.value, this.id)", tabindex = "14" })
+            <br />
+            <span>Incident Zip</span> @Html.TextBoxFor(m => m.Incident_Zip_Code, new { @class = "form-control GLOFieldSpacing", id = "txtincidentzipcode", @Name = "txtincidentzipcode", maxlength = "10", placeholder = "00000", style = "width: 25%;", tabindex = "11" })
+            <span>Incident Time Zone </span>
+            @Html.DropDownListFor(m => m.Incident_Time_Zone, TimeZones, new { @class = "GLOFieldSpacing", id = "cbincidenttimezone", @Name = "cbincidenttimezone", tabindex = "15" })
+            <br />
+        </div>
+        </div>
+
+        <div id="SpillInfo">
+            <br />
+            <div class="GLOHeader" id="GRCPHeader">Spill/Material Information and Incident Details</div>
+            @* Left Side Info *@
+            <br />
+            <div class="CrestInlineDisplay" style="width:45%;">
+                <span>Spill/Material Information</span>
+                <hr />
+                <span class="required-field">Material Name </span> @Html.TextBoxFor(m => m.Material_Name, new { id = "txtmaterialname", @Name = "txtmaterialname", @class = "form-control GLOFieldSpacing", style = "width:75%", required = "", tabindex = "16", maxlength="100" }) <br />
+                <span>Product Number</span> @Html.TextBoxFor(m => m.Product_Number, new { id = "txtproductnumber", @Name = "txtproductnumber", @class = "form-control GLOFieldSpacing", style = "width:75%", tabindex = "17", maxlength="100" }) <br />
+                <span>EPA Reg #</span> @Html.TextBoxFor(m => m.Epa_Reg_No, new { id = "txteparegno", @Name = "txteparegno", @class = "form-control GLOFieldSpacing", style = "width:75%", tabindex = "18", placeholder = "Not Applicable", maxlength="100"  }) <br />
+                <span>Quantity Spilled or Released</span> @Html.TextBoxFor(m => m.Quantity_Spilled, new { id = "txtquantityspilledorreleased", @Name = "txtquantityspilledorreleased", @class = "form-control GLOFieldSpacing", style = "width: 60%", tabindex = "19" }) <br />
+                <span class="required-field">Does incident involve fire or threat </span>
+                @Html.DropDownListFor(m => m.Involve_Fire, YesOrNo, new { id = "cbinvolvefire", @Name = "cbinvolvefire", @class = "GLOFieldSpacing", required = "", tabindex = "20" })
+                <br />
+                <span class="required-field">Where did you get ChemTel's # from </span>
+                @Html.DropDownListFor(m => m.Where_Did_You_Get_Our_Number, GetNumbLoc, new { id = "cbwheredidyougetournumberfrom", @Name = "cbwheredidyougetournumberfrom", @class = "GLOFieldSpacing", required = "", tabindex = "21" })
+                <br />
+                <span class="required-field">Accidental or Deliberate </span>
+                @Html.DropDownListFor(m => m.Accident_Or_Deliberate, AccOrDelib, new { id = "cbaccidentalordeliberate", @Name = "cbaccidentalordeliberate", @class = "GLOFieldSpacing", required = "", tabindex = "22" })
+                <br />
+            </div>
+            @* Right Side Info *@
+            <div class="CrestInlineDisplay">
+                <span class="required-field">Incident Details </span> <br /> <hr />
+                @Html.TextAreaFor(m => m.Incident_Details, new { @class = "GLOFieldSpacing", id = "txtincidentdeails", @Name = "txtincidentdeails", rows = "10", cols = "70", required = "", tabindex = "23", maxlength="3000" })
+            </div>
+        </div>
+
+
+        <div id="SpillStatus">
+            <br />
+            <div class="GLOHeader" id="GRCPHeader">Spill Status/Emergency Info, Subscriber's Info, and Additional Release/Exposure information</div>
+            <br />
+            @* Left Side Info *@
+            <div class="CrestInlineDisplay" style="width:35%">
+                <span>Spill Status/Emergency Info</span>
+                <hr />
+                <span class="required-field">Status of Release of Exposure</span><br />
+                @Html.DropDownListFor(m => m.Status_Of_Release, StatusOfRel, new { id = "cbstatusofrelease", @Name = "cbstatusofrelease", @class = "GLOFieldSpacing", required = "", tabindex = "26" })
+                <br />
+                <span class="required-field">Dispersion of SDS information</span><br />
+                @Html.DropDownListFor(m => m.Dispersion_Of_Msds_Information, DispOfMsds, new { id = "cbdispersionofmsdsinfo", @Name = "cbdispersionofmsdsinfo", @class = "GLOFieldSpacing", required = "", tabindex = "27" })
+                <br />
+                <br />
+                <span>Subscriber's Info</span>
+                <hr />
+                <span>Subscriber's Name</span> <input type="button" value="Get Subscriber" class="form-control GLOFieldSpacing" style="width:25%;" onclick="ShowSearch()" tabindex="70" />
+                <br />
+                @if (Updated == "true")
+                {
+                    <input type="text" id = "txtsubscribersname" name = "txtsubscribersname" class = "form-control GLOFieldSpacing" required = "" tabindex = "72" value="@Model.Subscribers_Name-@Model.Subscribers_MIS" />
+                } else
+                {
+                    @Html.TextBoxFor(m => m.Subscribers_Name, new { id = "txtsubscribersname", @Name = "txtsubscribersname", @class = "form-control GLOFieldSpacing", required = "", tabindex = "72" })
+                }
+            </div>
+            @* Right Side Info *@
+            <div class="CrestInlineDisplay" style="width:64%">
+                <span>Additional Release or Exposure Information</span>
+                <hr />
+                <span class="required-field">Spill or Exposure</span>
+                @Html.DropDownListFor(m => m.Spill_Or_Exposure, SpillOrExp, new { id = "cbspillorexposure", @Name = "cbspillorexposure", @class = "GLOFieldSpacing", required = "", tabindex = "28" })
+                <span>Medical Personnel's Name</span>
+                @Html.TextBoxFor(m => m.Med_Personnel_Name, new { id = "txtmedpersonnelname", @Name = "txtmedpersonnelname", placeholder = "Not Applicable", @class = "form-control GLOFieldSpacing", style = "width:25%;", tabindex = "32", maxlength="100" })
+                <br />
+                <span class="required-field">Type of Exposure</span>
+                @Html.DropDownListFor(m => m.Type_Of_Exposure, TypeOfExp, new { id = "cbtypeofexposure", @Name = "cbtypeofexposure", @class = "GLOFieldSpacing", required = "", tabindex = "29" })
+                <span>Patient's Condition</span> @Html.TextBoxFor(m => m.Patient_Condition, new { @class = "form-control GLOFieldSpacing", id = "txtpatientscondtion", @Name = "txtpatientscondtion", style = "width:25%;", placeholder = "Not Applicable", tabindex = "33", maxlength = "100" })
+                <br />
+                <span>Number of Casualties</span>
+                @Html.DropDownListFor(m => m.Num_Of_Casualties, Numbers, new { id = "cbnumofcasualties", @Name = "cbnumofcasualties", @class = "GLOFieldSpacing", tabindex = "30" })
+
+                <span>Hospital/Clinic Location</span> @Html.TextBoxFor(m => m.Hospital_Clinic_Location, new { id = "txthospitalcliniclocation", @Name = "txthospitalcliniclocation", @class = "form-control GLOFieldSpacing", placeholder = "Not Applicable", style = "width:25%;", tabindex = "34", maxlength = "100" })
+                <br />
+                <span>Number of Injuries</span>
+                @Html.DropDownListFor(m => m.Num_Of_Injuries, Numbers, new { id = "cbnumofinjuries", @Name = "cbnumofinjuries", @class = "GLOFieldSpacing", tabindex = "31" })
+                <br />
+                <br />
+                <br />
+                <br />
+                <div style="text-align:center;width:75%;display:none;" id="SubSearchContainer">
+                    <span>Search</span><br /><input type="text" name="subscriberlist" class="form-control GLOFieldSpacing" list="SubscriberList" style="margin-left:5%;width:75%;" onchange="FillSubscriberName(this.value)" tabindex="71" />
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div id="FormButtons" style="padding:2%;text-align:center;">
+            <input type="submit" value="Submit" class="form-control GRCPButtons required-field" id="btnsubmit" name="btnsubmit" onclick="return SubmitForm()" tabindex="99">
+        </div>
+    }
+</div>
+
+<datalist id="SubscriberList">
+    @foreach (string s in SubList)
+    {
+        <option value="@s">@s</option>
+    }
+</datalist>
+<datalist id="NotProvided">
+    <option value="Not Provided">Not Provided</option>
+</datalist>
+
+<script>
+    $(document).ready(function () {
+        $('#txtincidentProvidence').hide();
+
+        if ("@Updated" != "true") { // We do NOT want to update the IncidentID if the report is an update.
+            //Keep checking for a new IncidentID number to avoid double inserts and skipping ID's
+            var IncidentID = "@IncidentID";
+            window.setInterval(function () {
+                $.ajax({
+                    url: "/OtherReports/CheckForNewGenIncID",
+                    type: 'GET',
+                    success: function (data) {
+                        if (data.NEWID != IncidentID) {
+                            alert("The Incident ID has changed to " + data.NEWID + "!");
+                            document.getElementById("txtincidentid").value = data.NEWID;
+                            IncidentID = data.NEWID;
+                        }
+                    },
+                    error: function (data) {
+                        alert("There was an error checking for an updated ID. Please reach out to IT to see if your ID is still up to date.");
+                    }
+                })
+            }, 30000);
+        }
+    });
+
+    function SubmitForm() {
+        var submit = confirm("Please ensure all data entered is correct before submitting! Are you sure you want to submit this report?")
+        if (submit) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    function ShowSearch() {
+        $('#SubSearchContainer').show();
+    }
+    function FillSubscriberName(SubName) {
+        $('#txtsubscribersname').val(SubName);
+    }
+    function ClearForm() {
+        if (confirm("Are you sure you want to cancel this report?")) {
+            ClearID();
+            window.location = "/Home/Index";
+        }
+    }
+
+    //Formatting and Validation of Incident Time
+    function FormatDate(Date, FieldName) {
+        //Purely number input, no slashes.
+        if (Date.length == 8 && !Date.includes("/")) {
+            var ds = Date.split("");
+            var fulldate = ds[0] + ds[1] + "/" + ds[2] + ds[3] + "/" + ds[4] + ds[5] + ds[6] + ds[7];
+            document.getElementById(FieldName).value = fulldate;
+        }
+    }
+    function FormatTime(Time, FieldName) {
+        //Purely number input, no semi-colons.
+        if (Time.length == 4 && !Time.includes(":")) {
+            var ts = Time.split("");
+            var fulltime = ts[0] + ts[1] + ":" + ts[2] + ts[3];
+            document.getElementById(FieldName).value = fulltime;
+        }
+    }
+    function FormatPhone(Phone, FieldName) {
+        //Purely number input, no parenthesis, no hyphens.
+        if (Phone.length == 10 && !Phone.includes("-") && !Phone.includes("(") && !Phone.includes(")")) {
+            var ps = Phone.split("");
+            var fullphone = "(" + ps[0] + ps[1] + ps[2] + ") " + ps[3] + ps[4] + ps[5] + "-" + ps[6] + ps[7] + ps[8] + ps[9]
+            document.getElementById(FieldName).value = fullphone;
+        }
+    }
+
+    function ChangeStateProv(country) {
+        if (country == "Canada") {
+            $('#txtincidentProvidence').show();
+            $('#txtincidentstate').hide();
+        } else {
+            $('#txtincidentstate').show();
+            $('#txtincidentProvidence').hide();
+        }
+    }
+</script>

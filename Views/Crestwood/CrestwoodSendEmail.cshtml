@@ -1,0 +1,220 @@
+﻿@model crm.chemtelinc.com.Models.CrestEmailForm
+
+@{
+    ViewBag.Title = "CrestGenIncEmail";
+    List<string> Names = new List<string>();
+    string st = ChemicalLibrary.Search.ConvertState(Model.State);
+    string constring = crm.chemtelinc.com.Properties.Settings.Default.chemicalTestConnectionString;
+    Names = ChemicalLibrary.Search.GetNamesByRegion(constring, Model.Region);
+}
+
+<h2>Crestwood Email Form</h2>
+
+@using (Html.BeginForm("SendCrestwoodEmail", "Crestwood", FormMethod.Post))
+{
+    <div class="GLOHeader" id="GRCPHeader">Agency Contacts</div>
+    <br />
+    <div id="IncidentTypeButtons" style="width: 38%; display: inline-block">
+        <div>
+            <input type="button" value="1. WP Viol" class="form-control GLOFieldSpacing IncidentButton" style="width:20%; display:inline;" />
+            <input type="button" value="2. 3rd Party" class="form-control GLOFieldSpacing IncidentButton" style="width: 20%; display: inline; " />
+            <input type="button" value="3. Veh Acc" class="form-control GLOFieldSpacing IncidentButton" style="width: 20%; display: inline; " />
+            <input type="button" value="4. Spill/Rel" class="form-control GLOFieldSpacing IncidentButton" style="width: 20%; display: inline; " />
+        </div>
+        <div>
+            <input type="button" value="5. Injury" class="form-control GLOFieldSpacing IncidentButton" style="width: 20%; display: inline;" />
+            <input type="button" value="6. Ill/Chem" class="form-control GLOFieldSpacing IncidentButton" style="width: 20%; display: inline;" />
+            <input type="button" value="7. Fire" class="form-control GLOFieldSpacing IncidentButton" style="width: 20%; display: inline;" />
+            <input type="button" value="8. Line" class="form-control GLOFieldSpacing IncidentButton" style="width: 20%; display: inline;" />
+        </div>
+        <div>
+            <input type="button" value="9. Hazard" class="form-control GLOFieldSpacing IncidentButton" style="width: 20%; display: inline;" />
+            <input type="button" value="10. P. Dam" class="form-control GLOFieldSpacing IncidentButton" style="width: 20%; display: inline;" />
+            <input type="button" value="11. Theft" class="form-control GLOFieldSpacing IncidentButton" style="width: 20%; display: inline;" />
+            <input type="button" value="12. Reg. Visit" class="form-control GLOFieldSpacing IncidentButton" style="width: 20%; display: inline;" />
+        </div>
+        <div>
+            <input type="button" value="13. Drill" class="form-control GLOFieldSpacing IncidentButton" style="width: 20%; display: inline;" />
+            <input type="button" value="14. Sus Act." class="form-control GLOFieldSpacing IncidentButton" style="width: 20%; display: inline;" />
+        </div>
+        <br />
+        <br />
+        <div>
+            <input type="button" value="Pipeline" class="form-control GLOFieldSpacing IncidentButton" style="width: 20%; display: inline;" />
+            <input type="button" value="Class 8/Fleet" class="form-control GLOFieldSpacing IncidentButton" style="width: 20%; display: inline;" />
+            <input type="button" value="High Prof" class="form-control GLOFieldSpacing IncidentButton" style="width: 20%; display: inline;" />
+            <input type="button" value="Projects" class="form-control GLOFieldSpacing IncidentButton" style="width: 20%; display: inline;" />
+        </div>
+    </div>
+    <div id="AgentsEmails" style="width:42%; display:inline-block; vertical-align:top; text-align:left;">
+        <h4 style="text-align:center;">Agents</h4>
+        <select id="AgentsList" size="8" onchange="AddNewEmail(this.value)">
+            @if (st != "NO")
+            {
+                foreach (string name in Names)
+                {
+                    if (name.Contains(Model.State))
+                    {
+                        <option value="@name">@name</option>
+                    }
+                }
+            }
+            else
+            {
+                foreach (string name in Names)
+                {
+                    <option value="@name">@name</option>
+                }
+            } 
+        </select>
+    </div>
+    <div id="TransportEmails" style="width: 17%; display: inline-block; vertical-align: top;">
+        <input type="button" value="Add New Jersey Emails" class="form-control GLOFieldSpacing IncidentButton" />
+        <input type="button" value="Add Indiana Emails" class="form-control GLOFieldSpacing IncidentButton" />
+        <input type="button" value="Add West Virginia Emails" class="form-control GLOFieldSpacing IncidentButton" />
+        <input type="button" value="Add Injury Emails" class="form-control GLOFieldSpacing IncidentButton" />
+        <input type="button" value="Add Property Damage Emails" class="form-control GLOFieldSpacing IncidentButton" />
+    </div>
+    <br />
+    <br />
+    <div class="GLOHeader" id="GRCPHeader">Message</div>
+    <span style="vertical-align:top;">To Emails: </span>
+    <br />
+    <textarea id="txtemailto" name="txtemailto" class="form-control GLOFieldSpacing" style="width:85%"></textarea>
+    <input type="button" value="Clear Emails" class="form-control GLOFieldSpacing alert-warning" style="width: 10%; display: inline; vertical-align: top;" />
+    <br />
+    <span>Email Subject:</span>
+    <br />
+    <input type="text" id="txtemailsubject" name="txtemailsubject" class="form-control GLOFieldSpacing" style="width:85%" />
+    <br />
+    <span>Attachments:</span>
+    <br />
+    <input type="text" value="@Model.FilePath" id="txtemailattachment" name="txtemailattachment" class="form-control GLOFieldSpacing" style="width:85%" />
+    //St the txtfileattachment textbox to the path of th PDF report file.
+    <br />
+    <span>Email Body:</span>
+    <br />
+    <textarea id="txtemailbody" name="txtemailbody" style="width:85%" rows="5"></textarea>
+    <input type="submit" value="Send" class="form-control GLOFieldSpacing required-field" style="width: 10%" />
+
+}
+
+
+<script>
+    $(document).ready(function () {
+        document.getElementById('txtemailto').value = "";
+
+        //AJAX Call gets completed after the others are already done.
+        //Get automatically generated info for the email form using AJAX when the form is loaded and ready.
+        if ("@Model.Type" == "General Incident") {
+            if ("@Model.EmpOrContract" == "Private Citizen" && "@Model.PC_CWLocOrTransport" == "Transportation Unit") {
+                document.getElementById('txtemailto').value += ", Local-Terminal-IN@crestwoodlp.com";
+            };
+            if ("@Model.CallerEmail" == "") //This check determines whether the variable "calleremail" is blank.
+            {
+                document.getElementById('txtemailto').value += ",@Model.ESREmail";
+            } else
+            {
+                document.getElementById('txtemailto').value += ",@Model.ESREmail, @Model.CallerEmail";
+            };
+            $.ajax({
+                url: '/Crestwood/GetGeneralIncidentRecord/',
+                data: { id: @Model.ID },
+                type: 'GET',
+                success: function (data) {
+                    document.getElementById('txtemailto').value += ", " + data.txtemailto;
+                    document.getElementById('txtemailsubject').value = data.subject;
+                    document.getElementById('txtemailbody').value = data.body;
+                },
+                error: function (data) {
+                    alert("ERROR!");
+                }
+            });
+        } else if ("@Model.Type" == "Pipeline") {
+            $.ajax({
+                url: '/Crestwood/GetPipelineIncidentRecord/',
+                data: { id: @Model.ID },
+                type: 'GET',
+                success: function (data) {
+                    document.getElementById('txtemailto').value += data.txtemailto;
+                    document.getElementById('txtemailsubject').value = data.subject;
+                    document.getElementById('txtemailbody').value = data.body;
+                },
+                error: function (data) {
+                    alert("ERROR!");
+                }
+            });
+        }
+
+        //add emails related to the incident nature.
+        if ("@Model.IncidentType" == "Workplace Violence") { document.getElementById('txtemailto').value += ",Events-WorkplaceViolence@crestwoodlp.com"; }
+        else if ("@Model.IncidentType" == "Third Party Complaint") { document.getElementById('txtemailto').value += ",Events-Complaint@crestwoodlp.com"; }
+        else if ("@Model.IncidentType" == "Vehicle Accident (in motion)") { document.getElementById('txtemailto').value += ",Events-VehicleIncident@crestwoodlp.com"; }
+        else if ("@Model.IncidentType" == "Spill Or Release") { document.getElementById('txtemailto').value += ",Events-ReleaseSpill@crestwoodlp.com"; }
+        else if ("@Model.IncidentType" == "Injury") { document.getElementById('txtemailto').value += ",Events-Injuryillness@crestwoodlp.com"; }
+        else if ("@Model.IncidentType" == "Illness or Chemical Exposure") { document.getElementById('txtemailto').value += ",Events-Injuryillness@crestwoodlp.com"; }
+        else if ("@Model.IncidentType" == "Fire") { document.getElementById('txtemailto').value += ",Events-Fire@crestwoodlp.com"; }
+        else if ("@Model.IncidentType" == "Line Strike") { document.getElementById('txtemailto').value += ",Events-LineStrike@crestwoodlp.com"; }
+        else if ("@Model.IncidentType" == "Hazard Report") { document.getElementById('txtemailto').value += ",Events-HazardAlert@crestwoodlp.com"; }
+        else if ("@Model.IncidentType" == "Property Damage") { document.getElementById('txtemailto').value += ",Events-PropertyDamage@crestwoodlp.com"; }
+        else if ("@Model.IncidentType" == "Theft") { document.getElementById('txtemailto').value += ",Events-Theft@crestwoodlp.com"; }
+        else if ("@Model.IncidentType" == "Reg. Visit") { document.getElementById('txtemailto').value += ",Events-AgencyAction@crestwoodlp.com"; }
+        else if ("@Model.IncidentType" == "Drill or Safety System Test") { document.getElementById('txtemailto').value += ",Events-DrillTest@crestwoodlp.com"; }
+        else if ("@Model.IncidentType" == "Suspicious Activity/Security Threat") { document.getElementById('txtemailto').value += ",Events-SecurityThreat&SuspiciousActivity@crestwoodlp.com"; };
+
+        //Remove leading and trailing comma if needed using REGEX.
+        document.getElementById('txtemailto').value = document.getElementById('txtemailto').value.replace(/(^,)|(,$)/g, '');
+    });
+
+    function AddNewEmail(selectedName) {
+
+        var name = "";
+        var email = "";
+        var splitname = selectedName.split('-');
+        name = splitname[0];
+        if (name == "Maureen Ball") {
+            name = "Maureen Ball-Keene";
+        }
+
+        if (!selectedName.includes("Local-S&L-Terminal")) {
+            $.ajax({
+                url: '/Crestwood/GetEmailAddress/',
+                data: { name: name },
+                type: 'GET',
+                success: function (data) {
+                    document.getElementById('txtemailto').value += ", " + data;
+                },
+                error: function (data) {
+                    alert("ERROR!");
+                }
+            });
+        }
+        else {
+            txtemailto.Text += "," + selectedName;  //If it's not, the member's email address is added to the list in the txtemailto textbox.
+        }
+    }
+
+    //functions for buttons on page to clear emails, or add emails.
+    $(':button').click(function () {
+        if ($(this).val() == "1. WP Viol") { document.getElementById('txtemailto').value += ",Events-WorkplaceViolence@crestwoodlp.com"; }
+        else if ($(this).val() == "2. 3rd Party") { document.getElementById('txtemailto').value += ",Events-Complaint@crestwoodlp.com"; }
+        else if ($(this).val() == "3. Veh Acc") { document.getElementById('txtemailto').value += ",Events-VehicleIncident@crestwoodlp.com"; }
+        else if ($(this).val() == "4. Spill/Rel") { document.getElementById('txtemailto').value += ",Events-ReleaseSpill@crestwoodlp.com"; }
+        else if ($(this).val() == "5. Injury") { document.getElementById('txtemailto').value += ",Events-Injuryillness@crestwoodlp.com"; }
+        else if ($(this).val() == "6. Ill/Chem") { document.getElementById('txtemailto').value += ",Events-Injuryillness@crestwoodlp.com"; }
+        else if ($(this).val() == "7. Fire") { document.getElementById('txtemailto').value += ",Events-Fire@crestwoodlp.com"; }
+        else if ($(this).val() == "8. Line") { document.getElementById('txtemailto').value += ",Events-LineStrike@crestwoodlp.com"; }
+        else if ($(this).val() == "9. Hazard") { document.getElementById('txtemailto').value += ",Events-HazardAlert@crestwoodlp.com"; }
+        else if ($(this).val() == "10. P. Dam") { document.getElementById('txtemailto').value += ",Events-PropertyDamage@crestwoodlp.com"; }
+        else if ($(this).val() == "11. Theft") { document.getElementById('txtemailto').value += ",Events-Theft@crestwoodlp.com"; }
+        else if ($(this).val() == "12. Reg. Visit") { document.getElementById('txtemailto').value += ",Events-AgencyAction@crestwoodlp.com"; }
+        else if ($(this).val() == "13. Drill") { document.getElementById('txtemailto').value += ",Events-DrillTest@crestwoodlp.com"; }
+        else if ($(this).val() == "14. Sus Act.") { document.getElementById('txtemailto').value += ",Events-SecurityThreat&SuspiciousActivity@crestwoodlp.com"; }
+        else if ($(this).val() == "Pipeline") { document.getElementById('txtemailto').value += ",AssetType-Pipeline@crestwoodlp.com"; }
+        else if ($(this).val() == "Class 8/Fleet") { document.getElementById('txtemailto').value += ",AssetType-Class&Fleet@crestwoodlp.com"; }
+        else if ($(this).val() == "High Prof") { document.getElementById('txtemailto').value += ",Events-HighProfile@crestwoodlp.com"; }
+        else if ($(this).val() == "Projects") { document.getElementById('txtemailto').value += ",AssetType-Projects@crestwoodlp.com"; }
+        //Clear emails on button click
+        else if ($(this).val() == "Clear Emails") { document.getElementById('txtemailto').value = ""; }
+    });
+</script>

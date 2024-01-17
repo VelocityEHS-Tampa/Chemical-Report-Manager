@@ -1,0 +1,112 @@
+﻿
+@{
+    ViewBag.Title = "HSER Members";
+    string constring = crm.chemtelinc.com.Properties.Settings.Default.chemicalConnectionString; //Class-level variable containg the connection string to the database.
+    string constringTest = crm.chemtelinc.com.Properties.Settings.Default.chemicalTestConnectionString; //Class-level variable containg the connection string to the database.
+    List<string> names = new List<string>();
+    names = ChemicalLibrary.Search.GetCrestERSNames(constring);
+}
+
+<h2>HSER Members</h2>
+<br />
+<br />
+<div style="width: 49%; display:inline-block;">
+    Start Date
+    <input type="text" placeholder="__/__/____" name="StartDate" id="StartDate" class="GLOFieldSpacing form-control" style="width:50%;" maxlength="10" onblur="FormatDate(this.value, this.id)" />
+    <br />
+    End Date
+    <input type="text" placeholder="__/__/____" name="EndDate" id="EndDate" class="GLOFieldSpacing form-control" style="width:50%;" maxlength="10" onblur="FormatDate(this.value, this.id)"/>
+    <br />
+    Name
+    <input type="text" name="Name" id="Name" class="GLOFieldSpacing form-control" style="width:50%;" />
+    <br />
+    Phone
+    <input type="text" placeholder="(___) ___-____" name="Phone" id="Phone" class="GLOFieldSpacing form-control" style="width:50%;" onblur="FormatPhone(this.value, this.id)"/>
+    <br />
+    Email
+    <input type="text" name="Email" id="Email" class="GLOFieldSpacing form-control" style="width:50%;" />
+    <br />
+    Location
+    <input type="text" name="Location" id="Location" class="GLOFieldSpacing form-control" style="width:50%;" />
+    <br />
+    <br />
+    <input type="hidden" name="MemberID" id="MemberID" value="0"/>
+    <input type="button" name="Add" value="Add" class="GLOFieldSpacing form-control" style="width:15%; font-weight: bold;" onclick="UpdateMembers(this.value)" />
+    <input type="button" name="Update" value="Update" class="GLOFieldSpacing form-control" style="width: 15%; font-weight: bold;" onclick="UpdateMembers(this.value)" />
+    <input type="button" name="Delete" value="Delete" class="GLOFieldSpacing form-control text-danger" style="width: 15%; font-weight: bold;" onclick="UpdateMembers(this.value)" />
+</div>
+
+<div style="width: 49%; display: inline-block; vertical-align: top; overflow-x: scroll; ">
+    <select id="AgentsList" size="20" onchange="FillHSERForm(this.value)">
+        @foreach (string n in names)
+        {
+            <option value="@n">@n</option>
+        }
+    </select>
+</div>
+
+<script>
+
+    function FormatDate(Date, FieldName) {
+        //Purely number input, no slashes.
+        if (Date.length == 8 && !Date.includes("/")) {
+            var ds = Date.split("");
+            var fulldate = ds[0] + ds[1] + "/" + ds[2] + ds[3] + "/" + ds[4] + ds[5] + ds[6] + ds[7];
+            document.getElementById(FieldName).value = fulldate;
+        }
+    }
+
+    function FormatPhone(Phone, FieldName) {
+        //Purely number input, no parenthesis, no hyphens.
+        if (Phone.length == 10 && !Phone.includes("-") && !Phone.includes("(") && !Phone.includes(")")) {
+            var ps = Phone.split("");
+            var fullphone = "(" + ps[0] + ps[1] + ps[2] + ") " + ps[3] + ps[4] + ps[5] + "-" + ps[6] + ps[7] + ps[8] + ps[9]
+            document.getElementById(FieldName).value = fullphone;
+        }
+    }
+
+
+    function FillHSERForm(name) {
+        const id = name.split('_');
+        $.ajax({
+            url: '/Crestwood/HSERMemberInfo',
+            data: { id: id[2] },
+            type: 'GET',
+            success: function (data) {
+                document.getElementById('StartDate').value = data.StartDate.split(" ")[0];
+                document.getElementById('EndDate').value = data.EndDate.split(" ")[0];
+                document.getElementById('Name').value = id[1];
+                document.getElementById('Phone').value = data.Phone;
+                document.getElementById('Email').value = data.Email;
+                document.getElementById('Location').value = id[0];
+                document.getElementById('MemberID').value = id[2];
+            },
+            error: function (data) {
+                alert("ERROR!");
+            }
+        });
+    }
+
+    function UpdateMembers(btnvalue) {
+        var MemberID = document.getElementById('MemberID').value;
+        var stDate = document.getElementById('StartDate').value;
+        var endDate = document.getElementById('EndDate').value;
+        var Name = document.getElementById('Name').value;
+        var Phone = document.getElementById('Phone').value;
+        var Email = document.getElementById('Email').value;
+        var Location = document.getElementById('Location').value;
+
+        $.ajax({
+            url: '/Crestwood/UpdateHSERInfo',
+            data: { ID: MemberID, StartDate: stDate, EndDate: endDate, Name: Name, Phone: Phone, Email: Email, Location: Location, ButtonType: btnvalue },
+            type: 'GET',
+            success: function (data) {
+                alert("HSER Member has been successfully Updated!");
+                window.location.reload();
+            },
+            error: function (data) {
+                alert("ERROR!");
+            }
+        });
+    }
+</script>

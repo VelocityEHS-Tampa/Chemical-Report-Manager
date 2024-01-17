@@ -1,0 +1,50 @@
+﻿@model ChemicalLibrary.TheoChemCleanshotIncident
+@{
+    ViewBag.Title = "OtherReportsCleanShotEmailForm";
+}
+
+<h2>OtherReportsCleanShotEmailForm</h2>
+
+@using (Html.BeginForm("SendCleanShotEmail", "OtherReports", FormMethod.Post))
+{
+    <label>To</label>
+    <input type="text" name="txtemailto" id="txtemailto" class="GLOFieldSpacing form-control" value="jt@theochem.com,tbarnes@theochem.com,ers@ehs.com" />
+    <br />
+    <label>Subject</label>
+    <input type="text" name="txtemailsubject" id="txtemailsubject" class="GLOFieldSpacing form-control" value="ChemTel Clean Shot Incident Report" />
+    <br />
+    <label>Attachment</label>
+    <input type="text" name="txtemailattachment" id="txtemailattachment" class="GLOFieldSpacing form-control" />
+    <br />
+    <label id="InfoLabel"></label>
+    <br />
+    <label>Message</label> <textarea name="txtemailbody" id="txtemailbody" class="GLOFieldSpacing form-control"></textarea>
+    <br />
+    <div style="text-align:center;">
+        <input type="submit" value="Send" class="GLOFieldSpacing form-control" style="width: 25%; color:red; font-weight:700;" />
+        <input type="submit" value="Cancel" class="GLOFieldSpacing form-control" style="width: 25%; font-weight: 700;" />
+    </div>
+    <input type="hidden" name="txtIncidentid" value="@Model.Incident_ID" />
+    <input type="hidden" name="txtSubName" value="@Model.Sub_Name" />
+}
+
+<script>
+    $(document).ready(function() {
+        var yr = "@Model.Incident_ID";
+        var path = "\\\\chem-fs1.ers.local\\\completed reports\\Theochem Clean Shot Incident Reports\\Test\\";
+        var bpath = "\\\\chem-fs1.ers.local\\\completed reports\\Buster Incident Reports\\Test\\";
+        yr = yr.substring(3, 7);
+        path += yr + "\\";
+        bpath += yr + "\\";
+        if ("@Model.Type" == "Buster")
+        {
+            path = bpath + "@Model.Incident_ID" + ".pdf";
+        }
+        else
+        {
+            path += "@Model.Incident_ID" + ".pdf";
+        }
+        $("#txtemailattachment").val(path);
+        $("#InfoLabel").text("ChemTel Incident Report @Model.Incident_ID for @Model.Sub_Name");
+    });
+</script>

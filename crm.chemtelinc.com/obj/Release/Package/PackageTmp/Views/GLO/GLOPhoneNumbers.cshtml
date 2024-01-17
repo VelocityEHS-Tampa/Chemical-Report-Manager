@@ -1,0 +1,76 @@
+﻿@model ChemicalLibrary.GLOCountyList
+@{
+    Layout = null;
+
+    string bnum = Model.County_GLO_Beeper_Number;
+    string first = "";
+    if (bnum != "")
+    {  //This if statement ensures there's a beeper number.  If there is, the number is put into a readable format.
+        bnum.Substring(0, 1);
+    }
+    if (first == "1")
+    {
+        bnum = bnum.Remove(0, 1);
+    }
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GLO Phone Numbers</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.css" />
+    <link rel="stylesheet" href="~/Content/Site.css" />
+</head>
+<body style="background-color: #d3d3d3;">
+    <div class="GLOHeader" id="GRCPHeader">County Code and Name</div>
+    <br />
+    <span>County Code </span> <input type="text" id="CountyCode" value="@Model.County_Code" disabled="" />
+    <br />
+    <br />
+    <span>County Name </span> <input type="text" id="CountyName" value="@Model.County_Name" disabled="" />
+    <br />
+    <br />
+    <div class="GLOHeader" id="GRCPHeader">GLO Numbers</div>
+    <span>For GLO Non Coastal Courtesy Notification, call 409-727-5557.</span>
+    <br />
+    <span>GLO Phone # </span><input type="text" disabled="" id="GLOPhone" value="@Model.County_GLO_Voice_Number" />
+    <br />
+    <br />
+    <span>GLO Region # </span><input type="text" disabled="" id="GLORegion" value="@Model.County_GLO_Region_Number" />
+    <br />
+    <br />
+    <span>GLO City </span><input type="text" disabled="" id="GLOCity" value="@Model.County_GLO_Region_City" />
+    <br />
+    <br />
+    <span>Alt Phone # </span><input type="text" disabled="" id="GLOAltPhone" value="@bnum" />
+    <br />
+    <br />
+    <div class="GLOHeader" id="GRCPHeader">RRC Numbers</div>
+    <span>If RRC voice number can not be reached for 10 minutes, call 512-463-6788.  If still no response, see step 5 for RRC notification procedures.</span>
+    <br />
+    <br />
+    <span>RRC Phone # </span><input type="text" disabled="" id="RRCPhone" value="@Model.County_RRC_Number" />
+    <br />
+    <br />
+    <span>RRC District # </span><input type="text" disabled="" id="RRCDistrict" value="@Model.County_RRC_District_Number" />
+    <br />
+    <br />
+    <span>RRC City </span><input type="text" disabled="" id="RRCCity" value="@Model.County_RRC_District_City" />
+    <br />
+    <br />
+    <div class="GLOHeader" id="GRCPHeader">TCEQ Numbers</div>
+    <span>TCEQ voice numbers are from 9AM - 6PM EST.  On after hours or holiday, use the TCEQ Call Roster in the Script.</span>
+    <br />
+    <br />
+    <span>TCEQ Phone # </span><input type="text" disabled="" id="TCEQPhone" value="@Model.County_TNRCC_Number" />
+    <br />
+    <br />
+    <span>TCEQ Region # </span><input type="text" disabled="" id="TCEQRegion" value="@Model.County_TNRCC_District_Number" />
+    <br />
+    <br />
+    <span>TCEQ City </span><input type="text" disabled="" id="TCEQCity" value="@Model.County_TNRCC_District_City" />
+</body>
+</html>

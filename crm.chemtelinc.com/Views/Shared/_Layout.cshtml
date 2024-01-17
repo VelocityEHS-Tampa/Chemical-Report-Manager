@@ -1,0 +1,203 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - crm.chemtelinc.com</title>
+        <link rel="stylesheet" href="~/Content/bootstrap.css" />
+        <link rel="stylesheet" href="~/Content/Site.css" />
+        <script src="~/scripts/jquery.min.js"></script>
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container">
+                    <a class="navbar-brand" href="@Url.Action("Index", "Home")">Chemical Report Manager</a>
+                    @if (Session["Username"] != null) {
+                        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                            <ul class="navbar-nav flex-grow-1">
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" id="GLOTCEQMenu" href="#">GLO</a>
+                                    <div class="NavMenuContainer">
+                                        <ul class="NavMenu" id="GLOTCEQOptions">
+                                            <li class="MenuOptionHeader"><h5>GLO</h5></li>
+                                            <li><a href="@Url.Action("GLOReport", "GLO")">GLO Reports</a></li>
+                                            <li><a href="#" onclick="ShowPDF('Texas General Land Office-TGLO-0004121/Texas General Land Office Internal Script and Helpful Hints.pdf')">Internal Script and Hints</a></li>
+                                            <li><a href="#" onclick="ShowPDF('Texas General Land Office-TGLO-0004121/GLO Jurisdiction Matrix.pdf')">View Spill Matrix</a></li>
+                                            <li><a href="#" onclick="ShowPDF('Texas General Land Office-TGLO-0004121/GLO Classification Tool for Materials and Origins.pdf')">Classification Tool</a></li>
+                                            <li><a href="#" onclick="ShowPDF('Texas General Land Office-TGLO-0004121/After Hours Contacts.pdf')">After Hours Contacts</a></li>
+                                            <li>&nbsp;</li>
+                                            @*<li class="MenuOptionHeader"><h5>TCEQ</h5></li>
+                                            <li><a href="@Url.Action("TCEQReport", "TCEQ")">TCEQ Report</a></li>
+                                            <li><a href="~/PDFs/TCEQ/TCEQ After Hours Complaint Line Script.pdf" target="_blank">TCEQ Complaint Line Script</a></li>
+                                            <li><a href="@Url.Action("TCEQReportLog", "TCEQ")">TCEQ Log</a></li>
+                                            <li><a href="~/PDFs/TCEQ/TCEQ Regional ER Contact List.pdf" target="_blank">TCEQ After Hours Contacts</a></li>*@
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" id="CrestwoodMenu" href="#">Crestwood</a>
+                                    <div class="NavMenuContainer">
+                                        <ul class="NavMenu" id="CrestwoodOptions">
+                                            <li class="MenuOptionHeader"><h5>Reports</h5></li>
+
+                                            <li><a href="@Url.Action("GeneralIncident", "Crestwood")">General Incident</a></li>
+                                            <li><a onclick="ShowPDF('Crestwood Operations LLC-0008037/Enviance Guide.pdf')" href="#">Enviance Guide</a></li>
+                                            <li><a href="@Url.Action("PipelineReport", "Crestwood")">Pipeline</a></li>
+                                            <li><a href="@Url.Action("EightOneOneReport", "Crestwood")">811 Reports</a></li>
+                                            <li><a href="@Url.Action("LockedGateReport", "Crestwood")">Locked Gate Access</a></li>
+                                            <li>&nbsp;</li>
+
+                                            <li class="MenuOptionHeader"><h5>Logs</h5></li>
+
+                                            <li><a href="@Url.Action("CrestwoodLogs", "Crestwood", new { SelectedLog = "GeneralIncident" })">General Incident</a></li>
+                                            <li><a href="@Url.Action("CrestwoodLogs", "Crestwood", new { SelectedLog = "Pipeline" })">Pipeline</a></li>
+                                            <li><a href="@Url.Action("CrestwoodLogs", "Crestwood", new { SelectedLog = "811" })">811 Log</a></li>
+                                            <li><a href="@Url.Action("CrestwoodLogs", "Crestwood", new { SelectedLog = "LockedGate" })">Locked Gate Access</a></li>
+                                            <li>&nbsp;</li>
+
+                                            <li class="MenuOptionHeader"><h5>Manager</h5></li>
+
+                                            <li><a href="@Url.Action("HSERMembers", "Crestwood")">HSER Members</a></li>
+                                            <li><a href="@Url.Action("PipelineMembers", "Crestwood")">Pipeline Members</a></li>
+                                            <li><a href="@Url.Action("TransportList", "Crestwood")">Transportation List</a></li>
+                                            <li><a href="@Url.Action("AllNotifications", "Crestwood")">All Notifcations</a></li>
+                                            <li>&nbsp;</li>
+
+                                            <li class="MenuOptionHeader"><h5>Other</h5></li>
+
+                                            <li><a href="#" onclick="ShowPDF('Crestwood Operations LLC-0008037/Crestwood Helpful Hints.pdf')">Helpful Hints</a></li>
+                                            <li><a href="#" onclick="ShowCWPhones()">Phone Numbers</a></li>
+                                            <li><a href="#" onclick="ShowPDF('Crestwood Operations LLC-0008037/Crestwood Scripts Rotations and Notification.pdf')">Script</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" id="OtherReportsMenu" href="#">Other Reports/Logs</a>
+                                    <div class="NavMenuContainer">
+                                        <ul class="NavMenu" id="OtherReportsOptions">
+                                            <li class="MenuOptionHeader"><h5>Incident Reports</h5></li>
+
+                                            <li><a href="@Url.Action("GeneralIncident", "OtherReports")">General Incident Report</a></li>
+                                            <li><a href="@Url.Action("CleanShotReport", "OtherReports")">Clean Shot Incident Report</a></li>
+                                            <li><a href="@Url.Action("ShellOilReport", "OtherReports")">Shell Oil Incident Report</a></li>
+                                            <li>&nbsp;</li>
+
+                                            <li class="MenuOptionHeader"><h5>Neutralization and FAQ</h5></li>
+
+                                            <li><a onclick="ShowPDF('Theochem Laboratories Inc-0004158/Clean Shot Sulfuric Acid and Buster Neutralization and Common Consumer Questions.pdf')" href="#">Clean Shot Sulfuric Acid/Buster</a></li>
+                                            <li><a onclick="ShowPDF('Theochem Laboratories Inc-0004158/Clean Shot Instant Drain Opener Neutralization and Common Consumer Questions.pdf')" href="#">Clean Shot Instant Drain Opener</a></li>
+                                            <li>&nbsp;</li>
+
+                                            <li class="MenuOptionHeader"><h5>Incident Logs</h5></li>
+
+                                            <li><a href="@Url.Action("Logs", "ManagerTools", new { LogsSelected = "GenInc" })">General Incident Log</a></li>
+                                            <li><a href="@Url.Action("Logs", "ManagerTools", new { LogsSelected = "CleanShot" })">Clean Shot Incident Log</a></li>
+                                            <li><a href="@Url.Action("Logs", "ManagerTools", new { LogsSelected = "Shell" })">Shell Report Log</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" href="@Url.Action("Index", "MSDSSearch")">MSDS Search</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" href="#" onclick="OpenRegLookup()">Novartis Lookup</a>
+                                </li>
+                                @if (Session["AccountType"] != null && (Session["AccountType"].ToString() == "Administrator" || Session["AccountType"].ToString() == "Manager"))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" id="ManagerToolsMenu" href="#">Manager Tools</a>
+                                        <div class="NavMenuContainer">
+                                            <ul class="NavMenu" id="ManagerToolsOptions">
+                                                <li><a href="@Url.Action("ManagerToolsEtc", "ManagerTools", new { OtherToolSelected = "GLOEmails" })">GLO Emails</a></li>
+                                                <li><a href="@Url.Action("ManagerToolsEtc", "ManagerTools", new { OtherToolSelected = "GLOCountyList" })">GLO County List</a></li>
+                                                <li><a href="@Url.Action("ManagerToolsEtc", "ManagerTools", new { OtherToolSelected = "UserManagement"})">User Management</a></li>
+                                                <li><a href="@Url.Action("HWCGEmail", "ManagerTools", new { OtherToolSelected = "UserManagement"})">Send HWCG Email</a></li>
+
+                                                @* THESE LEGACY BUTTONS ARE NO LONGER USED AT THIS POINT
+                                                    <li><a href="#" onclick="ShowCleanShotContactInfo()">Clean Shot Contact Info</a></li>
+                                                    <li><a href="@Url.Action("Logs", "ManagerTools", new { LogsSelected = "GLO" })">GLO Logs</a></li>
+                                                    <li><a href="@Url.Action("Logs", "ManagerTools", new { LogsSelected = "CleanShot" })">Clean Shot Incident Log</a></li>
+                                                    <li><a href="@Url.Action("Logs", "ManagerTools", new { LogsSelected = "GenInc" })">General Incident Log</a></li>
+                                                    <li><a href="@Url.Action("Logs", "ManagerTools", new { LogsSelected = "Incident" })">Incident IDs</a></li>
+                                                    <li><a href="@Url.Action("Logs", "ManagerTools", new { LogsSelected = "CleanShot" })">Clean Shot IDs</a></li>
+                                                    <li><a href="@Url.Action("Logs", "ManagerTools", new { LogsSelected = "Shell" })">Shell Report Log</a></li>
+                                                    <li><a href="@Url.Action("ManagerToolsEtc", "ManagerTools", new { OtherToolSelected = "ViewReports" })">View Reports</a></li>
+                                                *@
+                                            </ul>
+                                        </div>
+                                    </li>
+                                }
+                                @if (Session["DaysBetween"] != null && Int32.Parse(Session["DaysBetween"].ToString()) > 60)
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link btn-warning text-dark" href="@Url.Action("ResetPassword", "Home")">Reset Password</a>
+                                    </li>
+                                }
+                                @if (Session["Username"] != null && Session["AccountType"] != null && Session["FullName"] != null && Session["Username"].ToString() != "" && Session["AccountType"].ToString() != "" && Session["FullName"].ToString() != "")
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" href="#" onclick="AreYouSure()">Logout</a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    }
+                </div>
+            </nav>
+        </header>
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2001-2023 VelocityEHS. All rights reserved. VelocityEHS® and VelocityEHS Accelerate® are proprietary trademarks of VelocityEHS. All other trademarks are the property of the respective owners.
+            </div>
+        </footer>
+        <script src="~/scripts/jquery.min.js"></script>
+        <script src="~/scripts/bootstrap.min.js"></script>
+        <script src="~/scripts/site.js" asp-append-version="true"></script>
+        <script>
+
+            //This code does not work when publishing new because it loses connection.
+            //var intervalId = window.setInterval(function () {
+            //    $.ajax({
+            //        url: "/Home/CheckFileModifications",
+            //        type: 'GET',
+            //        success: function (data) {
+            //            if (data.FileModified) {
+            //                alert("There has been an update to the program. Please take a screenshot of any work that has been done and click 'Chemical Report Manager' to go back to the home page and log in again!");
+            //            }
+            //        }
+            //    })
+            //}, 30000);
+
+            function AreYouSure() {
+                if (confirm("Are you sure you want to log out?")) {
+                    location.href = "@Url.Action("Logout", "Home")";
+                }
+            }
+
+            function ShowCWPhones() {
+                alert("Crestwood General Incident – 1-855-265-7377\r\n\r\n Crestwood Pipeline/811 – 1-866-234-7473\r\n\r\n Crestwood Employee Assistance Program - 1-800-854-1446\r\n\r\n Crestwood Whistleblower Hotline - 1-888-651-6239\r\n\r\n Crestwood NurseLine (ESIS) - 1-844-633-3362\r\n\r\n National Suicide Prevention Lifeline - 1-800-273-8255\r\n\r\n National Drug Abuse Hotline - 1-800-662-4357");
+            }
+
+            function ShowCleanShotContactInfo() {
+                alert("Name: Theochem Laboratories Inc \r\n\r\n Admin Contact: Michael Schneider Ext 206 \r\n\r\n Phone: (813) 237-6463 \r\n\r\n Fax: (813) 237-2059 \r\n\r\n Email: mschneider@theochem.com \r\n\r\n Address: 7373 Rowlett Park Drive \r\n\r\n City, State, Zip: Tampa, FL, 33610-000");
+            }
+
+            function OpenRegLookup() {
+                window.open('https://crm.chemtel.net/Home/NovartisRegLookup', '_blank');
+            }
+
+            function ShowPDF(filepath) {
+                window.open("https://crm.chemtel.net/PDFs/" + filepath);
+            }
+
+        </script>
+        @*@await RenderSectionAsync("Scripts", required: false)*@
+    </body>
+</html>

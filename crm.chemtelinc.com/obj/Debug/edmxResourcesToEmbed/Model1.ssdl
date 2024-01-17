@@ -1,0 +1,1294 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="chemreportertestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="agencylist">
+    <Key>
+      <PropertyRef Name="agencyId" />
+    </Key>
+    <Property Name="agencyId" Type="varchar" MaxLength="5" Nullable="false" />
+  </EntityType>
+  <EntityType Name="atandtassociatedata">
+    <Key>
+      <PropertyRef Name="rptid" />
+    </Key>
+    <Property Name="rptid" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="atandtvolunteerdata">
+    <Key>
+      <PropertyRef Name="rptid" />
+    </Key>
+    <Property Name="rptid" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="availablespillids">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="varchar" MaxLength="11" Nullable="false" />
+    <Property Name="available" Type="int" />
+    <Property Name="usedBy" Type="varchar" MaxLength="45" />
+  </EntityType>
+  <EntityType Name="basfenvironmental">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="incidentdate" Type="nvarchar" MaxLength="15" />
+    <Property Name="incidenttime" Type="nvarchar" MaxLength="15" />
+    <Property Name="callername" Type="nvarchar" MaxLength="50" />
+    <Property Name="callerphone" Type="nvarchar" MaxLength="15" />
+    <Property Name="plantname" Type="nvarchar" MaxLength="50" />
+    <Property Name="materialname" Type="nvarchar" MaxLength="50" />
+    <Property Name="sdsonhand" Type="nvarchar" MaxLength="10" />
+    <Property Name="contained" Type="nvarchar" MaxLength="10" />
+    <Property Name="handlingcleanup" Type="nvarchar" MaxLength="200" />
+    <Property Name="description" Type="nvarchar(max)" />
+    <Property Name="quantity" Type="nvarchar" MaxLength="8" />
+    <Property Name="quantityunits" Type="nvarchar" MaxLength="15" />
+    <Property Name="releaseto" Type="nvarchar" MaxLength="40" />
+    <Property Name="actions" Type="nvarchar(max)" />
+    <Property Name="achievereportablequantity" Type="nvarchar" MaxLength="10" />
+    <Property Name="notifications" Type="nvarchar" MaxLength="10" />
+    <Property Name="ersoperator" Type="nvarchar" MaxLength="25" />
+    <Property Name="calldate" Type="nvarchar" MaxLength="15" />
+    <Property Name="calltime" Type="nvarchar" MaxLength="10" />
+    <Property Name="nrc" Type="nvarchar" MaxLength="255" />
+    <Property Name="peas" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="basfenvironmentalids">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" Nullable="false" />
+    <Property Name="available" Type="nvarchar" MaxLength="3" />
+    <Property Name="user" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="basfinjury">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="ersoperator" />
+    </Key>
+    <Property Name="id" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="incidentdate" Type="nvarchar" MaxLength="15" />
+    <Property Name="incidenttime" Type="nvarchar" MaxLength="15" />
+    <Property Name="callername" Type="nvarchar" MaxLength="50" />
+    <Property Name="callerphone" Type="nvarchar" MaxLength="15" />
+    <Property Name="plantname" Type="nvarchar" MaxLength="50" />
+    <Property Name="description" Type="nvarchar(max)" />
+    <Property Name="injurytype" Type="nvarchar" MaxLength="255" />
+    <Property Name="bodypartaffected" Type="nvarchar" MaxLength="255" />
+    <Property Name="escorted" Type="nvarchar" MaxLength="10" />
+    <Property Name="immediateactions" Type="nvarchar(max)" />
+    <Property Name="evidencecollected" Type="nvarchar" MaxLength="200" />
+    <Property Name="notifications" Type="nvarchar" MaxLength="10" />
+    <Property Name="ersoperator" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="productname" Type="nvarchar" MaxLength="100" />
+    <Property Name="calldate" Type="nvarchar" MaxLength="15" />
+    <Property Name="calltime" Type="nvarchar" MaxLength="10" />
+    <Property Name="nrc" Type="nvarchar" MaxLength="255" />
+    <Property Name="peas" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="basfinjuryids">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" Nullable="false" />
+    <Property Name="available" Type="nvarchar" MaxLength="3" />
+    <Property Name="user" Type="nvarchar" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="cleanshotids">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="varchar" MaxLength="11" Nullable="false" />
+    <Property Name="available" Type="int" Nullable="false" />
+    <Property Name="user" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="companyinformation">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="crest811">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="todaydate" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="todaytime" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="excavationdate" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="excavationtime" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="normaloremergency" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="requestticketnumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="personcompanyname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="callbacknumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="emailaddress" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="city" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="state" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="county" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="workdate" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="street" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="intersection" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="nature" Type="nvarchar" MaxLength="2000" Nullable="false" />
+    <Property Name="remarks" Type="nvarchar" MaxLength="3000" Nullable="false" />
+    <Property Name="callername" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="callernumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="35" Nullable="false" />
+    <Property Name="contactnumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="location" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FacilityName" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="crestallnotifications">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="email" Type="nvarchar" MaxLength="70" Nullable="false" />
+  </EntityType>
+  <EntityType Name="crestdotincidents">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="callername" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="callertitle" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="calleraffiliation" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="callerphonenumber" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="incidentdate" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="incidentlocation" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="incidentlatitude" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="incidentlongitude" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="incidentoccuron" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="incidentnature" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="incidentdescription" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="involvedname1" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="involvedcell1" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="involvedinjury1" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="involvedname2" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="involvedcell2" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="involvedinjury2" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="involvedname3" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="involvedcell3" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="involvedinjury3" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="weatherconditions" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="impactedareas" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="impactedbodyofwater" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="reporttakername" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="reporttakeremail" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ersname1" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="erscontactnumber1" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="erslocation1" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="ersname2" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="erscontactnumber2" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="erslocation2" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="ersname3" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="erscontactnumber3" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="erslocation3" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="dispatcheroremployee" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="contractororemployee" Type="nvarchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="cresters">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="startdate" Type="datetime2" Precision="0" />
+    <Property Name="enddate" Type="datetime2" Precision="0" />
+    <Property Name="name" Type="nvarchar" MaxLength="35" Nullable="false" />
+    <Property Name="phone" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="email" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="location" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="crestgeneralincidents">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="callername" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="callertitle" Type="nvarchar" MaxLength="40" Nullable="false" />
+    <Property Name="calleraffiliation" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="callerphonenumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="incidentdate" Type="nvarchar" MaxLength="11" Nullable="false" />
+    <Property Name="incidentlocation" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="incidentlatitude" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="incidentlongitude" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="incidentoccuron" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="incidentnature" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="incidentdescription" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="involvedname1" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="involvedcell1" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="involvedinjury1" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="involvedname2" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="involvedcell2" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="involvedinjury2" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="involvedname3" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="involvedcell3" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="involvedinjury3" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="weatherconditions" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="impactedareas" Type="nvarchar" MaxLength="1200" Nullable="false" />
+    <Property Name="impactedbodyofwater" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="reporttakername" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="reporttakeremail" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ersname1" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="erscontactnumber1" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="erslocation1" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ersname2" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="erscontactnumber2" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="erslocation2" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="ersname3" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="erscontactnumber3" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="erslocation3" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="incidentprivaterow" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="incidenttriballand" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="incidentblmland" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="incidentstateland" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="incidentaddress" Type="nvarchar" MaxLength="70" Nullable="false" />
+    <Property Name="incidentcity" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="incidentstate" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="incidentcounty" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="incidentintersection" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="incidentfacilityname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="fireorexplosion" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="pipelinestrike" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="injury" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="illnessorexposure" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="vehicleaccident" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="spillorrelease" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="theft" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="agencyinspectionofvisit" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="propertydamage" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="potentialhazardornearmiss" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="landownercomplaint" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="impactstowater" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="dispatcheroremployee" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="contractororemployee" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="notify911" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="immediatesupport" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="transporttohospital" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="emergencyresponders" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="fatalities" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="mediaonscene" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="landowner" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="incidenttime" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="incidenttimezone" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="calleremail" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="calldate" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="calltime" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="other" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="ersoperator" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="equipmentorpeople" Type="nvarchar" MaxLength="10" />
+    <Property Name="numinjuries1" Type="nvarchar" MaxLength="3" />
+    <Property Name="numinjuries2" Type="nvarchar" MaxLength="3" />
+    <Property Name="numinjuries3" Type="nvarchar" MaxLength="3" />
+    <Property Name="none" Type="nvarchar" MaxLength="10" />
+    <Property Name="unknown" Type="nvarchar" MaxLength="10" />
+    <Property Name="tractortrailer" Type="nvarchar" MaxLength="10" />
+    <Property Name="equipment" Type="nvarchar" MaxLength="10" />
+    <Property Name="dispatcheremployee" Type="nvarchar" MaxLength="10" />
+    <Property Name="initials" Type="nvarchar" MaxLength="5" />
+    <Property Name="county" Type="nvarchar" MaxLength="50" />
+    <Property Name="drill" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Incident_Contractor_Or_Employee" Type="nvarchar" MaxLength="50" />
+    <Property Name="IndividualSafety" Type="nvarchar" MaxLength="3" />
+    <Property Name="WeaponReported" Type="nvarchar" MaxLength="3" />
+    <Property Name="WeaponType" Type="nvarchar(max)" />
+    <Property Name="wpviolence" Type="nvarchar" MaxLength="10" />
+    <Property Name="FacilityOrProject" Type="nvarchar" MaxLength="3" />
+    <Property Name="RegionOrFacility" Type="nvarchar(max)" />
+    <Property Name="ContractorName" Type="nvarchar" MaxLength="1000" />
+    <Property Name="FacilityOrProjectSelection" Type="nvarchar" MaxLength="50" />
+    <Property Name="OccuredOnPipeline" Type="nvarchar" MaxLength="3" />
+    <Property Name="NotificationDate" Type="nvarchar" MaxLength="15" />
+    <Property Name="NotificationTime" Type="nvarchar" MaxLength="15" />
+    <Property Name="PC_CWLocOrTransport" Type="varchar" MaxLength="50" />
+    <Property Name="SusAct" Type="varchar" MaxLength="10" />
+    <Property Name="SpillOrReleaseIntoAtmo" Type="varchar" MaxLength="10" />
+    <Property Name="MaterialSpilled" Type="varchar(max)" />
+    <Property Name="WaterbodiesImpacted" Type="varchar" MaxLength="10" />
+    <Property Name="ContainedOnSite" Type="varchar" MaxLength="10" />
+    <Property Name="SpillContainedSecondary" Type="varchar" MaxLength="10" />
+    <Property Name="ControlDevices" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="cresthighprofileincidents">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="callername" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="callertitle" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="calleraffiliation" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="callerphonenumber" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="incidentdate" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="incidentlocation" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="incidentlatitude" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="incidentlongitude" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="incidentoccuron" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="incidentnature" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="incidentdescription" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="involvedname1" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="involvedcell1" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="involvedinjury1" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="involvedname2" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="involvedcell2" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="involvedinjury2" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="involvedname3" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="involvedcell3" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="involvedinjury3" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="weatherconditions" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="impactedareas" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="impactedbodyofwater" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="reporttakername" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="reporttakeremail" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ersname1" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="erscontactnumber1" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="erslocation1" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="ersname2" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="erscontactnumber2" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="erslocation2" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="ersname3" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="erscontactnumber3" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="erslocation3" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="notify911" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="immediatesupport" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="transportedtohospital" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="emergencyresponders" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="fatalities" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="mediaonscene" Type="nvarchar" MaxLength="3" Nullable="false" />
+  </EntityType>
+  <EntityType Name="crestmonthlyreport">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="incidentdate" Type="nvarchar" MaxLength="10" />
+    <Property Name="incidenttype" Type="nvarchar" MaxLength="50" />
+    <Property Name="incidentlocation" Type="nvarchar" MaxLength="500" />
+    <Property Name="incidentdescription" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="crestpipelinemembers">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="operatorname" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="state" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="county" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="contactname" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="phone" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="contact" Type="int" />
+  </EntityType>
+  <EntityType Name="crestpiplineincidents">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="county" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="state" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="distancefromtown" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="distancefromlandmark" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="intersectionormilemarker" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="observing" Type="nvarchar" MaxLength="2000" Nullable="false" />
+    <Property Name="seeinghearingsmelling" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="roworwellpad" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="tanks" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="landowner" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="callername" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="callerphone" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="notify911" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="anyoneinjured" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="immediatedanger" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="temp" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="windspeed" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="winddirection" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="weatherconditions" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="relationtoincident" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="safelywarn" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="name1" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="name2" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="name3" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="contactnumber1" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="contactnumber2" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="contactnumber3" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="location1" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="location2" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="location3" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="leasewellname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="blackorwhitesmoke" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="flames" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="hissing" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="liquid" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="oilysheen" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="otherpipelinemarkers" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="rotteneggodor" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="vaporormist" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="directions" Type="nvarchar" MaxLength="2000" Nullable="false" />
+    <Property Name="city" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="date" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="time" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="timezone" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="numofinjuries" Type="int" Nullable="false" />
+    <Property Name="reporttakername" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="reporttakeremail" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="description" Type="nvarchar" MaxLength="3000" Nullable="false" />
+    <Property Name="calleremail" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="callertitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="calleraffiliation" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="name4" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="name5" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="contactnumber4" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="contactnumber5" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="location4" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="location5" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="calldate" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="calltime" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="ersoperator" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="initials" Type="nvarchar" MaxLength="5" />
+    <Property Name="NotificationDate" Type="nvarchar" MaxLength="15" />
+    <Property Name="NotificationTime" Type="nvarchar" MaxLength="15" />
+    <Property Name="Drill" Type="varchar" MaxLength="3" />
+  </EntityType>
+  <EntityType Name="crestpiplineincidents_copy">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="county" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="state" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="distancefromtown" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="distancefromlandmark" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="intersectionormilemarker" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="observing" Type="nvarchar" MaxLength="2000" Nullable="false" />
+    <Property Name="seeinghearingsmelling" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="roworwellpad" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="tanks" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="landowner" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="callername" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="callerphone" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="notify911" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="anyoneinjured" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="immediatedanger" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="temp" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="windspeed" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="winddirection" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="weatherconditions" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="relationtoincident" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="safelywarn" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="name1" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="name2" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="name3" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="contactnumber1" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="contactnumber2" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="contactnumber3" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="location1" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="location2" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="location3" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="leasewellname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="blackorwhitesmoke" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="flames" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="hissing" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="liquid" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="oilysheen" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="otherpipelinemarkers" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="rotteneggodor" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="vaporormist" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="directions" Type="nvarchar" MaxLength="2000" Nullable="false" />
+    <Property Name="city" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="date" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="time" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="timezone" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="numofinjuries" Type="int" Nullable="false" />
+    <Property Name="reporttakername" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="reporttakeremail" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="description" Type="nvarchar" MaxLength="3000" Nullable="false" />
+    <Property Name="calleremail" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="callertitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="calleraffiliation" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="name4" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="name5" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="contactnumber4" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="contactnumber5" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="location4" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="location5" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="calldate" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="calltime" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="ersoperator" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="initials" Type="nvarchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="crestwoodtransportationlist">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="email" Type="nvarchar" MaxLength="70" Nullable="false" />
+    <Property Name="Indiana" Type="int" />
+    <Property Name="NewJersey" Type="int" />
+    <Property Name="WestVirginia" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'chemreportertest.dbo.CRMWebU' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="CRMWebU">
+    <Key>
+      <PropertyRef Name="UserID" />
+      <PropertyRef Name="Username" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Password" />
+      <PropertyRef Name="UserType" />
+      <PropertyRef Name="LastPassChange" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Password" Type="varchar(max)" Nullable="false" />
+    <Property Name="UserType" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastPassChange" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="generalincidentedits">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="username" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="editdate" Type="datetime2" Precision="0" Nullable="false" />
+    <Property Name="numberofedits" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="generalincidentids">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="varchar" MaxLength="11" Nullable="false" />
+    <Property Name="available" Type="int" />
+    <Property Name="user" Type="varchar" MaxLength="45" />
+  </EntityType>
+  <EntityType Name="generalincidentreportdata">
+    <Key>
+      <PropertyRef Name="IncidentId" />
+    </Key>
+    <Property Name="IncidentId" Type="varchar" MaxLength="11" Nullable="false" />
+    <Property Name="ErsOperator" Type="varchar" MaxLength="45" />
+    <Property Name="Date" Type="varchar" MaxLength="15" />
+    <Property Name="Time" Type="varchar" MaxLength="5" />
+    <Property Name="CallersName" Type="varchar" MaxLength="100" />
+    <Property Name="CallersPhone" Type="varchar" MaxLength="15" />
+    <Property Name="CallersAffiliation" Type="varchar" MaxLength="100" />
+    <Property Name="CallersFaxOrEmail" Type="varchar" MaxLength="75" />
+    <Property Name="IncidentStreet" Type="varchar" MaxLength="65" />
+    <Property Name="IncidentCity" Type="varchar" MaxLength="65" />
+    <Property Name="IncidentState" Type="varchar" MaxLength="50" />
+    <Property Name="IncidentCountry" Type="varchar" MaxLength="65" />
+    <Property Name="IncidentDate" Type="varchar" MaxLength="15" />
+    <Property Name="IncidentTime" Type="varchar" MaxLength="5" />
+    <Property Name="IncidentTimeZone" Type="varchar" MaxLength="25" />
+    <Property Name="MaterialName" Type="varchar" MaxLength="100" />
+    <Property Name="ProductNumber" Type="varchar" MaxLength="100" />
+    <Property Name="QuantitySpilled" Type="varchar" MaxLength="30" />
+    <Property Name="CleanUpCrewReqs" Type="varchar" MaxLength="100" />
+    <Property Name="AgenciesOnSite" Type="varchar" MaxLength="100" />
+    <Property Name="AccidentOrDeliberate" Type="varchar" MaxLength="15" />
+    <Property Name="IncidentDetails" Type="varchar" MaxLength="3000" />
+    <Property Name="InvolveFire" Type="varchar" MaxLength="5" />
+    <Property Name="WhereDidYouGetOurNumber" Type="varchar" MaxLength="45" />
+    <Property Name="SubscribersName" Type="varchar" MaxLength="500" />
+    <Property Name="SubscriberMIS" Type="varchar" MaxLength="45" />
+    <Property Name="SpillOrExposure" Type="varchar" MaxLength="65" />
+    <Property Name="TypeOfExposure" Type="varchar" MaxLength="65" />
+    <Property Name="NumOfCasualties" Type="varchar" MaxLength="25" />
+    <Property Name="NumOfInjuries" Type="varchar" MaxLength="25" />
+    <Property Name="MedPersonnelName" Type="varchar" MaxLength="100" />
+    <Property Name="PatientName" Type="varchar" MaxLength="100" />
+    <Property Name="PatientCondition" Type="varchar" MaxLength="100" />
+    <Property Name="HospitalClinicLocation" Type="varchar" MaxLength="100" />
+    <Property Name="EpaRegNo" Type="varchar" MaxLength="100" />
+    <Property Name="StatusOfRelease" Type="varchar" MaxLength="300" />
+    <Property Name="DispersionOfMsdsInfo" Type="varchar" MaxLength="300" />
+    <Property Name="ReviewedBy" Type="varchar" MaxLength="45" />
+    <Property Name="ReviewedDate" Type="varchar" MaxLength="45" />
+    <Property Name="SentDate" Type="varchar" MaxLength="45" />
+    <Property Name="Comments" Type="varchar" MaxLength="1000" />
+    <Property Name="DateChanged" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="IncidentZipCode" Type="varchar" MaxLength="10" />
+    <Property Name="ReportType" Type="varchar" MaxLength="25" />
+    <Property Name="CallersPhoneExt" Type="varchar" MaxLength="6" />
+  </EntityType>
+  <EntityType Name="globasereportdata">
+    <Key>
+      <PropertyRef Name="cntSpillId" />
+    </Key>
+    <Property Name="cntSpillId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fDrill" Type="varchar" MaxLength="10" />
+    <Property Name="txtDrillTxt" Type="varchar" MaxLength="3" />
+    <Property Name="txtReportTakenBy" Type="varchar" MaxLength="50" />
+    <Property Name="txtReportPartyAffiliation" Type="varchar" MaxLength="50" />
+    <Property Name="datReportTakenDate" Type="varchar" MaxLength="10" />
+    <Property Name="datReportTakenTime" Type="varchar" MaxLength="6" />
+    <Property Name="txtNotificationAgency" Type="varchar" MaxLength="150" />
+    <Property Name="txtDischargeReportedBy" Type="varchar" MaxLength="50" />
+    <Property Name="txtDischargedPhone1" Type="varchar" MaxLength="20" />
+    <Property Name="txtDischargedPhone2" Type="varchar" MaxLength="150" />
+    <Property Name="datDischargeDate" Type="varchar" MaxLength="10" />
+    <Property Name="datDischargeTime" Type="varchar" MaxLength="6" />
+    <Property Name="txtMaterial1" Type="varchar" MaxLength="50" />
+    <Property Name="dblCASUN1" Type="varchar" MaxLength="50" />
+    <Property Name="dblAmtSpilled1" Type="varchar" MaxLength="25" />
+    <Property Name="txtUnitRecovered1" Type="varchar" MaxLength="4" />
+    <Property Name="txtMaterial2" Type="varchar" MaxLength="50" />
+    <Property Name="dblCASUN2" Type="varchar" MaxLength="50" />
+    <Property Name="dblAmtSpilled2" Type="varchar" MaxLength="25" />
+    <Property Name="txtUnitRecovered2" Type="varchar" MaxLength="4" />
+    <Property Name="txtMaterial3" Type="varchar" MaxLength="50" />
+    <Property Name="dblCASUN3" Type="varchar" MaxLength="50" />
+    <Property Name="dblAmtSpilled3" Type="varchar" MaxLength="25" />
+    <Property Name="txtUnitRecovered3" Type="varchar" MaxLength="4" />
+    <Property Name="txtMaterial4" Type="varchar" MaxLength="50" />
+    <Property Name="dblCASUN4" Type="varchar" MaxLength="50" />
+    <Property Name="dblAmtSpilled4" Type="varchar" MaxLength="25" />
+    <Property Name="txtUnitRecovered4" Type="varchar" MaxLength="4" />
+    <Property Name="txtMaterial5" Type="varchar" MaxLength="50" />
+    <Property Name="dblCASUN5" Type="varchar" MaxLength="50" />
+    <Property Name="dblAmtSpilled5" Type="varchar" MaxLength="25" />
+    <Property Name="txtUnitRecovered5" Type="varchar" MaxLength="4" />
+    <Property Name="wSpillCounty" Type="varchar" MaxLength="50" />
+    <Property Name="wOrigin" Type="varchar" MaxLength="100" />
+    <Property Name="fSpillInWater" Type="varchar" MaxLength="6" />
+    <Property Name="fSpillAirRelease" Type="varchar" MaxLength="6" />
+    <Property Name="fCoastalWater" Type="varchar" MaxLength="6" />
+    <Property Name="fLand" Type="varchar" MaxLength="6" />
+    <Property Name="txtSpillReceivingWater" Type="varchar" MaxLength="250" />
+    <Property Name="dblSpillAmountInWater" Type="varchar" MaxLength="50" />
+    <Property Name="txtSpillAmountInWaterUnits" Type="varchar" MaxLength="3" />
+    <Property Name="memSpillLocation" Type="varchar" MaxLength="3000" />
+    <Property Name="dblRRCLeaseNumber" Type="varchar" MaxLength="7" />
+    <Property Name="txtRRCLeaseName" Type="varchar" MaxLength="250" />
+    <Property Name="txtRRCFieldName" Type="varchar" MaxLength="250" />
+    <Property Name="txtLandOwner" Type="varchar" MaxLength="250" />
+    <Property Name="memActionsTakenCleanUpStatus" Type="varchar" MaxLength="3000" />
+    <Property Name="txtNRCNumber" Type="varchar" MaxLength="50" />
+    <Property Name="txtAgencyName1" Type="varchar" MaxLength="50" />
+    <Property Name="txtAgencyName2" Type="varchar" MaxLength="50" />
+    <Property Name="txtAgencyName3" Type="varchar" MaxLength="50" />
+    <Property Name="datDate1" Type="varchar" MaxLength="10" />
+    <Property Name="datDate2" Type="varchar" MaxLength="10" />
+    <Property Name="datDate3" Type="varchar" MaxLength="10" />
+    <Property Name="txtWhere1" Type="varchar" MaxLength="50" />
+    <Property Name="txtWhere2" Type="varchar" MaxLength="50" />
+    <Property Name="txtWhere3" Type="varchar" MaxLength="50" />
+    <Property Name="txtWho1" Type="varchar" MaxLength="50" />
+    <Property Name="txtWho2" Type="varchar" MaxLength="50" />
+    <Property Name="txtWho3" Type="varchar" MaxLength="50" />
+    <Property Name="datTime1" Type="varchar" MaxLength="6" />
+    <Property Name="datTime2" Type="varchar" MaxLength="6" />
+    <Property Name="datTime3" Type="varchar" MaxLength="6" />
+    <Property Name="txtSpiller" Type="varchar" MaxLength="250" />
+    <Property Name="txtSpillerAddress" Type="varchar" MaxLength="250" />
+    <Property Name="txtSpillerCity" Type="varchar" MaxLength="50" />
+    <Property Name="txtSpillerState" Type="varchar" MaxLength="2" />
+    <Property Name="txtSpillerZipCode" Type="varchar" MaxLength="9" />
+    <Property Name="txtSpillerContact" Type="varchar" MaxLength="250" />
+    <Property Name="txtSpillerContactPhone" Type="varchar" MaxLength="20" />
+    <Property Name="memComments" Type="varchar" MaxLength="3000" />
+    <Property Name="txtAgcyName1" Type="varchar" MaxLength="50" />
+    <Property Name="txtAgcyName2" Type="varchar" MaxLength="50" />
+    <Property Name="txtAgcyName3" Type="varchar" MaxLength="50" />
+    <Property Name="datD1" Type="varchar" MaxLength="10" />
+    <Property Name="datD2" Type="varchar" MaxLength="10" />
+    <Property Name="datD3" Type="varchar" MaxLength="10" />
+    <Property Name="txtWhr1" Type="varchar" MaxLength="50" />
+    <Property Name="txtWhr2" Type="varchar" MaxLength="50" />
+    <Property Name="txtWhr3" Type="varchar" MaxLength="50" />
+    <Property Name="txtW1" Type="varchar" MaxLength="50" />
+    <Property Name="txtW2" Type="varchar" MaxLength="50" />
+    <Property Name="txtW3" Type="varchar" MaxLength="50" />
+    <Property Name="datTi1" Type="varchar" MaxLength="6" />
+    <Property Name="datTi2" Type="varchar" MaxLength="6" />
+    <Property Name="datTi3" Type="varchar" MaxLength="6" />
+    <Property Name="txtLastField" Type="varchar" MaxLength="50" />
+    <Property Name="DateSearch" Type="date" />
+  </EntityType>
+  <EntityType Name="glocountylist">
+    <Key>
+      <PropertyRef Name="countyCode" />
+    </Key>
+    <Property Name="countyCode" Type="float" Nullable="false" />
+    <Property Name="countyName" Type="varchar" MaxLength="45" />
+    <Property Name="countyGLOVoiceNumber" Type="varchar" MaxLength="45" />
+    <Property Name="countyGLORegionNumber" Type="varchar" MaxLength="45" />
+    <Property Name="countyGLORegionCity" Type="varchar" MaxLength="45" />
+    <Property Name="countyGLOBeeperNumber" Type="varchar" MaxLength="45" />
+    <Property Name="countyRRCNumber" Type="varchar" MaxLength="45" />
+    <Property Name="countyRRCDistrictNumber" Type="varchar" MaxLength="45" />
+    <Property Name="countyRRCDistrictCity" Type="varchar" MaxLength="45" />
+    <Property Name="countyTNRCCNumber" Type="varchar" MaxLength="45" />
+    <Property Name="countyTNRCCDistrictNumber" Type="varchar" MaxLength="45" />
+    <Property Name="countyTNRCCDistrictCity" Type="varchar" MaxLength="45" />
+  </EntityType>
+  <EntityType Name="gloemails">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="emailgroup" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="email01" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="email02" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="email03" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="email04" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="email05" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="email06" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="email07" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="email08" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="email09" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="email10" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="gloids">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="available" Type="int" Nullable="false" />
+    <Property Name="user" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="glolastid">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="reportid" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ies">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="emergency" Type="nvarchar" MaxLength="255" />
+    <Property Name="facilityname" Type="nvarchar" MaxLength="255" />
+    <Property Name="location" Type="nvarchar" MaxLength="255" />
+    <Property Name="address" Type="nvarchar" MaxLength="255" />
+    <Property Name="city" Type="nvarchar" MaxLength="255" />
+    <Property Name="state" Type="nvarchar" MaxLength="2" />
+    <Property Name="zip" Type="nvarchar" MaxLength="5" />
+    <Property Name="callername" Type="nvarchar" MaxLength="255" />
+    <Property Name="callerphonenumber" Type="nvarchar" MaxLength="15" />
+    <Property Name="contactonscenename" Type="nvarchar" MaxLength="255" />
+    <Property Name="contactonscenephonenumber" Type="nvarchar" MaxLength="15" />
+    <Property Name="callerunknown" Type="nvarchar" MaxLength="5" />
+    <Property Name="contactunknown" Type="nvarchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="iescontacts">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+    <Property Name="phonenumber" Type="nvarchar" MaxLength="15" />
+    <Property Name="priority" Type="int" />
+  </EntityType>
+  <EntityType Name="knowledgebase">
+    <Key>
+      <PropertyRef Name="knowledgebase_id" />
+    </Key>
+    <Property Name="knowledgebase_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="title" Type="varchar" MaxLength="200" />
+    <Property Name="body" Type="varchar(max)" />
+    <Property Name="link" Type="varchar" MaxLength="300" />
+  </EntityType>
+  <EntityType Name="modrequests">
+    <Key>
+      <PropertyRef Name="modrequestid" />
+    </Key>
+    <Property Name="modrequestid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ersoperator" Type="varchar" MaxLength="45" />
+    <Property Name="companyname" Type="varchar" MaxLength="200" />
+    <Property Name="nameofcaller" Type="varchar" MaxLength="45" />
+    <Property Name="phone" Type="varchar" MaxLength="45" />
+    <Property Name="ext" Type="varchar" MaxLength="10" />
+    <Property Name="fax" Type="varchar" MaxLength="45" />
+    <Property Name="email" Type="varchar" MaxLength="45" />
+    <Property Name="sendingmethod" Type="varchar" MaxLength="45" />
+    <Property Name="modclient" Type="varchar" MaxLength="200" />
+    <Property Name="datereceived" Type="varchar" MaxLength="45" />
+    <Property Name="datefulfilled" Type="varchar" MaxLength="45" />
+    <Property Name="comments" Type="varchar" MaxLength="1000" />
+    <Property Name="prodname1" Type="varchar" MaxLength="100" />
+    <Property Name="manu1" Type="varchar" MaxLength="100" />
+    <Property Name="qty1" Type="varchar" MaxLength="100" />
+    <Property Name="locatedvia1" Type="varchar" MaxLength="100" />
+    <Property Name="prodname2" Type="varchar" MaxLength="100" />
+    <Property Name="manu2" Type="varchar" MaxLength="100" />
+    <Property Name="qty2" Type="varchar" MaxLength="100" />
+    <Property Name="locatedvia2" Type="varchar" MaxLength="100" />
+    <Property Name="prodname3" Type="varchar" MaxLength="100" />
+    <Property Name="manu3" Type="varchar" MaxLength="100" />
+    <Property Name="qty3" Type="varchar" MaxLength="100" />
+    <Property Name="locatedvia3" Type="varchar" MaxLength="100" />
+    <Property Name="prodname4" Type="varchar" MaxLength="100" />
+    <Property Name="manu4" Type="varchar" MaxLength="100" />
+    <Property Name="qty4" Type="varchar" MaxLength="100" />
+    <Property Name="locatedvia4" Type="varchar" MaxLength="100" />
+    <Property Name="prodname5" Type="varchar" MaxLength="100" />
+    <Property Name="manu5" Type="varchar" MaxLength="100" />
+    <Property Name="qty5" Type="varchar" MaxLength="100" />
+    <Property Name="locatedvia5" Type="varchar" MaxLength="100" />
+    <Property Name="prodname6" Type="varchar" MaxLength="100" />
+    <Property Name="manu6" Type="varchar" MaxLength="100" />
+    <Property Name="qty6" Type="varchar" MaxLength="100" />
+    <Property Name="locatedvia6" Type="varchar" MaxLength="100" />
+    <Property Name="prodname7" Type="varchar" MaxLength="100" />
+    <Property Name="manu7" Type="varchar" MaxLength="100" />
+    <Property Name="qty7" Type="varchar" MaxLength="100" />
+    <Property Name="locatedvia7" Type="varchar" MaxLength="100" />
+    <Property Name="prodname8" Type="varchar" MaxLength="100" />
+    <Property Name="manu8" Type="varchar" MaxLength="100" />
+    <Property Name="qty8" Type="varchar" MaxLength="100" />
+    <Property Name="locatedvia8" Type="varchar" MaxLength="100" />
+    <Property Name="prodname9" Type="varchar" MaxLength="100" />
+    <Property Name="manu9" Type="varchar" MaxLength="100" />
+    <Property Name="qty9" Type="varchar" MaxLength="100" />
+    <Property Name="locatedvia9" Type="varchar" MaxLength="100" />
+    <Property Name="prodname10" Type="varchar" MaxLength="100" />
+    <Property Name="manu10" Type="varchar" MaxLength="100" />
+    <Property Name="qty10" Type="varchar" MaxLength="100" />
+    <Property Name="locatedvia10" Type="varchar" MaxLength="100" />
+    <Property Name="totalcost" Type="varchar" MaxLength="11" />
+    <Property Name="price1" Type="varchar" MaxLength="45" />
+    <Property Name="price2" Type="varchar" MaxLength="45" />
+    <Property Name="price3" Type="varchar" MaxLength="45" />
+    <Property Name="price4" Type="varchar" MaxLength="45" />
+    <Property Name="price5" Type="varchar" MaxLength="45" />
+    <Property Name="price6" Type="varchar" MaxLength="45" />
+    <Property Name="price7" Type="varchar" MaxLength="45" />
+    <Property Name="price8" Type="varchar" MaxLength="45" />
+    <Property Name="price9" Type="varchar" MaxLength="45" />
+    <Property Name="price10" Type="varchar" MaxLength="45" />
+    <Property Name="totalqty" Type="varchar" MaxLength="45" />
+    <Property Name="monthreceived" Type="varchar" MaxLength="45" />
+    <Property Name="yearreceived" Type="varchar" MaxLength="45" />
+  </EntityType>
+  <EntityType Name="noncoastal">
+    <Key>
+      <PropertyRef Name="nonCoastalType" />
+    </Key>
+    <Property Name="nonCoastalType" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="oldglo">
+    <Key>
+      <PropertyRef Name="cntSpillID" />
+    </Key>
+    <Property Name="cntSpillID" Type="int" Nullable="false" />
+    <Property Name="fDrill" Type="varchar" MaxLength="10" />
+    <Property Name="txtDrillTxt" Type="varchar" MaxLength="3" />
+    <Property Name="txtReportTakenBy" Type="varchar" MaxLength="50" />
+    <Property Name="txtReportPartyAffliation" Type="varchar" MaxLength="50" />
+    <Property Name="datReportTakenDate" Type="varchar" MaxLength="10" />
+    <Property Name="datReportTakenTime" Type="varchar" MaxLength="6" />
+    <Property Name="txtNotificationAgency" Type="varchar" MaxLength="150" />
+    <Property Name="txtDischargeReportedBy" Type="varchar" MaxLength="50" />
+    <Property Name="txtDischargePhone1" Type="varchar" MaxLength="11" />
+    <Property Name="txtDischargePhone2" Type="varchar" MaxLength="150" />
+    <Property Name="datDischargeDate" Type="varchar" MaxLength="10" />
+    <Property Name="datDischargeTime" Type="varchar" MaxLength="6" />
+    <Property Name="txtMaterial1" Type="varchar" MaxLength="50" />
+    <Property Name="dblCASUN1" Type="varchar" MaxLength="50" />
+    <Property Name="dblAmtSpilled1" Type="varchar" MaxLength="25" />
+    <Property Name="txtUnitRecovered1" Type="varchar" MaxLength="4" />
+    <Property Name="txtMaterial2" Type="varchar" MaxLength="50" />
+    <Property Name="dblCASUN2" Type="varchar" MaxLength="50" />
+    <Property Name="dblAmtSpilled2" Type="varchar" MaxLength="25" />
+    <Property Name="txtUnitRecovered2" Type="varchar" MaxLength="4" />
+    <Property Name="txtMaterial3" Type="varchar" MaxLength="50" />
+    <Property Name="dblCASUN3" Type="varchar" MaxLength="50" />
+    <Property Name="dblAmtSpilled3" Type="varchar" MaxLength="25" />
+    <Property Name="txtUnitRecovered3" Type="varchar" MaxLength="4" />
+    <Property Name="txtMaterial4" Type="varchar" MaxLength="50" />
+    <Property Name="dblCASUN4" Type="varchar" MaxLength="50" />
+    <Property Name="dblAmtSpilled4" Type="varchar" MaxLength="25" />
+    <Property Name="txtUnitRecovered4" Type="varchar" MaxLength="4" />
+    <Property Name="txtMaterial5" Type="varchar" MaxLength="50" />
+    <Property Name="dblCASUN5" Type="varchar" MaxLength="50" />
+    <Property Name="dblAmtSpilled5" Type="varchar" MaxLength="25" />
+    <Property Name="txtUnitRecovered5" Type="varchar" MaxLength="4" />
+    <Property Name="wSpillCounty" Type="varchar" MaxLength="50" />
+    <Property Name="wOrigin" Type="varchar" MaxLength="100" />
+    <Property Name="fSpillInWater" Type="varchar" MaxLength="6" />
+    <Property Name="fSpillAirRelease" Type="varchar" MaxLength="6" />
+    <Property Name="fCoastalWater" Type="varchar" MaxLength="6" />
+    <Property Name="fLand" Type="varchar" MaxLength="6" />
+    <Property Name="txtSpillReceivingWater" Type="varchar" MaxLength="250" />
+    <Property Name="dblSpillAmountInWater" Type="varchar" MaxLength="50" />
+    <Property Name="txtSpillAmountInWaterUnits" Type="varchar" MaxLength="3" />
+    <Property Name="memSpillLocation" Type="varchar" MaxLength="3000" />
+    <Property Name="dblRRCLeaseNumber" Type="varchar" MaxLength="7" />
+    <Property Name="txtRRCLeaseName" Type="varchar" MaxLength="250" />
+    <Property Name="txtRRCFieldName" Type="varchar" MaxLength="250" />
+    <Property Name="txtLandOwner" Type="varchar" MaxLength="250" />
+    <Property Name="memActionsTakenCleanUpStatus" Type="varchar" MaxLength="3000" />
+    <Property Name="txtNRCNumber" Type="varchar" MaxLength="50" />
+    <Property Name="txtAgencyName1" Type="varchar" MaxLength="50" />
+    <Property Name="txtAgencyName2" Type="varchar" MaxLength="50" />
+    <Property Name="txtAgencyName3" Type="varchar" MaxLength="50" />
+    <Property Name="datDate1" Type="varchar" MaxLength="10" />
+    <Property Name="datDate2" Type="varchar" MaxLength="10" />
+    <Property Name="datDate3" Type="varchar" MaxLength="10" />
+    <Property Name="txtWhere1" Type="varchar" MaxLength="50" />
+    <Property Name="txtWhere2" Type="varchar" MaxLength="50" />
+    <Property Name="txtWhere3" Type="varchar" MaxLength="50" />
+    <Property Name="txtWho1" Type="varchar" MaxLength="50" />
+    <Property Name="txtWho2" Type="varchar" MaxLength="50" />
+    <Property Name="txtWho3" Type="varchar" MaxLength="50" />
+    <Property Name="datTime1" Type="varchar" MaxLength="6" />
+    <Property Name="datTime2" Type="varchar" MaxLength="6" />
+    <Property Name="datTime3" Type="varchar" MaxLength="6" />
+    <Property Name="txtSpiller" Type="varchar" MaxLength="250" />
+    <Property Name="txtSpillerAddress" Type="varchar" MaxLength="250" />
+    <Property Name="txtSpillerCity" Type="varchar" MaxLength="50" />
+    <Property Name="txtSpillerState" Type="varchar" MaxLength="2" />
+    <Property Name="txtSpillerZipCode" Type="varchar" MaxLength="9" />
+    <Property Name="txtSpillerContact" Type="varchar" MaxLength="250" />
+    <Property Name="txtSpillerContactPhone" Type="varchar" MaxLength="10" />
+    <Property Name="memComments" Type="varchar" MaxLength="3000" />
+    <Property Name="txtAgcyName1" Type="varchar" MaxLength="50" />
+    <Property Name="txtAgcyName2" Type="varchar" MaxLength="50" />
+    <Property Name="txtAgcyName3" Type="varchar" MaxLength="50" />
+    <Property Name="datD1" Type="varchar" MaxLength="10" />
+    <Property Name="datD2" Type="varchar" MaxLength="10" />
+    <Property Name="datD3" Type="varchar" MaxLength="10" />
+    <Property Name="txtWhr1" Type="varchar" MaxLength="50" />
+    <Property Name="txtWhr2" Type="varchar" MaxLength="50" />
+    <Property Name="txtWhr3" Type="varchar" MaxLength="50" />
+    <Property Name="txtW1" Type="varchar" MaxLength="50" />
+    <Property Name="txtW2" Type="varchar" MaxLength="50" />
+    <Property Name="txtW3" Type="varchar" MaxLength="50" />
+    <Property Name="datTi1" Type="varchar" MaxLength="6" />
+    <Property Name="datTi2" Type="varchar" MaxLength="6" />
+    <Property Name="datTi3" Type="varchar" MaxLength="6" />
+    <Property Name="txtLastField" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="otherids">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="available" Type="int" Nullable="false" />
+    <Property Name="user" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="reportlog">
+    <Key>
+      <PropertyRef Name="ReportLogID" />
+    </Key>
+    <Property Name="ReportLogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StartTime" Type="int" Nullable="false" />
+    <Property Name="EndTime" Type="int" />
+    <Property Name="MinutesTaken" Type="int" />
+    <Property Name="Operator" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ReportType" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ReportID" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="ReportDate" Type="date" Nullable="false" />
+    <Property Name="Corrected" Type="binary" MaxLength="1" Nullable="false" />
+  </EntityType>
+  <EntityType Name="reportlogschedules">
+    <Key>
+      <PropertyRef Name="ReportLogReportingID" />
+    </Key>
+    <Property Name="ReportLogReportingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReportDateFrom" Type="datetime2" Precision="0" Nullable="false" />
+    <Property Name="ReportDateTo" Type="datetime2" Precision="0" Nullable="false" />
+    <Property Name="ReportOperator" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="AverageOrDetailed" Type="binary" MaxLength="1" Nullable="false" />
+    <Property Name="Sent" Type="binary" MaxLength="1" Nullable="false" />
+  </EntityType>
+  <EntityType Name="shelloilincidentdata">
+    <Key>
+      <PropertyRef Name="incid" />
+    </Key>
+    <Property Name="incid" Type="int" Nullable="false" />
+    <Property Name="ersop" Type="varchar" MaxLength="60" />
+    <Property Name="date" Type="varchar" MaxLength="45" />
+    <Property Name="time" Type="varchar" MaxLength="45" />
+    <Property Name="callername1" Type="varchar" MaxLength="100" />
+    <Property Name="callername2" Type="varchar" MaxLength="100" />
+    <Property Name="callername3" Type="varchar" MaxLength="100" />
+    <Property Name="callerphone1" Type="varchar" MaxLength="45" />
+    <Property Name="callerphone2" Type="varchar" MaxLength="45" />
+    <Property Name="callerphone3" Type="varchar" MaxLength="45" />
+    <Property Name="callerext1" Type="varchar" MaxLength="45" />
+    <Property Name="callerext2" Type="varchar" MaxLength="45" />
+    <Property Name="callerext3" Type="varchar" MaxLength="45" />
+    <Property Name="calleraltphone1" Type="varchar" MaxLength="45" />
+    <Property Name="calleraltphone2" Type="varchar" MaxLength="45" />
+    <Property Name="calleraltphone3" Type="varchar" MaxLength="45" />
+    <Property Name="calleraltext1" Type="varchar" MaxLength="45" />
+    <Property Name="calleraltext2" Type="varchar" MaxLength="45" />
+    <Property Name="calleraltext3" Type="varchar" MaxLength="45" />
+    <Property Name="comments" Type="varchar(max)" />
+    <Property Name="staffname" Type="varchar" MaxLength="100" />
+    <Property Name="staffphone" Type="varchar" MaxLength="45" />
+    <Property Name="staffext" Type="varchar" MaxLength="45" />
+    <Property Name="staffreporttime" Type="varchar" MaxLength="45" />
+    <Property Name="stafftimezone" Type="varchar" MaxLength="45" />
+    <Property Name="followupname1" Type="varchar" MaxLength="45" />
+    <Property Name="followupname2" Type="varchar" MaxLength="45" />
+    <Property Name="followupname3" Type="varchar" MaxLength="45" />
+    <Property Name="followupname4" Type="varchar" MaxLength="45" />
+    <Property Name="followupname5" Type="varchar" MaxLength="45" />
+    <Property Name="followuptime1" Type="varchar" MaxLength="45" />
+    <Property Name="followuptime2" Type="varchar" MaxLength="45" />
+    <Property Name="followuptime3" Type="varchar" MaxLength="45" />
+    <Property Name="followuptime4" Type="varchar" MaxLength="45" />
+    <Property Name="followuptime5" Type="varchar" MaxLength="45" />
+    <Property Name="followuptimezone1" Type="varchar" MaxLength="45" />
+    <Property Name="followuptimezone2" Type="varchar" MaxLength="45" />
+    <Property Name="followuptimezone3" Type="varchar" MaxLength="45" />
+    <Property Name="followuptimezone4" Type="varchar" MaxLength="45" />
+    <Property Name="followuptimezone5" Type="varchar" MaxLength="45" />
+    <Property Name="followupphone1" Type="varchar" MaxLength="45" />
+    <Property Name="followupphone2" Type="varchar" MaxLength="45" />
+    <Property Name="followupphone3" Type="varchar" MaxLength="45" />
+    <Property Name="followupphone4" Type="varchar" MaxLength="45" />
+    <Property Name="followupphone5" Type="varchar" MaxLength="45" />
+    <Property Name="followupext1" Type="varchar" MaxLength="45" />
+    <Property Name="followupext2" Type="varchar" MaxLength="45" />
+    <Property Name="followupext3" Type="varchar" MaxLength="45" />
+    <Property Name="followupext4" Type="varchar" MaxLength="45" />
+    <Property Name="followupext5" Type="varchar" MaxLength="45" />
+    <Property Name="emailsent" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="notes" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="spillorigin">
+    <Key>
+      <PropertyRef Name="originId" />
+    </Key>
+    <Property Name="originId" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="spillunits">
+    <Key>
+      <PropertyRef Name="unitId" />
+    </Key>
+    <Property Name="unitId" Type="varchar" MaxLength="3" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tceqafterhours">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Region" Type="nvarchar" MaxLength="45" />
+    <Property Name="PrimaryContact" Type="nvarchar" MaxLength="45" />
+    <Property Name="SecondaryContact" Type="nvarchar" MaxLength="45" />
+    <Property Name="TertiaryContact" Type="nvarchar" MaxLength="45" />
+    <Property Name="RegionalDirector" Type="nvarchar" MaxLength="45" />
+    <Property Name="EmailAddress" Type="nvarchar" MaxLength="45" />
+  </EntityType>
+  <EntityType Name="tceqreport">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Operator" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ReportDate" Type="datetime2" Precision="0" Nullable="false" />
+    <Property Name="ReportTime" Type="nvarchar" MaxLength="6" Nullable="false" />
+    <Property Name="IncidentDate" Type="datetime2" Precision="0" Nullable="false" />
+    <Property Name="IncidentTime" Type="nvarchar" MaxLength="6" Nullable="false" />
+    <Property Name="ReportedBy" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ContactNumber" Type="nvarchar" MaxLength="20" />
+    <Property Name="ContactNumber2" Type="nvarchar" MaxLength="20" />
+    <Property Name="Emergency" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Location" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="County" Type="nvarchar" MaxLength="50" />
+    <Property Name="MediaAffected" Type="nvarchar" MaxLength="50" />
+    <Property Name="ReceivingWater" Type="nvarchar" MaxLength="100" />
+    <Property Name="AmountWater" Type="nvarchar" MaxLength="20" />
+    <Property Name="UnitWater" Type="nvarchar" MaxLength="20" />
+    <Property Name="PRCompany" Type="nvarchar" MaxLength="80" />
+    <Property Name="PRStreet" Type="nvarchar" MaxLength="80" />
+    <Property Name="PRCity" Type="nvarchar" MaxLength="80" />
+    <Property Name="PRState" Type="nvarchar" MaxLength="80" />
+    <Property Name="PRZipCode" Type="nvarchar" MaxLength="20" />
+    <Property Name="PRContact" Type="nvarchar" MaxLength="80" />
+    <Property Name="PRPhone" Type="nvarchar" MaxLength="20" />
+    <Property Name="Material1" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Material2" Type="nvarchar" MaxLength="50" />
+    <Property Name="Material3" Type="nvarchar" MaxLength="50" />
+    <Property Name="Material4" Type="nvarchar" MaxLength="50" />
+    <Property Name="Material5" Type="nvarchar" MaxLength="50" />
+    <Property Name="CAS1" Type="nvarchar" MaxLength="50" />
+    <Property Name="CAS2" Type="nvarchar" MaxLength="50" />
+    <Property Name="CAS3" Type="nvarchar" MaxLength="50" />
+    <Property Name="CAS4" Type="nvarchar" MaxLength="50" />
+    <Property Name="CAS5" Type="nvarchar" MaxLength="50" />
+    <Property Name="Amount1" Type="nvarchar" MaxLength="50" />
+    <Property Name="Amount2" Type="nvarchar" MaxLength="50" />
+    <Property Name="Amount3" Type="nvarchar" MaxLength="50" />
+    <Property Name="Amount4" Type="nvarchar" MaxLength="50" />
+    <Property Name="Amount5" Type="nvarchar" MaxLength="50" />
+    <Property Name="Unit1" Type="nvarchar" MaxLength="20" />
+    <Property Name="Unit2" Type="nvarchar" MaxLength="20" />
+    <Property Name="Unit3" Type="nvarchar" MaxLength="20" />
+    <Property Name="Unit4" Type="nvarchar" MaxLength="20" />
+    <Property Name="Unit5" Type="nvarchar" MaxLength="20" />
+    <Property Name="ResponderName" Type="nvarchar" MaxLength="100" />
+    <Property Name="NotificationTime" Type="nvarchar" MaxLength="6" />
+  </EntityType>
+  <EntityType Name="theochemcleanshotincidents">
+    <Key>
+      <PropertyRef Name="incidentId" />
+    </Key>
+    <Property Name="incidentId" Type="varchar" MaxLength="11" Nullable="false" />
+    <Property Name="ersOp" Type="varchar" MaxLength="45" />
+    <Property Name="rptDate" Type="varchar" MaxLength="10" />
+    <Property Name="rptTime" Type="varchar" MaxLength="10" />
+    <Property Name="callerName" Type="varchar" MaxLength="100" />
+    <Property Name="callerPhone" Type="varchar" MaxLength="45" />
+    <Property Name="callerAff" Type="varchar" MaxLength="100" />
+    <Property Name="callerFaxEmail" Type="varchar" MaxLength="100" />
+    <Property Name="incStreet" Type="varchar" MaxLength="100" />
+    <Property Name="incCity" Type="varchar" MaxLength="45" />
+    <Property Name="incState" Type="varchar" MaxLength="45" />
+    <Property Name="incCountry" Type="varchar" MaxLength="200" />
+    <Property Name="incTimeZone" Type="varchar" MaxLength="10" />
+    <Property Name="incDate" Type="varchar" MaxLength="10" />
+    <Property Name="incTime" Type="varchar" MaxLength="10" />
+    <Property Name="quest1" Type="varchar" MaxLength="200" />
+    <Property Name="quest2Qty" Type="varchar" MaxLength="10" />
+    <Property Name="quest2Units" Type="varchar" MaxLength="45" />
+    <Property Name="quest3" Type="varchar" MaxLength="10" />
+    <Property Name="quest4" Type="varchar" MaxLength="10" />
+    <Property Name="quest5" Type="varchar" MaxLength="10" />
+    <Property Name="quest6" Type="varchar" MaxLength="10" />
+    <Property Name="quest7" Type="varchar" MaxLength="10" />
+    <Property Name="quest8" Type="varchar" MaxLength="10" />
+    <Property Name="quest9" Type="varchar" MaxLength="10" />
+    <Property Name="quest10YesOrNo" Type="varchar" MaxLength="10" />
+    <Property Name="quest10IfYesWhat" Type="varchar" MaxLength="200" />
+    <Property Name="quest11YesOrNo" Type="varchar" MaxLength="10" />
+    <Property Name="quest11IfYesWhat" Type="varchar" MaxLength="200" />
+    <Property Name="quest12" Type="varchar" MaxLength="10" />
+    <Property Name="quest13" Type="varchar" MaxLength="10" />
+    <Property Name="quest14" Type="varchar" MaxLength="200" />
+    <Property Name="quest15" Type="varchar" MaxLength="10" />
+    <Property Name="quest16" Type="varchar" MaxLength="10" />
+    <Property Name="quest17" Type="varchar" MaxLength="10" />
+    <Property Name="additCommentsDetails" Type="varchar" MaxLength="3200" />
+    <Property Name="subName" Type="varchar" MaxLength="200" />
+    <Property Name="subAdminContact" Type="varchar" MaxLength="45" />
+    <Property Name="subPhone" Type="varchar" MaxLength="45" />
+    <Property Name="subFax" Type="varchar" MaxLength="45" />
+    <Property Name="subEmail" Type="varchar" MaxLength="200" />
+    <Property Name="subAddress" Type="varchar" MaxLength="200" />
+    <Property Name="subCityStateZip" Type="varchar" MaxLength="200" />
+    <Property Name="emailsent" Type="varchar" MaxLength="10" />
+    <Property Name="comments" Type="varchar" MaxLength="100" />
+    <Property Name="type" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="theochemcontactinfo">
+    <Key>
+      <PropertyRef Name="ContactID" />
+    </Key>
+    <Property Name="ContactID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" />
+    <Property Name="Admin Contact" Type="varchar" MaxLength="100" />
+    <Property Name="Phone" Type="varchar" MaxLength="100" />
+    <Property Name="Fax" Type="varchar" MaxLength="100" />
+    <Property Name="Email" Type="varchar" MaxLength="100" />
+    <Property Name="Address" Type="varchar" MaxLength="100" />
+    <Property Name="City, State, Zip" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="theochemcontactinformation">
+    <Key>
+      <PropertyRef Name="contactid" />
+    </Key>
+    <Property Name="contactid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="admincontact" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="phone" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="fax" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="address" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="citystatezip" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tickets">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="status" Type="varchar" MaxLength="45" />
+    <Property Name="username" Type="varchar" MaxLength="45" />
+    <Property Name="subject" Type="varchar" MaxLength="45" />
+    <Property Name="description" Type="varchar" MaxLength="1000" />
+  </EntityType>
+  <EntityType Name="veolianonincident">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="callername" Type="nvarchar" MaxLength="40" />
+    <Property Name="callerphonenumber" Type="nvarchar" MaxLength="20" />
+    <Property Name="calleraffiliation" Type="nvarchar" MaxLength="60" />
+    <Property Name="incidentcity" Type="nvarchar" MaxLength="30" />
+    <Property Name="incidentstate" Type="nvarchar" MaxLength="2" />
+    <Property Name="description" Type="nvarchar(max)" />
+    <Property Name="ersoperator" Type="nvarchar" MaxLength="30" />
+    <Property Name="date" Type="nvarchar" MaxLength="15" />
+    <Property Name="time" Type="nvarchar" MaxLength="15" />
+  </EntityType>
+  <EntityContainer Name="chemreportertestModelStoreContainer">
+    <EntitySet Name="agencylist" EntityType="Self.agencylist" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="atandtassociatedata" EntityType="Self.atandtassociatedata" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="atandtvolunteerdata" EntityType="Self.atandtvolunteerdata" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="availablespillids" EntityType="Self.availablespillids" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="basfenvironmental" EntityType="Self.basfenvironmental" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="basfenvironmentalids" EntityType="Self.basfenvironmentalids" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="basfinjury" EntityType="Self.basfinjury" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="basfinjuryids" EntityType="Self.basfinjuryids" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="cleanshotids" EntityType="Self.cleanshotids" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="companyinformation" EntityType="Self.companyinformation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="crest811" EntityType="Self.crest811" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="crestallnotifications" EntityType="Self.crestallnotifications" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="crestdotincidents" EntityType="Self.crestdotincidents" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="cresters" EntityType="Self.cresters" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="crestgeneralincidents" EntityType="Self.crestgeneralincidents" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="cresthighprofileincidents" EntityType="Self.cresthighprofileincidents" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="crestmonthlyreport" EntityType="Self.crestmonthlyreport" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="crestpipelinemembers" EntityType="Self.crestpipelinemembers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="crestpiplineincidents" EntityType="Self.crestpiplineincidents" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="crestpiplineincidents_copy" EntityType="Self.crestpiplineincidents_copy" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="crestwoodtransportationlist" EntityType="Self.crestwoodtransportationlist" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="generalincidentedits" EntityType="Self.generalincidentedits" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="generalincidentids" EntityType="Self.generalincidentids" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="generalincidentreportdata" EntityType="Self.generalincidentreportdata" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="globasereportdata" EntityType="Self.globasereportdata" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="glocountylist" EntityType="Self.glocountylist" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="gloemails" EntityType="Self.gloemails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="gloids" EntityType="Self.gloids" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="glolastid" EntityType="Self.glolastid" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ies" EntityType="Self.ies" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="iescontacts" EntityType="Self.iescontacts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="knowledgebase" EntityType="Self.knowledgebase" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="modrequests" EntityType="Self.modrequests" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="noncoastal" EntityType="Self.noncoastal" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="oldglo" EntityType="Self.oldglo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="otherids" EntityType="Self.otherids" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="reportlog" EntityType="Self.reportlog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="reportlogschedules" EntityType="Self.reportlogschedules" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="shelloilincidentdata" EntityType="Self.shelloilincidentdata" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="spillorigin" EntityType="Self.spillorigin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="spillunits" EntityType="Self.spillunits" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tceqafterhours" EntityType="Self.tceqafterhours" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tceqreport" EntityType="Self.tceqreport" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="theochemcleanshotincidents" EntityType="Self.theochemcleanshotincidents" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="theochemcontactinfo" EntityType="Self.theochemcontactinfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="theochemcontactinformation" EntityType="Self.theochemcontactinformation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tickets" EntityType="Self.tickets" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="veolianonincident" EntityType="Self.veolianonincident" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CRMWebU" EntityType="Self.CRMWebU" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [CRMWebU].[UserID] AS [UserID], 
+    [CRMWebU].[Username] AS [Username], 
+    [CRMWebU].[Name] AS [Name], 
+    [CRMWebU].[Password] AS [Password], 
+    [CRMWebU].[UserType] AS [UserType], 
+    [CRMWebU].[LastPassChange] AS [LastPassChange]
+    FROM [dbo].[CRMWebU] AS [CRMWebU]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

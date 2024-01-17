@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@if (Session["Username"] == null && Session["FullName"] == null && Session["UserType"] == null)
+{
+    Html.RenderPartial("Login");
+} else
+{
+    <br />
+    <h4 style="text-align:center;">Welcome to Chemical Report Manager, @Session["FullName"].ToString()! <br />You can quickly access the report entry below or use the navigation above for all options.</h4>
+    <div class="OptionGroup">
+        <a href="@Url.Action("GLOReport", "GLO")" class="OptionGroupLink">
+            <div class="QuickSelectOption">
+                GLO Report
+            </div>
+        </a>
+        <a href="@Url.Action("TCEQReport", "TCEQ")" class="OptionGroupLink">
+            <div class="QuickSelectOption">
+                TCEQ Report
+            </div>
+        </a>
+        <a href="@Url.Action("GeneralIncident", "Crestwood")" class="OptionGroupLink">
+            <div class="QuickSelectOption">
+                Crestwood General Incident Report
+            </div>
+        </a>
+        <a href="@Url.Action("PipelineReport", "Crestwood")" class="OptionGroupLink">
+            <div class="QuickSelectOption">
+                Crestwood Pipeline Report
+            </div>
+        </a>
+        <a href="@Url.Action("EightOneOneReport", "Crestwood")" class="OptionGroupLink">
+            <div class="QuickSelectOption">
+                Crestwood 811 Report
+            </div>
+        </a>
+        <a href="@Url.Action("LockedGateReport", "Crestwood")" class="OptionGroupLink">
+            <div class="QuickSelectOption">
+                Crestwood Locked Gate Report
+            </div>
+        </a>
+        <a href="@Url.Action("GeneralIncident", "OtherReports")" class="OptionGroupLink">
+            <div class="QuickSelectOption">
+                General Incident Report
+            </div>
+        </a>
+        <a href="@Url.Action("CleanShotReport", "OtherReports")" class="OptionGroupLink">
+            <div class="QuickSelectOption">
+                Clean Shot Report
+            </div>
+        </a>
+        <a href="@Url.Action("ShellOilReport", "OtherReports")" class="OptionGroupLink">
+            <div class="QuickSelectOption">
+                Shell Oil Report
+            </div>
+        </a>
+    </div>
+}

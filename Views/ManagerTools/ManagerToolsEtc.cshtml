@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "ManagerToolsEtc";
+    string OtherTool = ViewBag.OtherToolSelected;
+}
+
+@if (OtherTool == "GLOEmails")
+{
+    <h2>GLO Emails</h2>
+}
+else if (OtherTool == "GLOCountyList")
+{
+    <h2> GLO County List</h2>
+}
+else if (OtherTool == "CleanShotContact")
+{
+    <h2>Clean Shot Contact Info</h2>
+}
+else if (OtherTool == "ViewReports")
+{
+    < h2 > View Reports </ h2 >
+}
+else if (OtherTool == "UserManagement")
+{
+    <h2>User Management</h2>
+    Html.RenderPartial("UserManagement");
+}

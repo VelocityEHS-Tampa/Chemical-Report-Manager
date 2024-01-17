@@ -1,0 +1,501 @@
+﻿@model ChemicalLibrary.CrestPipelineIncident
+
+@{
+    ViewBag.Title = "Crestwood Pipeline Report";
+    int id = 0;  //Public variable that holds the report ID when a previous report is opened from the log.
+    bool emptyreport = false;  //Flag used to indicate whether the report form is empty, or if a report successfully submitted.  Flag is checked when the form closes.
+    int tmpid = 0;  //Temporary, class-level variable used to hold the curren report's ID.  Bassically used if a user found errors on the report and need to make changes
+    string email = ",AssetType-Pipeline@crestwoodlp.com";  //Class-level variable that holds the ESR member's email address so it can be passed to the email form.
+    string CCemail = "";  //Class-level variable that holds the CC email address(es) so it can be passed to the email form.
+    string initials = "";
+    string NERegion = ",AL,CO,DE,DC,FL,GA,IN,KY,ME,MA,MI,MS,NH,NJ,NY,NC,OH,PA,RI,SC,TN,VT,VA,WV,";
+    string CentralRegion = ",AZ,AR,IL,IA,KS,LA,MN,MO,NB,NM,OK,TX,UT,WI,";
+    string NorthRegion = ",AK,CA,HI,ID,MT,NV,ND,OR,SD,WA,WY,";
+    string Revised = ViewBag.Revised;
+
+    List<SelectListItem> TimeZones = new List<SelectListItem>();
+    TimeZones.Add(new SelectListItem { Text = "", Value = "" });
+    TimeZones.Add(new SelectListItem { Text = "AKST", Value = "AKST" });
+    TimeZones.Add(new SelectListItem { Text = "AST", Value = "AST" });
+    TimeZones.Add(new SelectListItem { Text = "CST", Value = "CST" });
+    TimeZones.Add(new SelectListItem { Text = "EST", Value = "EST" });
+    TimeZones.Add(new SelectListItem { Text = "HAST", Value = "HAST" });
+    TimeZones.Add(new SelectListItem { Text = "MST", Value = "MST" });
+    TimeZones.Add(new SelectListItem { Text = "PST", Value = "PST" });
+    TimeZones.Add(new SelectListItem { Text = "UTC", Value = "UTC" });
+
+    List<SelectListItem> States = new List<SelectListItem>();
+    States.Add(new SelectListItem { Text = "", Value = "" });
+    States.Add(new SelectListItem { Text = "MT", Value = "MT" });
+    States.Add(new SelectListItem { Text = "ND", Value = "ND" });
+    States.Add(new SelectListItem { Text = "NM", Value = "NM" });
+    States.Add(new SelectListItem { Text = "SC", Value = "SC" });
+    States.Add(new SelectListItem { Text = "TX", Value = "TX" });
+    States.Add(new SelectListItem { Text = "WY", Value = "WY" });
+
+    List<SelectListItem> BlankOptions = new List<SelectListItem>();
+    BlankOptions.Add(new SelectListItem { Text = "", Value = "" });
+
+    List<SelectListItem> YesOrNo = new List<SelectListItem>();
+    YesOrNo.Add(new SelectListItem { Text = "", Value = "" });
+    YesOrNo.Add(new SelectListItem { Text = "Yes", Value = "Yes" });
+    YesOrNo.Add(new SelectListItem { Text = "No", Value = "No" });
+}
+
+<h2>Crestwood Pipeline Report</h2>
+
+@using (Html.BeginForm("SubmitCrestPipeline", "Crestwood", FormMethod.Post, new { @id = "CrestPipelineForm" }))
+{
+    <div id="PipelineReportContainer">
+        <div id="FormButtons" style="padding:2%;text-align:right;">
+            <input type="button" value="Phone Numbers" class="form-control GRCPButtons" id="btnPhNumb" name="btnPhNumb" onclick="ShowPhoneNumbers()">
+            <input type="button" value="Pipeline Info" class="form-control GRCPButtons" id="btnPipeInfo" name="btnPipeInfo" onclick="ShowPipelineInfo()">
+            <input type="hidden" name="Revised" value="@Revised" />
+            <input type="hidden" name="ReportID" value="@Model.ID" />
+            <input type="submit" value="Submit" class="form-control GRCPButtons required-field" id="btnsubmit" name="btnsubmit" onclick="return SubmitForm()" tabindex="99">
+            <input type="button" value="Cancel" class="form-control GRCPButtons alert-info" id="btnclose" name="btnclose" onclick="ClearForm()">
+        </div>
+        @* Operations Information *@
+        <div id="OperationsContainer">
+            <div class="GLOHeader" id="GRCPHeader">Operations</div>
+            <br />
+
+            <span class="required-field">Date</span> @Html.TextBoxFor(m => m.Date, new { @class = "form-control GLOFieldSpacing", placeholder = "__/__/____", id = "txtdate", @Name = "txtdate", style = "width:8%;", onblur = "FormatDate(this.value, this.id)", required = "", tabindex = "1", @maxlength="10" })
+            <span class="required-field">Time</span> @Html.TextBoxFor(m => m.Time, new { @class = "form-control GLOFieldSpacing", placeholder = "__:__", id = "txttime", @Name = "txttime", style = "width:5%;", onblur = "FormatTime(this.value, this.id)", required = "", tabindex = "2" })
+            <span class="required-field">Time Zone</span>
+            @Html.DropDownListFor(m => m.Time_Zone, TimeZones, new { id = "txttimezone", @Name = "txttimezone", @class = "GLOFieldSpacing", required = "", tabindex = "3" })
+
+            <span class="required-field">Call Date</span>
+            @if (Revised == "true")
+            {
+                @Html.TextBoxFor(m => m.Call_Date, new { @class = "form-control GLOFieldSpacing", placeholder = "__/__/____", id = "txtcalldate", @Name = "txtcalldate", style = "width:8%;", onblur = "FormatDate(this.value, this.id)", tabindex = "4" })
+            }
+            else
+            {
+                @Html.TextBoxFor(m => m.Call_Date, new { @class = "form-control GLOFieldSpacing", placeholder = "__/__/____", id = "txtcalldate", @Name = "txtcalldate", style = "width:8%;", @Value=@DateTime.Now.ToShortDateString(), onblur = "FormatDate(this.value, this.id)", tabindex = "4" })
+            }
+            <span class="required-field">Call Time</span>
+            @if (Revised == "true")
+            {
+                @Html.TextBoxFor(m => m.Call_Time, new { @class = "form-control GLOFieldSpacing", placeholder = "__:__", id = "txtcalltime", @Name = "txtcalltime", style = "width:5%;", onblur = "FormatTime(this.value, this.id)", tabindex = "5" })
+            }
+            else
+            {
+                @Html.TextBoxFor(m => m.Call_Time, new { @class = "form-control GLOFieldSpacing", placeholder = "__:__", id = "txtcalltime", @Name = "txtcalltime", style = "width:5%;", @Value = @DateTime.Now.ToString("HH:mm"), onblur = "FormatTime(this.value, this.id)", tabindex = "5" })
+            }
+        </div>
+        <br />
+        @* Location Information *@
+        <div id="LocationInfoContainer" style="width:30%" class="CrestInlineDisplay">
+            <div class="GLOHeader" id="GRCPHeader">Location Information</div>
+            <br />
+
+            <span class="required-field">City</span> @Html.TextBoxFor(m => m.City, new { @class = "form-control GLOFieldSpacing", id = "txtcity", @Name = "txtcity", style = "width:50%;", required = "", tabindex = "6" })
+            <span class="required-field">State</span>
+            @Html.DropDownListFor(m => m.State, States, new { id = "txtstate", @Name = "txtstate", @class = "GLOFieldSpacing", required = "", onchange = "GetCounties(this.value), GetPipelineLocations(this.value)", tabindex = "7" })
+            <br />
+            <span class="required-field">County</span>
+            @Html.DropDownListFor(m => m.County, BlankOptions, new { id = "txtcounty", @Name = "txtcounty", @class="GLOFieldSpacing", required="", onchange="GetPipelineMembers(this.value)", tabindex="8" })
+            <br />
+            <span class="required-field">Please indicate the specific location of the incident</span>
+            <br />
+            @Html.TextAreaFor(m => m.Directions, new { id = "txtdirections", @Name = "txtdirections", cols = "30", rows = "3", @class="GLOFieldSpacing", required="", tabindex="9"})
+        </div>
+        @* Incident Details *@
+        <div id="IncidentDetailsContainer" style="width:69.5%;" class="CrestInlineDisplay">
+            <div class="GLOHeader" id="GRCPHeader">Incident Details</div>
+            <div style="width:45%;" class="CrestInlineDisplay">
+                <span class="required-field">Describe the incident</span><br />
+                @Html.TextAreaFor(m => m.Observing, new { @Name = "txtobserving", @class="GLOFieldSpacing", rows="7", cols="35", required="", tabindex="10" })
+            </div>
+
+            <div style="width:54%;" class="CrestInlineDisplay">
+                <span class="required-field">Are you seeing, hearing, or smelling? (check all that apply)</span><br />
+                @* Checkboxes Left *@
+                <div class="CrestInlineDisplay">
+                    @if (Model.Black_Or_White_Smoke == "TRUE") { <input type="checkbox" id="cbblackorwhitesmoke" name="cbblackorwhitesmoke" class="GLOFieldSpacing" tabindex="11" checked="" /> } else { <input type="checkbox" id="cbblackorwhitesmoke" name="cbblackorwhitesmoke" class="GLOFieldSpacing" tabindex="11" /> } 
+                    <span>Black or White Smoke</span> <br />
+                    @if (Model.Flames == "TRUE") { <input type="checkbox" id="cbflames" name="cbflames" class="GLOFieldSpacing" tabindex="12" checked="" /> } else { <input type="checkbox" id="cbflames" name="cbflames" class="GLOFieldSpacing" tabindex="12" /> }
+                    <span>Flames</span> <br />
+                    @if (Model.Hissing == "TRUE") { <input type="checkbox" id="cbhissing" name="cbhissing" class="GLOFieldSpacing" tabindex="13" checked="" /> } else { <input type="checkbox" id="cbhissing" name="cbhissing" class="GLOFieldSpacing" tabindex="13" /> }
+                    <span>Hissing</span> <br />
+                    @if (Model.Liquid == "TRUE") { <input type="checkbox" id="cbliquid" name="cbliquid" class="GLOFieldSpacing" tabindex="14" checked="" />} else { <input type="checkbox" id="cbliquid" name="cbliquid" class="GLOFieldSpacing" tabindex="14" /> }
+                    <span>Liquid</span> <br />
+                </div>
+                @* Checkboxes Right *@
+                <div class="CrestInlineDisplay">
+                    @if (Model.Oily_Sheen == "TRUE") { <input type="checkbox" id="cboilysheen" name="cboilysheen" class="GLOFieldSpacing" tabindex="15" checked="" /> } else { <input type="checkbox" id="cboilysheen" name="cboilysheen" class="GLOFieldSpacing" tabindex="15" /> }
+                    <span>Oily Sheen</span> <br />
+                    @if (Model.Other_Pipeline_Markers == "TRUE") { <input type="checkbox" id="cbotherpipelinemarkers" name="cbotherpipelinemarkers" class="GLOFieldSpacing" tabindex="16" checked=""/> } else { <input type="checkbox" id="cbotherpipelinemarkers" name="cbotherpipelinemarkers" class="GLOFieldSpacing" tabindex="16" /> }
+                    <span>Other Pipeline Markers</span> <br />
+                    @if (Model.Rotten_Egg_Odor == "TRUE") { <input type="checkbox" id="cbrotteneggodor" name="cbrotteneggodor" class="GLOFieldSpacing" tabindex="17" checked="" /> } else { <input type="checkbox" id="cbrotteneggodor" name="cbrotteneggodor" class="GLOFieldSpacing" tabindex="17" /> }
+                     <span>Rotten Egg Odor</span> <br />
+                    @if (Model.Vapor_Or_Mist == "TRUE") { <input type="checkbox" id="cbvaporsormist" name="cbvaporsormist" class="GLOFieldSpacing" tabindex="18" checked="" /> } else { <input type="checkbox" id="cbvaporsormist" name="cbvaporsormist" class="GLOFieldSpacing" tabindex="18" /> }
+                     <span>Vapors or Mist</span> <br />
+                </div>
+            </div>
+            <br />
+            <br />
+        </div>
+        @* Questionnaire *@
+        <div id="Questionnaire">
+            <div class="GLOHeader" id="GRCPHeader">Questionnaire</div><br />
+            <div id="QuestionnaireForm" class="CrestInlineDisplay" style="text-align:left; width:75%;">
+                <span class="required-field">Is this a drill</span>
+                @Html.DropDownListFor(m => m.Drill, YesOrNo, new { id = "cbDrill", @Name = "cbDrill", @class = "GLOFieldSpacing", required = "", tabindex = "19" })
+                <br />
+                <span class="required-field">Can you tell from your location if this is occurring on a pipeline ROW or a Well-pad location</span>
+                @Html.TextBoxFor(m => m.ROW_OR_Well_Pad, new { id = "txtroeworwellpad", @Name = "txtroeworwellpad", @class = "form-control GLOFieldSpacing", style = "width:20%;", required = "", tabindex = "20" })
+                <br />
+                <span class="required-field">Do you see ANY tanks near or at the location where this incident is occurring</span>
+                @Html.DropDownListFor(m => m.Tanks, YesOrNo, new { @Name = "txttanks", id = "txttanks", @class = "GLOFieldSpacing", required = "", tabindex = "21" })
+                <br />
+                <span class="required-field">Are you the land owner</span>
+                @Html.DropDownListFor(m => m.Landowner, YesOrNo, new { @Name = "txtlandowner", id = "txtlandowner", @class = "GLOFieldSpacing", required = "", tabindex = "22" })
+                <br />
+                <span class="required-field">What is the Lease/Well name</span> @Html.TextBoxFor(m => m.Lease_Well_Name, new { id = "txtleasewellname", @Name = "txtleasewellname", @class = "form-control GLOFieldSpacing", style = "width:20%;", required = "", tabindex = "23" })<br />
+                <span class="required-field">What is your name (caller)</span> @Html.TextBoxFor(m => m.Caller_Name, new { id = "txtcallername", @Name = "txtcallername", @class = "form-control GLOFieldSpacing", style = "width:20%;", required = "", tabindex = "24" })<br />
+                <span class="required-field">What is your email address</span> @Html.TextBoxFor(m => m.Caller_Email, new { id = "txtcalleremail", @Name = "txtcalleremail", @class = "form-control GLOFieldSpacing", style = "width:20%;", placeholder = "yourname@domain.com", required = "", tabindex = "25" })<br />
+                <span class="required-field">What is the phone number you are calling from</span> @Html.TextBoxFor(m => m.Caller_Phone, new { id = "txtcallerphone", @Name = "txtcallerphone", @class="form-control GLOFieldSpacing", style="width:20%;", placeholder="(___) ___-____", onblur="FormatPhone(this.value, this.id)", required="", tabindex="26" })<br />
+                <span class="required-field">Have you already contacted 9-1-1</span>
+                @Html.DropDownListFor(m => m.Notify_911, YesOrNo, new { id = "txtnotify911", @Name = "txtnotify911", @class="GLOFieldSpacing", required="", tabindex="27" })
+                <br />
+                <span class="required-field">Is anyone injured and needing medical assistance</span>
+                @Html.DropDownListFor(m => m.Anyone_Injured, YesOrNo, new { id = "txtanyoneinjured", @Name = "txtanyoneinjured", @class="GLOFieldSpacing", required="", tabindex="28" })
+                <br />
+                <span class="required-field">Is anyone in immediate danger</span>
+                @Html.DropDownListFor(m => m.Immediate_Danger, YesOrNo, new { id="txtimmediatedanger", @Name = "txtimmediatedanger", @class="GLOFieldSpacing", required="", tabindex="29" })
+                <br />
+                <span class="required-field">Where are they in relation to the incident</span> @Html.TextBoxFor(m => m.Relation_ToIncident, new { id = "txtrelationtoincident", @Name = "txtrelationtoincident", @class="form-control GLOFieldSpacing", style="width:20%;", required="", tabindex="30" }) <br />
+                <span class="required-field">Can you safely warn them to stay away from the incident</span>
+                @Html.DropDownListFor(m => m.Safely_Warn, YesOrNo, new { id = "txtsafelywarn", @Name = "txtsafelywarn", @class="GLOFieldSpacing", required="", tabindex="31" })
+                <br />
+            </div>
+            <div class="CrestInlineDisplay" style="width:24%;">
+                <span class="required-field">Number of Injuries</span> @Html.TextBoxFor(m => m.Number_Of_Injuries, new { type = "number", id = "txtnumofinjuries", @Name = "txtnumofinjuries", @class = "GLOFieldSpacing", required = "", tabindex = "32" }) <br />
+                <span class="required-field">Report Takers Name</span>
+                @if (Revised == "true")
+                {
+                    @Html.TextBoxFor(m => m.Report_Taker_Name, new { type = "text", id = "txtreporttakername", @Name = "txtreporttakername", @class = "GLOFieldSpacing", required = "", tabindex = "33" })
+                }
+                else
+                {
+                    @Html.TextBoxFor(m => m.Report_Taker_Name, new { type = "text", id = "txtreporttakername", @Name = "txtreporttakername", @class = "GLOFieldSpacing", @Value = @Session["FullName"].ToString(), required = "", tabindex = "33" })
+                }
+                <br />
+                <span class="required-field">Report Takers Email</span> @Html.TextBoxFor(m => m.Report_Taker_Email, new { id = "txtreporttakeremail", @Name = "txtreporttakeremail", @class = "GLOFieldSpacing", @Value = "ers@ehs.com", @readonly = "", required = "" }) <br />
+                @*
+                These fields are not visible in the desktop app, unsure if it will be returning or not, so leaving in just in case.
+                <span class="required-field">Describe the Incident</span><br />
+                <textarea name="txtdescription" class="GLOFieldSpacing" rows="7" cols="35" required=""></textarea>
+                *@
+            </div>
+        </div>
+        <br />
+        @* Weather Conditions *@
+        <div id="WeatherConditions">
+            <div class="GLOHeader" id="GRCPHeader">Weather Conditions</div>
+            <div class="CrestInlineDisplay" style="width:20%;">
+                <span class="required-field">Temp</span> @Html.TextBoxFor(m => m.Temperature, new { @class = "form-control GLOFieldSpacing", id = "txttemp", @Name = "txttemp", style = "width:30%;", required = "", tabindex = "34" })<br />
+                <span class="required-field">Wind Speed</span>  @Html.TextBoxFor(m => m.Wind_Speed, new { @class = "form-control GLOFieldSpacing", id = "txtwindspeed", @Name = "txtwindspeed", style = "width: 30%;", required = "", tabindex = "35" })<br />
+                <span class="required-field">Wind Direction</span> @Html.TextBoxFor(m => m.Wind_Direction, new { @class = "form-control GLOFieldSpacing", id = "txtwinddirection", @Name = "txtwinddirection", style = "width: 30%;", required = "", tabindex = "36" })<br />
+            </div>
+            <div class="CrestInlineDisplay" style="width:30%;">
+                <span class="required-field">Describe the weather conditions</span> <br />
+                @Html.TextAreaFor(m => m.Weather_Conditions, new { id = "txtweatherconditions", @Name = "txtweatherconditions", cols = "30", rows = "5", required = "", tabindex = "37" })
+            </div>
+            <div class="CrestInlineDisplay" style="width:30%;">
+                <span class="required-field">Name</span><br />
+                @Html.TextBoxFor(m => m.Name_1, new { id = "txtname1", @Name = "txtname1", @class="GLOFieldSpacing", required="", onchange="GetPipelinePhone(this.value)", tabindex="38", list ="ERSMembers"})
+                <br />
+                <span class="required-field">Contact Number</span><br />
+                @Html.TextBoxFor(m => m.Contact_Number_1, new { @class="form-control GLOFieldSpacing", placeholder="(___) ___-____", id="txtcontactnumber1", @Name = "txtcontactnumber1", onblur="FormatPhone(this.value, this.id)", required="", tabindex="39" })
+                <br />
+                <span class="required-field">Location</span><br />
+                @Html.TextBoxFor(m => m.Location_1, new { @class="form-control GLOFieldSpacing", id="txtlocation1", @Name="txtlocation1", required="", tabindex="40" })
+            </div>
+            <div class="CrestInlineDisplay" style="width:15%;">
+                <span class="required-field">Notification Date</span><br />
+                @Html.TextBoxFor(m => m.NotificationDate, new { @class="form-control GLOFieldSpacing", placeholder="__/__/____", id="NotificationDate", @Name = "NotificationDate", onblur="FormatDate(this.value, this.id)", required="", tabindex="41"})
+                <br />
+                <span class="required-field">Notification Time</span><br />
+                @Html.TextBoxFor(m => m.NotificationTime, new { @class="form-control GLOFieldSpacing", placeholder="__:__", id="NotificationTime", @Name = "NotificationTime", onblur="FormatTime(this.value, this.id)", required="", tabindex="42" })
+                <br />
+            </div>
+        </div>
+    </div>
+    <datalist id="ERSMembers">
+
+    </datalist>
+}
+
+<script>
+    $(document).ready(function () {
+        if ($('#txtstate').val() != "") {
+            var state = $('#txtstate').val();
+            var county = "@Model.County";
+            //Call functions to fill lists
+            GetCounties(state);
+            GetPipelineMembers(county);
+            //Set dropdown lists to the previously selected values.
+            $('#txtcounty').val(county);
+        }
+    });
+    function SubmitForm() {
+        var submit = confirm("Please ensure all data entered is correct before submitting! Are you sure you want to submit this report?");
+        if (submit) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    function FormatDate(Date, FieldName) {
+        //Purely number input, no slashes.
+        if (Date.length == 8 && !Date.includes("/")) {
+            var ds = Date.split("");
+            var fulldate = ds[0] + ds[1] + "/" + ds[2] + ds[3] + "/" + ds[4] + ds[5] + ds[6] + ds[7];
+            document.getElementById(FieldName).value = fulldate;
+        }
+    }
+    function FormatTime(Time, FieldName) {
+        //Purely number input, no semi-colons.
+        if (Time.length == 4 && !Time.includes(":")) {
+            var ts = Time.split("");
+            var fulltime = ts[0] + ts[1] + ":" + ts[2] + ts[3];
+            document.getElementById(FieldName).value = fulltime;
+        }
+    }
+    function FormatPhone(Phone, FieldName) {
+        //Purely number input, no parenthesis, no hyphens.
+        if (Phone.length == 10 && !Phone.includes("-") && !Phone.includes("(") && !Phone.includes(")")) {
+            var ps = Phone.split("");
+            var fullphone = "(" + ps[0] + ps[1] + ps[2] + ") " + ps[3] + ps[4] + ps[5] + "-" + ps[6] + ps[7] + ps[8] + ps[9]
+            document.getElementById(FieldName).value = fullphone;
+        }
+    }
+    function ClearForm() {
+        if (confirm("Are you sure you want to cancel this report?")) {
+            location.href = "";
+        }
+    }
+    //Functions to get each states counties.
+    function GetCounties(state) {
+        $('#txtcounty').empty(); //Clears all previous options that were in the select tag.
+        $('#txtcounty').append('<option value="0"></option>')
+        if (state == "AR") { ARCounties(); };
+        if (state == "CA") { CACounties(); };
+        if (state == "LA") { LACounties(); };
+        if (state == "MT") { MTCounties(); };
+        if (state == "ND") { NDCounties(); };
+        if (state == "NM") { NMCounties(); };
+        if (state == "NY") { NYCounties(); };
+        if (state == "PA") { PACounties(); };
+        if (state == "SC") { SCCounties(); };
+        if (state == "TX") { TXCounties(); };
+        if (state == "WV") { WVCounties(); };
+        if (state == "WY") { WYCounties(); };
+    }
+    function ARCounties() {
+        var x = document.getElementById('txtcounty');
+        // Adds currently selected state's counties to the dropdown menu
+        var ARCountyList = ["Conway", "Faulkner", "Van Buren", "White"];
+        ARCountyList.forEach(function (item) {
+            var option = document.createElement("option");
+            option.value = item;
+            option.text = item;
+            x.add(option);
+        });
+    }
+    function CACounties() {
+        var x = document.getElementById('txtcounty');
+        // Adds currently selected state's counties to the dropdown menu
+        var CACountyList = ["Kern"];
+        CACountyList.forEach(function (item) {
+            var option = document.createElement("option");
+            option.value = item;
+            option.text = item;
+            x.add(option);
+        });
+    }
+    function LACounties() {
+        var x = document.getElementById("txtcounty");
+        // Adds currently selected state's counties to the dropdown menu
+        var LACountyList = ["Sabine"];
+        LACountyList.forEach(function (item) {
+            var option = document.createElement("option");
+            option.value = item;
+            option.text = item;
+            x.add(option);
+        });
+    }
+    function MTCounties() {
+        var x = document.getElementById("txtcounty");
+        // Adds currently selected state's counties to the dropdown menu
+        var MTCountyList = ["Roosevelt"];
+        MTCountyList.forEach(function (item) {
+            var option = document.createElement("option");
+            option.value = item;
+            option.text = item;
+            x.add(option);
+        });
+    }
+    function NDCounties() {
+        var x = document.getElementById("txtcounty");
+        // Adds currently selected state's counties to the dropdown menu
+        var NDCountyList = ["Dunn", "McKenzie", "Mountrail", "Williams"];
+        NDCountyList.forEach(function (item) {
+            var option = document.createElement("option");
+            option.value = item;
+            option.text = item;
+            x.add(option);
+        });
+    }
+    function NMCounties() {
+        var x = document.getElementById("txtcounty");
+        // Adds currently selected state's counties to the dropdown menu
+        var NMCountyList = ["Eddy"];
+        NMCountyList.forEach(function (item) {
+            var option = document.createElement("option");
+            option.value = item;
+            option.text = item;
+            x.add(option);
+        });
+    }
+    function NYCounties() {
+        var x = document.getElementById("txtcounty");
+        // Adds currently selected state's counties to the dropdown menu
+        var NYCountyList = ["Broome", "Chemung", "Schuyler", "Steuben", "Tioga", "Tomkins"];
+        NYCountyList.forEach(function (item) {
+            var option = document.createElement("option");
+            option.value = item;
+            option.text = item;
+            x.add(option);
+        });
+    }
+    function PACounties() {
+        var x = document.getElementById("txtcounty");
+        // Adds currently selected state's counties to the dropdown menu
+        var PACountyList = ["Bradford", "Lycoming", "Sullivan"];
+        PACountyList.forEach(function (item) {
+            var option = document.createElement("option");
+            option.value = item;
+            option.text = item;
+        });
+    }
+    function SCCounties() {
+        var x = document.getElementById("txtcounty");
+        // Adds currently selected state's counties to the dropdown menu
+        var SCCountyList = ["Chester", "Kershaw", "Lancaster", "York"];
+        SCCountyList.forEach(function (item) {
+            var option = document.createElement("option");
+            option.value = item;
+            option.text = item;
+            x.add(option);
+        });
+    }
+    function TXCounties() {
+        var x = document.getElementById("txtcounty");
+        // Adds currently selected state's counties to the dropdown menu
+        var TXCountyList = ["Culberson", "Loving", "Reeves", "Ward", "Winkler"];
+        TXCountyList.forEach(function (item) {
+            var option = document.createElement("option");
+            option.value = item;
+            option.text = item;
+            x.add(option);
+        });
+    }
+    function WVCounties() {
+        var x = document.getElementById("txtcounty");
+        // Adds currently selected state's counties to the dropdown menu
+        var WVCountyList = ["Barbour", "Doddridge", "Harrison"];
+        WVCountyList.forEach(function (item) {
+            var option = document.createElement("option");
+            option.value = item;
+            option.text = item;
+            x.add(option);
+        });
+    }
+    function WYCounties() {
+        var x = document.getElementById("txtcounty");
+        // Adds currently selected state's counties to the dropdown menu
+        var WYCountyList = ["Converse"];
+        WYCountyList.forEach(function (item) {
+            var option = document.createElement("option");
+            option.value = item;
+            option.text = item;
+            x.add(option);
+        });
+    }
+    //Get list of Phone Numbers with State/County combination
+    function ShowPhoneNumbers() {
+        $.ajax({
+            url: '/Crestwood/GetPipelinePhoneList/',
+            data: { State: $('#txtstate').val(), County: $('#txtcounty').val() },
+            type: 'GET',
+            success: function (data) {
+                if (data.PhoneList.length > 0) {
+                    alert(data.PhoneList);
+                } else {
+                    alert("There are no contacts for this State/County combination.");
+                }
+            },
+            error: function (data) {
+                alert("ERROR!");
+            }
+        });
+    }
+    //Show Pipeline Information box
+    function ShowPipelineInfo() {
+        alert("Ask the caller to remain calm\n\nAsk the caller to make sure they are a safe distance from the leak area\n\nWalk INTO the wind away from the possible hazardous fumes\n\nRemind the caller not to touch, breathe or make contact with any leaking liquids \n\nRemind caller not to do anything further that could create a spark\n\nNo smoking, matches, engines, ANY phones, switching on/off lights\n\nDo not drive into the leak area, and warn others to stay away until relieved\n\n");
+    }
+    //Auto populate the Location field when a different state is selected.
+    function GetPipelineLocations(state) {
+        var x = $('#txtlocation1');
+        if (state == "WV" || state == "NY" || state == "PA" || state == "SC") {
+            x.val("Eastern");
+        } else if (state == "TX" || state == "AR" || state == "LA" || state == "NM") {
+            x.val("Central");
+        } else if (state == "ND" || state == "CA") {
+            x.val("Western");
+        };
+    }
+    //Auto populate a list of Pipeline members names and phone numbers depending on the county selected.
+    function GetPipelineMembers(selectedcounty) {
+        $('#txtname1').empty(); //Clears all previous options that were in the select tag.
+        $('#txtname1').append('<option value=""></option>')
+        var x = document.getElementById("ERSMembers");
+        $.ajax({
+            url: '/Crestwood/GetPipelineNames/',
+            data: { state: $('#txtstate').val(), county: selectedcounty },
+            type: 'GET',
+            success: function (data) {
+                const names = data.split(',');
+                names.forEach(function (item) {
+
+                    if ("@Model.Name_1" == item) {
+                        $("#ERSMembers").append("<option value='" + item + "' selected=''>" + item + "</option>")
+                    } else {
+                        $("#ERSMembers").append("<option value='" + item + "'>" + item + "</option>")
+                    }
+                })
+
+            },
+            error: function (data) {
+                alert("ERROR!");
+            }
+        });
+    }
+    function GetPipelinePhone(ContactName) {
+        $.ajax({
+            url: '/Crestwood/SearchByContactName/',
+            data: { contactName: ContactName, contactState: $('#txtstate').val(), contactCounty: $('#txtcounty').val() },
+            type: 'GET',
+            success: function (data) {
+                $('#txtcontactnumber1').val(data);
+            },
+            error: function (data) {
+                $('#txtcontactnumber1').val($('#txtcontactnumber1').val);
+            }
+        });
+    }
+</script>

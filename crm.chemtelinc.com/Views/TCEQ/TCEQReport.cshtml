@@ -1,0 +1,312 @@
+﻿@model ChemicalLibrary.TCEQ
+@{
+    ViewData["Title"] = "TCEQ Report";
+    List<string> Counties = ViewBag.Counties;
+    string NewID = ViewBag.NewID;
+    string Revised = ViewBag.Revised;
+
+    List<SelectListItem> UnitTypes = new List<SelectListItem>();
+    UnitTypes.Add(new SelectListItem { Text = "", Value = "" });
+    UnitTypes.Add(new SelectListItem { Text = "BBL", Value = "BBL" });
+    UnitTypes.Add(new SelectListItem { Text = "CUP", Value = "CUP" });
+    UnitTypes.Add(new SelectListItem { Text = "DRP", Value = "DRP" });
+    UnitTypes.Add(new SelectListItem { Text = "GAL", Value = "GAL" });
+    UnitTypes.Add(new SelectListItem { Text = "LBS", Value = "LBS" });
+    UnitTypes.Add(new SelectListItem { Text = "LTR", Value = "LTR" });
+    UnitTypes.Add(new SelectListItem { Text = "MCF", Value = "MCF" });
+    UnitTypes.Add(new SelectListItem { Text = "OZ", Value = "OZ" });
+    UnitTypes.Add(new SelectListItem { Text = "PNT", Value = "PNT" });
+    UnitTypes.Add(new SelectListItem { Text = "QRT", Value = "QRT" });
+    UnitTypes.Add(new SelectListItem { Text = "TBS", Value = "TBS" });
+    UnitTypes.Add(new SelectListItem { Text = "TSP", Value = "TSP" });
+    UnitTypes.Add(new SelectListItem { Text = "UNK", Value = "UNK" });
+    UnitTypes.Add(new SelectListItem { Text = "YDS", Value = "YDS" });
+
+    List<SelectListItem> YesOrNo = new List<SelectListItem>();
+    YesOrNo.Add(new SelectListItem { Text = "", Value = "" });
+    YesOrNo.Add(new SelectListItem { Text = "YES", Value = "YES" });
+    YesOrNo.Add(new SelectListItem { Text = "NO", Value = "NO" });
+
+    List<SelectListItem> CountyList = new List<SelectListItem>();
+    CountyList.Add(new SelectListItem { Text = "", Value = "" });
+    foreach (string c in Counties)
+    {
+        CountyList.Add(new SelectListItem { Text = c, Value = c });
+    }
+
+    string TimeTaken = DateTime.Now.AddHours(-6).ToString("HH:mm");
+
+}
+
+<h2>TCEQ Report Input</h2>
+
+@using (Html.BeginForm("SubmitTCEQReport", "TCEQ", FormMethod.Post, new { @id = "TCEQReportForm" }))
+{
+    <div id="TCEQFormContainer">
+        <div id="FormButtons" style="padding:2%;text-align:right;">
+            @if (Revised == "true")
+            {
+                @Html.TextBoxFor(m => m.ID_TCEQ, new { type = "hidden", id = "TBIDReport", @Name = "TBIDReport" })
+            }
+            else
+            {
+                @Html.TextBoxFor(m => m.ID_TCEQ, new { type = "hidden", id = "TBIDReport", @Name = "TBIDReport", @Value= NewID })
+            }
+            <input type="button" value="Cancel" class="form-control GRCPButtons alert-info" id="btnclose" name="btnclose">
+        </div>
+        <div id="CallInfoContainer">
+            <div id="ContentSection">
+                <div class="GLOHeader" id="GRCPHeader">Caller Information</div>
+                @Html.TextBoxFor(m => m.ERS_Operator, new { @readonly = "", @class = "form-control GLOFieldSpacing", id = "TBERS", @Name = "TBERS", style = "width: 15%;text-transform:uppercase;", @Value = @Session["Username"].ToString() })
+                <span>Incident Date / Time</span>
+                @if (Revised == "true") // Use the prior reported date/time.
+                {
+                    @Html.TextBoxFor(m => m.Incident_Date, new { @class = "form-control GLOFieldSpacing", id = "DTtincidentdate", @Name = "DTtincidentdate", style = "width: 8%;", placeholder = "__/__/____", tabindex = 7, maxlength = 10 })
+                    @Html.TextBoxFor(m => m.Incident_Time, new { @class = "form-control GLOFieldSpacing", id = "TBincidenttime", @Name = "TBincidenttime", style = "width: 8%;", placeholder = "__:__", maxlength = "5", required = "", tabindex = 3 })
+                }
+                else
+                {
+                    @Html.TextBoxFor(m => m.Incident_Date, new { @class = "form-control GLOFieldSpacing", id = "DTtincidentdate", @Name = "DTtincidentdate", style = "width: 8%;", @Value = @DateTime.Now.ToShortDateString(), placeholder = "__/__/____", onblur = "FormatDate(this.value, this.id)", tabindex = 7 })
+                    @Html.TextBoxFor(m => m.Incident_Time, new { @class = "form-control GLOFieldSpacing", id = "TBincidenttime", @Name = "TBincidenttime", style = "width: 8%;", placeholder = "__:__", maxlength = "5", onblur = "FormatTime(this.value, this.id)", required = "", tabindex = 3 })
+                }
+                <span>Reported By</span>
+                @Html.TextBoxFor(m => m.Report_By, new { @class = "form-control GLOFieldSpacing", id = "TBreportedby", @Name = "TBreportedby", style = "width: 25%;text-transform:uppercase;", tabindex = 4 })
+                <br />
+                <span>Report Date / Time</span>
+                @if (Revised == "true") // Use the prior reported date/time.
+                {
+                    @Html.TextBoxFor(m => m.Report_Date, new { @class = "form-control GLOFieldSpacing", id = "DTreportdate", @Name = "DTreportdate", placeholder = "__/__/____", style = "width: 8%;", onblur = "FormatDate(this.value, this.id)", tabindex = 4, @readonly = "" })
+                    @Html.TextBoxFor(m => m.Report_Time, new { @class = "form-control GLOFieldSpacing", id = "TBRTime", @Name = "TBRTime", placeholder = "__:__", style = "width: 8%;", maxlength = "5", onblur = "FormatTime(this.value, this.id)", @required = "", tabindex = 1 })
+                }
+                else
+                {
+                    @Html.TextBoxFor(m => m.Report_Date, new { @class = "form-control GLOFieldSpacing", id = "DTreportdate", @Name = "DTreportdate", @Value = @DateTime.Now.ToShortDateString(), placeholder = "__/__/____", style = "width: 8%;", onblur = "FormatDate(this.value, this.id)", tabindex = 4, @readonly = "" })
+                    @Html.TextBoxFor(m => m.Report_Time, new { @class = "form-control GLOFieldSpacing", id = "TBRTime", @Name = "TBRTime", @Value = TimeTaken, placeholder = "__:__", style = "width: 8%;", maxlength = "5", onblur = "FormatTime(this.value, this.id)", @required = "", tabindex = 1 })
+                }
+                <span>Contact Number</span>
+                @Html.TextBoxFor(m => m.Contact_Number, new { @class = "form-control GLOFieldSpacing", id = "TBContactNumber", @Name = "TBContactNumber", style = "width: 15%;", placeholder = "(___) ___-____", onblur = "FormatPhone(this.value, this.id)", tabindex = 5 })
+                <span>Other Contact Number</span>
+                @Html.TextBoxFor(m => m.Contact_Number_2, new { @class = "form-control GLOFieldSpacing", id = "TBContactNumber2", @Name = "TBContactNumber2", style = "width: 15%;", placeholder = "(___) ___-____", onblur = "FormatPhone(this.value, this.id)", tabindex = 6 })
+            </div>
+        </div>
+        <div id="IncidentDetailsContainer">
+            <div class="ContentSection">
+                <div class="GLOHeader" id="GRCPHeader">Incident Details</div>
+                <span>Is this an emergency?</span>
+                @Html.DropDownListFor(m => m.Emergency, YesOrNo, new { @Name = "CBEmergency", @class = "GLOFieldSpacing", style = "width: 8%;", required = "", tabindex = 8 })
+                <br />
+                <span>Description of Incident</span>
+                <br />
+                @Html.TextAreaFor(m => m.Description, new { @Name = "TBDescription", id = "TBDescription", @class = "form-control", rows = "10", required = "", tabindex = 9, style = "text-transform:uppercase;" })
+                <br />
+                <div id="IncidentLocationDetails">
+                    <div id="LocationContainer" style="display:inline-block;padding-right:5%;">
+                        <span>Location of Incident</span><br />
+                        @Html.TextAreaFor(m => m.Location, new { @Name = "TBLocation", id = "TBLocation", rows = "2", cols = "80", required = "", tabindex = 10, style = "text-transform:uppercase;" })
+                    </div>
+                    <div id="CountyContainer" style="display:inline-block; vertical-align:top;">
+                        <span>County</span>
+                        <br />
+                        @Html.DropDownListFor(m => m.County, CountyList, new { style = "display:inline; vertical-align:top;", @Name = "CBCounty", id = "CBCounty", onchange = "GetRegionAndCallNumb(this.value)", required = "", tabindex = 11 })
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="ContentSection">
+                <div id="SpilledMaterials" style="text-align:center;">
+                    <div id="MaterialsSpilledInfoContainer" style="display:inline-block;">
+                        <span>Material Spilled Information</span>
+                        <br /><br />
+                        <div id="MaterialContainer" style="border-radius: 5px; border: solid black 1px; display: inline-block; padding:10px;">
+                            <div id="Materials" style="display:inline-block;">
+                                <span>Material</span>
+                                <br />
+                                @Html.TextBoxFor(m => m.Material1, new { @class = "form-control GLOFieldSpacing", id = "TBM1", @Name = "TBM1", required = "", tabindex = 12, style= "text-transform:uppercase;" })<br />
+                                @Html.TextBoxFor(m => m.Material2, new { @class = "form-control GLOFieldSpacing", id = "TBM2", @Name = "TBM2", tabindex = 16, style = "text-transform:uppercase;" })<br />
+                                @Html.TextBoxFor(m => m.Material3, new { @class = "form-control GLOFieldSpacing", id = "TBM3", @Name = "TBM3", tabindex = 20, style = "text-transform:uppercase;" })<br />
+                                @Html.TextBoxFor(m => m.Material4, new { @class = "form-control GLOFieldSpacing", id = "TBM4", @Name = "TBM4", tabindex = 24, style = "text-transform:uppercase;" })<br />
+                                @Html.TextBoxFor(m => m.Material5, new { @class = "form-control GLOFieldSpacing", id = "TBM5", @Name = "TBM5", tabindex = 28, style = "text-transform:uppercase;" })<br />
+                            </div>
+                            <div id="CASUNNUmbs" style="display:inline-block;">
+                                <span>CAS / UN Number</span>
+                                <br />
+                                @Html.TextBoxFor(m => m.CAS1, new { @class = "form-control GLOFieldSpacing", id = "TBCAS1", @Name = "TBCAS1", tabindex = 13, placeholder = "NA" })<br />
+                                @Html.TextBoxFor(m => m.CAS2, new { @class = "form-control GLOFieldSpacing", id = "TBCAS2", @Name = "TBCAS2", tabindex = 17, placeholder = "NA" })<br />
+                                @Html.TextBoxFor(m => m.CAS3, new { @class = "form-control GLOFieldSpacing", id = "TBCAS3", @Name = "TBCAS3", tabindex = 21, placeholder = "NA" })<br />
+                                @Html.TextBoxFor(m => m.CAS4, new { @class = "form-control GLOFieldSpacing", id = "TBCAS4", @Name = "TBCAS4", tabindex = 25, placeholder = "NA" })<br />
+                                @Html.TextBoxFor(m => m.CAS5, new { @class = "form-control GLOFieldSpacing", id = "TBCAS5", @Name = "TBCAS5", tabindex = 29, placeholder = "NA" })<br />
+                            </div>
+                            <div id="Amounts" style="display:inline-block;">
+                                <span>Amount Spilled</span>
+                                <br />
+                                @Html.TextBoxFor(m => m.Amount1, new { @class = "form-control GLOFieldSpacing", id = "TBAmount1", @Name = "TBAmount1", tabindex = 14 })<br />
+                                @Html.TextBoxFor(m => m.Amount2, new { @class = "form-control GLOFieldSpacing", id = "TBAmount2", @Name = "TBAmount2", tabindex = 18 })<br />
+                                @Html.TextBoxFor(m => m.Amount3, new { @class = "form-control GLOFieldSpacing", id = "TBAmount3", @Name = "TBAmount3", tabindex = 22 })<br />
+                                @Html.TextBoxFor(m => m.Amount4, new { @class = "form-control GLOFieldSpacing", id = "TBAmount4", @Name = "TBAmount4", tabindex = 26 })<br />
+                                @Html.TextBoxFor(m => m.Amount5, new { @class = "form-control GLOFieldSpacing", id = "TBAmount5", @Name = "TBAmount5", tabindex = 30 })<br />
+                            </div>
+                            <div id="Units" style="display:inline-block; vertical-align:top;">
+                                <span>Units</span>
+                                <br />
+                                @Html.DropDownListFor(m => m.Unit1, UnitTypes, new { id = "CBUnit1", @Name = "CBUnit1", @class = "GLOFieldSpacing", tabindex = 15 })
+                                <br />
+                                @Html.DropDownListFor(m => m.Unit2, UnitTypes, new { id = "CBUnit2", @Name = "CBUnit2", @class = "GLOFieldSpacing", tabindex = 19 })
+                                <br />
+                                @Html.DropDownListFor(m => m.Unit3, UnitTypes, new { id = "CBUnit3", @Name = "CBUnit3", @class = "GLOFieldSpacing", tabindex = 23 })
+                                <br />
+                                @Html.DropDownListFor(m => m.Unit4, UnitTypes, new { id = "CBUnit4", @Name = "CBUnit4", @class = "GLOFieldSpacing", tabindex = 27 })
+                                <br />
+                                @Html.DropDownListFor(m => m.Unit5, UnitTypes, new { id = "CBUnit5", @Name = "CBUnit5", @class = "GLOFieldSpacing", tabindex = 31 })
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="MediaAffectedContainer" style="display:inline-block; vertical-align:top;">
+                        <span>Media Affected</span><br /><br />
+                        <div id="MediaAffected" style="border:solid black 1px; border-radius:5px;">
+                            @if (Model != null && Model.Media_Affected != "" && Model.Media_Affected.Contains("Air")) {
+                                <input type="checkbox" value="Air" id="CHAir" name="CHAir" class="GLOFieldSpacing" tabindex="32" checked="" />
+                            } else {
+                                <input type="checkbox" value="Air" id="CHAir" name="CHAir" class="GLOFieldSpacing" tabindex="32" /> 
+                            } Air <br />
+                            @if (Model != null && Model.Media_Affected != "" && Model.Media_Affected.Contains("Water")) {
+                                <input type="checkbox" value="Water" id="CHWater" name="CHWater" class="GLOFieldSpacing" tabindex="33" checked="" />
+                            } else {
+                                <input type="checkbox" value="Water" id="CHWater" name="CHWater" class="GLOFieldSpacing" tabindex="33" /> 
+                            } Water <br />
+                            @if (Model != null && Model.Media_Affected != "" && Model.Media_Affected.Contains("Land")) {
+                                <input type="checkbox" value="Land" id="CHLand" name="CHLand" class="GLOFieldSpacing" tabindex="34" checked="" />
+                            } else {
+                                <input type="checkbox" value="Land" id="CHLand" name="CHLand" class="GLOFieldSpacing" tabindex="34" /> 
+                            } Land <br />
+                        </div>
+                    </div>
+                    <div id="WaterBodyContainer" style="display:inline-block; vertical-align:top;">
+                        <span>Water Body</span><br /><br />
+                        <div id="WaterAffected" style="border: solid black 1px; border-radius: 5px; padding:10px;">
+                            <span>Receiving Water</span>
+                            @Html.TextBoxFor(m => m.Receiving_Water, new { @class = "form-control GLOFieldSpacing", id = "TBRW", @Name = "TBRW", style = "width:60%;text-transform:uppercase;", placeholder = "N/A", tabindex = 35 })
+                            <br />
+                            <span>Amount</span>
+                            @Html.TextBoxFor(m => m.Amount_Water, new { id = "TBRWAmount", @Name = "TBRWAmount", @class="form-control GLOFieldSpacing", style="width:30%;", placeholder="0.00", tabindex=37})
+                            <br />
+                            <span>Units</span>
+                            @Html.DropDownListFor(m => m.Unit_Water, UnitTypes, new { id = "CBRWUnit", @Name = "CBRWUnit", @class="GLOFieldSpacing", style="width:30%;", tabindex=36 })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="ContentSection">
+                <div id="PartyResponsibleContainer">
+                    <span>Party Responsible</span>
+                    <br />
+                    <div id="PartyInfoFields" style="border: solid black 1px; border-radius: 5px; text-align:center;">
+                        <div id="PartyAddress" style="padding:0 10px;">
+                            <span>Company</span>
+                            @Html.TextBoxFor(m => m.PR_Company, new { @class = "form-control GLOFieldSpacing", id = "TBPRCompany", @Name = "TBPRCompany", style = "display:inline-block;width:50%;", tabindex = 38 })
+                            <br />
+                            <span>Street or PO</span>
+                            @Html.TextBoxFor(m => m.PR_Street, new { @class = "form-control GLOFieldSpacing", id = "TBPRStreet", @Name = "TBPRStreet", style = "display:inline-block;width:50%;", tabindex = 39 })
+                            <br />
+                            <span style="padding-left:10px;">Contact Person</span>
+                            @Html.TextBoxFor(m => m.PR_Contact, new { id = "TBPRContact", @Name = "TBPRContact", @class = "form-control GLOFieldSpacing", style = "display:inline-block;width:30%;", tabindex = 44 })
+                            <br />
+                            <span>City</span>
+                            @Html.TextBoxFor(m => m.PR_City, new { @class = "form-control GLOFieldSpacing", style = "width:15%", id = "TBPRCity", @Name = "TBPRCity", tabindex = 40 })
+                            <span>State</span>
+                            @Html.TextBoxFor(m => m.PR_State, new { @class = "form-control GLOFieldSpacing", style = "width:5%", id = "TBPRState", @Name = "TBPRState", tabindex = 41 })
+                            <span>Zip Code</span>
+                            @Html.TextBoxFor(m => m.PR_ZipCode, new { @class = "form-control GLOFieldSpacing", style = "width:10%", placeholder = "_____-____", id = "TBPRZipCode", @Name = "TBPRZipCode", tabindex = 42 })
+                            <span>Phone</span>
+                            @Html.TextBoxFor(m => m.PR_Phone, new { @class = "form-control GLOFieldSpacing", style = "width:15%", placeholder = "(___) ___-____", id = "TBPRPhone", @Name = "TBPRPhone", onblur = "FormatPhone(this.value, this.id)", tabindex = 45 })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="ContentSection" style="text-align:center;">
+                <span>REGION</span>
+                <input type="text" class="form-control GLOFieldSpacing" readonly="" style="width:8%;" id="TBRegion" name="TBRegion" />
+                <span>CALL TO</span>
+                <input type="text" class="form-control GLOFieldSpacing" readonly="" style="width:15%;" id="TBCallNumber" name="TBCallNumber" />
+                <span>Responder Name</span>
+                @Html.TextBoxFor(m => m.ResponderName, new { @class="form-control GLOFieldSpacing", style="width: 25%;", id="TBRName", @Name = "TBRName", @required="", tabindex=13 })
+                <span>Notification Time</span>
+                @Html.TextBoxFor(m => m.NotificationTime, new { @class="form-control GLOFieldSpacing", placeholder="__:__", maxlength="5", style="width:5%;", id="TBNTime", @Name="TBNTime", onblur="FormatTime(this.value, this.id)", required="", tabindex=47 })
+            </div>
+        </div>
+        <br />
+        <div style="text-align:center;">
+            @if (Revised == "true")
+            {
+                <input type="submit" value="Update" class="form-control GRCPButtons required-field" id="btnsubmit" name="btnsubmit" tabindex="99" onclick="SubmitReport()">
+            }
+            else
+            {
+                <input type="submit" value="Submit" class="form-control GRCPButtons required-field" id="btnsubmit" name="btnsubmit" tabindex="99" onclick="SubmitReport()">
+            }
+            <input type="button" value="Cancel" class="form-control GRCPButtons alert-info" id="btnclose" name="btnclose">
+        </div>
+    </div>
+}
+
+
+<script>
+    $(document).ready(function () {
+        if ("@Revised" == "true") {
+            var Incdate = document.getElementById("DTtincidentdate").value;
+            var Repdate = document.getElementById("DTreportdate").value;
+            Incdate = Incdate.split(' ')[0];
+            Repdate = Repdate.split(' ')[0];
+            document.getElementById("DTtincidentdate").value = Incdate;
+            document.getElementById("DTreportdate").value = Repdate;
+
+            var County = document.getElementById("CBCounty").value;
+            GetRegionAndCallNumb(County);
+        }
+    });
+    function FormatDate(Date, FieldName) {
+        //Purely number input, no slashes.
+        if (Date.length == 8 && !Date.includes("/")) {
+            var ds = Date.split("");
+            var fulldate = ds[0] + ds[1] + "/" + ds[2] + ds[3] + "/" + ds[4] + ds[5] + ds[6] + ds[7];
+            document.getElementById(FieldName).value = fulldate;
+        }
+    }
+    function FormatTime(Time, FieldName) {
+        //Purely number input, no semi-colons.
+        if (Time.length == 4 && !Time.includes(":")) {
+            var ts = Time.split("");
+            var fulltime = ts[0] + ts[1] + ":" + ts[2] + ts[3];
+            document.getElementById(FieldName).value = fulltime;
+        }
+    }
+    function FormatPhone(Phone, FieldName) {
+        //Purely number input, no parenthesis, no hyphens.
+        if (Phone.length == 10 && !Phone.includes("-") && !Phone.includes("(") && !Phone.includes(")")) {
+            var ps = Phone.split("");
+            var fullphone = "(" + ps[0] + ps[1] + ps[2] + ") " + ps[3] + ps[4] + ps[5] + "-" + ps[6] + ps[7] + ps[8] + ps[9]
+            document.getElementById(FieldName).value = fullphone;
+        }
+    }
+    function GetRegionAndCallNumb(county) {
+        $.ajax({
+            method: 'POST',
+            url: "/TCEQ/CountyChange",
+            data: { County: county },
+            success: function (data) {
+                $("#TBRegion").val(data.Region);
+                $("#TBCallNumber").val(data.CallNumber);
+            },
+            error: function (data) {
+                alert("ERROR!");
+            },
+        });
+    }
+    function SubmitReport() {
+        if (confirm("Are you sure you want to submit this report?")) {
+            return true;
+        }
+    }
+</script>

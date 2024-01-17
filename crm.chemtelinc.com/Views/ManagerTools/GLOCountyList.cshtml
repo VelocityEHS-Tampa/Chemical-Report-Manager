@@ -1,0 +1,88 @@
+﻿@model IList<ChemicalLibrary.GLOCountyList>
+@{
+    string constring = crm.chemtelinc.com.Properties.Settings.Default.chemicalConnectionString; //Class-level variable containg the connection string to the database.
+    string constringTest = crm.chemtelinc.com.Properties.Settings.Default.chemicalTestConnectionString; //Class-level variable containg the connection string to the database.
+}
+
+
+<div>
+    @using (Html.BeginForm("SearchGLOCounties", "ManagerTools"))
+    {
+        <div class="GLOHeader" id="GRCPHeader">Control Panel</div>
+        <br />
+        <div style="width: 30%; display:inline-block; text-align:center;">
+            <span>Search:</span> <input type="text" name="Search" id="Search" class="form-control GLOFieldSpacing" style="width:70%;" />
+        </div>
+        <div style="width: 40%; display: inline-block; text-align: center;">
+            <input type="radio" name="SearchType" value="County" class="GLOFieldSpacing" /> <span>County</span>
+            <input type="radio" name="SearchType" value="GLO Region" class="GLOFieldSpacing" /> <span>GLO Region</span>
+            <input type="radio" name="SearchType" value="RRC District" class="GLOFieldSpacing" /> <span>RRC District</span>
+            <input type="radio" name="SearchType" value="TCEQ" class="GLOFieldSpacing" /> <span>TCEQ</span>
+        </div>
+        <div style="width: 29%; display: inline-block; text-align: center;">
+            <input type="submit" name="SearchBtn" id="SearchBtn" value="Search" class="form-control GLOFieldSpacing" style="width:40%;" />
+            <input type="button" name="RefreshBtn" id="RefreshBtn" value="Refresh" class="form-control GLOFieldSpacing" style="width: 40%; " />
+        </div>
+    }
+</div>
+<br />
+<div class="GLOHeader" id="GRCPHeader">GLO County List</div>
+<br />
+<table cellpadding="5" cellspacing="5" style="height:1000px;">
+    <tr>
+        <th>Code</th>
+        <th>Name</th>
+        <th>GLO Voice Number</th>
+        <th>GLO Region Number</th>
+        <th>GLO Region City</th>
+        <th>GLO Beeper Number</th>
+        <th>RRC Number</th>
+        <th>RRC District Number</th>
+        <th>RRC District City</th>
+        <th>TNRCC Number</th>
+        <th>TNRCC District Number</th>
+        <th>TNRCC District City</th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr id="Row_@item.County_Code">
+            <td>@item.County_Code</td>
+            <td>@item.County_Name</td>
+            <td><input type="text" name="countyGLOVoiceNumber_@item.County_Code" id="countyGLOVoiceNumber_@item.County_Code" value="@item.County_GLO_Voice_Number" /></td>
+            <td>@item.County_GLO_Region_Number</td>
+            <td>@item.County_GLO_Region_City</td>
+            <td><input type="text" name="countyGLOBeeperNumber_@item.County_Code" id="countyGLOBeeperNumber_@item.County_Code" value="@item.County_GLO_Beeper_Number" /></td>
+            <td><input type="text" name="countyRRCNumber_@item.County_Code" id="countyRRCNumber_@item.County_Code" value="@item.County_RRC_Number" /></td>
+            <td>@item.County_RRC_District_Number</td>
+            <td>@item.County_RRC_District_City</td>
+            <td><input type="text" name="countyTNRCCNumber_@item.County_Code" id="countyTNRCCNumber_@item.County_Code" value="@item.County_TNRCC_Number" /></td>
+            <td>@item.County_TNRCC_District_Number</td>
+            <td>@item.County_TNRCC_District_City</td>
+            <td><input type="button" name="Update" id="Update" value="Update" onclick="UpdateGLOCounty(@item.County_Code)" /></td>
+        </tr>
+    }
+</table>
+
+<script>
+    function UpdateGLOCounty(code) {
+        var GLOVoice = document.getElementById('countyGLOVoiceNumber_' + code).value;
+        var GLOBeeper = document.getElementById('countyGLOBeeperNumber_' + code).value;
+        var RRCNumb = document.getElementById('countyRRCNumber_' + code).value;
+        var TNRCCNumb = document.getElementById('countyTNRCCNumber_' + code).value;
+
+        $.ajax({
+            url: '/ManagerTools/UpdateGLOCounties',
+            data: { CountyCode: code, GLOVoice: GLOVoice, GLOBeeper: GLOBeeper, RRCNumb: RRCNumb, TNRCCNumb: TNRCCNumb },
+            type: 'GET',
+            success: function (data) {
+                alert("GLO County has been successfully updated!");
+                window.location.reload();
+            },
+            error: function (data) {
+                alert("ERROR!");
+            }
+        });
+    }
+
+</script>

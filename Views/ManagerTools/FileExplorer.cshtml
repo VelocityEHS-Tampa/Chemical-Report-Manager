@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "FileExplorer";
+    ViewBag.FolderList = "";
+    ViewBag.FileList = "";
+}
+
+<h2>File Explorer</h2>
+
+<ul id="DirectoryListing">
+    <li><a href="#" onclick="GetDirectoryList('completed reports')">Completed Reports</a></li>
+    <ul id="subdirlist">
+
+        <ul id="filelist"></ul> @* Add list of files under the subdirectory*@
+    </ul>
+</ul>
+
+
+
+<script>
+    function GetDirectoryList(selectedFolder) {
+        var ul = document.getElementById("subdirlist");
+        $.ajax({
+            url: '/ManagerTools/GetDirectories/',
+            data: { path: selectedFolder },
+            type: 'GET',
+            success: function (data) {
+                const dir = data.split(',');
+                dir.forEach(function (item) {
+                    var li = document.createElement('li');
+                    li.innerHTML = "<a href='#' onclick='GetFileList('" + item + "')'>" + item + "</a>";
+                    ul.appendChild(li);
+                })
+            },
+            error: function (data) {
+                alert("ERROR!");
+            }
+        });
+    }
+    function GetFileList(selectedFolder) {
+        var ul = document.getElementById("filelist");
+        $.ajax({
+            url: '/ManagerTools/GetFiles/',
+            data: { path: selectedFolder },
+            type: 'GET',
+            success: function (data) {
+                const dir = data.split(',');
+                dir.forEach(function (item) {
+                    var li = document.createElement('li');
+                    li.innerHTML = "<a href='#'>" + item + "</a>";
+                    ul.appendChild(li);
+                })
+            },
+            error: function (data) {
+                alert("ERROR!");
+            }
+        });
+    }
+</script>

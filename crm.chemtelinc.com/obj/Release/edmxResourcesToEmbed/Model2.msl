@@ -1,0 +1,1198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="chemreporterModelStoreContainer" CdmEntityContainer="chemreporterEntities">
+    <EntitySetMapping Name="agencylists">
+      <EntityTypeMapping TypeName="chemreporterModel.agencylist">
+        <MappingFragment StoreEntitySet="agencylist">
+          <ScalarProperty Name="agencyId" ColumnName="agencyId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="atandtassociatedatas">
+      <EntityTypeMapping TypeName="chemreporterModel.atandtassociatedata">
+        <MappingFragment StoreEntitySet="atandtassociatedata">
+          <ScalarProperty Name="rptid" ColumnName="rptid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="atandtvolunteerdatas">
+      <EntityTypeMapping TypeName="chemreporterModel.atandtvolunteerdata">
+        <MappingFragment StoreEntitySet="atandtvolunteerdata">
+          <ScalarProperty Name="rptid" ColumnName="rptid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="availablespillids">
+      <EntityTypeMapping TypeName="chemreporterModel.availablespillid">
+        <MappingFragment StoreEntitySet="availablespillids">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="available" ColumnName="available" />
+          <ScalarProperty Name="usedBy" ColumnName="usedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="basfenvironmentals">
+      <EntityTypeMapping TypeName="chemreporterModel.basfenvironmental">
+        <MappingFragment StoreEntitySet="basfenvironmental">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="incidentdate" ColumnName="incidentdate" />
+          <ScalarProperty Name="incidenttime" ColumnName="incidenttime" />
+          <ScalarProperty Name="callername" ColumnName="callername" />
+          <ScalarProperty Name="callerphone" ColumnName="callerphone" />
+          <ScalarProperty Name="plantname" ColumnName="plantname" />
+          <ScalarProperty Name="materialname" ColumnName="materialname" />
+          <ScalarProperty Name="sdsonhand" ColumnName="sdsonhand" />
+          <ScalarProperty Name="contained" ColumnName="contained" />
+          <ScalarProperty Name="handlingcleanup" ColumnName="handlingcleanup" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="quantityunits" ColumnName="quantityunits" />
+          <ScalarProperty Name="releaseto" ColumnName="releaseto" />
+          <ScalarProperty Name="actions" ColumnName="actions" />
+          <ScalarProperty Name="achievereportablequantity" ColumnName="achievereportablequantity" />
+          <ScalarProperty Name="notifications" ColumnName="notifications" />
+          <ScalarProperty Name="ersoperator" ColumnName="ersoperator" />
+          <ScalarProperty Name="calldate" ColumnName="calldate" />
+          <ScalarProperty Name="calltime" ColumnName="calltime" />
+          <ScalarProperty Name="nrc" ColumnName="nrc" />
+          <ScalarProperty Name="peas" ColumnName="peas" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="basfenvironmentalids">
+      <EntityTypeMapping TypeName="chemreporterModel.basfenvironmentalid">
+        <MappingFragment StoreEntitySet="basfenvironmentalids">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="available" ColumnName="available" />
+          <ScalarProperty Name="user" ColumnName="user" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="basfinjuries">
+      <EntityTypeMapping TypeName="chemreporterModel.basfinjury">
+        <MappingFragment StoreEntitySet="basfinjury">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="incidentdate" ColumnName="incidentdate" />
+          <ScalarProperty Name="incidenttime" ColumnName="incidenttime" />
+          <ScalarProperty Name="callername" ColumnName="callername" />
+          <ScalarProperty Name="callerphone" ColumnName="callerphone" />
+          <ScalarProperty Name="plantname" ColumnName="plantname" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="injurytype" ColumnName="injurytype" />
+          <ScalarProperty Name="bodypartaffected" ColumnName="bodypartaffected" />
+          <ScalarProperty Name="escorted" ColumnName="escorted" />
+          <ScalarProperty Name="immediateactions" ColumnName="immediateactions" />
+          <ScalarProperty Name="evidencecollected" ColumnName="evidencecollected" />
+          <ScalarProperty Name="notifications" ColumnName="notifications" />
+          <ScalarProperty Name="ersoperator" ColumnName="ersoperator" />
+          <ScalarProperty Name="productname" ColumnName="productname" />
+          <ScalarProperty Name="calldate" ColumnName="calldate" />
+          <ScalarProperty Name="calltime" ColumnName="calltime" />
+          <ScalarProperty Name="nrc" ColumnName="nrc" />
+          <ScalarProperty Name="peas" ColumnName="peas" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="basfinjuryids">
+      <EntityTypeMapping TypeName="chemreporterModel.basfinjuryid">
+        <MappingFragment StoreEntitySet="basfinjuryids">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="available" ColumnName="available" />
+          <ScalarProperty Name="user" ColumnName="user" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cleanshotids">
+      <EntityTypeMapping TypeName="chemreporterModel.cleanshotid">
+        <MappingFragment StoreEntitySet="cleanshotids">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="available" ColumnName="available" />
+          <ScalarProperty Name="user" ColumnName="user" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="companyinformations">
+      <EntityTypeMapping TypeName="chemreporterModel.companyinformation">
+        <MappingFragment StoreEntitySet="companyinformation">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="crest811">
+      <EntityTypeMapping TypeName="chemreporterModel.crest811">
+        <MappingFragment StoreEntitySet="crest811">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="todaydate" ColumnName="todaydate" />
+          <ScalarProperty Name="todaytime" ColumnName="todaytime" />
+          <ScalarProperty Name="excavationdate" ColumnName="excavationdate" />
+          <ScalarProperty Name="excavationtime" ColumnName="excavationtime" />
+          <ScalarProperty Name="normaloremergency" ColumnName="normaloremergency" />
+          <ScalarProperty Name="requestticketnumber" ColumnName="requestticketnumber" />
+          <ScalarProperty Name="personcompanyname" ColumnName="personcompanyname" />
+          <ScalarProperty Name="callbacknumber" ColumnName="callbacknumber" />
+          <ScalarProperty Name="emailaddress" ColumnName="emailaddress" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="county" ColumnName="county" />
+          <ScalarProperty Name="workdate" ColumnName="workdate" />
+          <ScalarProperty Name="street" ColumnName="street" />
+          <ScalarProperty Name="intersection" ColumnName="intersection" />
+          <ScalarProperty Name="nature" ColumnName="nature" />
+          <ScalarProperty Name="remarks" ColumnName="remarks" />
+          <ScalarProperty Name="callername" ColumnName="callername" />
+          <ScalarProperty Name="callernumber" ColumnName="callernumber" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="contactnumber" ColumnName="contactnumber" />
+          <ScalarProperty Name="location" ColumnName="location" />
+          <ScalarProperty Name="FacilityName" ColumnName="FacilityName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="crestallnotifications">
+      <EntityTypeMapping TypeName="chemreporterModel.crestallnotification">
+        <MappingFragment StoreEntitySet="crestallnotifications">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="email" ColumnName="email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="crestdotincidents">
+      <EntityTypeMapping TypeName="chemreporterModel.crestdotincident">
+        <MappingFragment StoreEntitySet="crestdotincidents">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="callername" ColumnName="callername" />
+          <ScalarProperty Name="callertitle" ColumnName="callertitle" />
+          <ScalarProperty Name="calleraffiliation" ColumnName="calleraffiliation" />
+          <ScalarProperty Name="callerphonenumber" ColumnName="callerphonenumber" />
+          <ScalarProperty Name="incidentdate" ColumnName="incidentdate" />
+          <ScalarProperty Name="incidentlocation" ColumnName="incidentlocation" />
+          <ScalarProperty Name="incidentlatitude" ColumnName="incidentlatitude" />
+          <ScalarProperty Name="incidentlongitude" ColumnName="incidentlongitude" />
+          <ScalarProperty Name="incidentoccuron" ColumnName="incidentoccuron" />
+          <ScalarProperty Name="incidentnature" ColumnName="incidentnature" />
+          <ScalarProperty Name="incidentdescription" ColumnName="incidentdescription" />
+          <ScalarProperty Name="involvedname1" ColumnName="involvedname1" />
+          <ScalarProperty Name="involvedcell1" ColumnName="involvedcell1" />
+          <ScalarProperty Name="involvedinjury1" ColumnName="involvedinjury1" />
+          <ScalarProperty Name="involvedname2" ColumnName="involvedname2" />
+          <ScalarProperty Name="involvedcell2" ColumnName="involvedcell2" />
+          <ScalarProperty Name="involvedinjury2" ColumnName="involvedinjury2" />
+          <ScalarProperty Name="involvedname3" ColumnName="involvedname3" />
+          <ScalarProperty Name="involvedcell3" ColumnName="involvedcell3" />
+          <ScalarProperty Name="involvedinjury3" ColumnName="involvedinjury3" />
+          <ScalarProperty Name="weatherconditions" ColumnName="weatherconditions" />
+          <ScalarProperty Name="impactedareas" ColumnName="impactedareas" />
+          <ScalarProperty Name="impactedbodyofwater" ColumnName="impactedbodyofwater" />
+          <ScalarProperty Name="reporttakername" ColumnName="reporttakername" />
+          <ScalarProperty Name="reporttakeremail" ColumnName="reporttakeremail" />
+          <ScalarProperty Name="ersname1" ColumnName="ersname1" />
+          <ScalarProperty Name="erscontactnumber1" ColumnName="erscontactnumber1" />
+          <ScalarProperty Name="erslocation1" ColumnName="erslocation1" />
+          <ScalarProperty Name="ersname2" ColumnName="ersname2" />
+          <ScalarProperty Name="erscontactnumber2" ColumnName="erscontactnumber2" />
+          <ScalarProperty Name="erslocation2" ColumnName="erslocation2" />
+          <ScalarProperty Name="ersname3" ColumnName="ersname3" />
+          <ScalarProperty Name="erscontactnumber3" ColumnName="erscontactnumber3" />
+          <ScalarProperty Name="erslocation3" ColumnName="erslocation3" />
+          <ScalarProperty Name="dispatcheroremployee" ColumnName="dispatcheroremployee" />
+          <ScalarProperty Name="contractororemployee" ColumnName="contractororemployee" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cresters">
+      <EntityTypeMapping TypeName="chemreporterModel.crester">
+        <MappingFragment StoreEntitySet="cresters">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="startdate" ColumnName="startdate" />
+          <ScalarProperty Name="enddate" ColumnName="enddate" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="location" ColumnName="location" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="crestgeneralincidents">
+      <EntityTypeMapping TypeName="chemreporterModel.crestgeneralincident">
+        <MappingFragment StoreEntitySet="crestgeneralincidents">
+          <ScalarProperty Name="PrimaryWorkLocation" ColumnName="PrimaryWorkLocation" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="callername" ColumnName="callername" />
+          <ScalarProperty Name="callertitle" ColumnName="callertitle" />
+          <ScalarProperty Name="calleraffiliation" ColumnName="calleraffiliation" />
+          <ScalarProperty Name="callerphonenumber" ColumnName="callerphonenumber" />
+          <ScalarProperty Name="incidentdate" ColumnName="incidentdate" />
+          <ScalarProperty Name="incidentlocation" ColumnName="incidentlocation" />
+          <ScalarProperty Name="incidentlatitude" ColumnName="incidentlatitude" />
+          <ScalarProperty Name="incidentlongitude" ColumnName="incidentlongitude" />
+          <ScalarProperty Name="incidentoccuron" ColumnName="incidentoccuron" />
+          <ScalarProperty Name="incidentnature" ColumnName="incidentnature" />
+          <ScalarProperty Name="incidentdescription" ColumnName="incidentdescription" />
+          <ScalarProperty Name="involvedname1" ColumnName="involvedname1" />
+          <ScalarProperty Name="involvedcell1" ColumnName="involvedcell1" />
+          <ScalarProperty Name="involvedinjury1" ColumnName="involvedinjury1" />
+          <ScalarProperty Name="involvedname2" ColumnName="involvedname2" />
+          <ScalarProperty Name="involvedcell2" ColumnName="involvedcell2" />
+          <ScalarProperty Name="involvedinjury2" ColumnName="involvedinjury2" />
+          <ScalarProperty Name="involvedname3" ColumnName="involvedname3" />
+          <ScalarProperty Name="involvedcell3" ColumnName="involvedcell3" />
+          <ScalarProperty Name="involvedinjury3" ColumnName="involvedinjury3" />
+          <ScalarProperty Name="weatherconditions" ColumnName="weatherconditions" />
+          <ScalarProperty Name="impactedareas" ColumnName="impactedareas" />
+          <ScalarProperty Name="impactedbodyofwater" ColumnName="impactedbodyofwater" />
+          <ScalarProperty Name="reporttakername" ColumnName="reporttakername" />
+          <ScalarProperty Name="reporttakeremail" ColumnName="reporttakeremail" />
+          <ScalarProperty Name="ersname1" ColumnName="ersname1" />
+          <ScalarProperty Name="erscontactnumber1" ColumnName="erscontactnumber1" />
+          <ScalarProperty Name="erslocation1" ColumnName="erslocation1" />
+          <ScalarProperty Name="ersname2" ColumnName="ersname2" />
+          <ScalarProperty Name="erscontactnumber2" ColumnName="erscontactnumber2" />
+          <ScalarProperty Name="erslocation2" ColumnName="erslocation2" />
+          <ScalarProperty Name="ersname3" ColumnName="ersname3" />
+          <ScalarProperty Name="erscontactnumber3" ColumnName="erscontactnumber3" />
+          <ScalarProperty Name="erslocation3" ColumnName="erslocation3" />
+          <ScalarProperty Name="incidentprivaterow" ColumnName="incidentprivaterow" />
+          <ScalarProperty Name="incidenttriballand" ColumnName="incidenttriballand" />
+          <ScalarProperty Name="incidentblmland" ColumnName="incidentblmland" />
+          <ScalarProperty Name="incidentstateland" ColumnName="incidentstateland" />
+          <ScalarProperty Name="incidentaddress" ColumnName="incidentaddress" />
+          <ScalarProperty Name="incidentcity" ColumnName="incidentcity" />
+          <ScalarProperty Name="incidentstate" ColumnName="incidentstate" />
+          <ScalarProperty Name="incidentcounty" ColumnName="incidentcounty" />
+          <ScalarProperty Name="incidentintersection" ColumnName="incidentintersection" />
+          <ScalarProperty Name="incidentfacilityname" ColumnName="incidentfacilityname" />
+          <ScalarProperty Name="fireorexplosion" ColumnName="fireorexplosion" />
+          <ScalarProperty Name="pipelinestrike" ColumnName="pipelinestrike" />
+          <ScalarProperty Name="injury" ColumnName="injury" />
+          <ScalarProperty Name="illnessorexposure" ColumnName="illnessorexposure" />
+          <ScalarProperty Name="vehicleaccident" ColumnName="vehicleaccident" />
+          <ScalarProperty Name="spillorrelease" ColumnName="spillorrelease" />
+          <ScalarProperty Name="theft" ColumnName="theft" />
+          <ScalarProperty Name="agencyinspectionofvisit" ColumnName="agencyinspectionofvisit" />
+          <ScalarProperty Name="propertydamage" ColumnName="propertydamage" />
+          <ScalarProperty Name="potentialhazardornearmiss" ColumnName="potentialhazardornearmiss" />
+          <ScalarProperty Name="landownercomplaint" ColumnName="landownercomplaint" />
+          <ScalarProperty Name="impactstowater" ColumnName="impactstowater" />
+          <ScalarProperty Name="dispatcheroremployee" ColumnName="dispatcheroremployee" />
+          <ScalarProperty Name="contractororemployee" ColumnName="contractororemployee" />
+          <ScalarProperty Name="notify911" ColumnName="notify911" />
+          <ScalarProperty Name="immediatesupport" ColumnName="immediatesupport" />
+          <ScalarProperty Name="transporttohospital" ColumnName="transporttohospital" />
+          <ScalarProperty Name="emergencyresponders" ColumnName="emergencyresponders" />
+          <ScalarProperty Name="fatalities" ColumnName="fatalities" />
+          <ScalarProperty Name="mediaonscene" ColumnName="mediaonscene" />
+          <ScalarProperty Name="landowner" ColumnName="landowner" />
+          <ScalarProperty Name="incidenttime" ColumnName="incidenttime" />
+          <ScalarProperty Name="incidenttimezone" ColumnName="incidenttimezone" />
+          <ScalarProperty Name="calleremail" ColumnName="calleremail" />
+          <ScalarProperty Name="calldate" ColumnName="calldate" />
+          <ScalarProperty Name="calltime" ColumnName="calltime" />
+          <ScalarProperty Name="other" ColumnName="other" />
+          <ScalarProperty Name="ersoperator" ColumnName="ersoperator" />
+          <ScalarProperty Name="equipmentorpeople" ColumnName="equipmentorpeople" />
+          <ScalarProperty Name="numinjuries1" ColumnName="numinjuries1" />
+          <ScalarProperty Name="numinjuries2" ColumnName="numinjuries2" />
+          <ScalarProperty Name="numinjuries3" ColumnName="numinjuries3" />
+          <ScalarProperty Name="none" ColumnName="none" />
+          <ScalarProperty Name="unknown" ColumnName="unknown" />
+          <ScalarProperty Name="tractortrailer" ColumnName="tractortrailer" />
+          <ScalarProperty Name="equipment" ColumnName="equipment" />
+          <ScalarProperty Name="dispatcheremployee" ColumnName="dispatcheremployee" />
+          <ScalarProperty Name="initials" ColumnName="initials" />
+          <ScalarProperty Name="county" ColumnName="county" />
+          <ScalarProperty Name="drill" ColumnName="drill" />
+          <ScalarProperty Name="Incident_Contractor_Or_Employee" ColumnName="Incident_Contractor_Or_Employee" />
+          <ScalarProperty Name="IndividualSafety" ColumnName="IndividualSafety" />
+          <ScalarProperty Name="WeaponReported" ColumnName="WeaponReported" />
+          <ScalarProperty Name="WeaponType" ColumnName="WeaponType" />
+          <ScalarProperty Name="wpviolence" ColumnName="wpviolence" />
+          <ScalarProperty Name="FacilityOrProject" ColumnName="FacilityOrProject" />
+          <ScalarProperty Name="RegionOrFacility" ColumnName="RegionOrFacility" />
+          <ScalarProperty Name="ContractorName" ColumnName="ContractorName" />
+          <ScalarProperty Name="FacilityOrProjectSelection" ColumnName="FacilityOrProjectSelection" />
+          <ScalarProperty Name="OccuredOnPipeline" ColumnName="OccuredOnPipeline" />
+          <ScalarProperty Name="NotificationDate" ColumnName="NotificationDate" />
+          <ScalarProperty Name="NotificationTime" ColumnName="NotificationTime" />
+          <ScalarProperty Name="PC_CWLocOrTransport" ColumnName="PC_CWLocOrTransport" />
+          <ScalarProperty Name="SusAct" ColumnName="SusAct" />
+          <ScalarProperty Name="SpillOrReleaseIntoAtmo" ColumnName="SpillOrReleaseIntoAtmo" />
+          <ScalarProperty Name="MaterialSpilled" ColumnName="MaterialSpilled" />
+          <ScalarProperty Name="WaterbodiesImpacted" ColumnName="WaterbodiesImpacted" />
+          <ScalarProperty Name="ContainedOnSite" ColumnName="ContainedOnSite" />
+          <ScalarProperty Name="SpillContainedSecondary" ColumnName="SpillContainedSecondary" />
+          <ScalarProperty Name="ControlDevices" ColumnName="ControlDevices" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cresthighprofileincidents">
+      <EntityTypeMapping TypeName="chemreporterModel.cresthighprofileincident">
+        <MappingFragment StoreEntitySet="cresthighprofileincidents">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="callername" ColumnName="callername" />
+          <ScalarProperty Name="callertitle" ColumnName="callertitle" />
+          <ScalarProperty Name="calleraffiliation" ColumnName="calleraffiliation" />
+          <ScalarProperty Name="callerphonenumber" ColumnName="callerphonenumber" />
+          <ScalarProperty Name="incidentdate" ColumnName="incidentdate" />
+          <ScalarProperty Name="incidentlocation" ColumnName="incidentlocation" />
+          <ScalarProperty Name="incidentlatitude" ColumnName="incidentlatitude" />
+          <ScalarProperty Name="incidentlongitude" ColumnName="incidentlongitude" />
+          <ScalarProperty Name="incidentoccuron" ColumnName="incidentoccuron" />
+          <ScalarProperty Name="incidentnature" ColumnName="incidentnature" />
+          <ScalarProperty Name="incidentdescription" ColumnName="incidentdescription" />
+          <ScalarProperty Name="involvedname1" ColumnName="involvedname1" />
+          <ScalarProperty Name="involvedcell1" ColumnName="involvedcell1" />
+          <ScalarProperty Name="involvedinjury1" ColumnName="involvedinjury1" />
+          <ScalarProperty Name="involvedname2" ColumnName="involvedname2" />
+          <ScalarProperty Name="involvedcell2" ColumnName="involvedcell2" />
+          <ScalarProperty Name="involvedinjury2" ColumnName="involvedinjury2" />
+          <ScalarProperty Name="involvedname3" ColumnName="involvedname3" />
+          <ScalarProperty Name="involvedcell3" ColumnName="involvedcell3" />
+          <ScalarProperty Name="involvedinjury3" ColumnName="involvedinjury3" />
+          <ScalarProperty Name="weatherconditions" ColumnName="weatherconditions" />
+          <ScalarProperty Name="impactedareas" ColumnName="impactedareas" />
+          <ScalarProperty Name="impactedbodyofwater" ColumnName="impactedbodyofwater" />
+          <ScalarProperty Name="reporttakername" ColumnName="reporttakername" />
+          <ScalarProperty Name="reporttakeremail" ColumnName="reporttakeremail" />
+          <ScalarProperty Name="ersname1" ColumnName="ersname1" />
+          <ScalarProperty Name="erscontactnumber1" ColumnName="erscontactnumber1" />
+          <ScalarProperty Name="erslocation1" ColumnName="erslocation1" />
+          <ScalarProperty Name="ersname2" ColumnName="ersname2" />
+          <ScalarProperty Name="erscontactnumber2" ColumnName="erscontactnumber2" />
+          <ScalarProperty Name="erslocation2" ColumnName="erslocation2" />
+          <ScalarProperty Name="ersname3" ColumnName="ersname3" />
+          <ScalarProperty Name="erscontactnumber3" ColumnName="erscontactnumber3" />
+          <ScalarProperty Name="erslocation3" ColumnName="erslocation3" />
+          <ScalarProperty Name="notify911" ColumnName="notify911" />
+          <ScalarProperty Name="immediatesupport" ColumnName="immediatesupport" />
+          <ScalarProperty Name="transportedtohospital" ColumnName="transportedtohospital" />
+          <ScalarProperty Name="emergencyresponders" ColumnName="emergencyresponders" />
+          <ScalarProperty Name="fatalities" ColumnName="fatalities" />
+          <ScalarProperty Name="mediaonscene" ColumnName="mediaonscene" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="crestmonthlyreports">
+      <EntityTypeMapping TypeName="chemreporterModel.crestmonthlyreport">
+        <MappingFragment StoreEntitySet="crestmonthlyreport">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="incidentdate" ColumnName="incidentdate" />
+          <ScalarProperty Name="incidenttype" ColumnName="incidenttype" />
+          <ScalarProperty Name="incidentlocation" ColumnName="incidentlocation" />
+          <ScalarProperty Name="incidentdescription" ColumnName="incidentdescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="crestpipelinemembers">
+      <EntityTypeMapping TypeName="chemreporterModel.crestpipelinemember">
+        <MappingFragment StoreEntitySet="crestpipelinemembers">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="operatorname" ColumnName="operatorname" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="county" ColumnName="county" />
+          <ScalarProperty Name="contactname" ColumnName="contactname" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="contact" ColumnName="contact" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="crestpiplineincidents">
+      <EntityTypeMapping TypeName="chemreporterModel.crestpiplineincident">
+        <MappingFragment StoreEntitySet="crestpiplineincidents">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="county" ColumnName="county" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="distancefromtown" ColumnName="distancefromtown" />
+          <ScalarProperty Name="distancefromlandmark" ColumnName="distancefromlandmark" />
+          <ScalarProperty Name="intersectionormilemarker" ColumnName="intersectionormilemarker" />
+          <ScalarProperty Name="observing" ColumnName="observing" />
+          <ScalarProperty Name="seeinghearingsmelling" ColumnName="seeinghearingsmelling" />
+          <ScalarProperty Name="roworwellpad" ColumnName="roworwellpad" />
+          <ScalarProperty Name="tanks" ColumnName="tanks" />
+          <ScalarProperty Name="landowner" ColumnName="landowner" />
+          <ScalarProperty Name="callername" ColumnName="callername" />
+          <ScalarProperty Name="callerphone" ColumnName="callerphone" />
+          <ScalarProperty Name="notify911" ColumnName="notify911" />
+          <ScalarProperty Name="anyoneinjured" ColumnName="anyoneinjured" />
+          <ScalarProperty Name="immediatedanger" ColumnName="immediatedanger" />
+          <ScalarProperty Name="temp" ColumnName="temp" />
+          <ScalarProperty Name="windspeed" ColumnName="windspeed" />
+          <ScalarProperty Name="winddirection" ColumnName="winddirection" />
+          <ScalarProperty Name="weatherconditions" ColumnName="weatherconditions" />
+          <ScalarProperty Name="relationtoincident" ColumnName="relationtoincident" />
+          <ScalarProperty Name="safelywarn" ColumnName="safelywarn" />
+          <ScalarProperty Name="name1" ColumnName="name1" />
+          <ScalarProperty Name="name2" ColumnName="name2" />
+          <ScalarProperty Name="name3" ColumnName="name3" />
+          <ScalarProperty Name="contactnumber1" ColumnName="contactnumber1" />
+          <ScalarProperty Name="contactnumber2" ColumnName="contactnumber2" />
+          <ScalarProperty Name="contactnumber3" ColumnName="contactnumber3" />
+          <ScalarProperty Name="location1" ColumnName="location1" />
+          <ScalarProperty Name="location2" ColumnName="location2" />
+          <ScalarProperty Name="location3" ColumnName="location3" />
+          <ScalarProperty Name="leasewellname" ColumnName="leasewellname" />
+          <ScalarProperty Name="blackorwhitesmoke" ColumnName="blackorwhitesmoke" />
+          <ScalarProperty Name="flames" ColumnName="flames" />
+          <ScalarProperty Name="hissing" ColumnName="hissing" />
+          <ScalarProperty Name="liquid" ColumnName="liquid" />
+          <ScalarProperty Name="oilysheen" ColumnName="oilysheen" />
+          <ScalarProperty Name="otherpipelinemarkers" ColumnName="otherpipelinemarkers" />
+          <ScalarProperty Name="rotteneggodor" ColumnName="rotteneggodor" />
+          <ScalarProperty Name="vaporormist" ColumnName="vaporormist" />
+          <ScalarProperty Name="directions" ColumnName="directions" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="time" ColumnName="time" />
+          <ScalarProperty Name="timezone" ColumnName="timezone" />
+          <ScalarProperty Name="numofinjuries" ColumnName="numofinjuries" />
+          <ScalarProperty Name="reporttakername" ColumnName="reporttakername" />
+          <ScalarProperty Name="reporttakeremail" ColumnName="reporttakeremail" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="calleremail" ColumnName="calleremail" />
+          <ScalarProperty Name="callertitle" ColumnName="callertitle" />
+          <ScalarProperty Name="calleraffiliation" ColumnName="calleraffiliation" />
+          <ScalarProperty Name="name4" ColumnName="name4" />
+          <ScalarProperty Name="name5" ColumnName="name5" />
+          <ScalarProperty Name="contactnumber4" ColumnName="contactnumber4" />
+          <ScalarProperty Name="contactnumber5" ColumnName="contactnumber5" />
+          <ScalarProperty Name="location4" ColumnName="location4" />
+          <ScalarProperty Name="location5" ColumnName="location5" />
+          <ScalarProperty Name="calldate" ColumnName="calldate" />
+          <ScalarProperty Name="calltime" ColumnName="calltime" />
+          <ScalarProperty Name="ersoperator" ColumnName="ersoperator" />
+          <ScalarProperty Name="initials" ColumnName="initials" />
+          <ScalarProperty Name="NotificationDate" ColumnName="NotificationDate" />
+          <ScalarProperty Name="NotificationTime" ColumnName="NotificationTime" />
+          <ScalarProperty Name="Drill" ColumnName="Drill" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="crestwoodtransportationlists">
+      <EntityTypeMapping TypeName="chemreporterModel.crestwoodtransportationlist">
+        <MappingFragment StoreEntitySet="crestwoodtransportationlist">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="Indiana" ColumnName="Indiana" />
+          <ScalarProperty Name="NewJersey" ColumnName="NewJersey" />
+          <ScalarProperty Name="WestVirginia" ColumnName="WestVirginia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="generalincidentedits">
+      <EntityTypeMapping TypeName="chemreporterModel.generalincidentedit">
+        <MappingFragment StoreEntitySet="generalincidentedits">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="editdate" ColumnName="editdate" />
+          <ScalarProperty Name="numberofedits" ColumnName="numberofedits" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="generalincidentids">
+      <EntityTypeMapping TypeName="chemreporterModel.generalincidentid">
+        <MappingFragment StoreEntitySet="generalincidentids">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="available" ColumnName="available" />
+          <ScalarProperty Name="user" ColumnName="user" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="generalincidentreportdatas">
+      <EntityTypeMapping TypeName="chemreporterModel.generalincidentreportdata">
+        <MappingFragment StoreEntitySet="generalincidentreportdata">
+          <ScalarProperty Name="IncidentId" ColumnName="IncidentId" />
+          <ScalarProperty Name="ErsOperator" ColumnName="ErsOperator" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="CallersName" ColumnName="CallersName" />
+          <ScalarProperty Name="CallersPhone" ColumnName="CallersPhone" />
+          <ScalarProperty Name="CallersAffiliation" ColumnName="CallersAffiliation" />
+          <ScalarProperty Name="CallersFaxOrEmail" ColumnName="CallersFaxOrEmail" />
+          <ScalarProperty Name="IncidentStreet" ColumnName="IncidentStreet" />
+          <ScalarProperty Name="IncidentCity" ColumnName="IncidentCity" />
+          <ScalarProperty Name="IncidentState" ColumnName="IncidentState" />
+          <ScalarProperty Name="IncidentCountry" ColumnName="IncidentCountry" />
+          <ScalarProperty Name="IncidentDate" ColumnName="IncidentDate" />
+          <ScalarProperty Name="IncidentTime" ColumnName="IncidentTime" />
+          <ScalarProperty Name="IncidentTimeZone" ColumnName="IncidentTimeZone" />
+          <ScalarProperty Name="MaterialName" ColumnName="MaterialName" />
+          <ScalarProperty Name="ProductNumber" ColumnName="ProductNumber" />
+          <ScalarProperty Name="QuantitySpilled" ColumnName="QuantitySpilled" />
+          <ScalarProperty Name="CleanUpCrewReqs" ColumnName="CleanUpCrewReqs" />
+          <ScalarProperty Name="AgenciesOnSite" ColumnName="AgenciesOnSite" />
+          <ScalarProperty Name="AccidentOrDeliberate" ColumnName="AccidentOrDeliberate" />
+          <ScalarProperty Name="IncidentDetails" ColumnName="IncidentDetails" />
+          <ScalarProperty Name="InvolveFire" ColumnName="InvolveFire" />
+          <ScalarProperty Name="WhereDidYouGetOurNumber" ColumnName="WhereDidYouGetOurNumber" />
+          <ScalarProperty Name="SubscribersName" ColumnName="SubscribersName" />
+          <ScalarProperty Name="SubscriberMIS" ColumnName="SubscriberMIS" />
+          <ScalarProperty Name="SpillOrExposure" ColumnName="SpillOrExposure" />
+          <ScalarProperty Name="TypeOfExposure" ColumnName="TypeOfExposure" />
+          <ScalarProperty Name="NumOfCasualties" ColumnName="NumOfCasualties" />
+          <ScalarProperty Name="NumOfInjuries" ColumnName="NumOfInjuries" />
+          <ScalarProperty Name="MedPersonnelName" ColumnName="MedPersonnelName" />
+          <ScalarProperty Name="PatientName" ColumnName="PatientName" />
+          <ScalarProperty Name="PatientCondition" ColumnName="PatientCondition" />
+          <ScalarProperty Name="HospitalClinicLocation" ColumnName="HospitalClinicLocation" />
+          <ScalarProperty Name="EpaRegNo" ColumnName="EpaRegNo" />
+          <ScalarProperty Name="StatusOfRelease" ColumnName="StatusOfRelease" />
+          <ScalarProperty Name="DispersionOfMsdsInfo" ColumnName="DispersionOfMsdsInfo" />
+          <ScalarProperty Name="ReviewedBy" ColumnName="ReviewedBy" />
+          <ScalarProperty Name="ReviewedDate" ColumnName="ReviewedDate" />
+          <ScalarProperty Name="SentDate" ColumnName="SentDate" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="DateChanged" ColumnName="DateChanged" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="IncidentZipCode" ColumnName="IncidentZipCode" />
+          <ScalarProperty Name="ReportType" ColumnName="ReportType" />
+          <ScalarProperty Name="CallersPhoneExt" ColumnName="CallersPhoneExt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="globasereportdatas">
+      <EntityTypeMapping TypeName="chemreporterModel.globasereportdata">
+        <MappingFragment StoreEntitySet="globasereportdata">
+          <ScalarProperty Name="cntSpillId" ColumnName="cntSpillId" />
+          <ScalarProperty Name="fDrill" ColumnName="fDrill" />
+          <ScalarProperty Name="txtDrillTxt" ColumnName="txtDrillTxt" />
+          <ScalarProperty Name="txtReportTakenBy" ColumnName="txtReportTakenBy" />
+          <ScalarProperty Name="txtReportPartyAffiliation" ColumnName="txtReportPartyAffiliation" />
+          <ScalarProperty Name="datReportTakenDate" ColumnName="datReportTakenDate" />
+          <ScalarProperty Name="datReportTakenTime" ColumnName="datReportTakenTime" />
+          <ScalarProperty Name="txtNotificationAgency" ColumnName="txtNotificationAgency" />
+          <ScalarProperty Name="txtDischargeReportedBy" ColumnName="txtDischargeReportedBy" />
+          <ScalarProperty Name="txtDischargedPhone1" ColumnName="txtDischargedPhone1" />
+          <ScalarProperty Name="txtDischargedPhone2" ColumnName="txtDischargedPhone2" />
+          <ScalarProperty Name="datDischargeDate" ColumnName="datDischargeDate" />
+          <ScalarProperty Name="datDischargeTime" ColumnName="datDischargeTime" />
+          <ScalarProperty Name="txtMaterial1" ColumnName="txtMaterial1" />
+          <ScalarProperty Name="dblCASUN1" ColumnName="dblCASUN1" />
+          <ScalarProperty Name="dblAmtSpilled1" ColumnName="dblAmtSpilled1" />
+          <ScalarProperty Name="txtUnitRecovered1" ColumnName="txtUnitRecovered1" />
+          <ScalarProperty Name="txtMaterial2" ColumnName="txtMaterial2" />
+          <ScalarProperty Name="dblCASUN2" ColumnName="dblCASUN2" />
+          <ScalarProperty Name="dblAmtSpilled2" ColumnName="dblAmtSpilled2" />
+          <ScalarProperty Name="txtUnitRecovered2" ColumnName="txtUnitRecovered2" />
+          <ScalarProperty Name="txtMaterial3" ColumnName="txtMaterial3" />
+          <ScalarProperty Name="dblCASUN3" ColumnName="dblCASUN3" />
+          <ScalarProperty Name="dblAmtSpilled3" ColumnName="dblAmtSpilled3" />
+          <ScalarProperty Name="txtUnitRecovered3" ColumnName="txtUnitRecovered3" />
+          <ScalarProperty Name="txtMaterial4" ColumnName="txtMaterial4" />
+          <ScalarProperty Name="dblCASUN4" ColumnName="dblCASUN4" />
+          <ScalarProperty Name="dblAmtSpilled4" ColumnName="dblAmtSpilled4" />
+          <ScalarProperty Name="txtUnitRecovered4" ColumnName="txtUnitRecovered4" />
+          <ScalarProperty Name="txtMaterial5" ColumnName="txtMaterial5" />
+          <ScalarProperty Name="dblCASUN5" ColumnName="dblCASUN5" />
+          <ScalarProperty Name="dblAmtSpilled5" ColumnName="dblAmtSpilled5" />
+          <ScalarProperty Name="txtUnitRecovered5" ColumnName="txtUnitRecovered5" />
+          <ScalarProperty Name="wSpillCounty" ColumnName="wSpillCounty" />
+          <ScalarProperty Name="wOrigin" ColumnName="wOrigin" />
+          <ScalarProperty Name="fSpillInWater" ColumnName="fSpillInWater" />
+          <ScalarProperty Name="fSpillAirRelease" ColumnName="fSpillAirRelease" />
+          <ScalarProperty Name="fCoastalWater" ColumnName="fCoastalWater" />
+          <ScalarProperty Name="fLand" ColumnName="fLand" />
+          <ScalarProperty Name="txtSpillReceivingWater" ColumnName="txtSpillReceivingWater" />
+          <ScalarProperty Name="dblSpillAmountInWater" ColumnName="dblSpillAmountInWater" />
+          <ScalarProperty Name="txtSpillAmountInWaterUnits" ColumnName="txtSpillAmountInWaterUnits" />
+          <ScalarProperty Name="memSpillLocation" ColumnName="memSpillLocation" />
+          <ScalarProperty Name="dblRRCLeaseNumber" ColumnName="dblRRCLeaseNumber" />
+          <ScalarProperty Name="txtRRCLeaseName" ColumnName="txtRRCLeaseName" />
+          <ScalarProperty Name="txtRRCFieldName" ColumnName="txtRRCFieldName" />
+          <ScalarProperty Name="txtLandOwner" ColumnName="txtLandOwner" />
+          <ScalarProperty Name="memActionsTakenCleanUpStatus" ColumnName="memActionsTakenCleanUpStatus" />
+          <ScalarProperty Name="txtNRCNumber" ColumnName="txtNRCNumber" />
+          <ScalarProperty Name="txtAgencyName1" ColumnName="txtAgencyName1" />
+          <ScalarProperty Name="txtAgencyName2" ColumnName="txtAgencyName2" />
+          <ScalarProperty Name="txtAgencyName3" ColumnName="txtAgencyName3" />
+          <ScalarProperty Name="datDate1" ColumnName="datDate1" />
+          <ScalarProperty Name="datDate2" ColumnName="datDate2" />
+          <ScalarProperty Name="datDate3" ColumnName="datDate3" />
+          <ScalarProperty Name="txtWhere1" ColumnName="txtWhere1" />
+          <ScalarProperty Name="txtWhere2" ColumnName="txtWhere2" />
+          <ScalarProperty Name="txtWhere3" ColumnName="txtWhere3" />
+          <ScalarProperty Name="txtWho1" ColumnName="txtWho1" />
+          <ScalarProperty Name="txtWho2" ColumnName="txtWho2" />
+          <ScalarProperty Name="txtWho3" ColumnName="txtWho3" />
+          <ScalarProperty Name="datTime1" ColumnName="datTime1" />
+          <ScalarProperty Name="datTime2" ColumnName="datTime2" />
+          <ScalarProperty Name="datTime3" ColumnName="datTime3" />
+          <ScalarProperty Name="txtSpiller" ColumnName="txtSpiller" />
+          <ScalarProperty Name="txtSpillerAddress" ColumnName="txtSpillerAddress" />
+          <ScalarProperty Name="txtSpillerCity" ColumnName="txtSpillerCity" />
+          <ScalarProperty Name="txtSpillerState" ColumnName="txtSpillerState" />
+          <ScalarProperty Name="txtSpillerZipCode" ColumnName="txtSpillerZipCode" />
+          <ScalarProperty Name="txtSpillerContact" ColumnName="txtSpillerContact" />
+          <ScalarProperty Name="txtSpillerContactPhone" ColumnName="txtSpillerContactPhone" />
+          <ScalarProperty Name="memComments" ColumnName="memComments" />
+          <ScalarProperty Name="txtAgcyName1" ColumnName="txtAgcyName1" />
+          <ScalarProperty Name="txtAgcyName2" ColumnName="txtAgcyName2" />
+          <ScalarProperty Name="txtAgcyName3" ColumnName="txtAgcyName3" />
+          <ScalarProperty Name="datD1" ColumnName="datD1" />
+          <ScalarProperty Name="datD2" ColumnName="datD2" />
+          <ScalarProperty Name="datD3" ColumnName="datD3" />
+          <ScalarProperty Name="txtWhr1" ColumnName="txtWhr1" />
+          <ScalarProperty Name="txtWhr2" ColumnName="txtWhr2" />
+          <ScalarProperty Name="txtWhr3" ColumnName="txtWhr3" />
+          <ScalarProperty Name="txtW1" ColumnName="txtW1" />
+          <ScalarProperty Name="txtW2" ColumnName="txtW2" />
+          <ScalarProperty Name="txtW3" ColumnName="txtW3" />
+          <ScalarProperty Name="datTi1" ColumnName="datTi1" />
+          <ScalarProperty Name="datTi2" ColumnName="datTi2" />
+          <ScalarProperty Name="datTi3" ColumnName="datTi3" />
+          <ScalarProperty Name="txtLastField" ColumnName="txtLastField" />
+          <ScalarProperty Name="DateSearch" ColumnName="DateSearch" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="glocountylists">
+      <EntityTypeMapping TypeName="chemreporterModel.glocountylist">
+        <MappingFragment StoreEntitySet="glocountylist">
+          <ScalarProperty Name="countyCode" ColumnName="countyCode" />
+          <ScalarProperty Name="countyName" ColumnName="countyName" />
+          <ScalarProperty Name="countyGLOVoiceNumber" ColumnName="countyGLOVoiceNumber" />
+          <ScalarProperty Name="countyGLORegionNumber" ColumnName="countyGLORegionNumber" />
+          <ScalarProperty Name="countyGLORegionCity" ColumnName="countyGLORegionCity" />
+          <ScalarProperty Name="countyGLOBeeperNumber" ColumnName="countyGLOBeeperNumber" />
+          <ScalarProperty Name="countyRRCNumber" ColumnName="countyRRCNumber" />
+          <ScalarProperty Name="countyRRCDistrictNumber" ColumnName="countyRRCDistrictNumber" />
+          <ScalarProperty Name="countyRRCDistrictCity" ColumnName="countyRRCDistrictCity" />
+          <ScalarProperty Name="countyTNRCCNumber" ColumnName="countyTNRCCNumber" />
+          <ScalarProperty Name="countyTNRCCDistrictNumber" ColumnName="countyTNRCCDistrictNumber" />
+          <ScalarProperty Name="countyTNRCCDistrictCity" ColumnName="countyTNRCCDistrictCity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="gloemails">
+      <EntityTypeMapping TypeName="chemreporterModel.gloemail">
+        <MappingFragment StoreEntitySet="gloemails">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="emailgroup" ColumnName="emailgroup" />
+          <ScalarProperty Name="email01" ColumnName="email01" />
+          <ScalarProperty Name="email02" ColumnName="email02" />
+          <ScalarProperty Name="email03" ColumnName="email03" />
+          <ScalarProperty Name="email04" ColumnName="email04" />
+          <ScalarProperty Name="email05" ColumnName="email05" />
+          <ScalarProperty Name="email06" ColumnName="email06" />
+          <ScalarProperty Name="email07" ColumnName="email07" />
+          <ScalarProperty Name="email08" ColumnName="email08" />
+          <ScalarProperty Name="email09" ColumnName="email09" />
+          <ScalarProperty Name="email10" ColumnName="email10" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="gloids">
+      <EntityTypeMapping TypeName="chemreporterModel.gloid">
+        <MappingFragment StoreEntitySet="gloids">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="available" ColumnName="available" />
+          <ScalarProperty Name="user" ColumnName="user" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="glolastids">
+      <EntityTypeMapping TypeName="chemreporterModel.glolastid">
+        <MappingFragment StoreEntitySet="glolastid">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="reportid" ColumnName="reportid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ies">
+      <EntityTypeMapping TypeName="chemreporterModel.y">
+        <MappingFragment StoreEntitySet="ies">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="emergency" ColumnName="emergency" />
+          <ScalarProperty Name="facilityname" ColumnName="facilityname" />
+          <ScalarProperty Name="location" ColumnName="location" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="zip" ColumnName="zip" />
+          <ScalarProperty Name="callername" ColumnName="callername" />
+          <ScalarProperty Name="callerphonenumber" ColumnName="callerphonenumber" />
+          <ScalarProperty Name="contactonscenename" ColumnName="contactonscenename" />
+          <ScalarProperty Name="contactonscenephonenumber" ColumnName="contactonscenephonenumber" />
+          <ScalarProperty Name="callerunknown" ColumnName="callerunknown" />
+          <ScalarProperty Name="contactunknown" ColumnName="contactunknown" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iescontacts">
+      <EntityTypeMapping TypeName="chemreporterModel.iescontact">
+        <MappingFragment StoreEntitySet="iescontacts">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="phonenumber" ColumnName="phonenumber" />
+          <ScalarProperty Name="priority" ColumnName="priority" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="knowledgebases">
+      <EntityTypeMapping TypeName="chemreporterModel.knowledgebase">
+        <MappingFragment StoreEntitySet="knowledgebase">
+          <ScalarProperty Name="knowledgebase_id" ColumnName="knowledgebase_id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="body" ColumnName="body" />
+          <ScalarProperty Name="link" ColumnName="link" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="modrequests">
+      <EntityTypeMapping TypeName="chemreporterModel.modrequest">
+        <MappingFragment StoreEntitySet="modrequests">
+          <ScalarProperty Name="modrequestid" ColumnName="modrequestid" />
+          <ScalarProperty Name="ersoperator" ColumnName="ersoperator" />
+          <ScalarProperty Name="companyname" ColumnName="companyname" />
+          <ScalarProperty Name="nameofcaller" ColumnName="nameofcaller" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="ext" ColumnName="ext" />
+          <ScalarProperty Name="fax" ColumnName="fax" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="sendingmethod" ColumnName="sendingmethod" />
+          <ScalarProperty Name="modclient" ColumnName="modclient" />
+          <ScalarProperty Name="datereceived" ColumnName="datereceived" />
+          <ScalarProperty Name="datefulfilled" ColumnName="datefulfilled" />
+          <ScalarProperty Name="comments" ColumnName="comments" />
+          <ScalarProperty Name="prodname1" ColumnName="prodname1" />
+          <ScalarProperty Name="manu1" ColumnName="manu1" />
+          <ScalarProperty Name="qty1" ColumnName="qty1" />
+          <ScalarProperty Name="locatedvia1" ColumnName="locatedvia1" />
+          <ScalarProperty Name="prodname2" ColumnName="prodname2" />
+          <ScalarProperty Name="manu2" ColumnName="manu2" />
+          <ScalarProperty Name="qty2" ColumnName="qty2" />
+          <ScalarProperty Name="locatedvia2" ColumnName="locatedvia2" />
+          <ScalarProperty Name="prodname3" ColumnName="prodname3" />
+          <ScalarProperty Name="manu3" ColumnName="manu3" />
+          <ScalarProperty Name="qty3" ColumnName="qty3" />
+          <ScalarProperty Name="locatedvia3" ColumnName="locatedvia3" />
+          <ScalarProperty Name="prodname4" ColumnName="prodname4" />
+          <ScalarProperty Name="manu4" ColumnName="manu4" />
+          <ScalarProperty Name="qty4" ColumnName="qty4" />
+          <ScalarProperty Name="locatedvia4" ColumnName="locatedvia4" />
+          <ScalarProperty Name="prodname5" ColumnName="prodname5" />
+          <ScalarProperty Name="manu5" ColumnName="manu5" />
+          <ScalarProperty Name="qty5" ColumnName="qty5" />
+          <ScalarProperty Name="locatedvia5" ColumnName="locatedvia5" />
+          <ScalarProperty Name="prodname6" ColumnName="prodname6" />
+          <ScalarProperty Name="manu6" ColumnName="manu6" />
+          <ScalarProperty Name="qty6" ColumnName="qty6" />
+          <ScalarProperty Name="locatedvia6" ColumnName="locatedvia6" />
+          <ScalarProperty Name="prodname7" ColumnName="prodname7" />
+          <ScalarProperty Name="manu7" ColumnName="manu7" />
+          <ScalarProperty Name="qty7" ColumnName="qty7" />
+          <ScalarProperty Name="locatedvia7" ColumnName="locatedvia7" />
+          <ScalarProperty Name="prodname8" ColumnName="prodname8" />
+          <ScalarProperty Name="manu8" ColumnName="manu8" />
+          <ScalarProperty Name="qty8" ColumnName="qty8" />
+          <ScalarProperty Name="locatedvia8" ColumnName="locatedvia8" />
+          <ScalarProperty Name="prodname9" ColumnName="prodname9" />
+          <ScalarProperty Name="manu9" ColumnName="manu9" />
+          <ScalarProperty Name="qty9" ColumnName="qty9" />
+          <ScalarProperty Name="locatedvia9" ColumnName="locatedvia9" />
+          <ScalarProperty Name="prodname10" ColumnName="prodname10" />
+          <ScalarProperty Name="manu10" ColumnName="manu10" />
+          <ScalarProperty Name="qty10" ColumnName="qty10" />
+          <ScalarProperty Name="locatedvia10" ColumnName="locatedvia10" />
+          <ScalarProperty Name="totalcost" ColumnName="totalcost" />
+          <ScalarProperty Name="price1" ColumnName="price1" />
+          <ScalarProperty Name="price2" ColumnName="price2" />
+          <ScalarProperty Name="price3" ColumnName="price3" />
+          <ScalarProperty Name="price4" ColumnName="price4" />
+          <ScalarProperty Name="price5" ColumnName="price5" />
+          <ScalarProperty Name="price6" ColumnName="price6" />
+          <ScalarProperty Name="price7" ColumnName="price7" />
+          <ScalarProperty Name="price8" ColumnName="price8" />
+          <ScalarProperty Name="price9" ColumnName="price9" />
+          <ScalarProperty Name="price10" ColumnName="price10" />
+          <ScalarProperty Name="totalqty" ColumnName="totalqty" />
+          <ScalarProperty Name="monthreceived" ColumnName="monthreceived" />
+          <ScalarProperty Name="yearreceived" ColumnName="yearreceived" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="noncoastals">
+      <EntityTypeMapping TypeName="chemreporterModel.noncoastal">
+        <MappingFragment StoreEntitySet="noncoastal">
+          <ScalarProperty Name="nonCoastalType" ColumnName="nonCoastalType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="oldgloes">
+      <EntityTypeMapping TypeName="chemreporterModel.oldglo">
+        <MappingFragment StoreEntitySet="oldglo">
+          <ScalarProperty Name="cntSpillID" ColumnName="cntSpillID" />
+          <ScalarProperty Name="fDrill" ColumnName="fDrill" />
+          <ScalarProperty Name="txtDrillTxt" ColumnName="txtDrillTxt" />
+          <ScalarProperty Name="txtReportTakenBy" ColumnName="txtReportTakenBy" />
+          <ScalarProperty Name="txtReportPartyAffliation" ColumnName="txtReportPartyAffliation" />
+          <ScalarProperty Name="datReportTakenDate" ColumnName="datReportTakenDate" />
+          <ScalarProperty Name="datReportTakenTime" ColumnName="datReportTakenTime" />
+          <ScalarProperty Name="txtNotificationAgency" ColumnName="txtNotificationAgency" />
+          <ScalarProperty Name="txtDischargeReportedBy" ColumnName="txtDischargeReportedBy" />
+          <ScalarProperty Name="txtDischargePhone1" ColumnName="txtDischargePhone1" />
+          <ScalarProperty Name="txtDischargePhone2" ColumnName="txtDischargePhone2" />
+          <ScalarProperty Name="datDischargeDate" ColumnName="datDischargeDate" />
+          <ScalarProperty Name="datDischargeTime" ColumnName="datDischargeTime" />
+          <ScalarProperty Name="txtMaterial1" ColumnName="txtMaterial1" />
+          <ScalarProperty Name="dblCASUN1" ColumnName="dblCASUN1" />
+          <ScalarProperty Name="dblAmtSpilled1" ColumnName="dblAmtSpilled1" />
+          <ScalarProperty Name="txtUnitRecovered1" ColumnName="txtUnitRecovered1" />
+          <ScalarProperty Name="txtMaterial2" ColumnName="txtMaterial2" />
+          <ScalarProperty Name="dblCASUN2" ColumnName="dblCASUN2" />
+          <ScalarProperty Name="dblAmtSpilled2" ColumnName="dblAmtSpilled2" />
+          <ScalarProperty Name="txtUnitRecovered2" ColumnName="txtUnitRecovered2" />
+          <ScalarProperty Name="txtMaterial3" ColumnName="txtMaterial3" />
+          <ScalarProperty Name="dblCASUN3" ColumnName="dblCASUN3" />
+          <ScalarProperty Name="dblAmtSpilled3" ColumnName="dblAmtSpilled3" />
+          <ScalarProperty Name="txtUnitRecovered3" ColumnName="txtUnitRecovered3" />
+          <ScalarProperty Name="txtMaterial4" ColumnName="txtMaterial4" />
+          <ScalarProperty Name="dblCASUN4" ColumnName="dblCASUN4" />
+          <ScalarProperty Name="dblAmtSpilled4" ColumnName="dblAmtSpilled4" />
+          <ScalarProperty Name="txtUnitRecovered4" ColumnName="txtUnitRecovered4" />
+          <ScalarProperty Name="txtMaterial5" ColumnName="txtMaterial5" />
+          <ScalarProperty Name="dblCASUN5" ColumnName="dblCASUN5" />
+          <ScalarProperty Name="dblAmtSpilled5" ColumnName="dblAmtSpilled5" />
+          <ScalarProperty Name="txtUnitRecovered5" ColumnName="txtUnitRecovered5" />
+          <ScalarProperty Name="wSpillCounty" ColumnName="wSpillCounty" />
+          <ScalarProperty Name="wOrigin" ColumnName="wOrigin" />
+          <ScalarProperty Name="fSpillInWater" ColumnName="fSpillInWater" />
+          <ScalarProperty Name="fSpillAirRelease" ColumnName="fSpillAirRelease" />
+          <ScalarProperty Name="fCoastalWater" ColumnName="fCoastalWater" />
+          <ScalarProperty Name="fLand" ColumnName="fLand" />
+          <ScalarProperty Name="txtSpillReceivingWater" ColumnName="txtSpillReceivingWater" />
+          <ScalarProperty Name="dblSpillAmountInWater" ColumnName="dblSpillAmountInWater" />
+          <ScalarProperty Name="txtSpillAmountInWaterUnits" ColumnName="txtSpillAmountInWaterUnits" />
+          <ScalarProperty Name="memSpillLocation" ColumnName="memSpillLocation" />
+          <ScalarProperty Name="dblRRCLeaseNumber" ColumnName="dblRRCLeaseNumber" />
+          <ScalarProperty Name="txtRRCLeaseName" ColumnName="txtRRCLeaseName" />
+          <ScalarProperty Name="txtRRCFieldName" ColumnName="txtRRCFieldName" />
+          <ScalarProperty Name="txtLandOwner" ColumnName="txtLandOwner" />
+          <ScalarProperty Name="memActionsTakenCleanUpStatus" ColumnName="memActionsTakenCleanUpStatus" />
+          <ScalarProperty Name="txtNRCNumber" ColumnName="txtNRCNumber" />
+          <ScalarProperty Name="txtAgencyName1" ColumnName="txtAgencyName1" />
+          <ScalarProperty Name="txtAgencyName2" ColumnName="txtAgencyName2" />
+          <ScalarProperty Name="txtAgencyName3" ColumnName="txtAgencyName3" />
+          <ScalarProperty Name="datDate1" ColumnName="datDate1" />
+          <ScalarProperty Name="datDate2" ColumnName="datDate2" />
+          <ScalarProperty Name="datDate3" ColumnName="datDate3" />
+          <ScalarProperty Name="txtWhere1" ColumnName="txtWhere1" />
+          <ScalarProperty Name="txtWhere2" ColumnName="txtWhere2" />
+          <ScalarProperty Name="txtWhere3" ColumnName="txtWhere3" />
+          <ScalarProperty Name="txtWho1" ColumnName="txtWho1" />
+          <ScalarProperty Name="txtWho2" ColumnName="txtWho2" />
+          <ScalarProperty Name="txtWho3" ColumnName="txtWho3" />
+          <ScalarProperty Name="datTime1" ColumnName="datTime1" />
+          <ScalarProperty Name="datTime2" ColumnName="datTime2" />
+          <ScalarProperty Name="datTime3" ColumnName="datTime3" />
+          <ScalarProperty Name="txtSpiller" ColumnName="txtSpiller" />
+          <ScalarProperty Name="txtSpillerAddress" ColumnName="txtSpillerAddress" />
+          <ScalarProperty Name="txtSpillerCity" ColumnName="txtSpillerCity" />
+          <ScalarProperty Name="txtSpillerState" ColumnName="txtSpillerState" />
+          <ScalarProperty Name="txtSpillerZipCode" ColumnName="txtSpillerZipCode" />
+          <ScalarProperty Name="txtSpillerContact" ColumnName="txtSpillerContact" />
+          <ScalarProperty Name="txtSpillerContactPhone" ColumnName="txtSpillerContactPhone" />
+          <ScalarProperty Name="memComments" ColumnName="memComments" />
+          <ScalarProperty Name="txtAgcyName1" ColumnName="txtAgcyName1" />
+          <ScalarProperty Name="txtAgcyName2" ColumnName="txtAgcyName2" />
+          <ScalarProperty Name="txtAgcyName3" ColumnName="txtAgcyName3" />
+          <ScalarProperty Name="datD1" ColumnName="datD1" />
+          <ScalarProperty Name="datD2" ColumnName="datD2" />
+          <ScalarProperty Name="datD3" ColumnName="datD3" />
+          <ScalarProperty Name="txtWhr1" ColumnName="txtWhr1" />
+          <ScalarProperty Name="txtWhr2" ColumnName="txtWhr2" />
+          <ScalarProperty Name="txtWhr3" ColumnName="txtWhr3" />
+          <ScalarProperty Name="txtW1" ColumnName="txtW1" />
+          <ScalarProperty Name="txtW2" ColumnName="txtW2" />
+          <ScalarProperty Name="txtW3" ColumnName="txtW3" />
+          <ScalarProperty Name="datTi1" ColumnName="datTi1" />
+          <ScalarProperty Name="datTi2" ColumnName="datTi2" />
+          <ScalarProperty Name="datTi3" ColumnName="datTi3" />
+          <ScalarProperty Name="txtLastField" ColumnName="txtLastField" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="otherids">
+      <EntityTypeMapping TypeName="chemreporterModel.otherid">
+        <MappingFragment StoreEntitySet="otherids">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="available" ColumnName="available" />
+          <ScalarProperty Name="user" ColumnName="user" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="reportlogs">
+      <EntityTypeMapping TypeName="chemreporterModel.reportlog">
+        <MappingFragment StoreEntitySet="reportlog">
+          <ScalarProperty Name="ReportLogID" ColumnName="ReportLogID" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="MinutesTaken" ColumnName="MinutesTaken" />
+          <ScalarProperty Name="Operator" ColumnName="Operator" />
+          <ScalarProperty Name="ReportType" ColumnName="ReportType" />
+          <ScalarProperty Name="ReportID" ColumnName="ReportID" />
+          <ScalarProperty Name="ReportDate" ColumnName="ReportDate" />
+          <ScalarProperty Name="Corrected" ColumnName="Corrected" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="shelloilincidentdatas">
+      <EntityTypeMapping TypeName="chemreporterModel.shelloilincidentdata">
+        <MappingFragment StoreEntitySet="shelloilincidentdata">
+          <ScalarProperty Name="incid" ColumnName="incid" />
+          <ScalarProperty Name="ersop" ColumnName="ersop" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="time" ColumnName="time" />
+          <ScalarProperty Name="callername1" ColumnName="callername1" />
+          <ScalarProperty Name="callername2" ColumnName="callername2" />
+          <ScalarProperty Name="callername3" ColumnName="callername3" />
+          <ScalarProperty Name="callerphone1" ColumnName="callerphone1" />
+          <ScalarProperty Name="callerphone2" ColumnName="callerphone2" />
+          <ScalarProperty Name="callerphone3" ColumnName="callerphone3" />
+          <ScalarProperty Name="callerext1" ColumnName="callerext1" />
+          <ScalarProperty Name="callerext2" ColumnName="callerext2" />
+          <ScalarProperty Name="callerext3" ColumnName="callerext3" />
+          <ScalarProperty Name="calleraltphone1" ColumnName="calleraltphone1" />
+          <ScalarProperty Name="calleraltphone2" ColumnName="calleraltphone2" />
+          <ScalarProperty Name="calleraltphone3" ColumnName="calleraltphone3" />
+          <ScalarProperty Name="calleraltext1" ColumnName="calleraltext1" />
+          <ScalarProperty Name="calleraltext2" ColumnName="calleraltext2" />
+          <ScalarProperty Name="calleraltext3" ColumnName="calleraltext3" />
+          <ScalarProperty Name="comments" ColumnName="comments" />
+          <ScalarProperty Name="staffname" ColumnName="staffname" />
+          <ScalarProperty Name="staffphone" ColumnName="staffphone" />
+          <ScalarProperty Name="staffext" ColumnName="staffext" />
+          <ScalarProperty Name="staffreporttime" ColumnName="staffreporttime" />
+          <ScalarProperty Name="stafftimezone" ColumnName="stafftimezone" />
+          <ScalarProperty Name="followupname1" ColumnName="followupname1" />
+          <ScalarProperty Name="followupname2" ColumnName="followupname2" />
+          <ScalarProperty Name="followupname3" ColumnName="followupname3" />
+          <ScalarProperty Name="followupname4" ColumnName="followupname4" />
+          <ScalarProperty Name="followupname5" ColumnName="followupname5" />
+          <ScalarProperty Name="followuptime1" ColumnName="followuptime1" />
+          <ScalarProperty Name="followuptime2" ColumnName="followuptime2" />
+          <ScalarProperty Name="followuptime3" ColumnName="followuptime3" />
+          <ScalarProperty Name="followuptime4" ColumnName="followuptime4" />
+          <ScalarProperty Name="followuptime5" ColumnName="followuptime5" />
+          <ScalarProperty Name="followuptimezone1" ColumnName="followuptimezone1" />
+          <ScalarProperty Name="followuptimezone2" ColumnName="followuptimezone2" />
+          <ScalarProperty Name="followuptimezone3" ColumnName="followuptimezone3" />
+          <ScalarProperty Name="followuptimezone4" ColumnName="followuptimezone4" />
+          <ScalarProperty Name="followuptimezone5" ColumnName="followuptimezone5" />
+          <ScalarProperty Name="followupphone1" ColumnName="followupphone1" />
+          <ScalarProperty Name="followupphone2" ColumnName="followupphone2" />
+          <ScalarProperty Name="followupphone3" ColumnName="followupphone3" />
+          <ScalarProperty Name="followupphone4" ColumnName="followupphone4" />
+          <ScalarProperty Name="followupphone5" ColumnName="followupphone5" />
+          <ScalarProperty Name="followupext1" ColumnName="followupext1" />
+          <ScalarProperty Name="followupext2" ColumnName="followupext2" />
+          <ScalarProperty Name="followupext3" ColumnName="followupext3" />
+          <ScalarProperty Name="followupext4" ColumnName="followupext4" />
+          <ScalarProperty Name="followupext5" ColumnName="followupext5" />
+          <ScalarProperty Name="emailsent" ColumnName="emailsent" />
+          <ScalarProperty Name="notes" ColumnName="notes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="spillorigins">
+      <EntityTypeMapping TypeName="chemreporterModel.spillorigin">
+        <MappingFragment StoreEntitySet="spillorigin">
+          <ScalarProperty Name="originId" ColumnName="originId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="spillunits">
+      <EntityTypeMapping TypeName="chemreporterModel.spillunit">
+        <MappingFragment StoreEntitySet="spillunits">
+          <ScalarProperty Name="unitId" ColumnName="unitId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tceqafterhours">
+      <EntityTypeMapping TypeName="chemreporterModel.tceqafterhour">
+        <MappingFragment StoreEntitySet="tceqafterhours">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="PrimaryContact" ColumnName="PrimaryContact" />
+          <ScalarProperty Name="SecondaryContact" ColumnName="SecondaryContact" />
+          <ScalarProperty Name="TertiaryContact" ColumnName="TertiaryContact" />
+          <ScalarProperty Name="RegionalDirector" ColumnName="RegionalDirector" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tceqreports">
+      <EntityTypeMapping TypeName="chemreporterModel.tceqreport">
+        <MappingFragment StoreEntitySet="tceqreport">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Operator" ColumnName="Operator" />
+          <ScalarProperty Name="ReportDate" ColumnName="ReportDate" />
+          <ScalarProperty Name="ReportTime" ColumnName="ReportTime" />
+          <ScalarProperty Name="IncidentDate" ColumnName="IncidentDate" />
+          <ScalarProperty Name="IncidentTime" ColumnName="IncidentTime" />
+          <ScalarProperty Name="ReportedBy" ColumnName="ReportedBy" />
+          <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+          <ScalarProperty Name="ContactNumber2" ColumnName="ContactNumber2" />
+          <ScalarProperty Name="Emergency" ColumnName="Emergency" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="County" ColumnName="County" />
+          <ScalarProperty Name="MediaAffected" ColumnName="MediaAffected" />
+          <ScalarProperty Name="ReceivingWater" ColumnName="ReceivingWater" />
+          <ScalarProperty Name="AmountWater" ColumnName="AmountWater" />
+          <ScalarProperty Name="UnitWater" ColumnName="UnitWater" />
+          <ScalarProperty Name="PRCompany" ColumnName="PRCompany" />
+          <ScalarProperty Name="PRStreet" ColumnName="PRStreet" />
+          <ScalarProperty Name="PRCity" ColumnName="PRCity" />
+          <ScalarProperty Name="PRState" ColumnName="PRState" />
+          <ScalarProperty Name="PRZipCode" ColumnName="PRZipCode" />
+          <ScalarProperty Name="PRContact" ColumnName="PRContact" />
+          <ScalarProperty Name="PRPhone" ColumnName="PRPhone" />
+          <ScalarProperty Name="Material1" ColumnName="Material1" />
+          <ScalarProperty Name="Material2" ColumnName="Material2" />
+          <ScalarProperty Name="Material3" ColumnName="Material3" />
+          <ScalarProperty Name="Material4" ColumnName="Material4" />
+          <ScalarProperty Name="Material5" ColumnName="Material5" />
+          <ScalarProperty Name="CAS1" ColumnName="CAS1" />
+          <ScalarProperty Name="CAS2" ColumnName="CAS2" />
+          <ScalarProperty Name="CAS3" ColumnName="CAS3" />
+          <ScalarProperty Name="CAS4" ColumnName="CAS4" />
+          <ScalarProperty Name="CAS5" ColumnName="CAS5" />
+          <ScalarProperty Name="Amount1" ColumnName="Amount1" />
+          <ScalarProperty Name="Amount2" ColumnName="Amount2" />
+          <ScalarProperty Name="Amount3" ColumnName="Amount3" />
+          <ScalarProperty Name="Amount4" ColumnName="Amount4" />
+          <ScalarProperty Name="Amount5" ColumnName="Amount5" />
+          <ScalarProperty Name="Unit1" ColumnName="Unit1" />
+          <ScalarProperty Name="Unit2" ColumnName="Unit2" />
+          <ScalarProperty Name="Unit3" ColumnName="Unit3" />
+          <ScalarProperty Name="Unit4" ColumnName="Unit4" />
+          <ScalarProperty Name="Unit5" ColumnName="Unit5" />
+          <ScalarProperty Name="ResponderName" ColumnName="ResponderName" />
+          <ScalarProperty Name="NotificationTime" ColumnName="NotificationTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="theochemcleanshotincidents">
+      <EntityTypeMapping TypeName="chemreporterModel.theochemcleanshotincident">
+        <MappingFragment StoreEntitySet="theochemcleanshotincidents">
+          <ScalarProperty Name="incidentId" ColumnName="incidentId" />
+          <ScalarProperty Name="ersOp" ColumnName="ersOp" />
+          <ScalarProperty Name="rptDate" ColumnName="rptDate" />
+          <ScalarProperty Name="rptTime" ColumnName="rptTime" />
+          <ScalarProperty Name="callerName" ColumnName="callerName" />
+          <ScalarProperty Name="callerPhone" ColumnName="callerPhone" />
+          <ScalarProperty Name="callerAff" ColumnName="callerAff" />
+          <ScalarProperty Name="callerFaxEmail" ColumnName="callerFaxEmail" />
+          <ScalarProperty Name="incStreet" ColumnName="incStreet" />
+          <ScalarProperty Name="incCity" ColumnName="incCity" />
+          <ScalarProperty Name="incState" ColumnName="incState" />
+          <ScalarProperty Name="incCountry" ColumnName="incCountry" />
+          <ScalarProperty Name="incTimeZone" ColumnName="incTimeZone" />
+          <ScalarProperty Name="incDate" ColumnName="incDate" />
+          <ScalarProperty Name="incTime" ColumnName="incTime" />
+          <ScalarProperty Name="quest1" ColumnName="quest1" />
+          <ScalarProperty Name="quest2Qty" ColumnName="quest2Qty" />
+          <ScalarProperty Name="quest2Units" ColumnName="quest2Units" />
+          <ScalarProperty Name="quest3" ColumnName="quest3" />
+          <ScalarProperty Name="quest4" ColumnName="quest4" />
+          <ScalarProperty Name="quest5" ColumnName="quest5" />
+          <ScalarProperty Name="quest6" ColumnName="quest6" />
+          <ScalarProperty Name="quest7" ColumnName="quest7" />
+          <ScalarProperty Name="quest8" ColumnName="quest8" />
+          <ScalarProperty Name="quest9" ColumnName="quest9" />
+          <ScalarProperty Name="quest10YesOrNo" ColumnName="quest10YesOrNo" />
+          <ScalarProperty Name="quest10IfYesWhat" ColumnName="quest10IfYesWhat" />
+          <ScalarProperty Name="quest11YesOrNo" ColumnName="quest11YesOrNo" />
+          <ScalarProperty Name="quest11IfYesWhat" ColumnName="quest11IfYesWhat" />
+          <ScalarProperty Name="quest12" ColumnName="quest12" />
+          <ScalarProperty Name="quest13" ColumnName="quest13" />
+          <ScalarProperty Name="quest14" ColumnName="quest14" />
+          <ScalarProperty Name="quest15" ColumnName="quest15" />
+          <ScalarProperty Name="quest16" ColumnName="quest16" />
+          <ScalarProperty Name="quest17" ColumnName="quest17" />
+          <ScalarProperty Name="additCommentsDetails" ColumnName="additCommentsDetails" />
+          <ScalarProperty Name="subName" ColumnName="subName" />
+          <ScalarProperty Name="subAdminContact" ColumnName="subAdminContact" />
+          <ScalarProperty Name="subPhone" ColumnName="subPhone" />
+          <ScalarProperty Name="subFax" ColumnName="subFax" />
+          <ScalarProperty Name="subEmail" ColumnName="subEmail" />
+          <ScalarProperty Name="subAddress" ColumnName="subAddress" />
+          <ScalarProperty Name="subCityStateZip" ColumnName="subCityStateZip" />
+          <ScalarProperty Name="emailsent" ColumnName="emailsent" />
+          <ScalarProperty Name="comments" ColumnName="comments" />
+          <ScalarProperty Name="type" ColumnName="type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="theochemcontactinfoes">
+      <EntityTypeMapping TypeName="chemreporterModel.theochemcontactinfo">
+        <MappingFragment StoreEntitySet="theochemcontactinfo">
+          <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Admin_Contact" ColumnName="Admin Contact" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="City__State__Zip" ColumnName="City, State, Zip" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="theochemcontactinformations">
+      <EntityTypeMapping TypeName="chemreporterModel.theochemcontactinformation">
+        <MappingFragment StoreEntitySet="theochemcontactinformation">
+          <ScalarProperty Name="contactid" ColumnName="contactid" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="admincontact" ColumnName="admincontact" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="fax" ColumnName="fax" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="citystatezip" ColumnName="citystatezip" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tickets">
+      <EntityTypeMapping TypeName="chemreporterModel.ticket">
+        <MappingFragment StoreEntitySet="tickets">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="subject" ColumnName="subject" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="veolianonincidents">
+      <EntityTypeMapping TypeName="chemreporterModel.veolianonincident">
+        <MappingFragment StoreEntitySet="veolianonincident">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="callername" ColumnName="callername" />
+          <ScalarProperty Name="callerphonenumber" ColumnName="callerphonenumber" />
+          <ScalarProperty Name="calleraffiliation" ColumnName="calleraffiliation" />
+          <ScalarProperty Name="incidentcity" ColumnName="incidentcity" />
+          <ScalarProperty Name="incidentstate" ColumnName="incidentstate" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="ersoperator" ColumnName="ersoperator" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="time" ColumnName="time" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CRMWebUs">
+      <EntityTypeMapping TypeName="chemreporterModel.CRMWebU">
+        <MappingFragment StoreEntitySet="CRMWebU">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="UserType" ColumnName="UserType" />
+          <ScalarProperty Name="LastPassChange" ColumnName="LastPassChange" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

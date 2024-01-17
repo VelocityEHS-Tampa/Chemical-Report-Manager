@@ -1,0 +1,102 @@
+﻿
+@{
+    string constring = crm.chemtelinc.com.Properties.Settings.Default.StatesConnectionString;
+    ViewBag.Title = "LockedGateReport";
+    List<string> States = new List<string>();
+    List<string> Names = new List<string>();
+    States = ChemicalLibrary.Search.GetStates(constring);
+    Names = ViewBag.Names;
+}
+
+<h2>Crestwood Locked Gate Report</h2>
+
+
+@using (Html.BeginForm("SubmitLockedGateReport", "Crestwood", FormMethod.Post))
+{
+    <div id="CrestLockedGateReportContainer" style="font-size: 10pt;">
+        <div id="FormButtons" style="padding:2%;text-align:right;">
+            <input type="submit" value="Submit" class="form-control GRCPButtons required-field" id="btnsubmit" name="btnsubmit" tabindex="99">
+            <input type="button" value="Close" class="form-control GRCPButtons alert-info" id="btnclose" name="btnclose" onclick="ClearForm()">
+        </div>
+
+        <div id="LockedGateForm" style="width: 40%;text-align:left;margin: 0 auto;">
+            @if (Request.QueryString["Result"] != null && Request.QueryString["Result"] == "Success")
+            {
+                <span class="alert-success">Record Added Successfully!</span><br />
+            }
+            <span class="required-field">Callers Name</span><input type="text" class="form-control GLOFieldSpacing" id="txtcallername" name="txtcallername" required="" style="width:80%" tabindex="1"/> <br />
+            <span>Callers Number</span><input type="text" class="form-control GLOFieldSpacing" id="txtcallernumber" name="txtcallernumber" placeholder="(___) ___-____" style="width:30%"  tabindex="2"/> <br />
+            <span class="required-field">State</span>
+            <select class="GLOFieldSpacing" name="txtstate" id="txtstate" required=""  tabindex="3">
+                <option value="" selected=""></option>
+                @foreach (string st in States)
+                {
+                    <option value="@st">@st</option>
+                }
+            </select><br />
+            <span class="required-field">County</span><input type="text" class="form-control GLOFieldSpacing" id="txtcounty" name="txtcounty" style="width:80%" required=""  tabindex="4"/> <br />
+            <span class="required-field">Facility Name</span><input type="text" class="form-control GLOFieldSpacing" id="FacilityName" name="FacilityName" style="width:80%" required=""  tabindex="5"/> <br />
+        </div>
+        <br />
+        <div style="text-align:center;">
+            <div class="CrestInlineDisplay">
+                <span class="required-field">Name</span><br />
+                <select class="GLOFieldSpacing" id="txtname" name="txtname" required="" onchange="GetInfo(this.value)" tabindex="6">
+                    <option value="" selected=""></option>
+                    @foreach (string n in Names)
+                    {
+                        //Separate Name and ID, only put name in text, include both in value for database purposes. ID for the phone number and location, Name for reporting
+                        var temp = n.Split('_');
+                        string nameId = temp[1];
+                        string name = temp[0];
+                        <option value="@n">@name</option>
+                    }
+                </select>
+            </div>
+            <div class="CrestInlineDisplay" style="width:20%;">
+                <span>Contact Number</span><br />
+                <input type="text" class="form-control GLOFieldSpacing" id="txtcontactnumber" name="txtcontactnumber"  tabindex="7"/>
+            </div>
+            <div class="CrestInlineDisplay" style="width:20%;">
+                <span class="required-field">Location</span><br />
+                <input type="text" class="form-control GLOFieldSpacing" id="txtlocation" name="txtlocation" required=""  tabindex="8"/>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    // clear form
+    function ClearForm() {
+        if (confirm("Are you sure you want to cancel this report?")) {
+            document.getElementById("txtcallername").value = "";
+            document.getElementById("txtcallernumber").value = "";
+            document.getElementById("txtstate").selectedIndex = 0;
+            document.getElementById("txtcounty").value = "";
+            document.getElementById("FacilityName").value = "";
+            document.getElementById("txtname").selectedIndex = 0;
+            document.getElementById("txtcontactnumber").value = "";
+            document.getElementById("txtlocation").value = "";
+        }
+    }
+    //get ers members phone number and location
+    function GetInfo(NameID) {
+        //separate name and ID to get the phone and location
+        var id = NameID.split('_');
+        id = id[1];
+
+        $.ajax({
+            url: '/Crestwood/SearchByID/',
+            data: { ID: id },
+            type: 'GET',
+            success: function (data) {
+                var phoneLoc = data.split('_');
+                document.getElementById("txtcontactnumber").value = phoneLoc[0];
+                document.getElementById("txtlocation").value = phoneLoc[1];
+            },
+            error: function (data) {
+                alert("ERROR!");
+            }
+        });
+    }
+</script>

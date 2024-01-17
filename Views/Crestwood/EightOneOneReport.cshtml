@@ -1,0 +1,225 @@
+﻿
+@{
+    ViewBag.Title = "EightOneOneReport";
+}
+
+<h2>Crestwood 811 Report</h2>
+
+
+@using (Html.BeginForm("Submit811Report", "Crestwood", FormMethod.Post))
+{
+    <div id="811Report">
+        <div id="FormButtons" style="padding:2%;text-align:right;">
+            <input type="submit" value="Submit" class="form-control GRCPButtons required-field" id="btnsubmit" name="btnsubmit" tabindex="99">
+            <input type="button" value="Cancel" class="form-control GRCPButtons alert-info" id="btnclose" name="btnclose" onclick="ClearForm()">
+        </div>
+        @* Left Side Questions *@
+        <div class="GLOHeader" id="GRCPHeader">811 Report Details</div>
+        <br />
+        @if (Request.QueryString["Result"] != null && Request.QueryString["Result"] == "Success")
+        {
+            <span class="alert-success">Record Added Successfully!</span><br />
+        }
+        <div class="CrestInlineDisplay">
+            <span style="text-decoration:underline;">Todays Date/Time</span><br />
+            <span>Date</span><input type="text" class="form-control GLOFieldSpacing" style="width:20%;" id="txttodaydate" name="txttodaydate" placeholder="__/__/____" value="@DateTime.Now.ToShortDateString()"  tabindex="1"/> <span>Time</span><input type="text" class="form-control GLOFieldSpacing" style="width:10%;" id="txttodaytime" name="txttodaytime" placeholder="__:__" value="@DateTime.Now.ToString("HH:mm")"  tabindex="2"/><br />
+
+            <span style="text-decoration:underline;">Date/Time of planned excavation or work</span><br />
+
+            <span>Date</span><input type="date" class="form-control GLOFieldSpacing" style="width:25%;" id="txtexcavationdate" name="txtexcavationdate" placeholder="__/__/____" required=""  tabindex="3"/> <span>Time</span><input type="text" class="form-control GLOFieldSpacing" style="width:15%;" id="txtexcavationtime" name="txtexcavationtime" placeholder="__:__" required="" maxlength="5" onchange="FormatTime(this.value)"  tabindex="4"/><br />
+
+            <span>Is this a NORMAL locate request or EMERGENCY locate request</span><br />
+            <select name="txtnormaloremergency" id="txtnormaloremergency" class="GLOFieldSpacing" style="width:25%;" required="" tabindex="5">
+                <option value="" selected=""></option>
+                <option value="Normal">Normal</option>
+                <option value="Emergency">Emergency</option>
+            </select><br />
+
+            <span>What is the locate request ticket number provided by the 8-1-1 center</span><br />
+            <input type="text" id="txtrequestticketnumber" name="txtrequestticketnumber" class="form-control GLOFieldSpacing" style="width:75%;" required=""  tabindex="6"/><br />
+
+            <span>What is the name of the person or company requesting this locate</span><br />
+            <input type="text" id="txtpersoncompanyname" name="txtpersoncompanyname" class="form-control GLOFieldSpacing" style="width:75%;" required=""  tabindex="7"/><br />
+
+            <span>What is the call back phone for the contacting excavator</span><br />
+            <input type="text" id="txtcallbacknumber" name="txtcallbacknumber" class="form-control GLOFieldSpacing" style="width:75%;" placeholder="(___) ___-____" required=""  tabindex="8"/><br />
+
+            <span>What is the email address for contacting the excavator</span><br />
+            <input type="text" id="txtemailaddress" name="txtemailaddress" class="form-control GLOFieldSpacing" style="width:75%;" placeholder="yourname@domain.com" required=""  tabindex="9"/><br />
+
+            <span>What is the city or town nearest to the excavation location</span><br />
+            <input type="text" id="txtcity" name="txtcity" class="form-control GLOFieldSpacing" style="width:75%;" required=""  tabindex="10"/><br />
+
+            <span style="text-decoration:underline;">In what state and county will the excavation take place</span><br />
+            <span>State</span>
+            <select id="txtstate" name="txtstate" class="GLOFieldSpacing" onchange="GetCounties(this.value)" required=""  tabindex="11">
+                <option value="" selected=""></option>
+                <option value="AR">AR</option>
+                <option value="CA">CA</option>
+                <option value="LA">LA</option>
+                <option value="ND">ND</option>
+                <option value="NM">NM</option>
+                <option value="NY">NY</option>
+                <option value="PA">PA</option>
+                <option value="TX">TX</option>
+                <option value="WV">WV</option>
+                <option value="WY">WY</option>
+            </select>
+            <span>County</span>
+            <select id="txtcounty" name="txtcounty" class="GLOFieldSpacing" onchange="GetNotifications(this.value)" required=""  tabindex="12">
+                <option value="" selected=""></option>
+            </select>
+        </div>
+        @* Right Side Questions *@
+        <div class="CrestInlineDisplay">
+            <span>What street or roadway is closest to the planned excavation</span><br />
+            <input type="text" class="form-control GLOFieldSpacing" id="txtstreet" name="txtstreet" tabindex="13" /><br />
+
+            <span>What is the nearest major road intersection</span><br />
+            <input type="text" class="form-control GLOFieldSpacing" id="txtintersection" name="txtintersection" required="" tabindex="14" /><br />
+
+            <span>What is the nature of the work being performed at the excavation location</span><br />
+            <textarea class="GLOFieldSpacing" cols="50" rows="5" id="txtnature" name="txtnature" required="" tabindex="15"></textarea><br />
+
+            <span>What other remarks are provided to ChemTel by the 8-1-1 One-Call operator/Pipeline Caller</span><br />
+            <textarea class="GLOFieldSpacing" cols="50" rows="5" id="txtremarks" name="txtremarks" required="" tabindex="16"></textarea>
+            <br />
+            <label class="required-field" style="font-size: 10pt;" id="NotificationList"></label>
+        </div>
+    </div>
+}
+
+<script>
+    function GetCounties(state) {
+        $('#txtcounty option').each(function () {
+            if (this.value != "") {
+                $(this).remove();
+            }
+        })
+        if (state == "AR") {
+            $('#txtcounty').append(new Option('Conway', 'Conway'));
+            $('#txtcounty').append(new Option('Faulkner', 'Faulkner'));
+            $('#txtcounty').append(new Option('White', 'White'));
+            $('#txtcounty').append(new Option('Van Buren', 'Van Buren'));
+        }
+        else if (state == "CA") {
+            $('#txtcounty').append(new Option('Kern', 'Kern'));
+        }
+        else if (state == "LA") {
+            $('#txtcounty').append(new Option('Sabine', 'Sabine'));
+        }
+        else if (state == "ND") {
+            $('#txtcounty').append(new Option('McKenzie', 'McKenzie'));
+            $('#txtcounty').append(new Option('Williams', 'Williams'));
+        }
+        else if (state == "NM") {
+            $('#txtcounty').append(new Option('Eddy', 'Eddy'));
+        }
+        else if (state == "NY") {
+            $('#txtcounty').append(new Option('Broome', 'Broome'));
+            $('#txtcounty').append(new Option('Chemung', 'Chemung'));
+            $('#txtcounty').append(new Option('Schuyler', 'Schuyler'));
+            $('#txtcounty').append(new Option('Steuben', 'Steuben'));
+            $('#txtcounty').append(new Option('Tioga', 'Tioga'));
+            $('#txtcounty').append(new Option('Tomkins', 'Tomkins'));
+        }
+        else if (state == "PA") {
+            $('#txtcounty').append(new Option('Bradford', 'Bradford'));
+            $('#txtcounty').append(new Option('Lycoming', 'Lycoming'));
+            $('#txtcounty').append(new Option('Sullivan', 'Sullivan'));
+        }
+        else if (state == "TX") {
+            $('#txtcounty').append(new Option('Bosque', 'Bosque'));
+            $('#txtcounty').append(new Option('Colorado', 'Colorado'));
+            $('#txtcounty').append(new Option('Culberson', 'Culberson'));
+            $('#txtcounty').append(new Option('Denton', 'Denton'));
+            $('#txtcounty').append(new Option('Erath', 'Erath'));
+            $('#txtcounty').append(new Option('Hood', 'Hood'));
+            $('#txtcounty').append(new Option('Johnson', 'Johnson'));
+            $('#txtcounty').append(new Option('Loving', 'Loving'));
+            $('#txtcounty').append(new Option('Matagorda', 'Matagorda'));
+            $('#txtcounty').append(new Option('Reeves', 'Reeves'));
+            $('#txtcounty').append(new Option('Roberts', 'Roberts'));
+            $('#txtcounty').append(new Option('Somerville', 'Somerville'));
+            $('#txtcounty').append(new Option('Tarrant', 'Tarrant'));
+            $('#txtcounty').append(new Option('Ward', 'Ward'));
+            $('#txtcounty').append(new Option('Wharton', 'Wharton'));
+        }
+        else if (state == "WV") {
+            $('#txtcounty').append(new Option('Barbour', 'Barbour'));
+            $('#txtcounty').append(new Option('Doddridge', 'Doddridge'));
+            $('#txtcounty').append(new Option('Harrison', 'Harrison'));
+        }
+        else if (state == "WY") {
+            $('#txtcounty').append(new Option('Converse', 'Converse'));
+        }
+    }
+    function FormatTime(time) {
+        if (CheckTime(time)) {
+            var timehours = time[0] + time[1];
+            var timemins = time[2] + time[3];
+            if (time.length = 4 && time.indexOf(':') == -1) { //Add a semi-colon ( : ) if the length is 4 and does NOT contain one already.
+                $('#txtexcavationtime').val(timehours + ":" + timemins);
+            }
+            $('#txtexcavationtime').removeClass('is-invalid');
+        } else {
+            $('#txtexcavationtime').addClass('is-invalid');
+        }
+    }
+    function CheckTime(time) {
+        if (time.length < 4) {
+            alert("Invalid time"); //Likely due to not have a leading zero in hours in the AM.
+            return false;
+        }
+        if (time[0] > 2 || time[1] > 3) { //if the hours go beyond 23, it is invalid.
+            alert("Invalid time, please ensure the hours are correct.");
+            return false;
+        }
+        if (time.length == 4) { //If the semi-colon is NOT in the time already check the first minute digit
+            if (time[2] > 5) { //If the first minute digit goes beyond 5 in the (HHmm) format, it is invalid.
+                alert("Invalid time, please ensure the minutes are correct.");
+                return false;
+            }
+        }
+        if (time.length == 5) { //If the semi-colon is in the time already check the first minute digit
+            if (time[3] > 5) { //If the first minute digit goes beyond 5 in the (HH:mm) format, it is invalid.
+                alert("Invalid time, please ensure the minutes are correct.");
+                return false;
+            }
+        }
+        return true;
+    }
+    function GetNotifications(county) {
+        var state = $('#txtstate').val();
+        $.ajax({
+            url: '/Crestwood/GetNotifications/',
+            type: 'GET',
+            data: { txtstate: state, txtcounty: county },
+            success: function (data) {
+                document.getElementById('NotificationList').innerText = data;
+            },
+            error: function (data) {
+                alert("ERROR!");
+            }
+        });
+    }
+    function ClearForm() {
+        if (confirm("Are you sure you want to cancel this report?")) {
+            document.getElementById("txtexcavationdate").value = "";
+            document.getElementById("txtexcavationtime").value = "";
+            document.getElementById("txtnormaloremergency").selectedIndex = 0;
+            document.getElementById("txtrequestticketnumber").value = "";
+            document.getElementById("txtpersoncompanyname").value = "";
+            document.getElementById("txtcallbacknumber").value = "";
+            document.getElementById("txtemailaddress").value = "";
+            document.getElementById("txtcity").value = "";
+            document.getElementById("txtstate").selectedIndex = 0;
+            document.getElementById("txtcounty").selectedIndex = 0;
+            document.getElementById("txtstreet").value = "";
+            document.getElementById("txtintersection").value = "";
+            document.getElementById("txtnature").value = "";
+            document.getElementById("txtremarks").value = "";
+
+        }
+    }
+</script>

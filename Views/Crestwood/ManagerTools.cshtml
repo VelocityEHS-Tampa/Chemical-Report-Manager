@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "ManagerTools";
+    string ToolSelected = ViewBag.ToolSelected;
+}
+
+@if (ToolSelected == "HSER")
+{
+    <h2>HSER Members</h2>
+}
+else if (ToolSelected == "PipelineMembers")
+{
+    <h2>Pipeline Members</h2>
+}
+else if (ToolSelected == "TransportList")
+{
+    <h2>Transportation List</h2>
+}
+else if (ToolSelected == "AllNotifications")
+{
+    <h2>All Notifications</h2>
+}
+

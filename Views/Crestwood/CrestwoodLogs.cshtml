@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "CrestwoodLogs";
+    string LogSelected = ViewBag.LogSelected;
+}
+
+@if (LogSelected == "GenInc")
+{
+    <h2>Crestwood General Incident</h2>
+}
+else if (LogSelected == "Pipeline")
+{
+    <h2>Pipeline Logs</h2>
+}
+else if (LogSelected == "811")
+{
+    <h2>811 Logs</h2>
+}
+else if (LogSelected == "LockedGate")
+{
+    <h2>Locked Gate Access Logs</h2>
+}
+

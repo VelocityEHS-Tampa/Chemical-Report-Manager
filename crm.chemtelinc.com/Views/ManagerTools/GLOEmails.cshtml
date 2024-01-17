@@ -1,0 +1,94 @@
+﻿<div class="GLOHeader" style="width: 35%;">Control Panel</div>
+<br />
+<input type="radio" name="SearchOptions" value="GLO" onchange="GetEmailGroups(this.value)" />
+<span>GLO &nbsp;&nbsp;</span>
+<input type="radio" name="SearchOptions" value="TCEQ" onchange="GetEmailGroups(this.value)" />
+<span>TCEQ &nbsp;&nbsp;</span>
+<input type="radio" name="SearchOptions" value="RRC" onchange="GetEmailGroups(this.value)" />
+<span>RRC &nbsp;&nbsp;</span>
+<input type="radio" name="SearchOptions" value="Other" onchange="GetEmailGroups(this.value)" />
+<span>Other &nbsp;&nbsp;</span>
+<br />
+<br />
+<select name="SearchType" id="SearchType">
+</select>
+<input type="button" value="Search" onclick="GetEmailList()" />
+<br />
+<br />
+<div class="GLOHeader" style="width:35%;">Email Addresses</div>
+<br />
+@using (Html.BeginForm("GLOEmailUpdates", "ManagerTools", FormMethod.Post, new { @id = "GLOEmailUpdateForm" }))
+{
+    <div style="width:100%;">
+        <input type="hidden" name="HiddenCBSearch" id="HiddenCBSearch" value="" />
+        <span>Email 01</span> <input type="text" class="form-control GLOFieldSpacing" style="width:25%;" id="Email1" name="Email1" />
+        <br />
+        <span>Email 02</span> <input type="text" class="form-control GLOFieldSpacing" style="width:25%;" id="Email2" name="Email2" />
+        <br />
+        <span>Email 03</span> <input type="text" class="form-control GLOFieldSpacing" style="width:25%;" id="Email3" name="Email3" />
+        <br />
+        <span>Email 04</span> <input type="text" class="form-control GLOFieldSpacing" style="width:25%;" id="Email4" name="Email4" />
+        <br />
+        <span>Email 05</span> <input type="text" class="form-control GLOFieldSpacing" style="width:25%;" id="Email5" name="Email5" />
+        <br />
+        <span>Email 06</span> <input type="text" class="form-control GLOFieldSpacing" style="width:25%;" id="Email6" name="Email6" />
+        <br />
+        <span>Email 07</span> <input type="text" class="form-control GLOFieldSpacing" style="width:25%;" id="Email7" name="Email7" />
+        <br />
+        <span>Email 08</span> <input type="text" class="form-control GLOFieldSpacing" style="width:25%;" id="Email8" name="Email8" />
+        <br />
+        <span>Email 09</span> <input type="text" class="form-control GLOFieldSpacing" style="width:25%;" id="Email9" name="Email9" />
+        <br />
+        <span>Email 10</span> <input type="text" class="form-control GLOFieldSpacing" style="width:25%;" id="Email10" name="Email10" />
+    </div>
+    <input type="submit" value="Update" />
+}
+
+
+<script>
+    function GetEmailGroups(EmailGroup) {
+        $('#SearchType').empty(); //Clears all previous options that were in the select tag.
+        var x = document.getElementById("SearchType");
+        $.ajax({
+            url: '/ManagerTools/GetGLOEmailGroups/',
+            data: { emailgroup: EmailGroup },
+            type: 'GET',
+            success: function (data) {
+                const groups = data.split(',');
+                groups.forEach(function (item) {
+                    var option = document.createElement("option");
+                    option.value = item.trim();
+                    option.text = item.trim();
+                    x.add(option);
+                })
+            },
+            error: function (data) {
+                alert("ERROR!");
+            }
+        });
+    }
+    function GetEmailList() {
+        document.getElementById('HiddenCBSearch').value = $('#SearchType').val();
+        $.ajax({
+            url: '/ManagerTools/SearchGLOEmails/',
+            data: { SearchType: $('#SearchType').val() },
+            type: 'GET',
+            success: function (data) {
+                $("#Email1").val(data.Email1);
+                $("#Email2").val(data.Email2);
+                $("#Email3").val(data.Email3);
+                $("#Email4").val(data.Email4);
+                $("#Email5").val(data.Email5);
+                $("#Email6").val(data.Email6);
+                $("#Email7").val(data.Email7);
+                $("#Email8").val(data.Email8);
+                $("#Email9").val(data.Email9);
+                $("#Email10").val(data.Email10);
+            },
+            error: function (data) {
+                alert("ERROR!");
+            }
+        });
+    }
+
+</script>

@@ -1,0 +1,218 @@
+﻿@model ChemicalLibrary.ShellOilIncidentData
+@{
+    ViewBag.Title = "ShellOilReport";
+    //Get the time right now and convert it to central time.
+    DateTime ConvertedTime = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time"));
+    string NewTime = ConvertedTime.ToString("HH:mm");
+    string Updated = ViewBag.Updated;
+}
+
+<h2>Shell Oil Report</h2>
+
+@using (Html.BeginForm("SearchShellReport", "OtherReports", FormMethod.Post, new { id = "ShellSearchForm" }))
+{
+    <div id="ShellOilSearch" style="font-size: 10pt;">
+        <div class="GLOHeader" id="GRCPHeader" style="font-size: 10pt;">Shell Oil Incident Report Search</div>
+        <br />
+        <span>Search </span> <input type="text" id="IDSearch" name="IDSearch" class="form-control GLOFieldSpacing" style="width:20%;" /> <input type="submit" value="Search" class="form-control GLOFieldSpacing" style="width:10%;" />
+    </div>
+}
+
+@using (Html.BeginForm("SubmitShellReport", "OtherReports", FormMethod.Post, new { @id = "ShellReportForm", @name = "ShellReportForm" }))
+{
+    @Html.TextBox("Updated", @Updated, new { type="hidden", id="UpdatedReport" })
+    <div id="ShellReportInfo" style="font-size: 10pt;">
+        <br />
+        <div class="GLOHeader" id="GRCPHeader" style="font-size: 10pt;">Report Information and Caller Information</div>
+        <br />
+        <div class="CrestInlineDisplay" style="width:50%;">
+            <span>Report Information</span>
+            <hr />
+            <span class="required-field">ERS Operator</span> @Html.TextBoxFor(m => m.ERS_Operator, new { id = "txtersoperator", @Name = "txtersoperator", @class = "form-control GLOFieldSpacing", style = "width:50%;", @readonly = "" }) <br />
+            <span class="required-field">Incident ID</span> @Html.TextBoxFor(m => m.Inc_ID, new { id = "txtincidentid", @Name = "txtincidentid", @class = "form-control GLOFieldSpacing", style = "width:50%;", @readonly = "" }) <br />
+            <span class="required-field">Date</span> @Html.TextBoxFor(m => m.Date, new { id = "txtdate", @Name = "txtdate", @class = "form-control GLOFieldSpacing", style = "width:30%;", placeholder = "__/__/____", tabindex = "1" }) <br />
+            <span class="required-field">Time</span>@Html.TextBoxFor(m => m.Time, new { id = "txttime", @Name = "txttime", @class = "form-control GLOFieldSpacing", style = "width:30%;", placeholder = "__:__", tabindex = "2" }) <br />
+        </div>
+        <div class="CrestInlineDisplay" style="width:49%;">
+            <span>Caller Information</span>
+            <hr />
+            <span class="required-field">Caller Name</span> @Html.TextBoxFor(m => m.Caller_Name_1, new { id = "txtcallername", @Name = "txtcallername", @class = "form-control GLOFieldSpacing", style = "width:75%;", tabindex = "3" }) <br />
+            <span class="required-field">Phone #</span> @Html.TextBoxFor(m => m.Caller_Phone_1, new { id = "txtphone", @Name = "txtphone", @class = "form-control GLOFieldSpacing", style = "width:30%;", placeholder = "(___) ___-____", onblur = "FormatPhone(this.value, this.id)", tabindex = "3" })
+            <span>Ext</span> @Html.TextBoxFor(m => m.Caller_Ext_1, new { id = "txtext", @Name = "txtext", @class = "form-control GLOFieldSpacing", style = "width:20%;", tabindex = "4" })
+            <br />
+            <span class="required-field">Alt Phone #</span> @Html.TextBoxFor(m => m.Caller_Alt_Phone_1, new { id = "txtaltphone", @Name = "txtaltphone", @class = "form-control GLOFieldSpacing", style = "width: 30%;", placeholder = "(___) ___-____", onblur = "FormatPhone(this.value, this.id)", tabindex = "5" }) 
+            <span>Ext</span>@Html.TextBoxFor(m => m.Caller_Alt_Ext_1, new { id = "txtaltext", @Name = "txtaltext", @class = "form-control GLOFieldSpacing", style = "width: 20%;", tabindex = "6" })
+        </div>
+    </div>
+    <div id="ShellOilComments" style="font-size: 10pt;">
+        <br />
+        <div class="GLOHeader" id="GRCPHeader" style="font-size: 10pt;">Comments</div>
+        <br />
+        @Html.TextAreaFor(m => m.Comments, new { rows = "6", id = "txtcomments", @Name = "txtcomments", style = "width:100%;", tabindex = "7" })
+    </div>
+    <div id="ShellOilStaffInfo" style="font-size: 10pt;">
+        <br />
+        <div class="GLOHeader" id="GRCPHeader">Staff Information</div>
+        <br />
+        <span class="required-field">Staff Name</span> @Html.TextBoxFor(m => m.Staff_Name, new { id = "txtstaffname", @Name = "txtstaffname", @class = "form-control GLOFieldSpacing", list = "Staff", style = "width:15%;", onchange = "FillStafferForm(this.value)", tabindex = "8" })
+        <span class="required-field">Phone #</span> @Html.TextBoxFor(m => m.Staff_Phone, new { id = "txtstaffphone", @Name = "txtstaffphone", @class = "form-control GLOFieldSpacing", style = "width:15%;", placeholder = "(___) ___-____", onblur = "FormatPhone(this.value, this.id)", tabindex = "9" })
+        <span>Ext</span> @Html.TextBoxFor(m => m.Staff_Ext, new { id = "txtstaffext", @Name = "txtstaffext", @class = "form-control GLOFieldSpacing", style = "width:10%;", tabindex = "10" })
+        <br />
+        <span class="required-field">Report Time</span> @Html.TextBoxFor(m => m.Staff_Report_Time, new { id = "txtstafftime", @Name = "txtstafftime", @class = "form-control GLOFieldSpacing", style = "width:10%;", onblur = "FormatTime(this.value, this.id)", tabindex = "11" })
+        <h5 class="required-field" style="float:right;">E-mail a copy of report to the Crisis Management team ASAP!</h5>
+    </div>
+    <div id="FollowUpInfo" style="font-size: 10pt;">
+        <br />
+        <div class="GLOHeader" id="GRCPHeader">Follow-Up Information</div>
+        <br />
+        <div class="CrestInlineDisplay" style="width:10%;">
+            <span>Follow Up Name</span><br />
+            @Html.TextBoxFor(m => m.Follow_Up_Name_1, new { list = "Staff", @class = "form-control GLOFieldSpacing", id = "txtfollowupname1", @Name = "txtfollowupname1", onchange = "FillFollowUpForm(this.value, 1)", tabindex = "12"})
+            @Html.TextBoxFor(m => m.Follow_Up_Name_2, new { list = "Staff", @class = "form-control GLOFieldSpacing", id = "txtfollowupname2", @Name = "txtfollowupname2", onchange = "FillFollowUpForm(this.value, 2)", tabindex = "17"})
+            @Html.TextBoxFor(m => m.Follow_Up_Name_3, new { list = "Staff", @class = "form-control GLOFieldSpacing", id = "txtfollowupname3", @Name = "txtfollowupname3", onchange = "FillFollowUpForm(this.value, 3)", tabindex = "22"})
+            @Html.TextBoxFor(m => m.Follow_Up_Name_4, new { list = "Staff", @class = "form-control GLOFieldSpacing", id = "txtfollowupname4", @Name = "txtfollowupname4", onchange = "FillFollowUpForm(this.value, 4)", tabindex = "27"})
+            @Html.TextBoxFor(m => m.Follow_Up_Name_5, new { list = "Staff", @class = "form-control GLOFieldSpacing", id = "txtfollowupname5", @Name = "txtfollowupname5", onchange = "FillFollowUpForm(this.value, 5)", tabindex = "32"})
+        </div>
+        <div class="CrestInlineDisplay" style="width:10%;">
+            <span>Phone #</span><br />
+            @Html.TextBoxFor(m => m.Follow_Up_Phone_1, new { @class = "form-control GLOFieldSpacing", placeholder = "(___) ___-____", id = "txtfollowupphone1", @Name = "txtfollowupphone1", onblur = "FormatPhone(this.value, this.id)", tabindex = "13" })
+            @Html.TextBoxFor(m => m.Follow_Up_Phone_2, new { @class = "form-control GLOFieldSpacing", placeholder = "(___) ___-____", id = "txtfollowupphone2", @Name = "txtfollowupphone2", onblur = "FormatPhone(this.value, this.id)", tabindex = "18" })
+            @Html.TextBoxFor(m => m.Follow_Up_Phone_3, new { @class = "form-control GLOFieldSpacing", placeholder = "(___) ___-____", id = "txtfollowupphone3", @Name = "txtfollowupphone3", onblur = "FormatPhone(this.value, this.id)", tabindex = "23" })
+            @Html.TextBoxFor(m => m.Follow_Up_Phone_4, new { @class = "form-control GLOFieldSpacing", placeholder = "(___) ___-____", id = "txtfollowupphone4", @Name = "txtfollowupphone4", onblur = "FormatPhone(this.value, this.id)", tabindex = "28" })
+            @Html.TextBoxFor(m => m.Follow_Up_Phone_5, new { @class = "form-control GLOFieldSpacing", placeholder = "(___) ___-____", id = "txtfollowupphone5", @Name = "txtfollowupphone5", onblur = "FormatPhone(this.value, this.id)", tabindex = "33" })
+
+            @Html.TextBox("txtfollowupemail1", "", new { @type = "hidden", id = "txtfollowupemail1" })
+            @Html.TextBox("txtfollowupemail2", "", new { @type = "hidden", id = "txtfollowupemail2" })
+            @Html.TextBox("txtfollowupemail3", "", new { @type = "hidden", id = "txtfollowupemail3" })
+            @Html.TextBox("txtfollowupemail4", "", new { @type = "hidden", id = "txtfollowupemail4" })
+            @Html.TextBox("txtfollowupemail5", "", new { @type = "hidden", id = "txtfollowupemail5" })
+        </div>
+        <div class="CrestInlineDisplay" style="width:10%;">
+            <span>Ext</span><br />
+            @Html.TextBoxFor(m => m.Follow_Up_Ext_1, new { @class="form-control GLOFieldSpacing", id="txtfollowupext1", @Name = "txtfollowupext1", tabindex="15"})
+            @Html.TextBoxFor(m => m.Follow_Up_Ext_2, new { @class="form-control GLOFieldSpacing", id="txtfollowupext2", @Name = "txtfollowupext2", tabindex="20"})
+            @Html.TextBoxFor(m => m.Follow_Up_Ext_3, new { @class= "form-control GLOFieldSpacing", id = "txtfollowupext3", @Name = "txtfollowupext3", tabindex = "25"})
+            @Html.TextBoxFor(m => m.Follow_Up_Ext_4, new { @class= "form-control GLOFieldSpacing", id = "txtfollowupext4", @Name = "txtfollowupext4", tabindex = "30"})
+            @Html.TextBoxFor(m => m.Follow_Up_Ext_5, new { @class= "form-control GLOFieldSpacing", id = "txtfollowupext5", @Name = "txtfollowupext5", tabindex = "35"})
+        </div>
+        <div class="CrestInlineDisplay" style="width:5%;">
+            <span>Time</span><br />
+            @Html.TextBoxFor(m => m.Follow_Up_Time_1, new { @class="form-control GLOFieldSpacing", id="txtfollowuptime1", @Name = "txtfollowuptime1", placeholder="__:__", onblur="FormatTime(this.value, this.id)", tabindex="16"})
+            @Html.TextBoxFor(m => m.Follow_Up_Time_2, new { @class="form-control GLOFieldSpacing", id="txtfollowuptime2", @Name = "txtfollowuptime2", placeholder="__:__", onblur="FormatTime(this.value, this.id)", tabindex="21"})
+            @Html.TextBoxFor(m => m.Follow_Up_Time_3, new { @class= "form-control GLOFieldSpacing", id = "txtfollowuptime3", @Name = "txtfollowuptime3", placeholder = "__:__", onblur = "FormatTime(this.value, this.id)", tabindex = "26"})
+            @Html.TextBoxFor(m => m.Follow_Up_Time_4, new { @class= "form-control GLOFieldSpacing", id = "txtfollowuptime4", @Name = "txtfollowuptime4", placeholder = "__:__", onblur = "FormatTime(this.value, this.id)", tabindex = "31"})
+            @Html.TextBoxFor(m => m.Follow_Up_Time_5, new { @class= "form-control GLOFieldSpacing", id = "txtfollowuptime5", @Name = "txtfollowuptime5", placeholder = "__:__", onblur = "FormatTime(this.value, this.id)", tabindex = "36"})
+        </div>
+        <div class="CrestInlineDisplay" style="width:55%; text-align:right;">
+            <span style="font-weight:bold; font-size:12pt;">Document any calls or actions that you take in response to this emergency call.</span>
+        </div>
+    </div>
+    <div id="FormButtons" style="padding:2%;text-align:right;">
+        <input type="submit" value="Submit" class="form-control GRCPButtons required-field" id="btnsubmit" name="btnsubmit" onclick="SubmitForm()" tabindex="99">
+        <input type="button" value="Cancel" class="form-control GRCPButtons alert-info" id="btnclose" name="btnclose" onclick="ClearForm()">
+    </div>
+    @* Staff Name List *@
+    <datalist id="Staff">
+        <option value="Jeff Bowes">Jeff Bowes</option>
+        <option value="Greg Hallet">Greg Hallet</option>
+        <option value="Tom Hopkins">Tom Hopkins</option>
+        <option value="Tim Langford">Tim Langford</option>
+        <option value="Shane Stuntz">Shane Stuntz</option>
+    </datalist>
+}
+
+<script>
+    $(document).ready(function () {
+        if ("@Updated" != "true") {
+            $.ajax({
+                url: '/OtherReports/GetNewShellID/',
+                type: 'GET',
+                success: function (data) {
+                    $("#txtincidentid").val(data.NewID);
+                },
+                error: function (data) {
+                    alert("ERROR!");
+                }
+            })
+            $("#txtersoperator").val("@Session["username"].ToString()")
+            $("#txtdate").val("@DateTime.Now.ToShortDateString()")
+            $("#txttime").val("@NewTime");
+        }
+    });
+
+    function SubmitForm() {
+        if (confirm("Please ensure all data entered is correct before submitting! Are you sure you want to submit this report?")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    function ClearForm() {
+        if (confirm("Are you sure you want to cancel this report?")) {
+            location.href = "";
+        }
+    }
+    function FormatDate(Date, FieldName) {
+        //Purely number input, no slashes.
+        if (Date.length == 8 && !Date.includes("/")) {
+            var ds = Date.split("");
+            var fulldate = ds[0] + ds[1] + "/" + ds[2] + ds[3] + "/" + ds[4] + ds[5] + ds[6] + ds[7];
+            document.getElementById(FieldName).value = fulldate;
+        }
+    }
+    function FormatTime(Time, FieldName) {
+        //Purely number input, no semi-colons.
+        if (Time.length == 4 && !Time.includes(":")) {
+            var ts = Time.split("");
+            var fulltime = ts[0] + ts[1] + ":" + ts[2] + ts[3];
+            document.getElementById(FieldName).value = fulltime;
+        }
+    }
+    function FormatPhone(Phone, FieldName) {
+        //Purely number input, no parenthesis, no hyphens.
+        if (Phone.length == 10 && !Phone.includes("-") && !Phone.includes("(") && !Phone.includes(")")) {
+            var ps = Phone.split("");
+            var fullphone = "(" + ps[0] + ps[1] + ps[2] + ") " + ps[3] + ps[4] + ps[5] + "-" + ps[6] + ps[7] + ps[8] + ps[9]
+            document.getElementById(FieldName).value = fullphone;
+        }
+    }
+    function FillFollowUpForm(Name, FollowUpNumber) {
+        if (Name == "Jeff Bowes") {
+            document.getElementById("txtfollowupphone" + FollowUpNumber).value = "(403) 465-0547";
+            document.getElementById("txtfollowupemail" + FollowUpNumber).value = "Jeffrey.bowes@shell.com";
+        }
+        else if (Name == "Greg Hallet") {
+            document.getElementById("txtfollowupphone" + FollowUpNumber).value = "(403) 606-8436";
+            document.getElementById("txtfollowupemail" + FollowUpNumber).value = "";
+        }
+        else if (Name == "Tom Hopkins") {
+            document.getElementById("txtfollowupphone" + FollowUpNumber).value = "(225) 921-6909";
+            document.getElementById("txtfollowupemail" + FollowUpNumber).value = "";
+        }
+        else if (Name == "Tim Langford") {
+            document.getElementById("txtfollowupphone" + FollowUpNumber).value = "(504) 208-8193";
+            document.getElementById("txtfollowupemail" + FollowUpNumber).value = "";
+        }
+        else if (Name == "Shane Stuntz") {
+            document.getElementById("txtfollowupphone" + FollowUpNumber).value = "(225) 384-9313";
+            document.getElementById("txtfollowupemail" + FollowUpNumber).value = "shane.stuntz@shell.com";
+        }
+    }
+    function FillStafferForm(Name) {
+        if (Name == "Jeff Bowes") {
+            document.getElementById("txtstaffphone").value = "(403) 465-0547";
+        }
+        else if (Name == "Greg Hallet") {
+            document.getElementById("txtstaffphone").value = "(403) 606-8436";
+        }
+        else if (Name == "Tom Hopkins") {
+            document.getElementById("txtstaffphone").value = "(225) 921-6909";
+        }
+        else if (Name == "Tim Langford") {
+            document.getElementById("txtstaffphone").value = "(504) 208-8193";
+        }
+        else if (Name == "Shane Stuntz") {
+            document.getElementById("txtstaffphone").value = "(225) 384-9313";
+        }
+    }
+</script>

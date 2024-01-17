@@ -1,0 +1,46 @@
+﻿@model ChemicalLibrary.GeneralIncidentReportData
+
+@{
+    ViewBag.Title = "OtherReportsEmailForm";
+    ViewBag.AttachmentNames = "";
+    var incident = ViewData.Model;
+}
+
+<h2>Other Reports Email Form</h2>
+
+@using (Html.BeginForm("SendGenIncMail", "OtherReports", FormMethod.Post, new { @id = "form1", @enctype = "multipart/form-data" }))
+{
+    <span>To: </span>
+    <input type="hidden" id="IncidentID" name="IncidentID" value="@incident.Incident_ID" />
+    <input type="hidden" id="SubscribersName" name="SubscribersName" value="@incident.Subscribers_Name" />
+    <input type="text" id="txtemailto" name="txtemailto" class="form-control GLOFieldSpacing" style="width:95%;" />
+    <br />
+    <span>Subject: </span>
+    <input type="text" id="txtemailsubject" name="txtemailsubject" class="form-control GLOFieldSpacing" style="width:90%;" />
+    <br />
+    <div class="CrestInlineDisplay">
+        <textarea id="txtemailmessage" name="txtemailmessage" rows="15" cols="60"></textarea>
+    </div>
+    <div class="CrestInlineDisplay">
+        <input type="file" multiple="" name="AttachFile" id="AttachFile" value="Attach File" class="required-field" style="padding:20%;" onchange="GetFileNames()" />
+        <br />
+        <span id="txtemailattachment">
+            Attached:
+            <br />
+            <label id="FileNames"></label>
+        </span>
+    </div>
+    <br />
+    <input type="submit" value="Send" class="form-control GLOFieldSpacing" />
+    <input type="button" value="Cancel" class="form-control GLOFieldSpacing required-field" />
+}
+
+<script>
+    function GetFileNames() {
+        $('#FileNames').empty();
+        var files = document.getElementById("AttachFile").files;
+        for (var i = 0; i < files.length; i++) {
+            $('#FileNames').append(files[i].name + "<br />");
+        }
+    }
+</script>

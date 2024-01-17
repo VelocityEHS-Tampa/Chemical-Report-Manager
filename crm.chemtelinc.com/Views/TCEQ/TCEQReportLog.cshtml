@@ -1,0 +1,101 @@
+﻿@model IList<ChemicalLibrary.TceqLog>
+
+@{
+    ViewBag.Title = "TCEQReportLog";
+}
+
+<h2>TCEQ Report Log</h2>
+
+
+<div id="generatereportcontainer" style="width: 50%; display: inline-block; text-align: center;">
+    @using (Html.BeginForm("ReportSearch", "TCEQ", FormMethod.Post, new { id = "ReportSearchForm" }))
+    {
+        <span>Report Search</span>
+        <hr />
+        <input type="text" name="reportid" id="reportid" class="form-control GLOFieldSpacing" style="width:30%;" placeholder="TCEQ ID #" />
+        <input type="hidden" name="submittype" id="submittype" />
+        <input type="hidden" name="reportdate" id="reportdate" />
+        <input type="button" value="Search" class="form-control GLOFieldSpacing" style="width:20%;" onclick="Search()" />
+        <input type="button" value="View PDF" class="form-control GLOFieldSpacing" style="width: 20%;" onclick="ViewPDF()" />
+        <input type="button" value="Revise" class="form-control GLOFieldSpacing" style="width: 20%;" onclick="Revise()" />
+    }
+</div>
+<div id="reportsearchcontainer" style="width: 49%;display:inline-block;vertical-align:top; text-align:center;">
+    @using (Html.BeginForm("LineReport", "TCEQ", FormMethod.Post))
+    {
+        <span>Monthly Report</span>
+        <hr />
+        <div style="display: inline-block; width: 50%;">
+            <span>Start Date:</span>
+            <input type="date" name="startdate" id="startdate" class="form-control GLOFieldSpacing" style="width:60%;" />
+            <br />
+            <span>End Date:</span>
+            <input type="date" name="enddate" id="enddate" class="form-control GLOFieldSpacing" style="width:60%;" />
+            <input type="submit" value="Generate Report" class="form-control GLOFieldSpacing" onclick="GenerateReport()" />
+        </div>
+    }
+</div>
+<hr />
+
+<table cellpadding="5">
+    <tr>
+        <th></th>
+        <th>ID</th>
+        <th>ERS Operator</th>
+        <th>Report Date</th>
+        <th>Report Time</th>
+        <th>Incident Date</th>
+        <th>Incident Time</th>
+        <th>Reported By</th>
+        <th>Contact Number</th>
+        <th>Other Contact Number</th>
+        <th>County</th>
+        <th>Notification Time</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        ;
+        <tr id="Row_@item.ID">
+            <td><input type="radio" name="IDSelected" value="@item.ID" onclick="FillTCEQID(this.value), FillReportDate(@item.ReportDate.Split('/')[2])" /></td> @* Have to split the date string and grab the year in order to send it to javascript *@ 
+            <td>@item.ID</td>
+            <td>@item.ERS</td>
+            <td>@item.ReportDate</td>
+            <td>@item.ReportTime</td>
+            <td>@item.IncidentDate</td>
+            <td>@item.IncidentTime</td>
+            <td>@item.ReportedBy</td>
+            <td>@item.ContactNumber</td>
+            <td>@item.OtherNumbers</td>
+            <td>@item.County</td>
+            <td>@item.NotificationTime</td>
+        </tr>
+    }
+</table>
+
+<script>
+    function GenerateReport() {
+        var x = document.getElementById('startdate').value;
+        var y = document.getElementById('enddate').value;
+        return true;
+    }
+    function Search() {
+        document.getElementById("submittype").value = "Search";
+        document.getElementById("ReportSearchForm").submit();
+
+    }
+    function ViewPDF() {
+        var id = document.getElementById("reportid").value;
+        var year = document.getElementById("reportdate").value;
+        window.open('https://crm.chemtel.net/Completed Reports/TCEQ/' + year + '/TCEQ-' + id + '.pdf', "_blank");
+    }
+    function Revise() {
+        document.getElementById("submittype").value = "Revise";
+        document.getElementById("ReportSearchForm").submit();
+    }
+    function FillTCEQID(id) {
+        document.getElementById("reportid").value = id;
+    }
+    function FillReportDate(ReportYear) {
+        document.getElementById("reportdate").value = ReportYear;
+    }
+</script>

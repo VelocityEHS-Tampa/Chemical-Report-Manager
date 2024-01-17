@@ -1,0 +1,71 @@
+﻿@model ChemicalLibrary.ShellOilIncidentData
+@{
+    ViewBag.Title = "ShellOilReportEmailForm";
+    string ReportFilePath = ViewBag.ShellOilReport;
+    string ShowReportPath = ViewBag.ShowShellOilReport;
+}
+
+<h2>Shell Oil Report Email Form</h2>
+
+<br />
+@using (Html.BeginForm("SearchShellReport", "OtherReports", FormMethod.Post))
+{
+    <input type="hidden" value="@Model.Inc_ID" name="IDSearch" id="IDSearch" />
+    <input type="submit" value="Back To Report" name="UpdateOrCorrect" />
+}
+<br />
+<br />
+@using (Html.BeginForm("SendShellReport", "OtherReports", FormMethod.Post))
+{
+    <br />
+    <br />
+    <div style="text-align:center;">
+        <select id="AgentsList" size="8" onchange="AddNewEmail(this.value)" style="width:25%;">
+            <option value="Tim.B.Langford@shell.com">Tim Langford</option>
+            <option value="Rick.Ferguson@shell.com">Rick Ferguson</option>
+            <option value="Shane.Stuntz@shell.com">Shane Stuntz</option>
+            <option value="Jeffrey.bowes@shell.com">Jeff Bowes</option>
+            <option value="Greg.Hallet@shell.com">Greg Hallet</option>
+            <option value="Jerry.Hopkins@shell.com">Tom Hopkins</option>
+        </select>
+    </div>
+    <br />
+    <span>To</span> <textarea name="txtemailto" id="txtemailto" class="form-control GLOFieldSpacing"></textarea>
+    <input type="button" value="Clear Emails" class="form-control GLOFieldSpacing" style="width:10%;font-weight:600;float:right;" onclick="ClearEmails();" />
+    <br />
+    <span>Subject</span>
+    <input type="text" id="txtemailsubject" name="txtemailsubject" class="form-control GLOFieldSpacing" value="VelocityEHS Shell Oil Incident Report" />
+    <br />
+    <span>Attachment</span>
+    <input type="text" id="txtemailattachment" name="txtemailattachment" value="@ReportFilePath" class="form-control GLOFieldSpacing" />
+    <br />
+    <br />
+    <label id="Label6"><b>VelocityEHS Incident Report @Model.Inc_ID for Shell Oil Products</b></label>
+    <br />
+    <br />
+    <span>Message</span>
+    <br />
+    <textarea name="txtemailbody" id="txtemailbody" class="form-control GLOFieldSpacing"></textarea>
+    <br />
+    <br />
+    <br />
+    <div style="text-align:center;">
+        <input type="submit" value="Send" class="form-control GLOFieldSpacing" style="width:25%;color:red;font-weight:600;" />
+        <input type="button" value="Cancel" class="form-control GLOFieldSpacing" style="width:25%;font-weight:600;" />
+    </div>
+}
+
+<script>
+    $(document).ready(function () {
+        window.open("@ShowReportPath");
+    })
+    function AddNewEmail(email) {
+        document.getElementById("txtemailto").append(email + ", ");
+    }
+    function ClearEmails() {
+        $('#txtemailto').empty();
+    }
+    $(document).on('click', '#backLink', function () {
+        history.go(-1);
+    });
+</script>

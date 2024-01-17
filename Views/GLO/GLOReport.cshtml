@@ -1,0 +1,431 @@
+﻿@model ChemicalLibrary.GLOBaseReportData
+
+@{
+    ViewData["Title"] = "GLO Report";
+    string txtspillid = ViewBag.txtspillid;
+    string txtreportdate = ViewBag.txtreportdate;
+    string txtreporttime = ViewBag.txtreporttime;
+    string Corrected = ViewBag.Corrected;
+    string Updated = ViewBag.Updated;
+    List<SelectListItem> UnitTypes = new List<SelectListItem>();
+    UnitTypes.Add(new SelectListItem { Text = "", Value = "" });
+    UnitTypes.Add(new SelectListItem { Text = "cup", Value = "cup" });
+    UnitTypes.Add(new SelectListItem { Text = "drp", Value = "drp" });
+    UnitTypes.Add(new SelectListItem { Text = "gal", Value = "gal" });
+    UnitTypes.Add(new SelectListItem { Text = "lbs", Value = "lbs" });
+    UnitTypes.Add(new SelectListItem { Text = "ltr", Value = "ltr" });
+    UnitTypes.Add(new SelectListItem { Text = "mcf", Value = "mcf" });
+    UnitTypes.Add(new SelectListItem { Text = "oz", Value = "oz" });
+    UnitTypes.Add(new SelectListItem { Text = "pnt", Value = "pnt" });
+    UnitTypes.Add(new SelectListItem { Text = "qt", Value = "qt" });
+    UnitTypes.Add(new SelectListItem { Text = "tbs", Value = "tbs" });
+    UnitTypes.Add(new SelectListItem { Text = "tsp", Value = "tsp" });
+    UnitTypes.Add(new SelectListItem { Text = "unk", Value = "unk" });
+    UnitTypes.Add(new SelectListItem { Text = "yds", Value = "yds" });
+
+    List<SelectListItem> Origins = new List<SelectListItem>();
+    Origins.Add(new SelectListItem { Text = "", Value = "" });
+    Origins.Add(new SelectListItem { Text = "Drums", Value = "Drums" });
+    Origins.Add(new SelectListItem { Text = "Fixed E&P Facility", Value = "Fixed E&P Facility" });
+    Origins.Add(new SelectListItem { Text = "Fixed Non-E&P Facility", Value = "Fixed Non-E&P Facility" });
+    Origins.Add(new SelectListItem { Text = "Highway/Rail Vehicle/Aircraft", Value = "Highway/Rail Vehicle/Aircraft" });
+    Origins.Add(new SelectListItem { Text = "Transmission Pipeline", Value = "Transmission Pipeline" });
+    Origins.Add(new SelectListItem { Text = "Unknown", Value = "Unknown" });
+    Origins.Add(new SelectListItem { Text = "Water Vessel", Value = "Water Vessel" });
+
+    List<SelectListItem> Agencies = new List<SelectListItem>();
+    Agencies.Add(new SelectListItem { Text = "", Value = "" });
+    Agencies.Add(new SelectListItem { Text = "AGO", Value = "AGO" });
+    Agencies.Add(new SelectListItem { Text = "DPS", Value = "DPS" });
+    Agencies.Add(new SelectListItem { Text = "EPA", Value = "EPA" });
+    Agencies.Add(new SelectListItem { Text = "GLO", Value = "GLO" });
+    Agencies.Add(new SelectListItem { Text = "LEPC", Value = "LEPC" });
+    Agencies.Add(new SelectListItem { Text = "N/A", Value = "N/A" });
+    Agencies.Add(new SelectListItem { Text = "NRC", Value = "NRC" });
+    Agencies.Add(new SelectListItem { Text = "Other", Value = "Other" });
+    Agencies.Add(new SelectListItem { Text = "RRC", Value = "RRC" });
+    Agencies.Add(new SelectListItem { Text = "TACB", Value = "TACB" });
+    Agencies.Add(new SelectListItem { Text = "TCEQ", Value = "TCEQ" });
+    Agencies.Add(new SelectListItem { Text = "TDA", Value = "TDA" });
+    Agencies.Add(new SelectListItem { Text = "TDH", Value = "TDH" });
+    Agencies.Add(new SelectListItem { Text = "TPWD", Value = "TPWD" });
+    Agencies.Add(new SelectListItem { Text = "TXDOT", Value = "TXDOT" });
+    Agencies.Add(new SelectListItem { Text = "USCG", Value = "USCG" });
+
+    List<SelectListItem> YesOrNo = new List<SelectListItem>();
+    YesOrNo.Add(new SelectListItem { Text = "", Value = "" });
+    YesOrNo.Add(new SelectListItem { Text = "YES", Value = "YES" });
+    YesOrNo.Add(new SelectListItem { Text = "NO", Value = "NO" });
+}
+<h2>GLO Report</h2>
+@using (Html.BeginForm("CorrectedGLO", "GLO", FormMethod.Post, new { @id = "CorrectedGLOReportForm" }))
+{
+    <div id="GLOReportControlPanel">
+        <div class="GLOHeader" id="GRCPHeader">GLO Report Control Panel</div>
+        <div class="ContentSection">
+            <br />
+            <span style="width:5%; float:left;">Search: </span>@Html.TextBox("cbsearch", "", new { @class = "form-control", style = "width: 15%; display:inline;", id = "cbsearch" })
+            <input type="submit" value="Correct" class="form-control GRCPButtons" id="btncorrect" name="btncorrect" onclick="CorrectedGLO()">
+            <input type="submit" value="Update" class="form-control GRCPButtons" id="btnupdate" name="btnupdate" onclick="UpdatedGLO()">
+            <input type="button" value="Phone" class="form-control GRCPButtons" id="btnphone" name="btnphone" onclick="PhoneButton()">
+            <input type="hidden" name="HiddenTxtSpillID" value="@txtspillid" />
+            <input type="hidden" name="UpdateOrCorrect" id="UpdateOrCorrect" value="" />
+        </div>
+    </div>
+}
+<br />
+@using (Html.BeginForm("SubmitGLOReport", "GLO", FormMethod.Post, new { @id = "GLOReportForm" }))
+{
+    <input type="hidden" name="Corrected" value="@Corrected" />  //This will send whether the report is corrected or not to the class function.
+    <div class="GLOFormContainer" id="GLOFormContainer">
+        <div id="ReportInfoContainer">
+            <div class="GLOHeader" id="GRIHeader">Report and Caller Information</div>
+            <div class="GRSFields">
+                <div class="ContentSection">
+                    <span class="required-field">Is this a Drill?</span>
+                    @Html.DropDownListFor(m => m.Drill_Txt, YesOrNo, new { id = "cbdrill", required = "", tabindex = 1 })
+                    <br />
+                    @Html.Label("Report Number", new { @class = "required-field" })
+                    @if (Corrected == "true" || Updated == "true")
+                    {
+                        @Html.TextBoxFor(m => m.Spill_ID, new { @class = "form-control GLOFieldSpacing", style = "width: 25%;", id = "txtspillid", @Name = "txtspillid", @readonly = "", required = "" })
+                    }
+                    else
+                    {
+                        <input type="text" class="form-control GLOFieldSpacing" style="width: 25%;" id="txtspillid" name="txtspillid" value="@txtspillid" readonly="" required="" />
+                    }
+                    <br />
+                    @Html.Label("Report Date", new { @class = "required-field" })
+                    @Html.TextBoxFor(m => m.Report_Taken_Date, new { @class = "form-control GLOFieldSpacing", style = "width: 25%;", id = "txtreportdate", @Name = "txtreportdate", required = "", tabindex = 2, onblur = "FormatDate(this.value, this.id)" })
+                    <span class="required-field"></span>
+                    @Html.Label("Report Time", new { @class = "required-field" })
+                    @Html.TextBoxFor(m => m.Report_Taken_Time, new { @class = "form-control GLOFieldSpacing", style = "width: 15%;", id = "txtreporttime", @Name = "txtreporttime", required = "", tabindex = 3, onblur = "FormatTime(this.value, this.id)" })
+                    <br />
+                    <span>Agency(s) to be Notified</span>
+                    @Html.TextBoxFor(m => m.Notification_Agency, new { @class = "form-control GLOFieldSpacing", style = "width: 50%;", id = "txtagencynotification", @Name = "txtagencynotification", tabindex = 4 })
+                </div>
+                <div class="ContentSection">
+                    @Html.Label("Incident Date", new { @class = "required-field" })
+                    @Html.TextBoxFor(m => m.Discharge_Date, new { @class = "form-control GLOFieldSpacing", style = "width: 25%;", id = "datincidentdate", @Name = "datincidentdate", required = "", tabindex = 5, onblur = "FormatDate(this.value, this.id)" })
+                    <br />
+                    <span class="required-field">Reported By</span>
+                    @Html.TextBoxFor(m => m.Discharge_Reported_By, new { @class = "form-control GLOFieldSpacing", style = "width: 50%;", id = "txtreportedby", @Name = "txtreportedby", required = "", tabindex = 6 })
+                    <br />
+                    <span class="required-field">Contact Number</span>
+                    @Html.TextBoxFor(m => m.Discharged_Phone_1, new { @class = "form-control GLOFieldSpacing", style = "width: 50%;", id = "txtdischargedphone1", @Name = "txtdischargedphone1", required = "", tabindex = 7 })
+                </div>
+                <div class="ContentSection">
+                    <span class="required-field">Incident Time</span>
+                    @Html.TextBoxFor(m => m.Discharge_Time, new { @class = "form-control GLOFieldSpacing", style = "width: 15%;", id = "txtincidenttime", @Name = "txtincidenttime", required = "", tabindex = 8, onblur = "FormatTime(this.value, this.id)" })
+                    <br />
+                    <span class="required-field">Affiliation</span>
+                    @Html.TextBoxFor(m => m.Report_Party_Affiliation, new { @class = "form-control GLOFieldSpacing", style = "width: 50%;", id = "txtreportaffiliation", @Name = "txtreportaffiliation", required = "", tabindex = 9 })
+                    <br />
+                    <span>Other Contact Number</span>
+                    @Html.TextBoxFor(m => m.Discharged_Phone_2, new { @class = "form-control GLOFieldSpacing", style = "width: 50%;", id = "txtdischargedphone2", @Name = "txtdischargedphone2", tabindex = 10 })
+                </div>
+            </div>
+        </div>
+        <div class="MaterialDischargeContainer" id="MaterialDischargeContainer">
+            <div class="GLOHeader" id="GRIHeader">Material(s) and Discharge/Spill Location</div>
+            <div class="DischargeContent">
+                <div class="ContentSection" style="text-align:center; width:15%;">
+                    <span class="required-field">Material</span>
+                    <br />
+                    @Html.TextBoxFor(m => m.Material_1, new { @class = "form-control GLOFieldSpacing", id = "txtmaterial1", @Name = "txtmaterial1", required = "", tabindex = 11 })
+                    @Html.TextBoxFor(m => m.Material_2, new { @class = "form-control GLOFieldSpacing", id = "txtmaterial2", @Name = "txtmaterial2", tabindex = 15 })
+                    @Html.TextBoxFor(m => m.Material_3, new { @class = "form-control GLOFieldSpacing", id = "txtmaterial3", @Name = "txtmaterial3", tabindex = 19 })
+                    @Html.TextBoxFor(m => m.Material_4, new { @class = "form-control GLOFieldSpacing", id = "txtmaterial4", @Name = "txtmaterial4", tabindex = 23 })
+                    @Html.TextBoxFor(m => m.Material_5, new { @class = "form-control GLOFieldSpacing", id = "txtmaterial5", @Name = "txtmaterial5", tabindex = 27 })
+                </div>
+                <div class="ContentSection" style="text-align:center; width:15%; ">
+                    <span>CAS / UN Number</span>
+                    <br />
+                    @Html.TextBoxFor(m => m.CASUN_1, new { @class = "form-control GLOFieldSpacing", id = "txtcasun1", @Name = "txtcasun1", tabindex = 12 })
+                    @Html.TextBoxFor(m => m.CASUN_2, new { @class = "form-control GLOFieldSpacing", id = "txtcasun2", @Name = "txtcasun2", tabindex = 16 })
+                    @Html.TextBoxFor(m => m.CASUN_3, new { @class = "form-control GLOFieldSpacing", id = "txtcasun3", @Name = "txtcasun3", tabindex = 20 })
+                    @Html.TextBoxFor(m => m.CASUN_4, new { @class = "form-control GLOFieldSpacing", id = "txtcasun4", @Name = "txtcasun4", tabindex = 24 })
+                    @Html.TextBoxFor(m => m.CASUN_5, new { @class = "form-control GLOFieldSpacing", id = "txtcasun5", @Name = "txtcasun5", tabindex = 28 })
+                </div>
+                <div class="ContentSection" style="text-align:center; width:10%;">
+                    <span class="required-field" style="margin: 0 auto;">Amount Spilled</span>
+                    <br />
+                    @Html.TextBoxFor(m => m.Amount_Spilled_1, new { @class = "form-control GLOFieldSpacing", id = "txtamountspilled1", @Name = "txtamountspilled1", required = "", type = "number", tabindex = 13, onchange = "RequireCBUnits(this.value)" })
+                    @Html.TextBoxFor(m => m.Amount_Spilled_2, new { @class = "form-control GLOFieldSpacing", id = "txtamountspilled2", @Name = "txtamountspilled2", type = "number", tabindex = 17 })
+                    @Html.TextBoxFor(m => m.Amount_Spilled_3, new { @class = "form-control GLOFieldSpacing", id = "txtamountspilled3", @Name = "txtamountspilled3", type = "number", tabindex = 21 })
+                    @Html.TextBoxFor(m => m.Amount_Spilled_4, new { @class = "form-control GLOFieldSpacing", id = "txtamountspilled4", @Name = "txtamountspilled4", type = "number", tabindex = 25 })
+                    @Html.TextBoxFor(m => m.Amount_Spilled_5, new { @class = "form-control GLOFieldSpacing", id = "txtamountspilled5", @Name = "txtamountspilled5", type = "number", tabindex = 29 })
+                </div>
+                <div class="ContentSection" style="width:6%; text-align:center;">
+                    <span class="required-field">Units</span>
+                    <br />
+                    @Html.DropDownListFor(m => m.Unit_Recovered_1, UnitTypes, new { @class = "GLOFieldSpacing", id = "cbunits1", @Name = "cbunits1", required = "", tabindex = 14 })
+                    <br />
+                    @Html.DropDownListFor(m => m.Unit_Recovered_2, UnitTypes, new { @class = "GLOFieldSpacing", id = "cbunits2", @Name = "cbunits2", tabindex = 18 })
+                    <br />
+                    @Html.DropDownListFor(m => m.Unit_Recovered_3, UnitTypes, new { @class = "GLOFieldSpacing", id = "cbunits3", @Name = "cbunits3", tabindex = 22 })
+                    <br />
+                    @Html.DropDownListFor(m => m.Unit_Recovered_4, UnitTypes, new { @class = "GLOFieldSpacing", id = "cbunits4", @Name = "cbunits4", tabindex = 26 })
+                    <br />
+                    @Html.DropDownListFor(m => m.Unit_Recovered_5, UnitTypes, new { @class = "GLOFieldSpacing", id = "cbunits5", @Name = "cbunits5", tabindex = 30 })
+                    <br />
+                </div>
+                <div class="ContentSection">
+                    <div class="GLOHeader">NON-COASTAL</div>
+                    @if (Model.Land == "TRUE")
+                    {
+                        <input type="radio" name="SpillType" value="rbland" tabindex="31" checked="" />
+                    }
+                    else
+                    {
+                        <input type="radio" name="SpillType" value="rbland" tabindex="31" />
+                    }
+                    <span class="required-field">Land Release Only</span> <br /><br />
+                    @if (Model.Spill_In_Water == "TRUE")
+                    {
+                        <input type="radio" name="SpillType" value="rbspillinwater" tabindex="32" checked="" />
+                    }
+                    else
+                    {
+                        <input type="radio" name="SpillType" value="rbspillinwater" tabindex="32" />
+                    }
+                    <span class="required-field">Threatens/Entered Water</span> <br /><br />
+
+                    @if (Model.Coastal_Water == "TRUE")
+                    {
+                        <input type="radio" name="SpillType" value="rbcoastalwater" tabindex="33" checked="" />
+                    }
+                    else
+                    {
+                        <input type="radio" name="SpillType" value="rbcoastalwater" tabindex="33" />
+                    }
+                    <span class="required-field">COASTAL: Threatens/Entered Water</span> <br /><br />
+
+                    @if (Model.Spill_Air_Release == "TRUE")
+                    {
+                        <input type="radio" name="SpillType" value="rbairrelease" tabindex="34" checked=""/>
+                    }
+                    else
+                    {
+                        <input type="radio" name="SpillType" value="rbairrelease" tabindex="34" />
+                    }
+                    <span class="required-field">Air Release</span>
+                </div>
+                <div class="ContentSection" style="text-align:center;">
+                    <span class="required-field">County</span>
+                    @Html.TextBoxFor(m => m.Spill_County, new { @class = "form-control", style = "display: inline; width: 50%; margin: 5px;", id = "cbcounty", @Name = "cbcounty", required = "", tabindex = 35 })
+                    <br />
+                    <span class="required-field">Origin</span>
+                    @Html.DropDownListFor(m => m.Origin, Origins, new { @class = "GLOFieldSpacing", style = "display: inline; width: 50%; margin: 5px;", id = "cborigin", @Name = "cborigin", required = "", tabindex = 36 })
+                    <br />
+                    <span class="required-field">Rec. Water</span>
+                    @Html.TextBoxFor(m => m.Spill_Receiving_Water, new { @class = "form-control", style = "display: inline; width: 50%; margin: 5px;", id = "txtreceivingwater", @Name = "txtreceivingwater", required = "", tabindex = 37 })
+                    <br />
+                    <span class="required-field">Amt In Water</span>
+                    @Html.TextBoxFor(m => m.Spill_Amount_In_Water, new { @class = "form-control", style = "display: inline; width: 50%; margin: 5px;", id = "txtamountinwater", @Name = "txtamountinwater", required = "", tabindex = 38 })
+                    <br />
+                    <span>Units</span>
+                    @Html.DropDownListFor(m => m.Spill_Amount_In_Water_Units, UnitTypes, new { id = "cbamountinwaterunits", @Name = "cbamountinwaterunits", required = "", tabindex = 39 })
+                </div>
+            </div>
+        </div>
+        <div class="IncidentLocationContainer" id="IncidentLocationContainer">
+            <div class="GLOHeader" id="GILHeader">Incident Location, Driving Directions, Description of Incident, Cause, Impact, Response, and RRC Information</div>
+            <div class="GILFields">
+                <div class="ContentSection">
+                    <span class="required-field">Incident Location and Directions</span><br />
+                    @Html.TextAreaFor(m => m.Spill_Location, new { @Name = "txtincidentlocation", id = "txtincidentlocation", cols = "30", rows = "3", required = "", tabindex = 40 })<br />
+                    <span>NRC Number</span>
+                    @Html.TextBoxFor(m => m.NRC_Number, new { @class = "form-control GLOFieldSpacing", style = "width: 50%;", id = "txtnrcnumber", @Name = "txtnrcnumber", tabindex = 41 })
+                </div>
+                <div class="ContentSection">
+                    <span class="required-field">Description of Incident, Cause, Impact, and Response</span><br />
+                    @Html.TextAreaFor(m => m.Actions_Taken_Clean_Up_Status, new { @Name = "txtdescription", id = "txtdescription", cols = "30", rows = "3", required = "", tabindex = 42 })
+                </div>
+                <div class="ContentSection">
+                    <span class="required-field">RRC Lease #</span>
+                    @Html.TextBoxFor(m => m.RRC_Lease_Number, new { @class = "form-control GLOFieldSpacing", style = "width: 60%;", id = "txtrrcleasenumber", @Name = "txtrrcleasenumber", tabindex = 43 }) <br />
+                    <span class="required-field">RRC Lease Name</span>
+                    @Html.TextBoxFor(m => m.RRC_Lease_Name, new { @class = "form-control GLOFieldSpacing", style = "width: 60%;", id = "txtrrcleasename", @Name = "txtrrcleasename", tabindex = 44 })<br />
+                    <span class="required-field">RRC Field Name</span>
+                    @Html.TextBoxFor(m => m.RRC_Field_Name, new { @class = "form-control GLOFieldSpacing", style = "width: 65%;", id = "txtrrcfieldname", @Name = "txtrrcfieldname", tabindex = 45 })<br />
+                    <span class="required-field">RRC Land Owner</span>
+                    @Html.TextBoxFor(m => m.Land_Owner, new { @class = "form-control GLOFieldSpacing", style = "width: 65%;", id = "txtrrclandowner", @Name = "txtrrclandowner", tabindex = 46 })<br />
+                </div>
+            </div>
+        </div>
+        <div class="DifferentPartiesContainer" id="DifferentPartiesContainer">
+            <div class="GLOHeader" id="GDPHeader">Others Reporting Party Notified and Party Responsible for Discharge/Spill</div>
+            <div class="GDPFields">
+                <div class="ContentSection" style="width:10%;">
+                    <span>Agency</span><br />
+                    @Html.DropDownListFor(m => m.Agency_Name_1, Agencies, new { @class = "GLOMargin", id = "cbagency1", @Name = "cbagency1", tabindex = 47 })
+                    @Html.DropDownListFor(m => m.Agency_Name_2, Agencies, new { @class = "GLOMargin", id = "cbagency2", @Name = "cbagency2", tabindex = 52 })
+                    @Html.DropDownListFor(m => m.Agency_Name_3, Agencies, new { @class = "GLOMargin", id = "cbagency3", @Name = "cbagency3", tabindex = 57 })
+                </div>
+                <div class="ContentSection">
+                    <span>Who</span><br />
+                    @Html.TextBoxFor(m => m.Who_1, new { @class = "form-control GLOMargin", id = "txtwho1", @Name = "txtwho1", tabindex = 48 })
+                    @Html.TextBoxFor(m => m.Who_2, new { @class = "form-control GLOMargin", id = "txtwho2", @Name = "txtwho2", tabindex = 53 })
+                    @Html.TextBoxFor(m => m.Who_3, new { @class = "form-control GLOMargin", id = "txtwho3", @Name = "txtwho3", tabindex = 58 })
+                </div>
+                <div class="ContentSection">
+                    <span>Where</span><br />
+                    @Html.TextBoxFor(m => m.Where_1, new { @class = "form-control GLOMargin", id = "txtwhere1", @Name = "txtwhere1", tabindex = 49 })
+                    @Html.TextBoxFor(m => m.Where_2, new { @class = "form-control GLOMargin", id = "txtwhere2", @Name = "txtwhere2", tabindex = 54 })
+                    @Html.TextBoxFor(m => m.Where_3, new { @class = "form-control GLOMargin", id = "txtwhere3", @Name = "txtwhere3", tabindex = 59 })
+                </div>
+                <div class="ContentSection" style="width:10%;">
+                    <span>Date</span><br />
+                    @Html.TextBoxFor(m => m.Date_1, new { @class = "form-control GLOMargin", id = "txtdate1", @Name = "txtdate1", tabindex = 50, onblur = "FormatDate(this.value, this.id)" })
+                    @Html.TextBoxFor(m => m.Date_2, new { @class = "form-control GLOMargin", id = "txtdate2", @Name = "txtdate2", tabindex = 55, onblur = "FormatDate(this.value, this.id)" })
+                    @Html.TextBoxFor(m => m.Date_3, new { @class = "form-control GLOMargin", id = "txtdate3", @Name = "txtdate3", tabindex = 60, onblur = "FormatDate(this.value, this.id)" })
+                </div>
+                <div class="ContentSection" style="width:5%;">
+                    <span>Time</span><br />
+                    @Html.TextBoxFor(m => m.Time_1, new { @class = "form-control GLOMargin", id = "txttime1", @Name = "txttime1", tabindex = 51, onblur = "FormatTime(this.value, this.id)" })
+                    @Html.TextBoxFor(m => m.Time_2, new { @class = "form-control GLOMargin", id = "txttime2", @Name = "txttime2", tabindex = 56, onblur = "FormatTime(this.value, this.id)" })
+                    @Html.TextBoxFor(m => m.Time_3, new { @class = "form-control GLOMargin", id = "txttime3", @Name = "txttime3", tabindex = 61, onblur = "FormatTime(this.value, this.id)" })
+                </div>
+                <div class="ContentSection" style="width:40%;text-align:right;">
+                    <span>Party Responsible for Discharge/Spill</span><br />
+                    <span class="required-field" style="display:inline;">Firm or Municipality</span>
+                    @Html.TextBoxFor(m => m.Spiller, new { @class = "form-control GLOFieldSpacing", style = "width: 50%;", id = "txtspiller", @Name = "txtspiller", tabindex = 62 })
+                    <br />
+                    <span>Street or PO</span>
+                    @Html.TextBoxFor(m => m.Spiller_Address, new { @class = "form-control GLOFieldSpacing", style = "width: 50%;", id = "txtspilleraddress", @Name = "txtspilleraddress", tabindex = 63 })
+                    <br />
+                    <div>
+                        <span>City</span>
+                        @Html.TextBoxFor(m => m.Spiller_City, new { @class = "form-control GLOFieldSpacing", style = "width: 35%;", id = "txtspillercity", @Name = "txtspillercity", tabindex = 64 })
+                        <span>State</span>
+                        @Html.TextBoxFor(m => m.Spiller_State, new { @class = "form-control GLOFieldSpacing", style = "width: 7%;", id = "txtspillerstate", @Name = "txtspillerstate", tabindex = 65 })
+                        <span>Zip Code</span>
+                        @Html.TextBoxFor(m => m.Spiller_Zip_Code, new { @class = "form-control GLOFieldSpacing", style = "width: 15%;", id = "txtspillerzipcode", @Name = "txtspillerzipcode", tabindex = 66 })
+                        <br />
+                    </div>
+                    <span>Contact Person</span>
+                    @Html.TextBoxFor(m => m.Spiller_Contact, new { @class = "form-control GLOFieldSpacing", style = "width: 35%;", id = "txtcontactperson", @Name = "txtcontactperson", tabindex = 67 })
+                    <span>Phone</span>
+                    @Html.TextBoxFor(m => m.Spiller_Contact_Phone, new { @class = "form-control GLOFieldSpacing", style = "width: 25%;", id = "txtcontactphone", @Name = "txtcontactphone", tabindex = 68, onblur = "FormatPhone(this.value, this.id)" })
+                </div>
+            </div>
+        </div>
+        <div class="NotificationsContainer" id="NotificationsContainer">
+            <div class="GLOHeader" id="GNotifyHeader">Phone Notification and Late Notification Comments</div>
+            <div class="GNotifyFields">
+                <div class="ContentSection" style="width:10%;">
+                    <span class="required-field">Agency</span><br />
+
+                    @Html.DropDownListFor(m => m.Agcy_Name_1, Agencies, new { @class = "GLOMargin", id = "cbagcy1", @Name = "cbagcy1", required = "", tabindex = 69 })
+                    @Html.DropDownListFor(m => m.Agcy_Name_2, Agencies, new { @class = "GLOMargin", id = "cbagcy2", @Name = "cbagcy2", tabindex = 74 })
+                    @Html.DropDownListFor(m => m.Agcy_Name_3, Agencies, new { @class = "GLOMargin", id = "cbagcy3", @Name = "cbagcy3", tabindex = 79 })
+                </div>
+                <div class="ContentSection">
+                    <span class="required-field">Who</span><br />
+
+                    @Html.TextBoxFor(m => m.W1, new { @class = "form-control GLOMargin", id = "txtw1", @Name = "txtw1", required = "", tabindex = 70 })
+                    @Html.TextBoxFor(m => m.W2, new { @class = "form-control GLOMargin", id = "txtw2", @Name = "txtw2", tabindex = 75 })
+                    @Html.TextBoxFor(m => m.W3, new { @class = "form-control GLOMargin", id = "txtw3", @Name = "txtw3", tabindex = 80 })
+                </div>
+                <div class="ContentSection">
+                    <span class="required-field">Where</span><br />
+                    @Html.TextBoxFor(m => m.Whr1, new { @class = "form-control GLOMargin", id = "txtwhr1", @Name = "txtwhr1", required = "", tabindex = 71 })
+                    @Html.TextBoxFor(m => m.Whr2, new { @class = "form-control GLOMargin", id = "txtwhr2", @Name = "txtwhr2", tabindex = 76 })
+                    @Html.TextBoxFor(m => m.Whr3, new { @class = "form-control GLOMargin", id = "txtwhr3", @Name = "txtwhr3", tabindex = 81 })
+                </div>
+                <div class="ContentSection" style="width:10%;">
+                    <span class="required-field">Date</span><br />
+                    @Html.TextBoxFor(m => m.D1, new { @class = "form-control GLOMargin", id = "txtd1", @Name = "txtd1", required = "", tabindex = 72, onblur = "FormatDate(this.value, this.id)" })
+                    @Html.TextBoxFor(m => m.D2, new { @class = "form-control GLOMargin", id = "txtd2", @Name = "txtd2", tabindex = 77, onblur = "FormatDate(this.value, this.id)" })
+                    @Html.TextBoxFor(m => m.D3, new { @class = "form-control GLOMargin", id = "txtd3", @Name = "txtd3", tabindex = 82, onblur = "FormatDate(this.value, this.id)" })
+                </div>
+                <div class="ContentSection" style="width:5%;">
+                    <span class="required-field">Time</span><br />
+                    @Html.TextBoxFor(m => m.Ti1, new { @class = "form-control GLOMargin", id = "txtti1", @Name = "txtti1", required = "", tabindex = 73, onblur = "FormatTime(this.value, this.id)" })
+                    @Html.TextBoxFor(m => m.Ti2, new { @class = "form-control GLOMargin", id = "txtti2", @Name = "txtti2", tabindex = 78, onblur = "FormatTime(this.value, this.id)" })
+                    @Html.TextBoxFor(m => m.Ti3, new { @class = "form-control GLOMargin", id = "txtti3", @Name = "txtti3", tabindex = 83, onblur = "FormatTime(this.value, this.id)" })
+                </div>
+                <div class="ContentSection" style="width:40%; text-align:center;padding-left:10px;">
+                    <span>Late Notification Comments</span><br />
+                    @Html.TextAreaFor(m => m.Comments, new { @Name = "txtlatenotificationcomments", id = "txtlatenotificationcomments", cols = "40", rows = "5", tabindex = 84 })
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="GRCPFields">
+            <div class="ContentSection" style="text-align:center;">
+                <input type="submit" value="Submit Report" class="form-control GRCPButtons required-field" id="btnsubmit" name="btnsubmit" onclick="SubmitForm()" tabindex="99">
+                <input type="button" value="Cancel Report" class="form-control GRCPButtons alert-info" id="btnclose" name="btnclose">
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $(document).ready(function () {
+        if ("@Updated" == "true") {
+            $("#txtdescription").prepend("THIS IS AN UPDATE FROM REPORT NUMBER " + @Model.Spill_ID + ".    ");
+        }
+    });
+
+    function SubmitForm() {
+        if ($("#rbland").Checked == false && $("#rbspillinwater").Checked == false && $("#rbcoastalwater").Checked == false && $("#rbairrelease").Checked == false) {
+            alert("You must select an option in the NON-COASTAL section");
+            return false;
+        } else {
+            if (confirm("Please ensure all data entered is correct before submitting! Are you sure you want to submit this report ?")) {
+                return true;
+            }
+        }
+    };
+    function CorrectedGLO() {
+        if (confirm("This will cancel the new report that has been prepared for you to enter.Are you sure you want to cancel this new report in order to view the report you want to correct?")) {
+            $("#UpdateOrCorrect").val("Corrected");
+            var cbsearch = document.getElementById('cbsearch').value;
+            var txtspillid = document.getElementById('txtspillid').value;
+            document.getElementById('txtspillid').value = cbsearch;
+            return true;
+        }
+    }
+    function UpdatedGLO() {
+        if (confirm("This will cancel the new report that has been prepared for you to enter.Are you sure you want to cancel this new report in order to view the report you want to correct?")) {
+            $("#UpdateOrCorrect").val("Updated");
+            var cbsearch = document.getElementById('cbsearch').value;
+            var txtspillid = document.getElementById('txtspillid').value;
+            document.getElementById('txtspillid').value = cbsearch;
+            return true;
+        }
+    }
+    function FormatDate(Date, FieldName) {
+        //Purely number input, no slashes.
+        if (Date.length == 8 && !Date.includes("/")) {
+            var ds = Date.split("");
+            var fulldate = ds[0] + ds[1] + "/" + ds[2] + ds[3] + "/" + ds[4] + ds[5] + ds[6] + ds[7];
+            document.getElementById(FieldName).value = fulldate;
+        }
+    }
+    function FormatTime(Time, FieldName) {
+        //Purely number input, no semi-colons.
+        if (Time.length == 4 && !Time.includes(":")) {
+            var ts = Time.split("");
+            var fulltime = ts[0] + ts[1] + ":" + ts[2] + ts[3];
+            document.getElementById(FieldName).value = fulltime;
+        }
+    }
+    function FormatPhone(Phone, FieldName) {
+        //Purely number input, no parenthesis, no hyphens.
+        if (Phone.length == 10 && !Phone.includes("-") && !Phone.includes("(") && !Phone.includes(")")) {
+            var ps = Phone.split("");
+            var fullphone = "(" + ps[0] + ps[1] + ps[2] + ") " + ps[3] + ps[4] + ps[5] + "-" + ps[6] + ps[7] + ps[8] + ps[9]
+            document.getElementById(FieldName).value = fullphone;
+        }
+    }
+    function RequireCBUnits(amt) {
+        if (amt != "0.00") {
+            $("#cbunits1").prop("required", true);
+        } else {
+            $("#cbunits1").prop("required", false);
+        }
+    }
+</script>

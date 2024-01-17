@@ -1,0 +1,71 @@
+﻿@model ChemicalLibrary.GeneralIncidentReportData
+
+@{
+    ViewBag.Title = "General Incident Email Form";
+    ViewBag.AttachmentNames = "";
+    string yr = Model.Incident_ID.Substring(0, 4);
+    string ReportFilePath = @"\\chem-fs1.ers.local\Completed Reports\General Incidents\" + yr + @"\" + Model.Incident_ID + ".pdf";
+    string Subscriber = Model.Subscribers_Name;
+}
+
+<h2>Other Reports Email Form</h2>
+<br />
+@using (Html.BeginForm("SearchGenIncReport", "OtherReports", FormMethod.Post))
+{
+    <input type="hidden" value="@Model.Incident_ID" name="cbsearch" id="cbsearch" />
+    <input type="submit" value="Back To Report" name="UpdateOrCorrect" />
+}
+<br />
+<br />
+
+@using (Html.BeginForm("SendGenIncMail", "OtherReports", FormMethod.Post, new { @id = "form1", @enctype = "multipart/form-data" }))
+{
+    <span>To: </span>
+    <input type="hidden" id="IncidentID" name="IncidentID" value="@Model.Incident_ID" />
+    <input type="hidden" id="SubscribersName" name="SubscribersName" value="@Model.Subscribers_Name" />
+    <input type="text" id="txtemailto" name="txtemailto" class="form-control GLOFieldSpacing" style="width:95%;" />
+    <br />
+    <span>Subject: </span>
+    <input type="text" id="txtemailsubject" name="txtemailsubject" class="form-control GLOFieldSpacing" style="width:90%;" value="VelocityEHS General Incident Report" />
+    <br />
+    <span>Attached Report: </span>
+    <input type="text" id="AttachedReport" name="AttachedReport" class="form-control GLOFieldSpacing" style="width:90%;" readonly="" value="@ReportFilePath" />
+    <br />
+    <div class="CrestInlineDisplay">
+        <textarea id="txtemailmessage" name="txtemailmessage" rows="15" cols="60"></textarea>
+    </div>
+    <div class="CrestInlineDisplay">
+        <input type="file" multiple="" name="AttachFile" id="AttachFile" value="Attach Adtnl File" class="required-field" style="padding:20%;" onchange="GetFileNames()" />
+        <br />
+        <span id="txtemailattachment">
+            Additionally Attached Files:
+            <br />
+            <label id="FileNames"></label>
+        </span>
+    </div>
+    <br />
+    <input type="submit" value="Send" class="form-control GLOFieldSpacing" />
+    <input type="button" value="Cancel" class="form-control GLOFieldSpacing required-field" />
+}
+
+<script>
+    $(document).ready(function () {
+        var year = document.getElementById("IncidentID").value;
+        year = year.substring(0, 4);
+        var Path = "https://crm.chemtel.net/completed reports/General Incidents/" + year + "/" + @Model.Incident_ID + ".pdf"
+        window.open(Path);
+    });
+
+
+    $(document).on('click', '#backLink', function () {
+        history.go(-1);
+    });
+
+    function GetFileNames() {
+        $('#FileNames').empty();
+        var files = document.getElementById("AttachFile").files;
+        for (var i = 0; i < files.length; i++) {
+            $('#FileNames').append(files[i].name + "<br />");
+        }
+    }
+</script>

@@ -1,0 +1,251 @@
+﻿
+@{
+    ViewBag.Title = "Logs";
+    string LogsSelected = ViewBag.LogsSelected;
+    IList<ChemicalLibrary.GLOID> GLOIdList = ViewBag.GLOIDs;
+    IList<ChemicalLibrary.TheoChemCleanshotIncident> CleanshotIdList = ViewBag.CleanshotIDs;
+    IList<ChemicalLibrary.GeneralIncidentReportData> GenIncIDList = ViewBag.GenIncIDs;
+    IList<ChemicalLibrary.ShellOilIncidentData> ShellIDList = ViewBag.ShellIDs;
+}
+
+@if (LogsSelected == "GLO")
+{
+    <h2>New GLO IDs</h2>
+    using (Html.BeginForm("SearchGloids", "ManagerTools", FormMethod.Post, new { id = "ReportSearchForm" }))
+    {
+        <div id="GLOReportControlPanel">
+            <div class="GLOHeader" id="GRCPHeader">GLO Report Control Panel</div>
+            <div class="ContentSection">
+                <br />
+                <span style="width:5%; float:left;">Search: </span>@Html.TextBox("GLOcbsearch", "", new { @class = "form-control", style = "width: 15%; display:inline;", id = "GLOcbsearch", @Name = "GLOcbsearch" })
+                <input type="submit" value="Search" class="form-control GRCPButtons" id="btncorrect" name="btncorrect" onclick="">
+                <input type="submit" value="Refresh" class="form-control GRCPButtons" id="btncorrect" name="btncorrect" onclick="">
+                <input type="submit" value="Revise" class="form-control GRCPButtons" id="btncorrect" name="btncorrect" onclick="">
+            </div>
+        </div>
+    }
+    <hr />
+
+    <table cellpadding="5">
+        <tr>
+            <th></th>
+            <th>ID</th>
+            <th>User</th>
+        </tr>
+        @foreach (var item in GLOIdList)
+        {
+            <tr id="Row_@item.ID">
+                <td><input type="radio" name="IDSelected" value="@item.ID" onclick="GLOFillSearchBox(this.value)" /></td> @* Have to split the date string and grab the year in order to send it to javascript *@
+                <td>@item.ID</td>
+                <td>@item.User</td>
+            </tr>
+        }
+    </table>
+}
+else if (LogsSelected == "CleanShot")
+{
+    <h2> Clean Shot IDs</h2>
+
+    using (Html.BeginForm("SearchCleanshotids", "ManagerTools", FormMethod.Post, new { id = "CleanshotReportSearchForm" }))
+    {
+        <div id="GLOReportControlPanel">
+            <div class="GLOHeader" id="GRCPHeader">Theochem Cleanshot Report Control Panel</div>
+            <div class="ContentSection">
+                <br />
+                <span style="width:5%; float:left;">Search: </span>@Html.TextBox("Cleanshotcbsearch", "", new { @class = "form-control", style = "width: 15%; display:inline;", id = "Cleanshotcbsearch", @Name = "Cleanshotcbsearch" })
+                <input type="submit" value="Search" class="form-control GRCPButtons" id="btncorrect" name="btncorrect" onclick="">
+                <input type="submit" value="Refresh" class="form-control GRCPButtons" id="btncorrect" name="btncorrect" onclick="">
+                <input type="submit" value="Revise" class="form-control GRCPButtons" id="btncorrect" name="btncorrect" onclick="">
+            </div>
+        </div>
+    }
+    <hr />
+
+    <table cellpadding="5">
+        <tr>
+            <th></th>
+            <th>Incident ID</th>
+            <th>Comments</th>
+            <th>Email Sent</th>
+            <th>ERS Operator</th>
+            <th>Report Date</th>
+            <th>Type</th>
+            <th></th>
+        </tr>
+        @foreach (var item in CleanshotIdList)
+        {
+            <tr id="Row_@item.Incident_ID">
+                <td><input type="radio" name="IDSelected" value="@item.Incident_ID" onclick="CleanshotFillSearchBox(this.value)" /></td> @* Have to split the date string and grab the year in order to send it to javascript *@
+                <td>@item.Incident_ID</td>
+                <td><input type="text" id="Comments_@item.Incident_ID" value="@item.Comments" /></td>
+                <td><input type="text" id="Email_Sent_@item.Incident_ID" value="@item.Email_Sent" /></td>
+                <td>@item.Ers_Operator</td>
+                <td>@item.Report_Date</td>
+                <td>@item.Type</td>
+                <td> <input type="button" value="update" onclick="UpdateCleanshotRecord('@item.Incident_ID')"/> </td>
+            </tr>
+        }
+    </table>
+}
+else if (LogsSelected == "GenInc")
+{
+    using (Html.BeginForm("SearchGenIncids", "ManagerTools", FormMethod.Post, new { id = "GenIncReportSearchForm" }))
+    {
+        <div id="GLOReportControlPanel">
+            <div class="GLOHeader" id="GRCPHeader">General Incident Report Control Panel</div>
+            <div class="ContentSection">
+                <br />
+                <span style="width:5%; float:left;">Search: </span>@Html.TextBox("GenInccbsearch", "", new { @class = "form-control", style = "width: 15%; display:inline;", id = "GenInccbsearch", @Name = "GenInccbsearch" })
+                <input type="submit" value="Search" class="form-control GRCPButtons" id="btncorrect" name="btncorrect" onclick="">
+                <input type="submit" value="Refresh" class="form-control GRCPButtons" id="btncorrect" name="btncorrect" onclick="">
+                <input type="submit" value="Revise" class="form-control GRCPButtons" id="btncorrect" name="btncorrect" onclick="">
+            </div>
+        </div>
+    }
+    <hr />
+
+    <h2> General Incident Logs</h2>
+    <table cellpadding="5">
+        <tr>
+            <th></th>
+            <th>Incident ID</th>
+            <th>Comments</th>
+            <th>ReviewedDate</th>
+            <th>SentDate</th>
+            <th>ERS Operator</th>
+            <th>Date</th>
+            <th>SubscribersName</th>
+            <th>ReviewedBy</th>
+            <th>ReportType</th>
+            <th></th>
+        </tr>
+        @foreach (var item in GenIncIDList)
+        {
+            <tr id="Row_@item.Incident_ID">
+                <td><input type="radio" name="IDSelected" value="@item.Incident_ID" onclick="GenIncFillSearchBox(this.value)" /></td> @* Have to split the date string and grab the year in order to send it to javascript *@
+                <td>@item.Incident_ID</td>
+                <td><input type="text" id="Comments_@item.Incident_ID" value="@item.Comments"/></td>
+                <td><input type="text" id="ReviewedDate_@item.Incident_ID" value="@item.Reviewed_Date" /></td>
+                <td><input type="text" id="SentDate_@item.Incident_ID" value="@item.Sent_Date" /></td>
+                <td>@item.Ers_Operator</td>
+                <td>@item.Date</td>
+                <td>@item.Subscribers_Name</td>
+                <td>@item.Reviewed_By</td>
+                <td>@item.Report_Type</td>
+                <td> <input type="button" value="update" onclick="UpdateGenIncRecord(@item.Incident_ID)"/> </td>
+            </tr>
+        }
+    </table>
+}
+else if (LogsSelected == "Shell")
+{
+    <h2> Shell Report Logs</h2>
+
+    using (Html.BeginForm("SearchShellids", "ManagerTools", FormMethod.Post, new { id = "ReportSearchForm" }))
+    {
+        <div id="GLOReportControlPanel">
+            <div class="GLOHeader" id="GRCPHeader">Shell Oil Report Control Panel</div>
+            <div class="ContentSection">
+                <br />
+                <span style="width:5%; float:left;">Search: </span>@Html.TextBox("Shellcbsearch", "", new { @class = "form-control", style = "width: 15%; display:inline;", id = "Shellcbsearch", @Name = "Shellcbsearch" })
+                <input type="submit" value="Search" class="form-control GRCPButtons" id="btncorrect" name="btncorrect" onclick="">
+                <input type="submit" value="Refresh" class="form-control GRCPButtons" id="btncorrect" name="btncorrect" onclick="">
+                <input type="submit" value="Revise" class="form-control GRCPButtons" id="btncorrect" name="btncorrect" onclick="">
+            </div>
+        </div>
+    }
+    <hr />
+
+    <table cellpadding="5">
+        <tr>
+            <th></th>
+            <th>Incident ID</th>
+            <th>Comments</th>
+            <th>Email_Sent</th>
+            <th>ERS Operator</th>
+            <th>Date</th>
+            <th></th>
+        </tr>
+        @foreach (var item in ShellIDList)
+        {
+            <tr id="Row_@item.Inc_ID">
+                <td><input type="radio" name="IDSelected" value="@item.Inc_ID" onclick="ShellFillSearchBox(this.value)" /></td> @* Have to split the date string and grab the year in order to send it to javascript *@
+                <td>@item.Inc_ID</td>
+                <td><input type="text" id="Comments_@item.Inc_ID" value="@item.Notes" /></td>
+                <td><input type="text" id="Email_Sent_@item.Inc_ID" value="@item.Email_Sent" /></td>
+                <td>@item.ERS_Operator</td>
+                <td>@item.Date</td>
+                <td><input type="button" value="update" onclick="UpdateShellRecord(@item.Inc_ID)"/> </td>
+            </tr>
+        }
+    </table>
+}
+
+
+
+<script>
+    function GLOFillSearchBox(id) {
+        $("#GLOcbsearch").val(id);
+    }
+    function CleanshotFillSearchBox(id) {
+        $("#Cleanshotcbsearch").val(id);
+    }
+    function GenIncFillSearchBox(id) {
+        $("#GenInccbsearch").val(id);
+    }
+    function ShellFillSearchBox(id) {
+        $("#Shellcbsearch").val(id);
+    }
+    function UpdateGenIncRecord(id) {
+        var NewComments = document.getElementById('Comments_'+id).value;
+        var NewReviewedDate = document.getElementById('ReviewedDate_' + id).value;
+        var NewSentDate = document.getElementById('SentDate_' + id).value;
+
+        $.ajax({
+            url: '/ManagerTools/UpdateGenInc',
+            data: { IncidentID: id, Comments: NewComments, ReviewedDate: NewReviewedDate, SentDate: NewSentDate },
+            type: 'GET',
+            success: function (data) {
+                alert("The report has been updated.");
+            },
+            error: function (date) {
+                alert("ERROR!");
+            }
+        })
+    }
+    function UpdateCleanshotRecord(id) {
+
+        var NewComments = document.getElementById('Comments_' + id).value;
+        var NewSentDate = document.getElementById('Email_Sent_' + id).value;
+
+        $.ajax({
+            url: '/ManagerTools/UpdateCleanshot',
+            data: { IncidentID: id, Comments: NewComments, EmailSent: NewSentDate },
+            type: 'GET',
+            success: function (data) {
+                alert("The report has been updated.");
+            },
+            error: function (date) {
+                alert("ERROR!");
+            }
+        })
+    }
+    function UpdateShellRecord(id) {
+
+        var NewComments = document.getElementById('Comments_' + id).value;
+        var NewSentDate = document.getElementById('Email_Sent_' + id).value;
+
+        $.ajax({
+            url: '/ManagerTools/UpdateShellOil',
+            data: { IncidentID: id, Comments: NewComments, EmailSent: NewSentDate },
+            type: 'GET',
+            success: function (data) {
+                alert("The report has been updated.");
+            },
+            error: function (date) {
+                alert("ERROR!");
+            }
+        })
+    }
+    
+</script>

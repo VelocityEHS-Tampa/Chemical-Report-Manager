@@ -1,0 +1,152 @@
+﻿@using crm.chemtelinc.com.Models
+@{
+    List<NovartisLookup> RegLookUp = new List<NovartisLookup>();
+    if (ViewBag.RegLookUpResults != null)
+    {
+        RegLookUp = ViewBag.RegLookUpResults;
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Novartis Registration Lookup</title>
+</head>
+<body>
+    <div>
+        <span>Division: </span>
+        <select name="Division" id="Division" onchange="GetSites(this.value)">
+            <option value=""></option>
+            <option value="NIBR">NIBR</option>
+            <option value="Pharma">Pharma</option>
+            <option value="Sandoz">Sandoz</option>
+        </select>
+
+        <br />
+
+        <span>Site: </span>
+        <select name="Sites" id="Sites" onchange="GetCountries(this.value)">
+        </select>
+        <br />
+
+        <span>Country: </span>
+        <select name="Countries" id="Countries" onchange="FillHiddenCountryField(this.value)">
+        </select>
+
+        <br />
+        <br />
+
+        @using (Html.BeginForm("RegistrationSearch", "Home", FormMethod.Post))
+        {
+            <input type="hidden" name="SelectedDivision" id="SelectedDivision" />
+            <input type="hidden" name="SelectedSite" id="SelectedSite" />
+            <input type="hidden" name="SelectedCountry" id="SelectedCountry" />
+            <input type="submit" name="submit" value="Search" />
+        }
+
+        <hr />
+
+        <table cellpadding="5">
+            <tr>
+                <th>ID</th>
+                <th>Division</th>
+                <th>Country</th>
+                <th>HSE Site</th>
+                <th>Country Code</th>
+                <th>Primary Contact</th>
+                <th>Primary Number</th>
+                <th>Phone Code</th>
+                <th>Primary Email</th>
+                <th>Secondary Contact</th>
+                <th>Secondary Email</th>
+                <th>Translator</th>
+                <th>Language</th>
+                <th>Injury Contact</th>
+                <th>Injury Phone</th>
+                <th>Injury Email</th>
+                <th>Release Contact</th>
+                <th>Release Phone</th>
+                <th>Release Email</th>
+                <th>Date Registered</th>
+            </tr>
+            @foreach (NovartisLookup n in RegLookUp)
+            {
+                <tr>
+                    <td>@n.ID</td>
+                    <td>@n.Division</td>
+                    <td>@n.Country</td>
+                    <td>@n.hseSite</td>
+                    <td>@n.CountryCode</td>
+                    <td>@n.PrimaryContact</td>
+                    <td>@n.PrimaryNumber</td>
+                    <td>@n.PhoneCode</td>
+                    <td>@n.PrimaryContactEmail</td>
+                    <td>@n.SecondaryContact</td>
+                    <td>@n.SecondaryContactEmail</td>
+                    <td>@n.Translator</td>
+                    <td>@n.Language</td>
+                    <td>@n.InjuryContact</td>
+                    <td>@n.InjuryPhoneNumber</td>
+                    <td>@n.InjuryEmail</td>
+                    <td>@n.ReleaseContact</td>
+                    <td>@n.ReleasePhoneNumber</td>
+                    <td>@n.ReleaseEmail</td>
+                    <td>@n.DateRegistered</td>
+                </tr>
+            }
+        </table>
+    </div>
+
+
+
+
+    <script>
+        function GetSites(SelectedDiv) {
+            $('#Sites').empty(); //Clears all previous options that were in the select tag.
+            $('#Sites').append('<option value=""></option>');
+            $.ajax({
+                url: '/Home/NovRegSites/',
+                data: { Division: SelectedDiv },
+                type: 'GET',
+                success: function (data) {
+                    const sites = data.SiteList.split(',');
+                    sites.forEach(function (item) {
+                        if (item != "") { // This avoids adding in blank sites and the final comma.
+                            $("#Sites").append("<option value='" + item + "'>" + item + "</option>")
+                        }
+                    })
+                    $('#SelectedDivision').val(SelectedDiv);
+                },
+                error: function (data) { alert("ERROR!") }
+            });
+        }
+
+        function GetCountries(SelectedSite) {
+            var SelectedDiv = $('#Division').val();
+            $('#Countries').empty(); //Clears all previous options that were in the select tag.
+            $('#Countries').append('<option value=""></option>');
+            $.ajax({
+                url: '/Home/NovRegCountries/',
+                data: { Division: SelectedDiv, Site: SelectedSite },
+                type: 'GET',
+                success: function (data) {
+                    const sites = data.CountryList.split(',');
+                    sites.forEach(function (item) {
+                        if (item != "") { // This avoids adding in blank sites and the final comma.
+                            $("#Countries").append("<option value='" + item + "'>" + item + "</option>")
+                        }
+                    })
+                    $('#SelectedSite').val(SelectedSite);
+                },
+                error: function (data) { alert("ERROR!") }
+            });
+        }
+
+        function FillHiddenCountryField(SelecedCountry) {
+            $('#SelectedCountry').val(SelecedCountry);
+        }
+    </script>
+</body>
+</html>

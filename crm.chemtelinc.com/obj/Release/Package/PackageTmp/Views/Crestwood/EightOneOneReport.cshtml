@@ -1,0 +1,208 @@
+﻿
+@{
+    ViewBag.Title = "EightOneOneReport";
+
+    string txtreportdate = ViewBag.txtreportdate;
+    string txtreporttime = ViewBag.txtreporttime;
+}
+
+<h2>Crestwood 811 Report</h2>
+
+
+@using (Html.BeginForm("Submit811Report", "Crestwood", FormMethod.Post))
+{
+    <div id="811Report">
+        <div id="FormButtons" style="padding:2%;text-align:right;">
+            <input type="submit" value="Submit" class="form-control GRCPButtons required-field" id="btnsubmit" name="btnsubmit" tabindex="99">
+            <input type="button" value="Cancel" class="form-control GRCPButtons alert-info" id="btnclose" name="btnclose" onclick="ClearForm()">
+        </div>
+        @* Left Side Questions *@
+        <div class="GLOHeader" id="GRCPHeader">811 Report Details</div>
+        <br />
+        @if (Request.QueryString["Result"] != null && Request.QueryString["Result"] == "Success")
+        {
+            <span class="alert-success">Record Added Successfully!</span><br />
+        }
+        <div class="CrestInlineDisplay">
+            <span style="text-decoration:underline;">Todays Date/Time</span><br />
+            <span>Date</span><input type="text" class="form-control GLOFieldSpacing" style="width:20%;" id="txttodaydate" name="txttodaydate" placeholder="__/__/____" value="@txtreportdate"  tabindex="1"/> <span>Time</span><input type="text" class="form-control GLOFieldSpacing" style="width:10%;" id="txttodaytime" name="txttodaytime" placeholder="__:__" value="@txtreporttime"  tabindex="2"/><br />
+
+            <span style="text-decoration:underline;">Date/Time of planned excavation or work</span><br />
+
+            <span>Date</span><input type="date" class="GLOFieldSpacing" style="width:27%;" id="txtexcavationdate" name="txtexcavationdate" placeholder="__/__/____" required=""  tabindex="3"/> 
+            <span>Time</span><input type="text" class="form-control GLOFieldSpacing" style="width:15%;" id="txtexcavationtime" name="txtexcavationtime" placeholder="__:__" required="" maxlength="5" onchange="FormatTime(this.value)"  tabindex="4"/><br />
+
+            <span>Is this a NORMAL locate request or EMERGENCY locate request</span><br />
+            <select name="txtnormaloremergency" id="txtnormaloremergency" class="GLOFieldSpacing" style="width:25%;" required="" tabindex="5">
+                <option value="" selected=""></option>
+                <option value="Normal">Normal</option>
+                <option value="Emergency">Emergency</option>
+            </select><br />
+
+            <span>What is the locate request ticket number provided by the 8-1-1 center</span><br />
+            <input type="text" id="txtrequestticketnumber" name="txtrequestticketnumber" class="form-control GLOFieldSpacing" style="width:75%;" required=""  tabindex="6"/><br />
+
+            <span>What is the name of the person or company requesting this locate</span><br />
+            <input type="text" id="txtpersoncompanyname" name="txtpersoncompanyname" class="form-control GLOFieldSpacing" style="width:75%;" required=""  tabindex="7"/><br />
+
+            <span>What is the call back phone for contacting the excavator</span><br />
+            <input type="text" id="txtcallbacknumber" name="txtcallbacknumber" class="form-control GLOFieldSpacing" style="width:75%;" placeholder="(___) ___-____" required=""  tabindex="8" onblur="FormatPhone(this.value, this.id)"/><br />
+
+            <span>What is the email address for contacting the excavator</span><br />
+            <input type="text" id="txtemailaddress" name="txtemailaddress" class="form-control GLOFieldSpacing" style="width:75%;" placeholder="yourname@domain.com" required=""  tabindex="9"/><br />
+
+            <span>What is the city or town nearest to the excavation location</span><br />
+            <input type="text" id="txtcity" name="txtcity" class="form-control GLOFieldSpacing" style="width:75%;" required=""  tabindex="10"/><br />
+
+            <span style="text-decoration:underline;">In what state and county will the excavation take place</span><br />
+            <span>State</span>
+            <select id="txtstate" name="txtstate" class="GLOFieldSpacing" onchange="GetCounties(this.value)" required=""  tabindex="11">
+                <option value="" selected=""></option>
+                <option value="MT">MT</option>
+                <option value="ND">ND</option>
+                <option value="NM">NM</option>
+                <option value="SC">SC</option>
+                <option value="TX">TX</option>
+                <option value="WY">WY</option>
+            </select>
+            <span>County</span>
+            <select id="txtcounty" name="txtcounty" class="GLOFieldSpacing" onchange="GetNotifications(this.value)" required=""  tabindex="12">
+                <option value="" selected=""></option>
+            </select>
+        </div>
+        @* Right Side Questions *@
+        <div class="CrestInlineDisplay">
+            <span>What street or roadway is closest to the planned excavation</span><br />
+            <input type="text" class="form-control GLOFieldSpacing" id="txtstreet" name="txtstreet" tabindex="13" /><br />
+
+            <span>What is the nearest major road intersection</span><br />
+            <input type="text" class="form-control GLOFieldSpacing" id="txtintersection" name="txtintersection" required="" tabindex="14" /><br />
+
+            <span>What is the nature of the work being performed at the excavation location</span><br />
+            <textarea class="GLOFieldSpacing" cols="50" rows="5" id="txtnature" name="txtnature" required="" tabindex="15"></textarea><br />
+
+            <span>What other remarks are provided to ChemTel by the 8-1-1 One-Call operator/Pipeline Caller</span><br />
+            <textarea class="GLOFieldSpacing" cols="50" rows="5" id="txtremarks" name="txtremarks" required="" tabindex="16"></textarea>
+            <br />
+            <label class="required-field" style="font-size: 10pt;" id="NotificationList"></label>
+        </div>
+    </div>
+}
+
+<script>
+    function GetCounties(state) {
+        $('#txtcounty option').each(function () {
+            if (this.value != "") {
+                $(this).remove();
+            }
+        })
+        if (state == "MT") {
+            $('#txtcounty').append(new Option('Roosevelt', 'Roosevelt'));
+        }
+        else if (state == "ND") {
+            $('#txtcounty').append(new Option('Dunn', 'Dunn'));
+            $('#txtcounty').append(new Option('McKenzie', 'McKenzie'));
+            $('#txtcounty').append(new Option('Mountrail', 'Mountrail'));
+            $('#txtcounty').append(new Option('Williams', 'Williams'));
+        }
+        else if (state == "NM") {
+            $('#txtcounty').append(new Option('Eddy', 'Eddy'));
+        }
+        else if (state == "SC") {
+            $('#txtcounty').append(new Option('Chester', 'Chester'));
+            $('#txtcounty').append(new Option('Kershaw', 'Kershaw'));
+            $('#txtcounty').append(new Option('Lancaster', 'Lancaster'));
+            $('#txtcounty').append(new Option('York', 'York'));
+        }
+        else if (state == "TX") {
+            $('#txtcounty').append(new Option('Culberson', 'Culberson'));
+            $('#txtcounty').append(new Option('Loving', 'Loving'));
+            $('#txtcounty').append(new Option('Reeves', 'Reeves'));
+            $('#txtcounty').append(new Option('Ward', 'Ward'));
+            $('#txtcounty').append(new Option('Winkler', 'Winkler'));
+        }
+        else if (state == "WY") {
+            $('#txtcounty').append(new Option('Converse', 'Converse'));
+        }
+    }
+    function FormatTime(time) {
+        if (CheckTime(time)) {
+            var timehours = time[0] + time[1];
+            var timemins = time[2] + time[3];
+            if (time.length = 4 && time.indexOf(':') == -1) { //Add a semi-colon ( : ) if the length is 4 and does NOT contain one already.
+                $('#txtexcavationtime').val(timehours + ":" + timemins);
+            }
+            $('#txtexcavationtime').removeClass('is-invalid');
+        } else {
+            $('#txtexcavationtime').addClass('is-invalid');
+        }
+    }
+
+    function FormatPhone(Phone, FieldName) {
+        //Purely number input, no parenthesis, no hyphens.
+        if (Phone.length == 10 && !Phone.includes("-") && !Phone.includes("(") && !Phone.includes(")")) {
+            var ps = Phone.split("");
+            var fullphone = "(" + ps[0] + ps[1] + ps[2] + ") " + ps[3] + ps[4] + ps[5] + "-" + ps[6] + ps[7] + ps[8] + ps[9]
+            document.getElementById(FieldName).value = fullphone;
+        }
+    }
+
+    function CheckTime(time) {
+        if (time.length < 4) {
+            alert("Invalid time"); //Likely due to not have a leading zero in hours in the AM.
+            return false;
+        }
+        var timehours = time[0] + time[1];
+        var timemins = time[2] + time[3];
+        if (timehours > 23) { //if the hours go beyond 23, it is invalid.
+            alert("Invalid time, please ensure the hours are correct.");
+            return false;
+        }
+        if (time.length == 4) { //If the semi-colon is NOT in the time already check the first minute digit
+            if (timemins > 59) { //If the minutes go beyond 59 in the (HHmm) format, it is invalid.
+                alert("Invalid time, please ensure the minutes are correct.");
+                return false;
+            }
+        }
+        if (time.length == 5) { //If the semi-colon is in the time already check the first minute digit
+            if (time[3] > 5) { //If the first minute digit goes beyond 5 in the (HH:mm) format, it is invalid.
+                alert("Invalid time, please ensure the minutes are correct.");
+                return false;
+            }
+        }
+        return true;
+    }
+    function GetNotifications(county) {
+        var state = $('#txtstate').val();
+        $.ajax({
+            url: '/Crestwood/GetNotifications/',
+            type: 'GET',
+            data: { txtstate: state, txtcounty: county },
+            success: function (data) {
+                document.getElementById('NotificationList').innerText = data;
+            },
+            error: function (data) {
+                alert("ERROR!");
+            }
+        });
+    }
+    function ClearForm() {
+        if (confirm("Are you sure you want to cancel this report?")) {
+            document.getElementById("txtexcavationdate").value = "";
+            document.getElementById("txtexcavationtime").value = "";
+            document.getElementById("txtnormaloremergency").selectedIndex = 0;
+            document.getElementById("txtrequestticketnumber").value = "";
+            document.getElementById("txtpersoncompanyname").value = "";
+            document.getElementById("txtcallbacknumber").value = "";
+            document.getElementById("txtemailaddress").value = "";
+            document.getElementById("txtcity").value = "";
+            document.getElementById("txtstate").selectedIndex = 0;
+            document.getElementById("txtcounty").selectedIndex = 0;
+            document.getElementById("txtstreet").value = "";
+            document.getElementById("txtintersection").value = "";
+            document.getElementById("txtnature").value = "";
+            document.getElementById("txtremarks").value = "";
+
+        }
+    }
+</script>

@@ -1,0 +1,230 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+.required-field {
+    color:red;
+    font-weight: 600;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    background-color: #d3d3d3;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px; /* Vertically center the text there */
+}
+
+span {
+    font-weight:600;
+}
+
+.NavMenu {
+    list-style-type: none;
+    position: absolute;
+    background-color: white;
+    display: none;
+    background-color: #4c5559;
+    color: black;
+    font-weight: 600;
+    margin: 0;
+    padding: 2px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.MenuOptionHeader {
+    background-color: #00b6de;
+    font-weight: 800;
+}
+
+.NavMenu > li > a {
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+}
+
+/*GLO REPORT STYLING*/
+.GLOReportSection {
+    display: block;
+    padding:15px;
+}
+.GLOHeader {
+    background-color: dimgrey;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+}
+.GRCPFields {
+    margin-top:2%;
+}
+.GRSFields .ContentSection {
+    margin-top: 2%;
+    display: inline-block;
+    vertical-align: middle;
+    width: 33%;
+}
+.GRCPButtons {
+    display: inline;
+    margin: 0 5px;
+    width: 10%;
+}
+.DischargeContent .ContentSection {
+    display: inline-block;
+    margin-top: 2%;
+    vertical-align:top;
+    width:25%;
+}
+
+.GILFields .ContentSection {
+    width: 33%;
+    display: inline-block;
+    margin-top: 2%;
+    vertical-align: top;
+}
+
+.GDPFields .ContentSection {
+    width: 15%;
+    display: inline-block;
+    margin-top: 2%;
+    vertical-align: top;
+    text-align:center;
+}
+
+.GNotifyFields .ContentSection {
+    width: 15%;
+    display: inline-block;
+    margin-top: 2%;
+    vertical-align: top;
+    text-align: center;
+}
+.GLOMargin {
+    margin: 5px;
+}
+.GLOFieldSpacing {
+    margin: 5px;
+    display:inline;
+}
+
+.OptionGroup {
+    margin:0 auto;
+    padding: 2% 5%;
+    text-align:center;
+    width: 75%;
+}
+
+.QuickSelectOption {
+    padding: 3%;
+    margin: 3% auto;
+    display: inline-block;
+    width: 49%;
+    background-color: #00b6de;
+    color: #4c5559;
+    font-family: Arial;
+    font-size: 16pt;
+    font-weight: bold;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+.OptionGroupLink {
+    text-decoration: none;
+}
+
+/** CRESTWOOD REPORT FORMATTING **/
+
+.CrestInlineDisplay {
+    display:inline-block;
+    vertical-align: top;
+}
+.CleanShotOptionAlign {
+    float:right;
+}
+
+/*GLO common Styles*/
+.GLOEmailScrollBars {
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    overflow-y: scroll;
+    width: 90%
+}
+
+.GLOEmailScrollBars::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
+}
+
+table {
+    display: block;
+    height: 500px;
+    overflow-x: scroll;
+    overflow-y: scroll;
+}
+th {
+    text-align:center;
+}
+td {
+    width: auto;
+    border: 1px solid black;
+    text-align: center;
+    font-size: 10pt;
+}

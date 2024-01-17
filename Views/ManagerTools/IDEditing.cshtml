@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "IDEditing";
+    string IDEditing = ViewBag.IDsSelected;
+}
+
+@if (IDEditing == "NewGLO")
+{
+    <h2>New GLO IDs</h2>
+}
+else if (IDEditing == "OldGLO")
+{
+    <h2>Old GLO IDs</h2>
+}
+else if (IDEditing == "Incident")
+{
+    <h2>Incident IDs</h2>
+}
+else if (IDEditing == "CleanShot")
+{
+    <h2>Clean Shot IDs</h2>
+}
+else if (IDEditing == "BASFEnvironmental")
+{
+    <h2>BASF Environmental IDs</h2>
+}
+else if (IDEditing == "BASFInjury")
+{
+    <h2>BASF Injury IDs</h2>
+}
+

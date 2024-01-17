@@ -1,0 +1,303 @@
+﻿
+@{
+    ViewBag.Title = "CleanShotReport";
+}
+
+<h2>Clean Shot Report</h2>
+
+<div id="FormButtons" style="padding:2%;text-align:right;">
+    <input type="submit" value="Submit" class="form-control GRCPButtons required-field" id="btnsubmit" name="btnsubmit" onclick="SubmitForm()" tabindex="99">
+    <input type="button" value="Cancel" class="form-control GRCPButtons alert-info" id="btnclose" name="btnclose">
+</div>
+<div class="GLOHeader" id="GRCPHeader" style="font-size: 10pt;">Theochem Cleanshot Incident Report Search</div>
+<div id="GenIncSearch" style="font-size: 10pt;">
+    <br />
+    <span>Search </span> <input type="text" id="cbsearch" name="cbsearch" class="form-control GLOFieldSpacing" style="width:20%;" /> <input type="button" value="Search" class="form-control GLOFieldSpacing" style="width:10%;" />
+</div>
+@using (Html.BeginForm("SubmitCleanShotReport", "OtherReports", FormMethod.Post, new { @id = "CleanShotForm" }))
+{
+
+    @* Report Information *@
+    <div id="ReportInfo" style="font-size:10pt;">
+        <br />
+        <div class="GLOHeader" id="GRCPHeader">Report Information, Caller'ss Information, and Incident Information</div>
+        <br />
+        <div class="CrestInlineDisplay" id="ReportInfo" style="width:25%;">
+            <span>Report Information</span>
+            <hr />
+            <span class="required-field">Type</span>
+            <select id="cbtype" name="cbtype" class="GLOFieldSpacing" tabindex="1">
+                <option value="Buster">Buster</option>
+                <option value="Sulfuric Acid" selected="">Clean Shot Sulfuric Acid</option>
+                <option value="Drain Opener">Clean Shot Instant Drain Opener</option>
+            </select>
+            <br />
+            <span class="required-field">ERS Operator</span> <input type="text" class="form-control GLOFieldSpacing" id="txtersop" name="txtersop" style="width:50%;" value="@Session["Username"].ToString()" readonly=""/><br />
+            <span class="required-field">Incident ID</span> <input type="text" class="form-control GLOFieldSpacing" id="txtincidentid" name="txtincidentid" style="width:50%;" readonly=""/><br />
+            <span class="required-field">Date</span> <input type="text" class="form-control GLOFieldSpacing" id="txtdate" name="txtdate" style="width:30%;" value="@DateTime.Now.ToShortDateString()" placeholder="__/__/____" onblur="FormatDate(this.value, this.id)" tabindex="2"/><br />
+            <span class="required-field">Time</span> <input type="text" class="form-control GLOFieldSpacing" id="txttime" name="txttime" style="width:30%;" value="@DateTime.Now.ToString("HH:mm")" placeholder="__:__" onblur="FormatTime(this.value, this.id)" tabindex="3"/><br />
+        </div>
+        <div class="CrestInlineDisplay" id="CallerInfo" style="width:25%;">
+            <span>Caller's Information</span>
+            <hr />
+            <span class="required-field">Caller's Name</span> <input type="text" class="form-control GLOFieldSpacing" id="txtcallersname" name="txtcallersname" style="width:50%;" tabindex="4"/><br />
+            <span class="required-field">Phone #</span> <input type="text" class="form-control GLOFieldSpacing" id="txtcallersphone" name="txtcallersphone" style="width:50%;" placeholder="(___) ___-____" onblur="FormatPhone(this.value, this.id)" tabindex="5"/><br />
+            <span>Affiliation</span> <input type="text" class="form-control GLOFieldSpacing" id="txtcallersaffiliation" name="txtcallersaffiliation" style="width:50%;" tabindex="6"/> <br />
+            <span>Fax/Email</span> <input type="text" class="form-control GLOFieldSpacing" id="txtcallersfaxemail" name="txtcallersfaxemail" style="width:50%;" tabindex="7"/> <br />
+        </div>
+        <div class="CrestInlineDisplay" id="IncidentInfo" style="width:49%;">
+            <span>Incident Information</span>
+            <hr />
+            <span>Incident Street</span> <input type="text" style="width:25%" class="form-control GLOFieldSpacing" id="txtincidentstreet" name="txtincidentstreet" tabindex="8" /> <br />
+            <span>Incident City</span> <input type="text" style="width:25%" class="form-control GLOFieldSpacing" id="txtincidentcity" name="txtincidentcity" tabindex="9" />
+            <span>Incident Date</span> <input type="text" style="width:25%" class="form-control GLOFieldSpacing" id="txtincidentdate" name="txtincidentdate" placeholder="__/__/____" onblur="FormatDate(this.value, this.id)" tabindex="12" />
+            <br />
+            <span>Incident State</span> <input type="text" style="width:25%" class="form-control GLOFieldSpacing" id="txtincidentstate" name="txtincidentstate" maxlength="2" tabindex="10" />
+            <span>Incident Time</span> <input type="text" style="width:25%" class="form-control GLOFieldSpacing" id="txtincidenttime" name="txtincidenttime" placeholder="__:__" onblur="FormatTime(this.value, this.id)" tabindex="13" />
+            <br />
+            <span>Incident Country</span> <input type="text" style="width:25%" class="form-control GLOFieldSpacing" id="txtincidentcountry" name="txtincidentcountry" value="USA" tabindex="11" />
+            <span>Incident Time Zone</span>
+            <select id="cbincidenttimezone" name="cbincidenttimezone" class="GLOFieldSpacing" tabindex="14">
+                <option value="" selected=""></option>
+                <option value="AKST">AKST</option>
+                <option value="AST">AST</option>
+                <option value="CST">CST</option>
+                <option value="EST">EST</option>
+                <option value="HAST">HAST</option>
+                <option value="MST">MST</option>
+                <option value="PST">PST</option>
+                <option value="UTC">UTC</option>
+            </select>
+            <br />
+        </div>
+    </div>
+    @*Q uestionnaire *@
+    <div id="Questionnaire" style="font-size: 10pt;">
+        <div class="CrestInlineDisplay" style="width:70%;">
+            <br />
+            <div class="GLOHeader" id="GRCPHeader">Questionnaire</div>
+            <br />
+            <span class="required-field">What did you use this product for? Stopped Drain, toitlet, etc.?</span>
+            <select class="GLOFieldSpacing CleanShotOptionAlign" name="txtquest1" id="txtquest1" tabindex="15">
+                <option value="" selected=""></option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+                <option value="N/A">N/A</option>
+                <option value="UNK">UNK</option>
+            </select>
+            <hr />
+            <span class="required-field">How much of this product did you use?</span>
+            <div class="CleanShotOptionAlign">
+                QTY <input type="text" id="txtquest2qty" name="txtquest2qty" class="GLOFieldSpacing" tabindex="16"/>
+                UNITS
+                <select class="GLOFieldSpacing" name="cbquest2units" tabindex="17">
+                    <option value="" selected=""></option>
+                    <option value="Cups">Cups</option>
+                    <option value="Ounces">Ounces</option>
+                    <option value="Pints">Pints</option>
+                    <option value="Gallons">Gallons</option>
+                    <option value="Liters">Liters</option>
+                    <option value="Milliliters">Milliliters</option>
+                    <option value="Teaspoons">Teaspoons</option>
+                    <option value="Tablespoons">Tablespoons</option>
+                    <option value="Other">Other</option>
+                    <option value="Unknown">Unknown</option>
+                </select>
+            </div>
+            <hr />
+            <span class="required-field">Did you read all the product warnings prior to opening or using the product?</span>
+            <select class="GLOFieldSpacing CleanShotOptionAlign" name="cbquest3" id="cbquest3" tabindex="18">
+                <option value="" selected=""></option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+                <option value="N/A">N/A</option>
+                <option value="UNK">UNK</option>
+            </select>
+            <hr />
+            <span class="required-field">Did you follow all of the warnings outlined on the label?</span>
+            <select class="GLOFieldSpacing CleanShotOptionAlign" name="cbquest4" id="cbquest4" tabindex="19">
+                <option value="" selected=""></option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+                <option value="N/A">N/A</option>
+                <option value="UNK">UNK</option>
+            </select>
+            <hr />
+            <span class="required-field">Was the bottle kept and stored in the upright position?</span>
+            <select class="GLOFieldSpacing CleanShotOptionAlign" name="cbquest5" id="cbquest5" tabindex="20">
+                <option value="" selected=""></option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+                <option value="N/A">N/A</option>
+                <option value="UNK">UNK</option>
+            </select>
+            <hr />
+            <span class="required-field">Was the cap replaced securely?</span>
+            <select class="GLOFieldSpacing CleanShotOptionAlign" name="cbquest6" id="cbquest6" tabindex="21">
+                <option value="" selected=""></option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+                <option value="N/A">N/A</option>
+                <option value="UNK">UNK</option>
+            </select>
+            <hr />
+            <span class="required-field">Was the bottle placed back into it's original plastic bag?</span>
+            <select class="GLOFieldSpacing CleanShotOptionAlign" name="cbquest7" id="cbquest7" tabindex="22">
+                <option value="" selected=""></option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+                <option value="N/A">N/A</option>
+                <option value="UNK">UNK</option>
+            </select>
+            <hr />
+            <span class="required-field">Did you open the container on a flat, stable surface?</span>
+            <select class="GLOFieldSpacing CleanShotOptionAlign" name="cbquest8" id="cbquest8" tabindex="23">
+                <option value="" selected=""></option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+                <option value="N/A">N/A</option>
+                <option value="UNK">UNK</option>
+            </select>
+            <hr />
+            <span class="required-field">Is it stored in a locked cabinet inaccessable to children, people unfamiliar with the use of the product?</span>
+            <select class="GLOFieldSpacing CleanShotOptionAlign" name="cbquest9" id="cbquest9" tabindex="24">
+                <option value="" selected=""></option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+                <option value="N/A">N/A</option>
+                <option value="UNK">UNK</option>
+            </select>
+            <hr />
+            <span class="required-field">Did you pour any other chemicals or other drain openers into the drain prior to using this product?</span>
+            <select class="GLOFieldSpacing CleanShotOptionAlign" name="cbquest10yesorno" id="cbquest10yesorno" tabindex="25">
+                <option value="" selected=""></option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+                <option value="N/A">N/A</option>
+                <option value="UNK">UNK</option>
+            </select>
+            <br />
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;If yes, what?</span><input type="text" class="form-control GLOFieldSpacing" id="txtquest10ifyeswhat" name="txtquest10ifyeswhat" style="width:75%;" tabindex="26" />
+            <hr />
+            <span class="required-field">Did you have adequate ventilation?</span>
+            <select class="GLOFieldSpacing CleanShotOptionAlign" name="cbquest11yesorno" id="cbquest11yesorno" tabindex="27">
+                <option value="" selected=""></option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+                <option value="N/A">N/A</option>
+                <option value="UNK">UNK</option>
+            </select><br />
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;If yes, what?</span><input type="text" class="form-control GLOFieldSpacing" id="txtquest11ifyeswhat" name="txtquest11ifyeswhat" style="width:75%;" tabindex="28" />
+            <hr />
+            <span class="required-field">Did you remove the standing water prior to using this product?</span>
+            <select class="GLOFieldSpacing CleanShotOptionAlign" id="cbquest12" name="cbquest12" tabindex="29">
+                <option value="" selected=""></option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+                <option value="N/A">N/A</option>
+                <option value="UNK">UNK</option>
+            </select>
+            <hr />
+            <span class="required-field">Did you use protective gear?</span>
+            <select class="GLOFieldSpacing CleanShotOptionAlign" id="cbquest13" name="cbquest13" tabindex="30">
+                <option value="" selected=""></option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+                <option value="N/A">N/A</option>
+                <option value="UNK">UNK</option>
+            </select>
+            <br />
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;If yes, what?</span><input type="text" class="form-control GLOFieldSpacing" id="txtquest14" name="txtquest14" style="width:75%;" tabindex="31" />
+            <hr />
+            <span class="required-field">Did you place a bucket or other container under the drain?</span>
+            <select class="GLOFieldSpacing CleanShotOptionAlign" id="cbquest15" name="cbquest15" tabindex="32">
+                <option value="" selected=""></option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+                <option value="N/A">N/A</option>
+                <option value="UNK">UNK</option>
+            </select>
+            <hr />
+            <span class="required-field">Did you place an inverted container over the opening after use?</span>
+            <select class="GLOFieldSpacing CleanShotOptionAlign" id="cbquest15" name="cbquest16" tabindex="33">
+                <option value="" selected=""></option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+                <option value="N/A">N/A</option>
+                <option value="UNK">UNK</option>
+            </select>
+            <hr />
+            <span class="required-field">Were the Neutralization and Odor instructions read to the caller?</span>
+            <select class="GLOFieldSpacing CleanShotOptionAlign" id="cbquest15" name="cbquest17" tabindex="34">
+                <option value="" selected=""></option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+                <option value="N/A">N/A</option>
+                <option value="UNK">UNK</option>
+            </select>
+        </div>
+        <div class="CrestInlineDisplay" style="width:29%; text-align:center;">
+            <br />
+            <div class="GLOHeader" id="GRCPHeader">Add Customer Info/Incident Details and Subscriber's Info</div>
+            <br />
+            <span class="required-field">Additional Customer Information/Incident Details</span><br />
+            <textarea id="txtincidentdetails" name="txtincidentdetails" cols="45" rows="10" tabindex="35"></textarea>
+            <br />
+            <br />
+            <span>Subscriber's Information</span>
+            <hr />
+            <span>Subscriber's Name</span> <input type="text" id="txtsubscribersname" name="txtsubscribersname" class="form-control GLOFieldSpacing" style="width:60%;" value="Theochem Laboratories Inc" tabindex="36" /> <br />
+            <span>Administrative Contact</span> <input type="text" id="txtadmincontact" name="txtadmincontact" class="form-control GLOFieldSpacing" style="width: 50%; " value="John Theofilos" tabindex="37" /> <br />
+            <span>Phone #</span> <input type="text" id="txtphonenumber" name="txtphonenumber" class="form-control GLOFieldSpacing" style="width: 50%; " value="813-237-6463" tabindex="38" /> <br />
+            <span>Fax #</span> <input type="text" id="txtfaxnumber" name="txtfaxnumber" class="form-control GLOFieldSpacing" style="width: 50%; " value="813-237-2059" tabindex="39" /> <br />
+            <span>Email Address</span> <input type="text" id="txtemailaddress" name="txtemailaddress" class="form-control GLOFieldSpacing" style="width: 60%; " value="JT@theochem.com" tabindex="40" /> <br />
+            <span>Physical Address</span> <input type="text" id="txtphysicaladdress" name="txtphysicaladdress" class="form-control GLOFieldSpacing" style="width: 60%; " value="7373 Rowlett Park Drive" tabindex="41" /> <br />
+            <span>City, State, Zip</span> <input type="text" id="txtcitystatezip" name="txtcitystatezip" class="form-control GLOFieldSpacing" style="width: 50%; " value="Tampa, FL, 33610" tabindex="42" /> <br />
+        </div>
+    </div>
+}
+
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: '/OtherReports/CSYearCheck/',
+            type: 'GET',
+            success: function (data) {
+                $("#txtincidentid").val(data.NewID);
+            },
+            error: function (data) {
+                alert("ERROR!");
+            }
+        });
+    });
+    function SubmitForm() {
+        if (confirm("Please ensure all data entered is correct before submitting! Are you sure you want to submit this report ?")) {
+            return true;
+        }
+    };
+    function FormatDate(Date, FieldName) {
+        //Purely number input, no slashes.
+        if (Date.length == 8 && !Date.includes("/")) {
+            var ds = Date.split("");
+            var fulldate = ds[0] + ds[1] + "/" + ds[2] + ds[3] + "/" + ds[4] + ds[5] + ds[6] + ds[7];
+            document.getElementById(FieldName).value = fulldate;
+        }
+    }
+    function FormatTime(Time, FieldName) {
+        //Purely number input, no semi-colons.
+        if (Time.length == 4 && !Time.includes(":")) {
+            var ts = Time.split("");
+            var fulltime = ts[0] + ts[1] + ":" + ts[2] + ts[3];
+            document.getElementById(FieldName).value = fulltime;
+        }
+    }
+    function FormatPhone(Phone, FieldName) {
+        //Purely number input, no parenthesis, no hyphens.
+        if (Phone.length == 10 && !Phone.includes("-") && !Phone.includes("(") && !Phone.includes(")")) {
+            var ps = Phone.split("");
+            var fullphone = "(" + ps[0] + ps[1] + ps[2] + ") " + ps[3] + ps[4] + ps[5] + "-" + ps[6] + ps[7] + ps[8] + ps[9]
+            document.getElementById(FieldName).value = fullphone;
+        }
+    }
+
+</script>

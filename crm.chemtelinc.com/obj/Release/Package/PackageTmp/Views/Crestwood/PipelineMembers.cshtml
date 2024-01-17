@@ -1,0 +1,130 @@
+﻿
+@{
+    ViewBag.Title = "Crestwood Pipeline Members";
+    string constring = crm.chemtelinc.com.Properties.Settings.Default.chemicalConnectionString; //Class-level variable containg the connection string to the database.
+    string constringTest = crm.chemtelinc.com.Properties.Settings.Default.chemicalTestConnectionString; //Class-level variable containg the connection string to the database.
+    List<string> names = new List<string>();
+    names = ChemicalLibrary.Search.GetContactNames(constring);
+}
+
+<h2>Crestwood Pipeline Members</h2>
+
+<br />
+<br />
+
+<div style="width: 49%; display:inline-block;">
+    Operator Name
+    <input type="text" name="OpName" id="OpName" class="GLOFieldSpacing form-control" style="width:50%;" />
+    <br />
+    State
+    <input type="text" name="State" id="State" class="GLOFieldSpacing form-control" style="width:50%;" />
+    <br />
+    County
+    <input type="text" name="County" id="County" class="GLOFieldSpacing form-control" style="width:50%;" />
+    <br />
+    Contact Name
+    <input type="text" name="ConName" id="ConName" class="GLOFieldSpacing form-control" style="width:50%;" />
+    <br />
+    Phone
+    <input type="text" placeholder="(___) ___-____" name="Phone" id="Phone" class="GLOFieldSpacing form-control" style="width:50%;" onblur="FormatPhone(this.value, this.id)" />
+    <br />
+    Contact Order
+    <br />
+    <div style="text-align:center; width:50%;">
+        <input type="radio" name="ContactOrder" id="ContactOrder_1" value="1" onchange="SetOrderNo(this.value)" /> First &nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="radio" name="ContactOrder" id="ContactOrder_2" value="2" onchange="SetOrderNo(this.value)" /> Second
+        <br />
+        <br />
+        <input type="radio" name="ContactOrder" id="ContactOrder_3" value="3" onchange="SetOrderNo(this.value)" /> Third &nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="radio" name="ContactOrder" id="ContactOrder_4" value="4" onchange="SetOrderNo(this.value)" /> Fourth
+        <br />
+        <br />
+        <input type="radio" name="ContactOrder" id="ContactOrder_5" value="5" onchange="SetOrderNo(this.value)" /> Fifth
+    </div>
+    <br />
+    <input type="hidden" name="ContactOrder" id="ContactOrder" value="0" />
+    <input type="hidden" name="MemberID" id="MemberID" value="0" />
+    <input type="button" name="Add" value="Add" class="GLOFieldSpacing form-control" style="width:15%; font-weight: bold;" onclick="UpdatePipelineMembers(this.value)" />
+    <input type="button" name="Update" value="Update" class="GLOFieldSpacing form-control" style="width: 15%; font-weight: bold;" onclick="UpdatePipelineMembers(this.value)" />
+    <input type="button" name="Delete" value="Delete" class="GLOFieldSpacing form-control text-danger" style="width: 15%; font-weight: bold;" onclick="UpdatePipelineMembers(this.value)" />
+</div>
+
+<div style="width: 49%; display: inline-block; vertical-align: top; overflow-x: scroll; ">
+    <select id="AgentsList" size="20" onchange="FillPipelineForm(this.value)">
+        @foreach (string n in names)
+        {
+            <option value="@n">@n</option>
+        }
+    </select>
+</div>
+
+<script>
+
+    function SetOrderNo(OrderNumber) {
+        document.getElementById('ContactOrder').value = OrderNumber;
+    }
+
+
+    function FormatPhone(Phone, FieldName) {
+        //Purely number input, no parenthesis, no hyphens.
+        if (Phone.length == 10 && !Phone.includes("-") && !Phone.includes("(") && !Phone.includes(")")) {
+            var ps = Phone.split("");
+            var fullphone = "(" + ps[0] + ps[1] + ps[2] + ") " + ps[3] + ps[4] + ps[5] + "-" + ps[6] + ps[7] + ps[8] + ps[9]
+            document.getElementById(FieldName).value = fullphone;
+        }
+    }
+
+    function FillPipelineForm(name) {
+        const id = name.split('_');
+        $.ajax({
+            url: '/Crestwood/PipelineMemberInfo',
+            data: { id: id[4] },
+            type: 'GET',
+            success: function (data) {
+                document.getElementById('OpName').value = data.OperatorName;
+                document.getElementById('State').value = data.State;
+                document.getElementById('County').value = data.County;
+                document.getElementById('ConName').value = data.ConName;
+                document.getElementById('Phone').value = data.Phone;
+                if (data.Contact != 0) {
+                    document.getElementById('ContactOrder_' + data.Contact).checked = true;
+                } else {
+                    document.getElementById('ContactOrder_1').checked = false;
+                    document.getElementById('ContactOrder_2').checked = false;
+                    document.getElementById('ContactOrder_3').checked = false;
+                    document.getElementById('ContactOrder_4').checked = false;
+                    document.getElementById('ContactOrder_5').checked = false;
+                }
+                document.getElementById('ContactOrder').value = data.Contact;
+                document.getElementById('MemberID').value = data.ID;
+            },
+            error: function (data) {
+                alert("ERROR!");
+            }
+        });
+    }
+
+    function UpdatePipelineMembers(btnvalue) {
+        var OpName = document.getElementById('OpName').value;
+        var State = document.getElementById('State').value;
+        var County = document.getElementById('County').value;
+        var ConName = document.getElementById('ConName').value;
+        var Phone = document.getElementById('Phone').value;
+        var ConOrder = document.getElementById('ContactOrder').value;
+        var ID = document.getElementById('MemberID').value;
+
+        $.ajax({
+            url: '/Crestwood/UpdatePipelineMembers',
+            data: { ID: ID, OpName: OpName, State: State, County: County, ConName: ConName, Phone: Phone, ConOrder: ConOrder, BtnType: btnvalue },
+            type: 'GET',
+            success: function (data) {
+                alert("Pipeline Member has been successfully updated!");
+                window.location.reload();
+            },
+            error: function (data) {
+                alert("ERROR!");
+            }
+        });
+
+    }
+</script>

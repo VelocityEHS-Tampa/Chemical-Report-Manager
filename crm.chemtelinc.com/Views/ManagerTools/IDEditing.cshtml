@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "IDEditing";
+    string IDEditing = ViewBag.IDsSelected;
+    IList<ChemicalLibrary.GLOID> GLOIdList = ViewBag.GLOIDs;
+}
+
+@if (IDEditing == "NewGLO")
+{
+    <h2>New GLO IDs</h2>
+}
+else if (IDEditing == "Incident")
+{
+    <h2> Incident IDs </h2>
+}
+else if (IDEditing == "CleanShot")
+{
+
+}
+

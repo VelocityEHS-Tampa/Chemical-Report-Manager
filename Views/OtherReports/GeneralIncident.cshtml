@@ -1,0 +1,292 @@
+﻿
+@{
+    ViewBag.Title = "GeneralIncident";
+    string constring = crm.chemtelinc.com.Properties.Settings.Default.StatesConnectionString;
+    int IncidentID = ViewBag.ID;
+    List<string> SubList = ViewBag.SubscriberList;
+    List<string> States = new List<string>();
+    States = ChemicalLibrary.Search.GetStates(constring);
+}
+
+<h2>General Incident Report</h2>
+
+<div id="GenIncReportContainer">
+    <div class="GLOHeader" id="GRCPHeader">General Incident Report Search</div>
+    <div id="GenIncSearch">
+        <br />
+        <span>Search </span> <input type="text" id="cbsearch" name="cbsearch" class="form-control GLOFieldSpacing" style="width:20%;" /> <input type="button" value="Search" class="form-control GLOFieldSpacing" style="width:10%;" />
+    </div>
+    <br />
+    @using (Html.BeginForm("SubmitGenIncForm", "OtherReports", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div id="FormButtons" style="padding:2%;text-align:right;">
+            <input type="submit" value="Submit" class="form-control GRCPButtons required-field" id="btnsubmit" name="btnsubmit" onclick="SubmitForm()" tabindex="99">
+            <input type="button" value="Cancel" class="form-control GRCPButtons alert-info" id="btnclose" name="btnclose" onclick="ClearForm()">
+        </div>
+        <div id="ReportInfo">
+            <div class="GLOHeader" id="GRCPHeader">Report Information, Caller's Information, and Incident Specifics</div>
+            <br />
+            @* Left portion info *@
+            <div class="CrestInlineDisplay" style="width:20%;">
+                <span>Report Information</span>
+                <hr />
+                <span>Operator Name</span> <input type="text" id="txtersop" name="txtersop" class="form-control GLOFieldSpacing" value="@Session["FullName"].ToString()" style="width:90%;" readonly="" /> <br />
+                <span>Incident ID</span> <input type="text" id="txtincidentid" name="txtincidentid" class="form-control GLOFieldSpacing" style="width:90%;" readonly="" value="@IncidentID" /><br />
+                <span>Date</span> <input type="text" id="txtdate" name="txtdate" class="form-control GLOFieldSpacing" style="width:90%;" placeholder="__/__/____" value="@DateTime.Now.ToShortDateString()" onblur="FormatDate(this.value, this.id)" tabindex="1"/><br />
+                <span>Time</span> <input type="text" id="txttime" name="txttime" class="form-control GLOFieldSpacing" style="width:90%;" placeholder="__:__" value="@DateTime.Now.ToString("HH:mm")" onblur="FormatTime(this.value, this.id)" tabindex="2"/><br />
+            </div>
+            @* center portion info *@
+        <div class="CrestInlineDisplay" style="width:30%;">
+            <span>Caller's Information</span>
+            <hr />
+            <span class="required-field">Caller's Name </span> <input type="text" id="txtcallersname" name="txtcallersname" class="form-control GLOFieldSpacing" style="width:90%;" required="" tabindex="3" /> <br />
+            <span class="required-field">Caller's Phone # </span> <input type="text" id="txtcallersphone" name="txtcallersphone" class="form-control GLOFieldSpacing" style="width:30%;" placeholder="9999999999" required="" tabindex="4" /> <span>Ext </span> <input type="text" id="txtcallersphoneext" name="txtcallersphoneext" class="form-control GLOFieldSpacing" style="width:20%;" tabindex="5" /><br />
+            <span>Caller's Affiliation </span> <input type="text" id="txtcallersaffiliation" name="txtcallersaffiliation" class="form-control GLOFieldSpacing" style="width:90%;" tabindex="6" /> <br />
+            <span>Caller's Fax/Email </span> <input type="text" id="txtcallersfaxoremail" name="txtcallersfaxoremail" class="form-control GLOFieldSpacing" style="width:90%;" tabindex="7" /> <br />
+        </div>
+            @* Right portion info *@
+            <div class="CrestInlineDisplay">
+                <span>Incident Specifics</span>
+                <hr />
+                <span>Incident Street</span> <input type="text" class="form-control GLOFieldSpacing" id="txtincidentstreet" name="txtincidentstreet" style="width:25%;" tabindex="8" />
+                <span>Incident Country </span>
+                <select class="GLOFieldSpacing" id="txtincidentcountry" name="txtincidentcountry" tabindex="12">
+                    <option value="USA" selected="">USA</option>
+                    <option value="Canada">Canada</option>
+                </select>
+                <br />
+                <span>Incident City</span> <input type="text" class="form-control GLOFieldSpacing" id="txtincidentcity" name="txtincidentcity" style="width:25%;" tabindex="9" /> <span>Incident Date</span> <input type="text" id="txtincidentdate" name="txtincidentdate" class="form-control GLOFieldSpacing" style="width:20%;" placeholder="__/__/____" onblur="FormatDate(this.value, this.id)" tabindex="13"/>
+                <br />
+                <span>Incident State</span>
+                <select id="txtincidentstate" name="txtincidentstate" class="GLOFieldSpacing" tabindex="10">
+                    <option value="" selected=""></option>
+                    @foreach (string s in States)
+                    {
+                        <option value="@s">@s</option>
+                    }
+                </select>
+                <span>Incident Time</span> <input type="text" id="txtincidenttime" name="txtincidenttime" class="form-control GLOFieldSpacing" style="width:20%;" placeholder="__:__" onblur="FormatTime(this.value, this.id)" tabindex="14" />
+                <br />
+                <span>Incident Zip</span> <input type="text" class="form-control GLOFieldSpacing" id="txtincidentzipcode" name="txtincidentzipcode" maxlength="5" placeholder="00000" style="width: 25%;" tabindex="11" />
+                <span>Incident Time Zone </span>
+                <select class="GLOFieldSpacing" id="cbincidenttimezone" name="cbincidenttimezone" tabindex="15">
+                    <option value="" selected=""></option>
+                    <option value="AKST">AKST</option>
+                    <option value="AST">AST</option>
+                    <option value="CST">CST</option>
+                    <option value="EST">EST</option>
+                    <option value="HAST">HAST</option>
+                    <option value="MST">MST</option>
+                    <option value="PST">PST</option>
+                    <option value="UTC">UTC</option>
+                </select>
+                <br />
+            </div>
+        </div>
+
+        <div id="SpillInfo">
+            <br />
+            <div class="GLOHeader" id="GRCPHeader">Spill/Material Information and Incident Details</div>
+            @* Left Side Info *@
+            <br />
+            <div class="CrestInlineDisplay" style="width:45%;">
+                <span>Spill/Material Information</span>
+                <hr />
+                <span class="required-field">Material Name </span> <input type="text" id="txtmaterialname" name="txtmaterialname" class="form-control GLOFieldSpacing" style="width:75%" required="" tabindex="16" /><br />
+                <span>Product Number</span> <input type="text" id="txtproductnumber" name="txtproductnumber" class="form-control GLOFieldSpacing" style="width:75%" tabindex="17" /><br />
+                <span>EPA Reg #</span> <input type="text" id="txteparegno" name="txteparegno" class="form-control GLOFieldSpacing" style="width:75%" tabindex="18" /><br />
+                <span>Quantity Spilled or Released</span> <input type="text" id="txtquantityspilledorreleased" name="txtquantityspilledorreleased" class="form-control GLOFieldSpacing" style="width: 60%" tabindex="19" /><br />
+                <span class="required-field">Does incident involve fire or threat </span>
+                <select id="cbinvolvefire" name="cbinvolvefire" class="GLOFieldSpacing" required="" tabindex="20">
+                    <option value="" selected=""></option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+                <br />
+                <span class="required-field">Where did you get ChemTel's # from </span>
+                <select id="cbwheredidyougetournumberfrom" name="cbwheredidyougetournumberfrom" class="GLOFieldSpacing" required="" tabindex="21">
+                    <option value="" selected=""></option>
+                    <option value="ERG">ERG</option>
+                    <option value="Friend">Friend</option>
+                    <option value="Google/Web Search">Google/Web Search</option>
+                    <option value="Manufacturer">Manufacturer</option>
+                    <option value="Product Label">Product Label</option>
+                    <option value="SDS">SDS</option>
+                    <option value="Shipping Papers">Shipping Papers</option>
+                    <option value="Website">Website</option>
+                    <option value="Other">Other</option>
+                    <option value="Unknown">Unknown</option>
+                </select><br />
+                <span class="required-field">Accidental or Deliberate </span>
+                <select id="cbaccidentalordeliberate" name="cbaccidentalordeliberate" class="GLOFieldSpacing" required="" tabindex="22">
+                    <option value="" selected=""></option>
+                    <option value="Accidental">Accidental</option>
+                    <option value="Deliberate">Deliberate</option>
+                    <option value="Not Applicable">Not Applicable</option>
+                    <option value="Unknown">Unknown</option>
+                </select><br />
+            </div>
+            @* Right Side Info *@
+            <div class="CrestInlineDisplay">
+                <span class="required-field">Incident Details </span> <br />
+                <textarea class="GLOFieldSpacing" id="txtincidentdeails" name="txtincidentdeails" rows="10" cols="70" required="" tabindex="23"></textarea><br />
+                <span>Clean Up Crew Requirement</span> <input type="text" id="txtcleanupcrewrequirement" name="txtcleanupcrewrequirement" class="form-control GLOFieldSpacing" style="width:50%;" tabindex="24" />
+                <br />
+                <span>Agencies On Site </span> <input type="text" id="txtagenciesonsite" name="txtagenciesonsite" class="form-control GLOFieldSpacing" style="width: 50%;" tabindex="25" />
+            </div>
+        </div>
+
+
+        <div id="SpillStatus">
+            <br />
+            <div class="GLOHeader" id="GRCPHeader">Spill Status/Emergency Info, Subscriber's Info, and Additional Release/Exposure information</div>
+            <br />
+            @* Left Side Info *@
+            <div class="CrestInlineDisplay" style="width:35%">
+                <span>Spill Status/Emergency Info</span>
+                <hr />
+                <span class="required-field">Status of Release of Exposure</span><br />
+                <select id="cbstatusofrelease" name="cbstatusofrelease" class="GLOFieldSpacing" required="" tabindex="26">
+                    <option value="Not Applicaple" selected="">Not Applicaple</option>
+                    <option value="Ongoing">Ongoing</option>
+                    <option value="Stopped">Stopped</option>
+                    <option value="Mitigated">Mitigated</option>
+                    <option value="Awaiting disposition">Awaiting disposition</option>
+                    <option value="Personnel is enroute to Medical Facility">Personnel is enroute to Medical Facility</option>
+                    <option value="Personnel is receiving Medical Assistance">Personnel is receiving Medical Assistance</option>
+                    <option value="Personnel has Received Medical Assistance">Personnel has Received Medical Assistance</option>
+                    <option value="Other - See Details">Other - See Details</option>
+                    <option value="Unknown">Unknown</option>
+                </select><br />
+                <span class="required-field">Dispersion of SDS information</span><br />
+                <select id="cbdispersionofmsdsinfo" name="cbdispersionofmsdsinfo" class="GLOFieldSpacing" required="" tabindex="27">
+                    <option value="Not Applicable" selected="">Not Applicable</option>
+                    <option value="ER Info Read to Citizen">ER Info Read to Citizen</option>
+                    <option value="ER Info Read to First Responder">ER Info Read to First Responder</option>
+                    <option value="SDS Sent">SDS Sent</option>
+                    <option value="SDS Declined">SDS Declined</option>
+                    <option value="Other - See Details">Other - See Details</option>
+                    <option value="Unknown">Unknown</option>
+                </select>
+                <br />
+                <br />
+                <span>Subscriber's Info</span>
+                <hr />
+                <span>Subscriber's Name</span> <input type="button" value="Get Subscriber" class="form-control GLOFieldSpacing" style="width:25%;" onclick="ShowSearch()" tabindex="70" />
+                <br />
+                <input type="text" id="txtsubscribersname" name="txtsubscribersname" class="form-control GLOFieldSpacing" required="" tabindex="72" />
+            </div>
+            @* Right Side Info *@
+            <div class="CrestInlineDisplay" style="width:64%">
+                <span>Additional Release or Exposure Information</span>
+                <hr />
+                <span class="required-field">Spill or Exposure</span>
+                <select id="cbspillorexposure" name="cbspillorexposure" class="GLOFieldSpacing" required="" tabindex="28">
+                    <option value="Not Applicable" selected="">Not Applicable</option>
+                    <option value="Spill">Spill</option>
+                    <option value="Exposure">Exposure</option>
+                    <option value="Both">Both</option>
+                    <option value="Neither">Neither</option>
+                    <option value="Unknown">Unknown</option>
+                </select>
+
+                <span>Medical Personnel's Name</span>
+                <input type="text" id="txtmedpersonnelname" name="txtmedpersonnelname" value="Not Applicable" class="form-control GLOFieldSpacing" style="width:25%;" tabindex="32" />
+                <br />
+                <span class="required-field">Type of Exposure</span>
+                <select id="cbtypeofexposure" name="cbtypeofexposure" class="GLOFieldSpacing" required="" tabindex="29">
+                    <option value="Not Applicable" selected="">Not Applicable</option>
+                    <option value="Inhalation">Inhalation</option>
+                    <option value="Injection">Injection</option>
+                    <option value="Ingestion">Ingestion</option>
+                    <option value="Skin">Skin</option>
+                    <option value="Eye">Eye</option>
+                    <option value="Other - See Details">Other - See Details</option>
+                    <option value="Unknown">Unknown</option>
+                </select>
+                <span>Patient's Condition</span> <input type="text" class="form-control GLOFieldSpacing" id="txtpatientscondtion" name="txtpatientscondtion" style="width:25%;" value="Not Applicable" tabindex="33" />
+                <br />
+                <span>Number of Casualties</span>
+                <select id="cbnumofcasualties" name="cbnumofcasualties" class="GLOFieldSpacing" tabindex="30">
+                    <option value="None" selected="">None</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value=">10">>10</option>
+                    <option value="Other - See Details">Other - See Details</option>
+                </select>
+                <span>Hospital/Clinic Location</span> <input type="text" id="txthospitalcliniclocation" name="txthospitalcliniclocation" class="form-control GLOFieldSpacing" value="Not Applicable" style="width:25%;" tabindex="34" />
+                <br />
+                <span>Number of Injuries</span>
+                <select id="cbnumofinjuries" name="cbnumofinjuries" class="GLOFieldSpacing" tabindex="31">
+                    <option value="None" selected="">None</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value=">10">>10</option>
+                    <option value="Other - See Details">Other - See Details</option>
+                </select>
+                <br />
+                <br />
+                <br />
+                <br />
+                <div style="text-align:center;width:75%;display:none;" id="SubSearchContainer">
+                    <span>Search</span><br /><input type="text" name="subscriberlist" class="form-control GLOFieldSpacing" list="SubscriberList" style="margin-left:5%;width:75%;" onchange="FillSubscriberName(this.value)" tabindex="71" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<datalist id="SubscriberList">
+    @foreach (string s in SubList)
+    {
+        <option value="@s">@s</option>
+    }
+</datalist>
+
+<script>
+    function SubmitForm() {
+        if (confirm("Please ensure all data entered is correct before submitting! Are you sure you want to submit this report?")) {
+            return true;
+        }
+    }
+    function ShowSearch() {
+        $('#SubSearchContainer').show();
+    }
+    function FillSubscriberName(SubName) {
+        $('#txtsubscribersname').val(SubName);
+    }
+
+    //Formatting and Validation of Incident Time
+    function FormatDate(Date, FieldName) {
+        //Purely number input, no slashes.
+        if (Date.length == 8 && !Date.includes("/")) {
+            var ds = Date.split("");
+            var fulldate = ds[0] + ds[1] + "/" + ds[2] + ds[3] + "/" + ds[4] + ds[5] + ds[6] + ds[7];
+            document.getElementById(FieldName).value = fulldate;
+        }
+    }
+    function FormatTime(Time, FieldName) {
+        //Purely number input, no semi-colons.
+        if (Time.length == 4 && !Time.includes(":")) {
+            var ts = Time.split("");
+            var fulltime = ts[0] + ts[1] + ":" + ts[2] + ts[3];
+            document.getElementById(FieldName).value = fulltime;
+        }
+    }
+</script>

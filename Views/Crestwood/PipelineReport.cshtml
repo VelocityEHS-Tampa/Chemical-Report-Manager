@@ -1,0 +1,458 @@
+﻿
+
+@{
+    ViewBag.Title = "Crestwood Pipeline Report";
+    int id = 0;  //Public variable that holds the report ID when a previous report is opened from the log.
+    bool emptyreport = false;  //Flag used to indicate whether the report form is empty, or if a report successfully submitted.  Flag is checked when the form closes.
+    int tmpid = 0;  //Temporary, class-level variable used to hold the curren report's ID.  Bassically used if a user found errors on the report and need to make changes
+    string email = ",AssetType-Pipeline@crestwoodlp.com";  //Class-level variable that holds the ESR member's email address so it can be passed to the email form.
+    string CCemail = "";  //Class-level variable that holds the CC email address(es) so it can be passed to the email form.
+    string initials = "";
+    string NERegion = ",AL,CO,DE,DC,FL,GA,IN,KY,ME,MA,MI,MS,NH,NJ,NY,NC,OH,PA,RI,SC,TN,VT,VA,WV,";
+    string CentralRegion = ",AZ,AR,IL,IA,KS,LA,MN,MO,NB,NM,OK,TX,UT,WI,";
+    string NorthRegion = ",AK,CA,HI,ID,MT,NV,ND,OR,SD,WA,WY,"; 
+}
+
+<h2>Crestwood Pipeline Report</h2>
+
+@using (Html.BeginForm("SubmitCrestPipeline", "Crestwood", FormMethod.Post, new { @id = "CrestPipelineForm" }))
+{
+    <div id="PipelineReportContainer">
+        <div id="FormButtons" style="padding:2%;text-align:right;">
+            <input type="button" value="Phone Numbers" class="form-control GRCPButtons" id="btnPhNumb" name="btnPhNumb" onclick="ShowPhoneNumbers()">
+            <input type="button" value="Pipeline Info" class="form-control GRCPButtons" id="btnPipeInfo" name="btnPipeInfo" onclick="ShowPipelineInfo()">
+
+            <input type="submit" value="Submit" class="form-control GRCPButtons required-field" id="btnsubmit" name="btnsubmit" onclick="SubmitForm()" tabindex="99">
+            <input type="button" value="Cancel" class="form-control GRCPButtons alert-info" id="btnclose" name="btnclose" onclick="ClearForm()">
+        </div>
+        @* Operations Information *@
+        <div id="OperationsContainer">
+            <div class="GLOHeader" id="GRCPHeader">Operations</div>
+            <br />
+            <span class="required-field">Date</span> <input type="text" class="form-control GLOFieldSpacing" placeholder="__/__/____" id="txtdate" name="txtdate" style="width:8%;" onblur="FormatDate(this.value, this.id)" required="" tabindex="1"/>
+            <span class="required-field">Time</span> <input type="text" class="form-control GLOFieldSpacing" placeholder="__:__" id="txttime" name="txttime" style="width:5%;" onblur="FormatTime(this.value, this.id)" required="" tabindex="2"/>
+            <span class="required-field">Time Zone</span>
+            <select id="txttimezone" name="txttimezone" class="GLOFieldSpacing" required="" tabindex="3">
+                <option value="" selected=""></option>
+                <option value="AKST">AKST</option>
+                <option value="AST">AST</option>
+                <option value="CST">CST</option>
+                <option value="EST">EST</option>
+                <option value="HAST">HAST</option>
+                <option value="MST">MST</option>
+                <option value="PST">PST</option>
+                <option value="UTC">UTC</option>
+            </select>
+
+            <span class="required-field">Call Date</span> <input type="text" class="form-control GLOFieldSpacing" placeholder="__/__/____" id="txtcalldate" name="txtcalldate" style="width:8%;" value="@DateTime.Now.ToShortDateString()" onblur="FormatDate(this.value, this.id)" tabindex="4"/>
+            <span class="required-field">Call Time</span> <input type="text" class="form-control GLOFieldSpacing" placeholder="__:__" id="txtcalltime" name="txtcalltime" style="width:5%;" value="@DateTime.Now.ToString("HH:mm")" onblur="FormatTime(this.value, this.id)" tabindex="5"/>
+        </div>
+        <br />
+        @* Location Information *@
+        <div id="LocationInfoContainer" style="width:30%" class="CrestInlineDisplay">
+            <div class="GLOHeader" id="GRCPHeader">Location Information</div>
+            <br />
+            <span class="required-field">City</span> <input type="text" class="form-control GLOFieldSpacing" id="txtcity" name="txtcity" style="width:50%;" required="" tabindex="6"/>
+            <span class="required-field">State</span>
+            <select id="txtstate" name="txtstate" class="GLOFieldSpacing" required="" onchange="GetCounties(this.value), GetPipelineLocations(this.value)" tabindex="7">
+                <option value="" selected=""></option>
+                <option value="AR">AR</option>
+                <option value="CA">CA</option>
+                <option value="LA">LA</option>
+                <option value="MT">MT</option>
+                <option value="ND">ND</option>
+                <option value="NM">NM</option>
+                <option value="NY">NY</option>
+                <option value="PA">PA</option>
+                <option value="SC">SC</option>
+                <option value="TX">TX</option>
+                <option value="WV">WV</option>
+                <option value="WY">WY</option>
+            </select>
+            <br />
+            <span class="required-field">County</span>
+            <select id="txtcounty" name="txtcounty" class="GLOFieldSpacing" required="" onchange="GetPipelineMembers(this.value)" tabindex="8">
+                <option value="" selected=""></option>
+            </select>
+            <br />
+            <span class="required-field">Please indicate the specific location of the incident</span>
+            <br />
+            <textarea id="txtdirections" name="txtdirections" cols="30" rows="3" class="GLOFieldSpacing" required="" tabindex="9"></textarea>
+        </div>
+        @* Incident Details *@
+        <div id="IncidentDetailsContainer" style="width:69.5%;" class="CrestInlineDisplay">
+            <div class="GLOHeader" id="GRCPHeader">Incident Details</div>
+            <div style="width:45%;" class="CrestInlineDisplay">
+                <span class="required-field">Describe the incident</span><br />
+                <textarea name="txtobserving" class="GLOFieldSpacing" rows="7" cols="35" required="" tabindex="10"></textarea>
+            </div>
+
+            <div style="width:54%;" class="CrestInlineDisplay">
+                <span class="required-field">Are you seeing, hearing, or smelling? (check all that apply)</span><br />
+                @* Checkboxes Left *@
+                <div class="CrestInlineDisplay">
+                    <input type="checkbox" id="cbblackorwhitesmoke" name="cbblackorwhitesmoke" class="GLOFieldSpacing" tabindex="11"/> <span>Black or White Smoke</span> <br />
+                    <input type="checkbox" id="cbflames" name="cbflames" class="GLOFieldSpacing" tabindex="12"/> <span>Flames</span> <br />
+                    <input type="checkbox" id="cbhissing" name="cbhissing" class="GLOFieldSpacing" tabindex="13"/> <span>Hissing</span> <br />
+                    <input type="checkbox" id="cbliquid" name="cbliquid" class="GLOFieldSpacing" tabindex="14"/> <span>Liquid</span> <br />
+                </div>
+                @* Checkboxes Right *@
+                <div class="CrestInlineDisplay">
+                    <input type="checkbox" id="cboilysheen" name="cboilysheen" class="GLOFieldSpacing" tabindex="15"/> <span>Oily Sheen</span> <br />
+                    <input type="checkbox" id="cbotherpipelinemarkers" name="cbotherpipelinemarkers" class="GLOFieldSpacing" tabindex="16"/> <span>Other Pipeline Markers</span> <br />
+                    <input type="checkbox" id="cbrotteneggodor" name="cbrotteneggodor" class="GLOFieldSpacing" tabindex="17"/> <span>Rotten Egg Odor</span> <br />
+                    <input type="checkbox" id="cbvaporsormist" name="cbvaporsormist" class="GLOFieldSpacing" tabindex="18"/> <span>Vapors or Mist</span> <br />
+                </div>
+            </div>
+            <br />
+            <br />
+        </div>
+        @* Questionnaire *@
+        <div id="Questionnaire">
+            <div class="GLOHeader" id="GRCPHeader">Questionnaire</div><br />
+            <div id="QuestionnaireForm" class="CrestInlineDisplay" style="text-align:left; width:75%;">
+                <span class="required-field">Is this a drill</span>
+                <select id="cbDrill" name="cbDrill" class="GLOFieldSpacing" required="" tabindex="19">
+                    <option value="" selected=""></option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select><br />
+                <span class="required-field">Can you tell from your location if this is occurring on a pipeline ROW or a Well-pad location</span> <input type="text" id="txtroeworwellpad" name="txtroeworwellpad" class="form-control GLOFieldSpacing" style="width:20%;" required="" tabindex="20"/><br />
+                <span class="required-field">Do you see ANY tanks near or at the location where this incident is occurring</span>
+                <select name="txttanks" id="txttanks" class="GLOFieldSpacing" required="" tabindex="21">
+                    <option value="" selected=""></option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select><br />
+                <span class="required-field">Are you the land owner</span>
+                <select id="txtlandowner" name="txtlandowner" class="GLOFieldSpacing" required="" tabindex="22">
+                    <option value="" selected=""></option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select><br />
+                <span class="required-field">What is the Lease/Well name</span> <input type="text" id="txtleasewellname" name="txtleasewellname" class="form-control GLOFieldSpacing" style="width:20%;" required=""  tabindex="23"/><br />
+                <span class="required-field">What is your name (caller)</span> <input type="text" id="txtcallername" name="txtcallername" class="form-control GLOFieldSpacing" style="width:20%;" required=""  tabindex="24"/><br />
+                <span class="required-field">What is your email address</span> <input type="text" id="txtcalleremail" name="txtcalleremail" class="form-control GLOFieldSpacing" style="width:20%;" placeholder="yourname@domain.com" required=""  tabindex="25"/><br />
+                <span class="required-field">What is the phone number you are calling from</span> <input type="text" id="txtcallerphone" name="txtcallerphone" class="form-control GLOFieldSpacing" style="width:20%;" placeholder="(___) ___-____" onblur="FormatPhone(this.value, this.id)" required=""  tabindex="26"/><br />
+                <span class="required-field">Have you already contacted 9-1-1 (IX-I-I)</span>
+                <select id="txtnotify911" name="txtnotify911" class="GLOFieldSpacing" required="" tabindex="27">
+                    <option value="" selected=""></option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select><br />
+                <span class="required-field">Is anyone injured and needing medical assistance</span>
+                <select id="txtanyoneinjured" name="txtanyoneinjured" class="GLOFieldSpacing" required="" tabindex="28">
+                    <option value="" selected=""></option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select><br />
+                <span class="required-field">Is anyone in immediate danger</span>
+                <select id="txtimmediatedanger" name="txtimmediatedanger" class="GLOFieldSpacing" required="" tabindex="29">
+                    <option value="" selected=""></option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select><br />
+                <span class="required-field">Where are they in relation to the incident</span><input type="text" id="txtrelationtoincident" name="txtrelationtoincident" class="form-control GLOFieldSpacing" style="width:20%;" required=""  tabindex="30"/><br />
+                <span class="required-field">Can you safely warn them to stay away from the incident</span>
+                <select id="txtsafelywarn" name="txtsafelywarn" class="GLOFieldSpacing" required="" tabindex="31">
+                    <option value="" selected=""></option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select><br />
+            </div>
+            <div class="CrestInlineDisplay" style="width:24%;">
+                <span class="required-field">Number of Injuries</span> <input type="number" id="txtnumofinjuries" name="txtnumofinjuries" class="GLOFieldSpacing" required=""  tabindex="32"/><br />
+                <span class="required-field">Report Takers Name</span> <input type="text" id="txtreporttakername" name="txtreporttakername" class="GLOFieldSpacing" value="@Session["FullName"].ToString()" required=""  tabindex="33"/> <br />
+                <span class="required-field">Report Takers Email</span> <input type="text" id="txtreporttakeremail" name="txtreporttakeremail" class="GLOFieldSpacing" value="ers@ehs.com" readonly="" required="" /> <br />
+                @*
+                    These fields are not visible in the desktop app, unsure if it will be returning or not, so leaving in just in case.
+                    <span class="required-field">Describe the Incident</span><br />
+                    <textarea name="txtdescription" class="GLOFieldSpacing" rows="7" cols="35" required=""></textarea>
+                *@
+            </div>
+        </div>
+        <br />
+        @* Weather Conditions *@
+        <div id="WeatherConditions">
+            <div class="GLOHeader" id="GRCPHeader">Weather Conditions</div>
+            <div class="CrestInlineDisplay" style="width:20%;">
+                <span class="required-field">Temp</span> <input class="form-control GLOFieldSpacing" type="text" id="txttemp" name="txttemp" style="width:15%;" required="" tabindex="34" /><br />
+                <span class="required-field">Wind Speed</span> <input class="form-control GLOFieldSpacing" type="text" id="txtwindspeed" name="txtwindspeed" style="width: 15%;" required="" tabindex="35" /><br />
+                <span class="required-field">Wind Direction</span> <input class="form-control GLOFieldSpacing" type="text" id="txtwinddirection" name="txtwinddirection" style="width: 15%;" required="" tabindex="36" /><br />
+            </div>
+            <div class="CrestInlineDisplay" style="width:30%;">
+                <span class="required-field">Describe the weather conditions</span> <br />
+                <textarea id="txtweatherconditions" name="txtweatherconditions" cols="30" rows="5" required="" tabindex="37"></textarea>
+            </div>
+            <div class="CrestInlineDisplay" style="width:30%;">
+                <span class="required-field">Name</span><br />
+                <select id="txtname1" name="txtname1" class="GLOFieldSpacing" required="" onchange="GetPipelinePhone(this.value)" tabindex="38"></select><br />
+                <span class="required-field">Contact Number</span><br />
+                <input type="text" class="form-control GLOFieldSpacing" placeholder="(___) ___-____" id="txtcontactnumber1" name="txtcontactnumber1" onblur="FormatPhone(this.value, this.id)" required="" tabindex="39" /><br />
+                <span class="required-field">Location</span><br />
+                <input type="text" class="form-control GLOFieldSpacing" id="txtlocation1" name="txtlocation1" required="" tabindex="40" />
+            </div>
+            <div class="CrestInlineDisplay" style="width:15%;">
+                <span class="required-field">Notification Date</span><br />
+                <input type="text" class="form-control GLOFieldSpacing" placeholder="__/__/____" id="NotificationDate" name="NotificationDate" onblur="FormatDate(this.value, this.id)" required="" tabindex="41" /><br />
+                <span class="required-field">Notification Time</span><br />
+                <input type="text" class="form-control GLOFieldSpacing" placeholder="__:__" id="NotificationTime" name="NotificationTime" onblur="FormatTime(this.value, this.id)" required="" tabindex="42" /><br />
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    function SubmitForm() {
+        if (confirm("Please ensure all data entered is correct before submitting! Are you sure you want to submit this report?")) {
+            return true;
+        }
+    }
+    function FormatDate(Date, FieldName) {
+        //Purely number input, no slashes.
+        if (Date.length == 8 && !Date.includes("/")) {
+            var ds = Date.split("");
+            var fulldate = ds[0] + ds[1] + "/" + ds[2] + ds[3] + "/" + ds[4] + ds[5] + ds[6] + ds[7];
+            document.getElementById(FieldName).value = fulldate;
+        }
+    }
+    function FormatTime(Time, FieldName) {
+        //Purely number input, no semi-colons.
+        if (Time.length == 4 && !Time.includes(":")) {
+            var ts = Time.split("");
+            var fulltime = ts[0] + ts[1] + ":" + ts[2] + ts[3];
+            document.getElementById(FieldName).value = fulltime;
+        }
+    }
+    function FormatPhone(Phone, FieldName) {
+        //Purely number input, no parenthesis, no hyphens.
+        if (Phone.length == 10 && !Phone.includes("-") && !Phone.includes("(") && !Phone.includes(")")) {
+            var ps = Phone.split("");
+            var fullphone = "(" + ps[0] + ps[1] + ps[2] + ") " + ps[3] + ps[4] + ps[5] + "-" + ps[6] + ps[7] + ps[8] + ps[9]
+            document.getElementById(FieldName).value = fullphone;
+        }
+    }
+    function ClearForm() {
+        if (confirm("Are you sure you want to cancel this report?")) {
+            location.href = "";
+        }
+    }
+    //Functions to get each states counties.
+    function GetCounties(state) {
+        $('#txtcounty').empty(); //Clears all previous options that were in the select tag.
+        $('#txtcounty').append('<option value="0"></option>')
+        if (state == "AR") { ARCounties(); };
+        if (state == "CA") { CACounties(); };
+        if (state == "LA") { LACounties(); };
+        if (state == "MT") { MTCounties(); };
+        if (state == "ND") { NDCounties(); };
+        if (state == "NM") { NMCounties(); };
+        if (state == "NY") { NYCounties(); };
+        if (state == "PA") { PACounties(); };
+        if (state == "SC") { SCCounties(); };
+        if (state == "TX") { TXCounties(); };
+        if (state == "WV") { WVCounties(); };
+        if (state == "WY") { WYCounties(); };
+    }
+    function ARCounties() {
+        var x = document.getElementById('txtcounty');
+        // Adds currently selected state's counties to the dropdown menu
+        var ARCountyList = ["Conway", "Faulkner", "Van Buren", "White"];
+        ARCountyList.forEach(function (item) {
+            var option = document.createElement("option");
+            option.value = item;
+            option.text = item;
+            x.add(option);
+        });
+    }
+    function CACounties() {
+        var x = document.getElementById('txtcounty');
+        // Adds currently selected state's counties to the dropdown menu
+        var CACountyList = ["Kern"];
+        CACountyList.forEach(function (item) {
+            var option = document.createElement("option");
+            option.value = item;
+            option.text = item;
+            x.add(option);
+        });
+    }
+    function LACounties() {
+        var x = document.getElementById("txtcounty");
+        // Adds currently selected state's counties to the dropdown menu
+        var LACountyList = ["Sabine"];
+        LACountyList.forEach(function (item) {
+            var option = document.createElement("option");
+            option.value = item;
+            option.text = item;
+            x.add(option);
+        });
+    }
+    function MTCounties() {
+        var x = document.getElementById("txtcounty");
+        // Adds currently selected state's counties to the dropdown menu
+        var MTCountyList = ["Roosevelt"];
+        MTCountyList.forEach(function (item) {
+            var option = document.createElement("option");
+            option.value = item;
+            option.text = item;
+            x.add(option);
+        });
+    }
+    function NDCounties() {
+        var x = document.getElementById("txtcounty");
+        // Adds currently selected state's counties to the dropdown menu
+        var NDCountyList = ["Dunn", "McKenzie", "Mountrail", "Williams"];
+        NDCountyList.forEach(function (item) {
+            var option = document.createElement("option");
+            option.value = item;
+            option.text = item;
+            x.add(option);
+        });
+    }
+    function NMCounties() {
+        var x = document.getElementById("txtcounty");
+        // Adds currently selected state's counties to the dropdown menu
+        var NMCountyList = ["Eddy"];
+        NMCountyList.forEach(function (item) {
+            var option = document.createElement("option");
+            option.value = item;
+            option.text = item;
+            x.add(option);
+        });
+    }
+    function NYCounties() {
+        var x = document.getElementById("txtcounty");
+        // Adds currently selected state's counties to the dropdown menu
+        var NYCountyList = ["Broome", "Chemung", "Schuyler", "Steuben", "Tioga", "Tomkins"];
+        NYCountyList.forEach(function (item) {
+            var option = document.createElement("option");
+            option.value = item;
+            option.text = item;
+            x.add(option);
+        });
+    }
+    function PACounties() {
+        var x = document.getElementById("txtcounty");
+        // Adds currently selected state's counties to the dropdown menu
+        var PACountyList = ["Bradford", "Lycoming", "Sullivan"];
+        PACountyList.forEach(function (item) {
+            var option = document.createElement("option");
+            option.value = item;
+            option.text = item;
+        });
+    }
+    function SCCounties() {
+        var x = document.getElementById("txtcounty");
+        // Adds currently selected state's counties to the dropdown menu
+        var SCCountyList = ["Chester", "Kershaw", "Lancaster", "York"];
+        SCCountyList.forEach(function (item) {
+            var option = document.createElement("option");
+            option.value = item;
+            option.text = item;
+            x.add(option);
+        });
+    }
+    function TXCounties() {
+        var x = document.getElementById("txtcounty");
+        // Adds currently selected state's counties to the dropdown menu
+        var TXCountyList = ["Bosque", "Colorado", "Culberson", "Denton", "Erath", "Hood", "Johnson", "Loving", "Matagorda", "Reeves", "Roberts", "Somerville", "Tarrant", "Ward", "Wharton"];
+        TXCountyList.forEach(function (item) {
+            var option = document.createElement("option");
+            option.value = item;
+            option.text = item;
+            x.add(option);
+        });
+    }
+    function WVCounties() {
+        var x = document.getElementById("txtcounty");
+        // Adds currently selected state's counties to the dropdown menu
+        var WVCountyList = ["Barbour", "Doddridge", "Harrison"];
+        WVCountyList.forEach(function (item) {
+            var option = document.createElement("option");
+            option.value = item;
+            option.text = item;
+            x.add(option);
+        });
+    }
+    function WYCounties() {
+        var x = document.getElementById("txtcounty");
+        // Adds currently selected state's counties to the dropdown menu
+        var WYCountyList = ["Converse"];
+        WYCountyList.forEach(function (item) {
+            var option = document.createElement("option");
+            option.value = item;
+            option.text = item;
+            x.add(option);
+        });
+    }
+    //Get list of Phone Numbers with State/County combination
+    function ShowPhoneNumbers() {
+            $.ajax({
+                url: '/Crestwood/GetPipelinePhoneList/',
+                data: { State: $('#txtstate').val(), County: $('#txtcounty').val() },
+                type: 'GET',
+                success: function (data) {
+                    if (data.PhoneList.length > 0) {
+                        alert(data.PhoneList);
+                    } else {
+                        alert("There are no contacts for this State/County combination.");
+                    }
+                },
+                error: function (data) {
+                    alert("ERROR!");
+                }
+            });
+    }
+    //Show Pipeline Information box
+    function ShowPipelineInfo() {
+        alert("Ask the caller to remain calm\n\nAsk the caller to make sure they are a safe distance from the leak area\n\nWalk INTO the wind away from the possible hazardous fumes\n\nRemind the caller not to touch, breathe or make contact with any leaking liquids \n\nRemind caller not to do anything further that could create a spark\n\nNo smoking, matches, engines, ANY phones, switching on/off lights\n\nDo not drive into the leak area, and warn others to stay away until relieved\n\n");
+    }
+    //Auto populate the Location field when a different state is selected.
+    function GetPipelineLocations(state) {
+        var x = $('#txtlocation1');
+        if (state == "WV" || state == "NY" || state == "PA" || state == "SC") {
+            x.val("Eastern");
+        } else if (state == "TX" || state == "AR" || state == "LA" || state == "NM") {
+            x.val("Central");
+        } else if (state == "ND" || state == "CA") {
+            x.val("Western");
+        };
+    }
+    //Auto populate a list of Pipeline members names and phone numbers depending on the county selected.
+    function GetPipelineMembers(selectedcounty) {
+        $('#txtname1').empty(); //Clears all previous options that were in the select tag.
+        $('#txtname1').append('<option value="0"></option>')
+        var x = document.getElementById("txtname1");
+        $.ajax({
+            url: '/Crestwood/GetPipelineNames/',
+            data: { state: $('#txtstate').val(), county: selectedcounty },
+            type: 'GET',
+            success: function (data) {
+                const names = data.split(',');
+                names.forEach(function (item) {
+                    var option = document.createElement("option");
+                    option.value = item;
+                    option.text = item;
+                    x.add(option);
+                })
+                
+            },
+            error: function (data) {
+                alert("ERROR!");
+            }
+        });
+    }
+    function GetPipelinePhone(ContactName) {
+        $.ajax({
+            url: '/Crestwood/SearchByContactName/',
+            data: { contactName: ContactName, contactState: $('#txtstate').val(), contactCounty: $('#txtcounty').val() },
+            type: 'GET',
+            success: function (data) {
+                $('#txtcontactnumber1').val(data.phone);
+            },
+            error: function (data) {
+                alert("ERROR!");
+            }
+        });
+    }
+</script>
