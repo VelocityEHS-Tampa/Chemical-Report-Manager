@@ -261,8 +261,8 @@
     <Property Name="potentialhazardornearmiss" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="landownercomplaint" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="impactstowater" Type="nvarchar" MaxLength="10" Nullable="false" />
-    <Property Name="dispatcheroremployee" Type="nvarchar" MaxLength="30" Nullable="false" />
-    <Property Name="contractororemployee" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="dispatcheroremployee" Type="nvarchar" MaxLength="30" />
+    <Property Name="contractororemployee" Type="nvarchar" MaxLength="30" />
     <Property Name="notify911" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="immediatesupport" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="transporttohospital" Type="nvarchar" MaxLength="10" Nullable="false" />
@@ -384,14 +384,14 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="county" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="county" Type="nvarchar(max)" Nullable="false" />
     <Property Name="state" Type="nvarchar" MaxLength="2" Nullable="false" />
-    <Property Name="distancefromtown" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="distancefromlandmark" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="intersectionormilemarker" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="observing" Type="nvarchar" MaxLength="2000" Nullable="false" />
-    <Property Name="seeinghearingsmelling" Type="nvarchar" MaxLength="1000" Nullable="false" />
-    <Property Name="roworwellpad" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="distancefromtown" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="distancefromlandmark" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="intersectionormilemarker" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="observing" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="seeinghearingsmelling" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="roworwellpad" Type="nvarchar(max)" Nullable="false" />
     <Property Name="tanks" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="landowner" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="callername" Type="nvarchar" MaxLength="30" Nullable="false" />
@@ -402,45 +402,45 @@
     <Property Name="temp" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="windspeed" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="winddirection" Type="nvarchar" MaxLength="15" Nullable="false" />
-    <Property Name="weatherconditions" Type="nvarchar" MaxLength="100" Nullable="false" />
-    <Property Name="relationtoincident" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="weatherconditions" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="relationtoincident" Type="nvarchar(max)" Nullable="false" />
     <Property Name="safelywarn" Type="nvarchar" MaxLength="10" Nullable="false" />
-    <Property Name="name1" Type="nvarchar" MaxLength="30" Nullable="false" />
-    <Property Name="name2" Type="nvarchar" MaxLength="30" Nullable="false" />
-    <Property Name="name3" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="name1" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="name2" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="name3" Type="nvarchar(max)" Nullable="false" />
     <Property Name="contactnumber1" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="contactnumber2" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="contactnumber3" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="location1" Type="nvarchar" MaxLength="30" Nullable="false" />
-    <Property Name="location2" Type="nvarchar" MaxLength="30" Nullable="false" />
-    <Property Name="location3" Type="nvarchar" MaxLength="30" Nullable="false" />
-    <Property Name="leasewellname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="location1" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="location2" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="location3" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="leasewellname" Type="nvarchar(max)" Nullable="false" />
     <Property Name="blackorwhitesmoke" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="flames" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="hissing" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="liquid" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="oilysheen" Type="nvarchar" MaxLength="10" Nullable="false" />
-    <Property Name="otherpipelinemarkers" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="otherpipelinemarkers" Type="nvarchar(max)" Nullable="false" />
     <Property Name="rotteneggodor" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="vaporormist" Type="nvarchar" MaxLength="10" Nullable="false" />
-    <Property Name="directions" Type="nvarchar" MaxLength="2000" Nullable="false" />
+    <Property Name="directions" Type="nvarchar(max)" Nullable="false" />
     <Property Name="city" Type="nvarchar" MaxLength="15" Nullable="false" />
     <Property Name="date" Type="date" Nullable="false" />
     <Property Name="time" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="timezone" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="numofinjuries" Type="int" Nullable="false" />
-    <Property Name="reporttakername" Type="nvarchar" MaxLength="30" Nullable="false" />
-    <Property Name="reporttakeremail" Type="nvarchar" MaxLength="100" Nullable="false" />
-    <Property Name="description" Type="nvarchar" MaxLength="3000" Nullable="false" />
-    <Property Name="calleremail" Type="nvarchar" MaxLength="100" Nullable="false" />
-    <Property Name="callertitle" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="calleraffiliation" Type="nvarchar" MaxLength="100" Nullable="false" />
-    <Property Name="name4" Type="nvarchar" MaxLength="30" Nullable="false" />
-    <Property Name="name5" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="reporttakername" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="reporttakeremail" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="calleremail" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="callertitle" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="calleraffiliation" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="name4" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="name5" Type="nvarchar(max)" Nullable="false" />
     <Property Name="contactnumber4" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="contactnumber5" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="location4" Type="nvarchar" MaxLength="30" Nullable="false" />
-    <Property Name="location5" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="location4" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="location5" Type="nvarchar(max)" Nullable="false" />
     <Property Name="calldate" Type="nvarchar" MaxLength="15" Nullable="false" />
     <Property Name="calltime" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="ersoperator" Type="nvarchar" MaxLength="20" Nullable="false" />
@@ -471,7 +471,7 @@ warning 6002: The table/view 'chemreporter.dbo.CRMWebU' does not have a primary 
       <PropertyRef Name="UserType" />
       <PropertyRef Name="LastPassChange" />
     </Key>
-    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Password" Type="varchar(max)" Nullable="false" />
@@ -514,13 +514,13 @@ warning 6002: The table/view 'chemreporter.dbo.CRMWebU' does not have a primary 
     <Property Name="IncidentDate" Type="varchar" MaxLength="15" />
     <Property Name="IncidentTime" Type="varchar" MaxLength="5" />
     <Property Name="IncidentTimeZone" Type="varchar" MaxLength="25" />
-    <Property Name="MaterialName" Type="varchar" MaxLength="100" />
+    <Property Name="MaterialName" Type="varchar(max)" />
     <Property Name="ProductNumber" Type="varchar" MaxLength="100" />
-    <Property Name="QuantitySpilled" Type="varchar" MaxLength="30" />
+    <Property Name="QuantitySpilled" Type="varchar(max)" />
     <Property Name="CleanUpCrewReqs" Type="varchar" MaxLength="100" />
     <Property Name="AgenciesOnSite" Type="varchar" MaxLength="100" />
     <Property Name="AccidentOrDeliberate" Type="varchar" MaxLength="15" />
-    <Property Name="IncidentDetails" Type="varchar" MaxLength="3000" />
+    <Property Name="IncidentDetails" Type="varchar(max)" />
     <Property Name="InvolveFire" Type="varchar" MaxLength="5" />
     <Property Name="WhereDidYouGetOurNumber" Type="varchar" MaxLength="45" />
     <Property Name="SubscribersName" Type="varchar" MaxLength="500" />
@@ -539,7 +539,7 @@ warning 6002: The table/view 'chemreporter.dbo.CRMWebU' does not have a primary 
     <Property Name="ReviewedBy" Type="varchar" MaxLength="45" />
     <Property Name="ReviewedDate" Type="varchar" MaxLength="45" />
     <Property Name="SentDate" Type="varchar" MaxLength="45" />
-    <Property Name="Comments" Type="varchar" MaxLength="1000" />
+    <Property Name="Comments" Type="varchar(max)" />
     <Property Name="DateChanged" Type="varchar" MaxLength="10" Nullable="false" />
     <Property Name="Username" Type="varchar" MaxLength="25" Nullable="false" />
     <Property Name="IncidentZipCode" Type="varchar" MaxLength="10" />
@@ -563,23 +563,23 @@ warning 6002: The table/view 'chemreporter.dbo.CRMWebU' does not have a primary 
     <Property Name="txtDischargedPhone2" Type="varchar" MaxLength="150" />
     <Property Name="datDischargeDate" Type="varchar" MaxLength="10" />
     <Property Name="datDischargeTime" Type="varchar" MaxLength="6" />
-    <Property Name="txtMaterial1" Type="varchar" MaxLength="50" />
+    <Property Name="txtMaterial1" Type="varchar" MaxLength="100" />
     <Property Name="dblCASUN1" Type="varchar" MaxLength="50" />
     <Property Name="dblAmtSpilled1" Type="varchar" MaxLength="25" />
     <Property Name="txtUnitRecovered1" Type="varchar" MaxLength="4" />
-    <Property Name="txtMaterial2" Type="varchar" MaxLength="50" />
+    <Property Name="txtMaterial2" Type="varchar" MaxLength="100" />
     <Property Name="dblCASUN2" Type="varchar" MaxLength="50" />
     <Property Name="dblAmtSpilled2" Type="varchar" MaxLength="25" />
     <Property Name="txtUnitRecovered2" Type="varchar" MaxLength="4" />
-    <Property Name="txtMaterial3" Type="varchar" MaxLength="50" />
+    <Property Name="txtMaterial3" Type="varchar" MaxLength="100" />
     <Property Name="dblCASUN3" Type="varchar" MaxLength="50" />
     <Property Name="dblAmtSpilled3" Type="varchar" MaxLength="25" />
     <Property Name="txtUnitRecovered3" Type="varchar" MaxLength="4" />
-    <Property Name="txtMaterial4" Type="varchar" MaxLength="50" />
+    <Property Name="txtMaterial4" Type="varchar" MaxLength="100" />
     <Property Name="dblCASUN4" Type="varchar" MaxLength="50" />
     <Property Name="dblAmtSpilled4" Type="varchar" MaxLength="25" />
     <Property Name="txtUnitRecovered4" Type="varchar" MaxLength="4" />
-    <Property Name="txtMaterial5" Type="varchar" MaxLength="50" />
+    <Property Name="txtMaterial5" Type="varchar" MaxLength="100" />
     <Property Name="dblCASUN5" Type="varchar" MaxLength="50" />
     <Property Name="dblAmtSpilled5" Type="varchar" MaxLength="25" />
     <Property Name="txtUnitRecovered5" Type="varchar" MaxLength="4" />
@@ -593,7 +593,7 @@ warning 6002: The table/view 'chemreporter.dbo.CRMWebU' does not have a primary 
     <Property Name="dblSpillAmountInWater" Type="varchar" MaxLength="50" />
     <Property Name="txtSpillAmountInWaterUnits" Type="varchar" MaxLength="3" />
     <Property Name="memSpillLocation" Type="varchar" MaxLength="3000" />
-    <Property Name="dblRRCLeaseNumber" Type="varchar" MaxLength="7" />
+    <Property Name="dblRRCLeaseNumber" Type="varchar" MaxLength="50" />
     <Property Name="txtRRCLeaseName" Type="varchar" MaxLength="250" />
     <Property Name="txtRRCFieldName" Type="varchar" MaxLength="250" />
     <Property Name="txtLandOwner" Type="varchar" MaxLength="250" />

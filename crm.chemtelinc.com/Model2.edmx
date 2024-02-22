@@ -266,8 +266,8 @@
           <Property Name="potentialhazardornearmiss" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="landownercomplaint" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="impactstowater" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="dispatcheroremployee" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="contractororemployee" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="dispatcheroremployee" Type="nvarchar" MaxLength="30" />
+          <Property Name="contractororemployee" Type="nvarchar" MaxLength="30" />
           <Property Name="notify911" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="immediatesupport" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="transporttohospital" Type="nvarchar" MaxLength="10" Nullable="false" />
@@ -389,14 +389,14 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="county" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="county" Type="nvarchar(max)" Nullable="false" />
           <Property Name="state" Type="nvarchar" MaxLength="2" Nullable="false" />
-          <Property Name="distancefromtown" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="distancefromlandmark" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="intersectionormilemarker" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="observing" Type="nvarchar" MaxLength="2000" Nullable="false" />
-          <Property Name="seeinghearingsmelling" Type="nvarchar" MaxLength="1000" Nullable="false" />
-          <Property Name="roworwellpad" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="distancefromtown" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="distancefromlandmark" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="intersectionormilemarker" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="observing" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="seeinghearingsmelling" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="roworwellpad" Type="nvarchar(max)" Nullable="false" />
           <Property Name="tanks" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="landowner" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="callername" Type="nvarchar" MaxLength="30" Nullable="false" />
@@ -407,45 +407,45 @@
           <Property Name="temp" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="windspeed" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="winddirection" Type="nvarchar" MaxLength="15" Nullable="false" />
-          <Property Name="weatherconditions" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="relationtoincident" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="weatherconditions" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="relationtoincident" Type="nvarchar(max)" Nullable="false" />
           <Property Name="safelywarn" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="name1" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="name2" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="name3" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="name1" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="name2" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="name3" Type="nvarchar(max)" Nullable="false" />
           <Property Name="contactnumber1" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="contactnumber2" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="contactnumber3" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="location1" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="location2" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="location3" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="leasewellname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="location1" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="location2" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="location3" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="leasewellname" Type="nvarchar(max)" Nullable="false" />
           <Property Name="blackorwhitesmoke" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="flames" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="hissing" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="liquid" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="oilysheen" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="otherpipelinemarkers" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="otherpipelinemarkers" Type="nvarchar(max)" Nullable="false" />
           <Property Name="rotteneggodor" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="vaporormist" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="directions" Type="nvarchar" MaxLength="2000" Nullable="false" />
+          <Property Name="directions" Type="nvarchar(max)" Nullable="false" />
           <Property Name="city" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="date" Type="date" Nullable="false" />
           <Property Name="time" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="timezone" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="numofinjuries" Type="int" Nullable="false" />
-          <Property Name="reporttakername" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="reporttakeremail" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="description" Type="nvarchar" MaxLength="3000" Nullable="false" />
-          <Property Name="calleremail" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="callertitle" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="calleraffiliation" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="name4" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="name5" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="reporttakername" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="reporttakeremail" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="calleremail" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="callertitle" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="calleraffiliation" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="name4" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="name5" Type="nvarchar(max)" Nullable="false" />
           <Property Name="contactnumber4" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="contactnumber5" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="location4" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="location5" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="location4" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="location5" Type="nvarchar(max)" Nullable="false" />
           <Property Name="calldate" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="calltime" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="ersoperator" Type="nvarchar" MaxLength="20" Nullable="false" />
@@ -476,7 +476,7 @@ warning 6002: The table/view 'chemreporter.dbo.CRMWebU' does not have a primary 
             <PropertyRef Name="UserType" />
             <PropertyRef Name="LastPassChange" />
           </Key>
-          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Password" Type="varchar(max)" Nullable="false" />
@@ -519,13 +519,13 @@ warning 6002: The table/view 'chemreporter.dbo.CRMWebU' does not have a primary 
           <Property Name="IncidentDate" Type="varchar" MaxLength="15" />
           <Property Name="IncidentTime" Type="varchar" MaxLength="5" />
           <Property Name="IncidentTimeZone" Type="varchar" MaxLength="25" />
-          <Property Name="MaterialName" Type="varchar" MaxLength="100" />
+          <Property Name="MaterialName" Type="varchar(max)" />
           <Property Name="ProductNumber" Type="varchar" MaxLength="100" />
-          <Property Name="QuantitySpilled" Type="varchar" MaxLength="30" />
+          <Property Name="QuantitySpilled" Type="varchar(max)" />
           <Property Name="CleanUpCrewReqs" Type="varchar" MaxLength="100" />
           <Property Name="AgenciesOnSite" Type="varchar" MaxLength="100" />
           <Property Name="AccidentOrDeliberate" Type="varchar" MaxLength="15" />
-          <Property Name="IncidentDetails" Type="varchar" MaxLength="3000" />
+          <Property Name="IncidentDetails" Type="varchar(max)" />
           <Property Name="InvolveFire" Type="varchar" MaxLength="5" />
           <Property Name="WhereDidYouGetOurNumber" Type="varchar" MaxLength="45" />
           <Property Name="SubscribersName" Type="varchar" MaxLength="500" />
@@ -544,7 +544,7 @@ warning 6002: The table/view 'chemreporter.dbo.CRMWebU' does not have a primary 
           <Property Name="ReviewedBy" Type="varchar" MaxLength="45" />
           <Property Name="ReviewedDate" Type="varchar" MaxLength="45" />
           <Property Name="SentDate" Type="varchar" MaxLength="45" />
-          <Property Name="Comments" Type="varchar" MaxLength="1000" />
+          <Property Name="Comments" Type="varchar(max)" />
           <Property Name="DateChanged" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="Username" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="IncidentZipCode" Type="varchar" MaxLength="10" />
@@ -568,23 +568,23 @@ warning 6002: The table/view 'chemreporter.dbo.CRMWebU' does not have a primary 
           <Property Name="txtDischargedPhone2" Type="varchar" MaxLength="150" />
           <Property Name="datDischargeDate" Type="varchar" MaxLength="10" />
           <Property Name="datDischargeTime" Type="varchar" MaxLength="6" />
-          <Property Name="txtMaterial1" Type="varchar" MaxLength="50" />
+          <Property Name="txtMaterial1" Type="varchar" MaxLength="100" />
           <Property Name="dblCASUN1" Type="varchar" MaxLength="50" />
           <Property Name="dblAmtSpilled1" Type="varchar" MaxLength="25" />
           <Property Name="txtUnitRecovered1" Type="varchar" MaxLength="4" />
-          <Property Name="txtMaterial2" Type="varchar" MaxLength="50" />
+          <Property Name="txtMaterial2" Type="varchar" MaxLength="100" />
           <Property Name="dblCASUN2" Type="varchar" MaxLength="50" />
           <Property Name="dblAmtSpilled2" Type="varchar" MaxLength="25" />
           <Property Name="txtUnitRecovered2" Type="varchar" MaxLength="4" />
-          <Property Name="txtMaterial3" Type="varchar" MaxLength="50" />
+          <Property Name="txtMaterial3" Type="varchar" MaxLength="100" />
           <Property Name="dblCASUN3" Type="varchar" MaxLength="50" />
           <Property Name="dblAmtSpilled3" Type="varchar" MaxLength="25" />
           <Property Name="txtUnitRecovered3" Type="varchar" MaxLength="4" />
-          <Property Name="txtMaterial4" Type="varchar" MaxLength="50" />
+          <Property Name="txtMaterial4" Type="varchar" MaxLength="100" />
           <Property Name="dblCASUN4" Type="varchar" MaxLength="50" />
           <Property Name="dblAmtSpilled4" Type="varchar" MaxLength="25" />
           <Property Name="txtUnitRecovered4" Type="varchar" MaxLength="4" />
-          <Property Name="txtMaterial5" Type="varchar" MaxLength="50" />
+          <Property Name="txtMaterial5" Type="varchar" MaxLength="100" />
           <Property Name="dblCASUN5" Type="varchar" MaxLength="50" />
           <Property Name="dblAmtSpilled5" Type="varchar" MaxLength="25" />
           <Property Name="txtUnitRecovered5" Type="varchar" MaxLength="4" />
@@ -598,7 +598,7 @@ warning 6002: The table/view 'chemreporter.dbo.CRMWebU' does not have a primary 
           <Property Name="dblSpillAmountInWater" Type="varchar" MaxLength="50" />
           <Property Name="txtSpillAmountInWaterUnits" Type="varchar" MaxLength="3" />
           <Property Name="memSpillLocation" Type="varchar" MaxLength="3000" />
-          <Property Name="dblRRCLeaseNumber" Type="varchar" MaxLength="7" />
+          <Property Name="dblRRCLeaseNumber" Type="varchar" MaxLength="50" />
           <Property Name="txtRRCLeaseName" Type="varchar" MaxLength="250" />
           <Property Name="txtRRCFieldName" Type="varchar" MaxLength="250" />
           <Property Name="txtLandOwner" Type="varchar" MaxLength="250" />
@@ -1482,8 +1482,8 @@ warning 6002: The table/view 'chemreporter.dbo.CRMWebU' does not have a primary 
           <Property Name="potentialhazardornearmiss" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="landownercomplaint" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="impactstowater" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="dispatcheroremployee" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="contractororemployee" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dispatcheroremployee" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="contractororemployee" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="notify911" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="immediatesupport" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="transporttohospital" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
@@ -1605,14 +1605,14 @@ warning 6002: The table/view 'chemreporter.dbo.CRMWebU' does not have a primary 
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="county" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="county" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="state" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="distancefromtown" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="distancefromlandmark" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="intersectionormilemarker" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="observing" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="seeinghearingsmelling" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="roworwellpad" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="distancefromtown" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="distancefromlandmark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="intersectionormilemarker" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="observing" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="seeinghearingsmelling" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="roworwellpad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="tanks" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="landowner" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="callername" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
@@ -1623,45 +1623,45 @@ warning 6002: The table/view 'chemreporter.dbo.CRMWebU' does not have a primary 
           <Property Name="temp" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="windspeed" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="winddirection" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="weatherconditions" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="relationtoincident" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="weatherconditions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="relationtoincident" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="safelywarn" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="name1" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="name2" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="name3" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="contactnumber1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="contactnumber2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="contactnumber3" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="location1" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="location2" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="location3" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="leasewellname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="location1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="location2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="location3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="leasewellname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="blackorwhitesmoke" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="flames" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="hissing" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="liquid" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="oilysheen" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="otherpipelinemarkers" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="otherpipelinemarkers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="rotteneggodor" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="vaporormist" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="directions" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="directions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="city" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="time" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="timezone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="numofinjuries" Type="Int32" Nullable="false" />
-          <Property Name="reporttakername" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="reporttakeremail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="description" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="calleremail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="callertitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="calleraffiliation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="name4" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="name5" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="reporttakername" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="reporttakeremail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="calleremail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="callertitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="calleraffiliation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="contactnumber4" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="contactnumber5" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="location4" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="location5" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="location4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="location5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="calldate" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="calltime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ersoperator" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
@@ -1717,13 +1717,13 @@ warning 6002: The table/view 'chemreporter.dbo.CRMWebU' does not have a primary 
           <Property Name="IncidentDate" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="IncidentTime" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="IncidentTimeZone" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="MaterialName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MaterialName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ProductNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="QuantitySpilled" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="QuantitySpilled" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="CleanUpCrewReqs" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="AgenciesOnSite" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="AccidentOrDeliberate" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="IncidentDetails" Type="String" MaxLength="3000" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="InvolveFire" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="WhereDidYouGetOurNumber" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="SubscribersName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
@@ -1742,7 +1742,7 @@ warning 6002: The table/view 'chemreporter.dbo.CRMWebU' does not have a primary 
           <Property Name="ReviewedBy" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="ReviewedDate" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="SentDate" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="Comments" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DateChanged" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Username" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="IncidentZipCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
@@ -1766,23 +1766,23 @@ warning 6002: The table/view 'chemreporter.dbo.CRMWebU' does not have a primary 
           <Property Name="txtDischargedPhone2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="datDischargeDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="datDischargeTime" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
-          <Property Name="txtMaterial1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="txtMaterial1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="dblCASUN1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="dblAmtSpilled1" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="txtUnitRecovered1" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="txtMaterial2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="txtMaterial2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="dblCASUN2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="dblAmtSpilled2" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="txtUnitRecovered2" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="txtMaterial3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="txtMaterial3" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="dblCASUN3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="dblAmtSpilled3" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="txtUnitRecovered3" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="txtMaterial4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="txtMaterial4" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="dblCASUN4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="dblAmtSpilled4" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="txtUnitRecovered4" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="txtMaterial5" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="txtMaterial5" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="dblCASUN5" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="dblAmtSpilled5" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="txtUnitRecovered5" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
@@ -1796,7 +1796,7 @@ warning 6002: The table/view 'chemreporter.dbo.CRMWebU' does not have a primary 
           <Property Name="dblSpillAmountInWater" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="txtSpillAmountInWaterUnits" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
           <Property Name="memSpillLocation" Type="String" MaxLength="3000" FixedLength="false" Unicode="false" />
-          <Property Name="dblRRCLeaseNumber" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="dblRRCLeaseNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="txtRRCLeaseName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="txtRRCFieldName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="txtLandOwner" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />

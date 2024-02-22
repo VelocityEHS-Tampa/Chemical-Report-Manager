@@ -2269,7 +2269,31 @@ namespace crm.chemtelinc.com {
             
             private global::System.Data.DataColumn columnCallersPhoneExt;
             
-            private global::System.Data.DataColumn columnDataColumn1;
+            private global::System.Data.DataColumn columnDOTName;
+            
+            private global::System.Data.DataColumn columnTradeName;
+            
+            private global::System.Data.DataColumn columnPrimaryHazardClass;
+            
+            private global::System.Data.DataColumn columnPackingGroup;
+            
+            private global::System.Data.DataColumn columnContainerType;
+            
+            private global::System.Data.DataColumn columnResidueContainer;
+            
+            private global::System.Data.DataColumn columnTankTruckNumber;
+            
+            private global::System.Data.DataColumn columnPRONumber;
+            
+            private global::System.Data.DataColumn columnShipperManufacturer;
+            
+            private global::System.Data.DataColumn columnShipperLocation;
+            
+            private global::System.Data.DataColumn columnConsignee;
+            
+            private global::System.Data.DataColumn columnConsigneeLocation;
+            
+            private global::System.Data.DataColumn columnCarrier;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -2674,9 +2698,105 @@ namespace crm.chemtelinc.com {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn DataColumn1Column {
+            public global::System.Data.DataColumn DOTNameColumn {
                 get {
-                    return this.columnDataColumn1;
+                    return this.columnDOTName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn TradeNameColumn {
+                get {
+                    return this.columnTradeName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn PrimaryHazardClassColumn {
+                get {
+                    return this.columnPrimaryHazardClass;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn PackingGroupColumn {
+                get {
+                    return this.columnPackingGroup;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn ContainerTypeColumn {
+                get {
+                    return this.columnContainerType;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn ResidueContainerColumn {
+                get {
+                    return this.columnResidueContainer;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn TankTruckNumberColumn {
+                get {
+                    return this.columnTankTruckNumber;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn PRONumberColumn {
+                get {
+                    return this.columnPRONumber;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn ShipperManufacturerColumn {
+                get {
+                    return this.columnShipperManufacturer;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn ShipperLocationColumn {
+                get {
+                    return this.columnShipperLocation;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn ConsigneeColumn {
+                get {
+                    return this.columnConsignee;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn ConsigneeLocationColumn {
+                get {
+                    return this.columnConsigneeLocation;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn CarrierColumn {
+                get {
+                    return this.columnCarrier;
                 }
             }
             
@@ -2764,7 +2884,19 @@ namespace crm.chemtelinc.com {
                         string IncidentZipCode, 
                         string ReportType, 
                         string CallersPhoneExt, 
-                        string DataColumn1) {
+                        string DOTName, 
+                        string TradeName, 
+                        string PrimaryHazardClass, 
+                        string PackingGroup, 
+                        string ContainerType, 
+                        string ResidueContainer, 
+                        string TankTruckNumber, 
+                        string PRONumber, 
+                        string ShipperManufacturer, 
+                        string ShipperLocation, 
+                        string Consignee, 
+                        string ConsigneeLocation, 
+                        string Carrier) {
                 generalincidentreportdataRow rowgeneralincidentreportdataRow = ((generalincidentreportdataRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         IncidentId,
@@ -2813,7 +2945,19 @@ namespace crm.chemtelinc.com {
                         IncidentZipCode,
                         ReportType,
                         CallersPhoneExt,
-                        DataColumn1};
+                        DOTName,
+                        TradeName,
+                        PrimaryHazardClass,
+                        PackingGroup,
+                        ContainerType,
+                        ResidueContainer,
+                        TankTruckNumber,
+                        PRONumber,
+                        ShipperManufacturer,
+                        ShipperLocation,
+                        Consignee,
+                        ConsigneeLocation,
+                        Carrier};
                 rowgeneralincidentreportdataRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowgeneralincidentreportdataRow);
                 return rowgeneralincidentreportdataRow;
@@ -2882,7 +3026,19 @@ namespace crm.chemtelinc.com {
                 this.columnIncidentZipCode = base.Columns["IncidentZipCode"];
                 this.columnReportType = base.Columns["ReportType"];
                 this.columnCallersPhoneExt = base.Columns["CallersPhoneExt"];
-                this.columnDataColumn1 = base.Columns["DataColumn1"];
+                this.columnDOTName = base.Columns["DOTName"];
+                this.columnTradeName = base.Columns["TradeName"];
+                this.columnPrimaryHazardClass = base.Columns["PrimaryHazardClass"];
+                this.columnPackingGroup = base.Columns["PackingGroup"];
+                this.columnContainerType = base.Columns["ContainerType"];
+                this.columnResidueContainer = base.Columns["ResidueContainer"];
+                this.columnTankTruckNumber = base.Columns["TankTruckNumber"];
+                this.columnPRONumber = base.Columns["PRONumber"];
+                this.columnShipperManufacturer = base.Columns["ShipperManufacturer"];
+                this.columnShipperLocation = base.Columns["ShipperLocation"];
+                this.columnConsignee = base.Columns["Consignee"];
+                this.columnConsigneeLocation = base.Columns["ConsigneeLocation"];
+                this.columnCarrier = base.Columns["Carrier"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2980,8 +3136,32 @@ namespace crm.chemtelinc.com {
                 base.Columns.Add(this.columnReportType);
                 this.columnCallersPhoneExt = new global::System.Data.DataColumn("CallersPhoneExt", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCallersPhoneExt);
-                this.columnDataColumn1 = new global::System.Data.DataColumn("DataColumn1", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDataColumn1);
+                this.columnDOTName = new global::System.Data.DataColumn("DOTName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDOTName);
+                this.columnTradeName = new global::System.Data.DataColumn("TradeName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTradeName);
+                this.columnPrimaryHazardClass = new global::System.Data.DataColumn("PrimaryHazardClass", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPrimaryHazardClass);
+                this.columnPackingGroup = new global::System.Data.DataColumn("PackingGroup", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPackingGroup);
+                this.columnContainerType = new global::System.Data.DataColumn("ContainerType", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnContainerType);
+                this.columnResidueContainer = new global::System.Data.DataColumn("ResidueContainer", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnResidueContainer);
+                this.columnTankTruckNumber = new global::System.Data.DataColumn("TankTruckNumber", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTankTruckNumber);
+                this.columnPRONumber = new global::System.Data.DataColumn("PRONumber", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPRONumber);
+                this.columnShipperManufacturer = new global::System.Data.DataColumn("ShipperManufacturer", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnShipperManufacturer);
+                this.columnShipperLocation = new global::System.Data.DataColumn("ShipperLocation", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnShipperLocation);
+                this.columnConsignee = new global::System.Data.DataColumn("Consignee", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnConsignee);
+                this.columnConsigneeLocation = new global::System.Data.DataColumn("ConsigneeLocation", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnConsigneeLocation);
+                this.columnCarrier = new global::System.Data.DataColumn("Carrier", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCarrier);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8990,18 +9170,217 @@ namespace crm.chemtelinc.com {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string DataColumn1 {
+            public string DOTName {
                 get {
                     try {
-                        return ((string)(this[this.tablegeneralincidentreportdata.DataColumn1Column]));
+                        return ((string)(this[this.tablegeneralincidentreportdata.DOTNameColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DataColumn1\' in table \'generalincidentreportdata\' is DBNull" +
-                                ".", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'DOTName\' in table \'generalincidentreportdata\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablegeneralincidentreportdata.DataColumn1Column] = value;
+                    this[this.tablegeneralincidentreportdata.DOTNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string TradeName {
+                get {
+                    try {
+                        return ((string)(this[this.tablegeneralincidentreportdata.TradeNameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TradeName\' in table \'generalincidentreportdata\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablegeneralincidentreportdata.TradeNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string PrimaryHazardClass {
+                get {
+                    try {
+                        return ((string)(this[this.tablegeneralincidentreportdata.PrimaryHazardClassColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PrimaryHazardClass\' in table \'generalincidentreportdata\' is" +
+                                " DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablegeneralincidentreportdata.PrimaryHazardClassColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string PackingGroup {
+                get {
+                    try {
+                        return ((string)(this[this.tablegeneralincidentreportdata.PackingGroupColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PackingGroup\' in table \'generalincidentreportdata\' is DBNul" +
+                                "l.", e);
+                    }
+                }
+                set {
+                    this[this.tablegeneralincidentreportdata.PackingGroupColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string ContainerType {
+                get {
+                    try {
+                        return ((string)(this[this.tablegeneralincidentreportdata.ContainerTypeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ContainerType\' in table \'generalincidentreportdata\' is DBNu" +
+                                "ll.", e);
+                    }
+                }
+                set {
+                    this[this.tablegeneralincidentreportdata.ContainerTypeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string ResidueContainer {
+                get {
+                    try {
+                        return ((string)(this[this.tablegeneralincidentreportdata.ResidueContainerColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ResidueContainer\' in table \'generalincidentreportdata\' is D" +
+                                "BNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablegeneralincidentreportdata.ResidueContainerColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string TankTruckNumber {
+                get {
+                    try {
+                        return ((string)(this[this.tablegeneralincidentreportdata.TankTruckNumberColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TankTruckNumber\' in table \'generalincidentreportdata\' is DB" +
+                                "Null.", e);
+                    }
+                }
+                set {
+                    this[this.tablegeneralincidentreportdata.TankTruckNumberColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string PRONumber {
+                get {
+                    try {
+                        return ((string)(this[this.tablegeneralincidentreportdata.PRONumberColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PRONumber\' in table \'generalincidentreportdata\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablegeneralincidentreportdata.PRONumberColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string ShipperManufacturer {
+                get {
+                    try {
+                        return ((string)(this[this.tablegeneralincidentreportdata.ShipperManufacturerColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ShipperManufacturer\' in table \'generalincidentreportdata\' i" +
+                                "s DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablegeneralincidentreportdata.ShipperManufacturerColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string ShipperLocation {
+                get {
+                    try {
+                        return ((string)(this[this.tablegeneralincidentreportdata.ShipperLocationColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ShipperLocation\' in table \'generalincidentreportdata\' is DB" +
+                                "Null.", e);
+                    }
+                }
+                set {
+                    this[this.tablegeneralincidentreportdata.ShipperLocationColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string Consignee {
+                get {
+                    try {
+                        return ((string)(this[this.tablegeneralincidentreportdata.ConsigneeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Consignee\' in table \'generalincidentreportdata\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablegeneralincidentreportdata.ConsigneeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string ConsigneeLocation {
+                get {
+                    try {
+                        return ((string)(this[this.tablegeneralincidentreportdata.ConsigneeLocationColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ConsigneeLocation\' in table \'generalincidentreportdata\' is " +
+                                "DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablegeneralincidentreportdata.ConsigneeLocationColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string Carrier {
+                get {
+                    try {
+                        return ((string)(this[this.tablegeneralincidentreportdata.CarrierColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Carrier\' in table \'generalincidentreportdata\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablegeneralincidentreportdata.CarrierColumn] = value;
                 }
             }
             
@@ -9559,14 +9938,158 @@ namespace crm.chemtelinc.com {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsDataColumn1Null() {
-                return this.IsNull(this.tablegeneralincidentreportdata.DataColumn1Column);
+            public bool IsDOTNameNull() {
+                return this.IsNull(this.tablegeneralincidentreportdata.DOTNameColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetDataColumn1Null() {
-                this[this.tablegeneralincidentreportdata.DataColumn1Column] = global::System.Convert.DBNull;
+            public void SetDOTNameNull() {
+                this[this.tablegeneralincidentreportdata.DOTNameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsTradeNameNull() {
+                return this.IsNull(this.tablegeneralincidentreportdata.TradeNameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetTradeNameNull() {
+                this[this.tablegeneralincidentreportdata.TradeNameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsPrimaryHazardClassNull() {
+                return this.IsNull(this.tablegeneralincidentreportdata.PrimaryHazardClassColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetPrimaryHazardClassNull() {
+                this[this.tablegeneralincidentreportdata.PrimaryHazardClassColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsPackingGroupNull() {
+                return this.IsNull(this.tablegeneralincidentreportdata.PackingGroupColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetPackingGroupNull() {
+                this[this.tablegeneralincidentreportdata.PackingGroupColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsContainerTypeNull() {
+                return this.IsNull(this.tablegeneralincidentreportdata.ContainerTypeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetContainerTypeNull() {
+                this[this.tablegeneralincidentreportdata.ContainerTypeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsResidueContainerNull() {
+                return this.IsNull(this.tablegeneralincidentreportdata.ResidueContainerColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetResidueContainerNull() {
+                this[this.tablegeneralincidentreportdata.ResidueContainerColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsTankTruckNumberNull() {
+                return this.IsNull(this.tablegeneralincidentreportdata.TankTruckNumberColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetTankTruckNumberNull() {
+                this[this.tablegeneralincidentreportdata.TankTruckNumberColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsPRONumberNull() {
+                return this.IsNull(this.tablegeneralincidentreportdata.PRONumberColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetPRONumberNull() {
+                this[this.tablegeneralincidentreportdata.PRONumberColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsShipperManufacturerNull() {
+                return this.IsNull(this.tablegeneralincidentreportdata.ShipperManufacturerColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetShipperManufacturerNull() {
+                this[this.tablegeneralincidentreportdata.ShipperManufacturerColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsShipperLocationNull() {
+                return this.IsNull(this.tablegeneralincidentreportdata.ShipperLocationColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetShipperLocationNull() {
+                this[this.tablegeneralincidentreportdata.ShipperLocationColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsConsigneeNull() {
+                return this.IsNull(this.tablegeneralincidentreportdata.ConsigneeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetConsigneeNull() {
+                this[this.tablegeneralincidentreportdata.ConsigneeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsConsigneeLocationNull() {
+                return this.IsNull(this.tablegeneralincidentreportdata.ConsigneeLocationColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetConsigneeLocationNull() {
+                this[this.tablegeneralincidentreportdata.ConsigneeLocationColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsCarrierNull() {
+                return this.IsNull(this.tablegeneralincidentreportdata.CarrierColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetCarrierNull() {
+                this[this.tablegeneralincidentreportdata.CarrierColumn] = global::System.Convert.DBNull;
             }
         }
         

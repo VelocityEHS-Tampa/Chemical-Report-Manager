@@ -691,6 +691,19 @@ namespace crm.chemtelinc.com.Controllers
                 g.Date_Changed = datenow;
                 g.Username = System.Environment.UserName;
             }
+            g.DOTName = fc["txtDOTName"].ToString();
+            g.TradeName = fc["txtTradeName"].ToString();
+            g.PrimaryHazardClass = fc["txtPrimaryHazardClass"].ToString();
+            g.PackingGroup = fc["txtPackingGroup"].ToString();
+            g.ContainerType = fc["txtContainerType"].ToString();
+            g.ResidueContainer = fc["txtResidueContainer"].ToString();
+            g.TankTruckNumber = fc["txtTankTruckNumber"].ToString();
+            g.PRONumber = fc["txtPRONumber"].ToString();
+            g.ShipperManufacturer = fc["txtShipperManufacturer"].ToString();
+            g.ShipperLocation = fc["txtShipperLocation"].ToString();
+            g.Consignee = fc["txtConsignee"].ToString();
+            g.ConsigneeLocation = fc["txtConsigneeLocation"].ToString();
+            g.Carrier = fc["txtCarrier"].ToString();
             return g;
         }
         private void UpdateID(string txtincidentid, string txtersop)
@@ -966,84 +979,97 @@ namespace crm.chemtelinc.com.Controllers
 
             return RedirectToAction("Index", "Home", new { Result = ResultCode });
         }
-        public string GetNameUser(string user)
-        {
-            string result = "";
-            string parameter = user.ToUpper();
-            if (parameter == "JPERDOMO")
-            {
-                result = "Jerri Perdomo";
-                return result;
-            }
-            else if (parameter == "TCOCKRELL")
-            {
-                result = "Terri Cockrell";
-                return result;
-            }
-            else if (parameter == "CBOTELHO" || parameter == "CCOCKRELL")
-            {
-                result = "Chrissy Botelho";
-                return result;
-            }
-            else if (parameter == "TOWENS")
-            {
-                result = "Tonya Owens";
-                return result;
-            }
-            else if (parameter == "LWECKERLE")
-            {
-                result = "Lynn Weckerle";
-                return result;
-            }
-            else if (parameter == "SWARDINO")
-            {
-                result = "Sandy Wardino";
-                return result;
-            }
-            else if (parameter == "SWECKERLE")
-            {
-                result = "Simond Weckerle";
-                return result;
-            }
-            else if (parameter == "ACLEMENTS")
-            {
-                result = "Austin Clements";
-                return result;
-            }
-            else if (parameter == "MWILLIAMS")
-            {
-                result = "Machelle Williams";
-                return result;
-            }
-            else
-            if (parameter == "SCOURTNEY")
-            {
-                result = "Sterling Courtney";
-                return result;
-            }
-            else
-            if (parameter == "JHARVEY")
-            {
-                result = "Juli Harvey";
-                return result;
-            }
-            else
-            if (parameter == "SSCHULTE")
-            {
-                result = "Shaye Schulte";
-                return result;
-            }
-            else
-            if (parameter == "MPEPITONE")
-            {
-                result = "Michael Pepitone";
-                return result;
-            }
-            else
-            {
-                return result;
-            }
-        }
+        //IF THIS DOES NOT CAUSE PROBLEMS, REMOVE CODE IN 30 DAYS (03/22/2024)
+        //public string GetNameUser(string user)
+        //{
+        //    string result = "";
+        //    string parameter = user.ToUpper();
+        //    if (parameter == "JPERDOMO")
+        //    {
+        //        result = "Jerri Perdomo";
+        //        return result;
+        //    }
+        //    else if (parameter == "TCOCKRELL")
+        //    {
+        //        result = "Terri Cockrell";
+        //        return result;
+        //    }
+        //    else if (parameter == "CBOTELHO" || parameter == "CCOCKRELL")
+        //    {
+        //        result = "Chrissy Botelho";
+        //        return result;
+        //    }
+        //    else if (parameter == "TOWENS")
+        //    {
+        //        result = "Tonya Owens";
+        //        return result;
+        //    }
+        //    else if (parameter == "LWECKERLE")
+        //    {
+        //        result = "Lynn Weckerle";
+        //        return result;
+        //    }
+        //    else if (parameter == "SWARDINO")
+        //    {
+        //        result = "Sandy Wardino";
+        //        return result;
+        //    }
+        //    else if (parameter == "SWECKERLE")
+        //    {
+        //        result = "Simond Weckerle";
+        //        return result;
+        //    }
+        //    else if (parameter == "ACLEMENTS")
+        //    {
+        //        result = "Austin Clements";
+        //        return result;
+        //    }
+        //    else if (parameter == "MWILLIAMS")
+        //    {
+        //        result = "Machelle Williams";
+        //        return result;
+        //    }
+        //    else
+        //    if (parameter == "SCOURTNEY")
+        //    {
+        //        result = "Sterling Courtney";
+        //        return result;
+        //    }
+        //    else
+        //    if (parameter == "JHARVEY")
+        //    {
+        //        result = "Juli Harvey";
+        //        return result;
+        //    }
+        //    else
+        //    if (parameter == "SSCHULTE")
+        //    {
+        //        result = "Shaye Schulte";
+        //        return result;
+        //    }
+        //    else
+        //    if (parameter == "AELLISON")
+        //    {
+        //        result = "Anthonuy Ellison";
+        //        return result;
+        //    }
+        //    else
+        //    if (parameter == "CTAYLOR")
+        //    {
+        //        result = "Caitlinn Taylor";
+        //        return result;
+        //    }
+        //    else
+        //    if (parameter == "MPEPITONE")
+        //    {
+        //        result = "Michael Pepitone";
+        //        return result;
+        //    }
+        //    else
+        //    {
+        //        return result;
+        //    }
+        //}
         public ActionResult OtherReportsGeneralIncidentEmailForm(GeneralIncidentReportData g)
         {
             return View(g);

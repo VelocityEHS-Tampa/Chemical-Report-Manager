@@ -15,6 +15,7 @@ namespace ChemicalLibrary
         private string _accidentordeliberate, _incidentdetails, _involvefire, _wheredidyougetournumber, _subscribersname, _subscribersmis, _spillorexposure, _typeofexposure;
         private string _numofcasualties, _numofinjuries, _medpersonnelname, _patientname, _patientcondition, _hospitalcliniclocation, _eparegno, _statusofrelease;
         private string _dispersionofmsdsinfo, _reviewedby, _revieweddate, _sentdate, _comments, _datechanged, _username, _incidentzipcode, _reporttype, _callersphoneext;
+        private string _dotname, _tradename, _primhazclass, _packinggroup, _containertype, _residuecontainer, _tanktrucknumb, _pronumb, _shippermanufacturer, _shipperlocation, _consignee, _consigneeloc, _carrier;
 
         #endregion
         #region Public Properties
@@ -296,6 +297,71 @@ namespace ChemicalLibrary
             set { _callersphoneext = value; }
         }
 
+        public string DOTName
+        {
+            get { return _dotname; }
+            set { _dotname = value; }
+        }
+        public string TradeName
+        {
+            get { return _tradename; }
+            set { _tradename = value; }
+        }
+        public string PrimaryHazardClass
+        {
+            get { return _primhazclass; }
+            set { _primhazclass = value; }
+        }
+        public string PackingGroup
+        {
+            get { return _packinggroup; }
+            set { _packinggroup = value; }
+        }
+        public string ContainerType
+        {
+            get { return _containertype; }
+            set { _containertype = value; }
+        }
+        public string ResidueContainer
+        {
+            get { return _residuecontainer; }
+            set { _residuecontainer = value; }
+        }
+        public string TankTruckNumber
+        {
+            get { return _tanktrucknumb; }
+            set { _tanktrucknumb = value; }
+        }
+        public string PRONumber
+        {
+            get { return _pronumb; }
+            set { _pronumb = value; }
+        }
+        public string ShipperManufacturer
+        {
+            get { return _shippermanufacturer; }
+            set { _shippermanufacturer = value; }
+        }
+        public string ShipperLocation
+        {
+            get { return _shipperlocation; }
+            set { _shipperlocation = value; }
+        }
+        public string Consignee
+        {
+            get { return _consignee; }
+            set { _consignee = value; }
+        }
+        public string ConsigneeLocation
+        {
+            get { return _consigneeloc; }
+            set { _consigneeloc = value; }
+        }
+        public string Carrier
+        {
+            get { return _carrier; }
+            set { _carrier = value; }
+        }
         #endregion
         #endregion
         #region Public Constructors
@@ -348,6 +414,19 @@ namespace ChemicalLibrary
             _incidentzipcode = "";
             _reporttype = "";
             _callersphoneext = "";
+            _dotname = "";
+            _tradename = "";
+            _primhazclass = "";
+            _packinggroup = "";
+            _containertype = "";
+            _residuecontainer = "";
+            _tanktrucknumb = "";
+            _pronumb = "";
+            _shippermanufacturer = "";
+            _shipperlocation = "";
+            _consignee = "";
+            _consigneeloc = "";
+            _carrier = "";
         }
 
         public GeneralIncidentReportData(string constring, string id)
@@ -417,6 +496,19 @@ namespace ChemicalLibrary
                         this.Incident_Zip_Code = rdr["IncidentZipCode"].ToString();
                         this.Report_Type = rdr["ReportType"].ToString();
                         this.Callers_Phone_Ext = rdr["CallersPhoneExt"].ToString();
+                        this.DOTName = rdr["DOTName"].ToString();
+                        this.TradeName = rdr["TradeName"].ToString();
+                        this.PrimaryHazardClass = rdr["PrimaryHazardClass"].ToString();
+                        this.PackingGroup = rdr["PackingGroup"].ToString();
+                        this.ContainerType = rdr["ContainerType"].ToString();
+                        this.ResidueContainer = rdr["ResidueContainer"].ToString();
+                        this.TankTruckNumber = rdr["TankTruckNumber"].ToString();
+                        this.PRONumber = rdr["PRONumber"].ToString();
+                        this.ShipperManufacturer = rdr["ShipperManufacturer"].ToString();
+                        this.ShipperLocation = rdr["ShipperLocation"].ToString();
+                        this.Consignee = rdr["Consignee"].ToString();
+                        this.ConsigneeLocation = rdr["ConsigneeLocation"].ToString();
+                        this.Carrier = rdr["Carrier"].ToString();
                     }
                 }
             }

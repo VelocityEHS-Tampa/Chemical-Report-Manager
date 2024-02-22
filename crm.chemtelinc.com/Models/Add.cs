@@ -121,7 +121,12 @@ namespace ChemicalLibrary
 
         public static void AddGeneralIncidentReportData(string constring, GeneralIncidentReportData g)
         {
-            string strsql = "INSERT INTO generalincidentreportdata (IncidentId, ErsOperator, Date, Time, CallersName, CallersPhone, CallersAffiliation, CallersFaxOrEmail, IncidentStreet, IncidentCity, IncidentState, IncidentCountry, IncidentDate, IncidentTime, IncidentTimeZone, MaterialName, ProductNumber, QuantitySpilled, CleanUpCrewReqs, AgenciesOnSite, AccidentOrDeliberate, IncidentDetails, InvolveFire, WhereDidYouGetOurNumber, SubscribersName, SubscriberMIS, SpillOrExposure, TypeOfExposure, NumOfCasualties, NumOfInjuries, MedPersonnelName, PatientName, PatientCondition, HospitalClinicLocation, EpaRegNo, StatusOfRelease, DispersionOfMsdsInfo, ReviewedBy, ReviewedDate, SentDate, Comments, DateChanged, Username, IncidentZipCode, ReportType, CallersPhoneExt) VALUES (@id, @eo, @d, @t, @cn, @cp, @ca, @cfoe, @istr, @icit, @ista, @icou, @idat, @it, @itz, @mn, @pnum, @qs, @cucr, @aos, @aod, @idet, @if, @wdygon, @sn, @sm, @soe, @toe, @noc, @noi, @mpn, @pn, @pc, @hcl, @ern, @sor, @domi, @rb, @rd, @sd, @c, @dc, @us, @izc, @rt, @cpe)";
+            string strsql = "INSERT INTO generalincidentreportdata" +
+                " (IncidentId, ErsOperator, Date, Time, CallersName, CallersPhone, CallersAffiliation, CallersFaxOrEmail, IncidentStreet, IncidentCity, IncidentState, IncidentCountry, IncidentDate, IncidentTime, IncidentTimeZone, MaterialName, ProductNumber, QuantitySpilled, " +
+                "CleanUpCrewReqs, AgenciesOnSite, AccidentOrDeliberate, IncidentDetails, InvolveFire, WhereDidYouGetOurNumber, SubscribersName, SubscriberMIS, SpillOrExposure, TypeOfExposure, NumOfCasualties, NumOfInjuries, MedPersonnelName, PatientName, PatientCondition," +
+                " HospitalClinicLocation, EpaRegNo, StatusOfRelease, DispersionOfMsdsInfo, ReviewedBy, ReviewedDate, SentDate, Comments, DateChanged, Username, IncidentZipCode, ReportType, CallersPhoneExt, DOTName, TradeName, PrimaryHazardClass, PackingGroup, ContainerType, ResidueContainer, TankTruckNumber, PRONumber, ShipperManufacturer, ShipperLocation, Consignee, ConsigneeLocation, Carrier) " +
+                "VALUES " +
+                "(@id, @eo, @d, @t, @cn, @cp, @ca, @cfoe, @istr, @icit, @ista, @icou, @idat, @it, @itz, @mn, @pnum, @qs, @cucr, @aos, @aod, @idet, @if, @wdygon, @sn, @sm, @soe, @toe, @noc, @noi, @mpn, @pn, @pc, @hcl, @ern, @sor, @domi, @rb, @rd, @sd, @c, @dc, @us, @izc, @rt, @cpe, @DOTN, @TN, @PHC, @PG, @CT, @RC, @TTN, @PRON, @ShipManu, @SL, @Consignee, @ConsigneeLoc, @Carrier)";
             try
             {
                 using (SqlConnection cn = new SqlConnection(constring))
@@ -175,6 +180,19 @@ namespace ChemicalLibrary
                         cmd.Parameters.AddWithValue("@izc", g.Incident_Zip_Code);
                         cmd.Parameters.AddWithValue("@rt", g.Report_Type);
                         cmd.Parameters.AddWithValue("@cpe", g.Callers_Phone_Ext);
+                        cmd.Parameters.AddWithValue("@DOTN", g.DOTName);
+                        cmd.Parameters.AddWithValue("@TN", g.TradeName);
+                        cmd.Parameters.AddWithValue("@PHC", g.PrimaryHazardClass);
+                        cmd.Parameters.AddWithValue("@PG", g.PackingGroup);
+                        cmd.Parameters.AddWithValue("@CT", g.ContainerType);
+                        cmd.Parameters.AddWithValue("RC", g.ResidueContainer);
+                        cmd.Parameters.AddWithValue("@TTN", g.TankTruckNumber);
+                        cmd.Parameters.AddWithValue("@PRON", g.PRONumber);
+                        cmd.Parameters.AddWithValue("@ShipManu", g.ShipperManufacturer);
+                        cmd.Parameters.AddWithValue("@SL", g.ShipperLocation);
+                        cmd.Parameters.AddWithValue("@Consignee", g.Consignee);
+                        cmd.Parameters.AddWithValue("@ConsigneeLoc", g.ConsigneeLocation);
+                        cmd.Parameters.AddWithValue("@Carrier", g.Carrier);
                         cmd.ExecuteNonQuery();
                     }
                 }

@@ -81,7 +81,12 @@ namespace ChemicalLibrary
 
         public static void UpdateGeneralIncidentReportData(string constring, GeneralIncidentReportData g)
         {
-            string strsql = "UPDATE generalincidentreportdata SET ErsOperator=@eo, Date=@d, Time=@t, CallersName=@cn, CallersPhone=@cp, CallersAffiliation=@ca, CallersFaxOrEmail=@cfoe, IncidentStreet=@istr, IncidentCity=@icit, IncidentState=@ista, IncidentCountry=@icou, IncidentDate=@idat, IncidentTime=@it, IncidentTimeZone=@itz, MaterialName=@mn, ProductNumber=@pnum, QuantitySpilled=@qs, CleanUpCrewReqs=@cucr, AgenciesOnSite=@aos, AccidentOrDeliberate=@aod, IncidentDetails=@idet, InvolveFire=@if, WhereDidYouGetOurNumber=@wdygon, SubscribersName=@sn, SubscriberMIS=@sm, SpillOrExposure=@soe, TypeOfExposure=@toe, NumOfCasualties=@noc, NumOfInjuries=@noi, MedPersonnelName=@mpn, PatientName=@pn, PatientCondition=@pc, HospitalClinicLocation=@hcl, EpaRegNo=@ern, StatusOfRelease=@sor, DispersionOfMsdsInfo=@domi, ReviewedBy=@rb, ReviewedDate=@rd, SentDate=@sd, Comments=@c, DateChanged=@datechanged, Username=@username, IncidentZipCode=@izc, ReportType=@rt, CallersPhoneExt=@cpe WHERE IncidentId=@id";
+            string strsql = "UPDATE generalincidentreportdata SET ErsOperator=@eo, Date=@d, Time=@t, CallersName=@cn, CallersPhone=@cp, CallersAffiliation=@ca, CallersFaxOrEmail=@cfoe, IncidentStreet=@istr, IncidentCity=@icit, IncidentState=@ista, " +
+                "IncidentCountry=@icou, IncidentDate=@idat, IncidentTime=@it, IncidentTimeZone=@itz, MaterialName=@mn, ProductNumber=@pnum, QuantitySpilled=@qs, CleanUpCrewReqs=@cucr, AgenciesOnSite=@aos, AccidentOrDeliberate=@aod, IncidentDetails=@idet, " +
+                "InvolveFire=@if, WhereDidYouGetOurNumber=@wdygon, SubscribersName=@sn, SubscriberMIS=@sm, SpillOrExposure=@soe, TypeOfExposure=@toe, NumOfCasualties=@noc, NumOfInjuries=@noi, MedPersonnelName=@mpn, PatientName=@pn, PatientCondition=@pc, " +
+                "HospitalClinicLocation=@hcl, EpaRegNo=@ern, StatusOfRelease=@sor, DispersionOfMsdsInfo=@domi, ReviewedBy=@rb, ReviewedDate=@rd, SentDate=@sd, Comments=@c, DateChanged=@datechanged, Username=@username, IncidentZipCode=@izc, ReportType=@rt, " +
+                "CallersPhoneExt=@cpe, DOTName = @DOTN, TradeName = @TN, PrimaryHazardClass = @PHC, PackingGroup = @PG, ContainerType = @CT, ResidueContainer = @RC, TankTruckNumber = @TTN, PRONumber = @PRON, ShipperManufacturer = @ShipManu, ShipperLocation = @SL, " +
+                "Consignee = @Consignee, ConsigneeLocation = @ConsigneeLoc, Carrier = @Carrier WHERE IncidentId=@id";
             using (SqlConnection cn = new SqlConnection(constring))
             {
                 cn.Open();
@@ -133,6 +138,19 @@ namespace ChemicalLibrary
                     cmd.Parameters.AddWithValue("@izc", g.Incident_Zip_Code);
                     cmd.Parameters.AddWithValue("@rt", g.Report_Type);
                     cmd.Parameters.AddWithValue("@cpe", g.Callers_Phone_Ext);
+                    cmd.Parameters.AddWithValue("@DOTN", g.DOTName);
+                    cmd.Parameters.AddWithValue("@TN", g.TradeName);
+                    cmd.Parameters.AddWithValue("@PHC", g.PrimaryHazardClass);
+                    cmd.Parameters.AddWithValue("@PG", g.PackingGroup);
+                    cmd.Parameters.AddWithValue("@CT", g.ContainerType);
+                    cmd.Parameters.AddWithValue("RC", g.ResidueContainer);
+                    cmd.Parameters.AddWithValue("@TTN", g.TankTruckNumber);
+                    cmd.Parameters.AddWithValue("@PRON", g.PRONumber);
+                    cmd.Parameters.AddWithValue("@ShipManu", g.ShipperManufacturer);
+                    cmd.Parameters.AddWithValue("@SL", g.ShipperLocation);
+                    cmd.Parameters.AddWithValue("@Consignee", g.Consignee);
+                    cmd.Parameters.AddWithValue("@ConsigneeLoc", g.ConsigneeLocation);
+                    cmd.Parameters.AddWithValue("@Carrier", g.Carrier);
                     cmd.ExecuteNonQuery();
                 }
             }
