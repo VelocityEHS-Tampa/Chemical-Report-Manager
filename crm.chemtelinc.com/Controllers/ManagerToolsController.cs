@@ -847,7 +847,7 @@ namespace crm.chemtelinc.com.Controllers
                 }
             }
 
-            var msg = MailHelper.CreateSingleEmailToMultipleRecipients(from, to, subject, "", body);
+            var msg = MailHelper.CreateSingleEmailToMultipleRecipients(from, to, subject, "", body,true);
 
             //Attach PDF
             var filename = Path.GetFileName(filepath);
