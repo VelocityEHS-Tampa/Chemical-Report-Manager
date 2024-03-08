@@ -317,6 +317,7 @@
     <Compile Include="Controllers\MSDSSearchController.cs" />
     <Compile Include="Controllers\OtherReportsController.cs" />
     <Compile Include="Controllers\TCEQController.cs" />
+    <Compile Include="Controllers\UniversalEmailController.cs" />
     <Compile Include="crest811.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
@@ -921,6 +922,7 @@
     <Folder Include="Views\GLOBaseReportData2\" />
     <Folder Include="Views\NovartisLookup\" />
     <Folder Include="Views\PassEncrypt\" />
+    <Folder Include="Views\UniversalEmail\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.min.css.map" />
