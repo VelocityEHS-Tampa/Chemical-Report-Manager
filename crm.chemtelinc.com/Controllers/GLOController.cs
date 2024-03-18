@@ -142,22 +142,23 @@ namespace crm.chemtelinc.com.Controllers
             catch (Exception ex)
             {
                 string mod = "YearCheck";
-                string pfile = "frmcrmGLOReport.cs";
-                var smtpCreds = new NetworkCredential(@"CHEMTEL\emergency", "ERS*33602");
-                SmtpClient smtp = new SmtpClient("mail.chemtelinc.com", 587);
-                MailAddress from = new MailAddress("ers@ehs.com");
-                MailAddressCollection to = new MailAddressCollection();
-                MailMessage message = new MailMessage();
-                smtp.UseDefaultCredentials = false;
-                smtp.Credentials = smtpCreds;
-                string msg = "Check the log file!";
-                string subject = "Chemical Report Manager Error";
-                to.Add("mpepitone@ehs.com");
-                message.To.Add(to.ToString());
-                message.From = from;
-                message.Subject = subject;
-                message.Body = msg + ex.Message;
-                smtp.Send(message);
+                string pfile = "GLOController.cs";
+                //Write Error Message in Log
+                string path = @"\\chem-fs1.ers.local\Log Files\Chemical.log";
+                StreamWriter log;
+                if (System.IO.File.Exists(path))
+                    log = System.IO.File.AppendText(path);
+                else
+                    log = System.IO.File.CreateText(path);
+                log.WriteLine("Date: " + DateTime.Now.ToShortDateString() + "\n" +
+                    "Time: " + DateTime.Now.ToShortTimeString() + "\n" +
+                    "User: " + Session["username"].ToString() + "\n" +
+                    "Error Message: " + ex.Message + "\n" +
+                    "File: " + pfile + "\n" +
+                    "Method: " + mod + "\n\n\n"
+                );
+                log.Close();
+                RedirectToAction("Error", "Home", new { ErrorMessage = ex.Message});
             }
         }
         private void NewYear(int year, string txtspillid)
@@ -920,7 +921,7 @@ namespace crm.chemtelinc.com.Controllers
                 string pfile = "SendGLOEmail.cs";
                 log.WriteLine("Date: " + DateTime.Now.ToShortDateString() + "\n" + "Time: " + DateTime.Now.ToShortTimeString() + "\n" + "Error Message: " + ex.Message + "\n" + "File: " + pfile + "\n" + "Method: " + mod + "\n\n\n");
                 log.Close();
-                return View("~/Views/Home/Index.cshtml", new { Result = "Error" });
+                return RedirectToAction("Error", "Home", new { ErrorMessage = ex.Message });
             }
         }
         #endregion

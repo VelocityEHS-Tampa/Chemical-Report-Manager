@@ -740,21 +740,8 @@ namespace crm.chemtelinc.com.Controllers
                 string pfile = "frmcrmOtherReportsandLogsGeneralIncident.cs";
                 log.WriteLine("Date: " + DateTime.Now.ToShortDateString() + "\n" + "Time: " + DateTime.Now.ToShortTimeString() + "\n" + "Error Message: " + ex.Message + "\n" + "File: " + pfile + "\n" + "Method: " + mod + "\n\n\n");
                 log.Close();
-                var smtpCreds = new NetworkCredential(@"CHEMTEL\emergency", "ERS*33602");
-                SmtpClient smtp = new SmtpClient("mail.chemtelinc.com", 587);
-                MailAddress from = new MailAddress("ers@ehs.com");
-                MailAddressCollection to = new MailAddressCollection();
-                MailMessage message = new MailMessage();
-                smtp.UseDefaultCredentials = false;
-                smtp.Credentials = smtpCreds;
-                string msg = "Check the log file!";
-                string subject = "Chemical Report Manager Error";
-                to.Add("mpepitone@ehs.com,tgillis@ehs.com");
-                message.To.Add(to.ToString());
-                message.From = from;
-                message.Subject = subject;
-                message.Body = msg;
-                smtp.Send(message);
+                RedirectToAction("Error", "Home", new { ErrorMessage = ex.Message });
+
             }
         }
         private bool CheckGeneralEditsTable(string txtincidentid)
@@ -790,21 +777,7 @@ namespace crm.chemtelinc.com.Controllers
                 string pfile = "frmcrmOtherReportsandLogsGeneralIncident.cs";
                 log.WriteLine("Date: " + DateTime.Now.ToShortDateString() + "\n" + "Time: " + DateTime.Now.ToShortTimeString() + "\n" + "Error Message: " + ex.Message + "\n" + "File: " + pfile + "\n" + "Method: " + mod + "\n\n\n");
                 log.Close();
-                var smtpCreds = new NetworkCredential(@"CHEMTEL\emergency", "ERS*33602");
-                SmtpClient smtp = new SmtpClient("mail.chemtelinc.com", 587);
-                MailAddress from = new MailAddress("ers@ehs.com");
-                MailAddressCollection to = new MailAddressCollection();
-                MailMessage message = new MailMessage();
-                smtp.UseDefaultCredentials = false;
-                smtp.Credentials = smtpCreds;
-                string msg = "Check the log file!";
-                string subject = "Chemical Report Manager Error";
-                to.Add("mpepitone@ehs.com,tgillis@ehs.com");
-                message.To.Add(to.ToString());
-                message.From = from;
-                message.Subject = subject;
-                message.Body = msg;
-                smtp.Send(message);
+                RedirectToAction("Error", "Home", new { ErrorMessage = ex.Message });
                 return false;
             }
         }

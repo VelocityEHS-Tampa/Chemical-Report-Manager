@@ -746,6 +746,7 @@ namespace crm.chemtelinc.com.Controllers
                 string pfile = "CrestwoodController.cs";
                 log.WriteLine("Date: " + DateTime.Now.ToShortDateString() + "\n" + "Time: " + DateTime.Now.ToShortTimeString() + "\n" + "Error Message: " + e.Message + "\n" + "File: " + pfile + "\n" + "Method: " + mod + "\n\n\n");
                 log.Close();
+                RedirectToAction("Error", "Home", new { ErrorMessage = e.Message});
             }
             return c;
         }

@@ -73,3 +73,7 @@ Weekly Update (11/05/2023)
 * Added .Trim() to email lists to ensure empty commas do not cause problems.
 * Add message after sending out an email letting users know if their emails were sent or not.
 * Set automatically generated report time hours back an hour for time change.
+
+Weekly Update (03/20/2024)
+* Universal Error Page showing error message and company back drop (rather than ugly yellow screens)
+* Turn Incident Date field background red when it is an invalid date.
