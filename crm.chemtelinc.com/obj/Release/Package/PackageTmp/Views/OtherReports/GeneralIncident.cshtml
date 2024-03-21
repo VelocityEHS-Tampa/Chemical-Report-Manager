@@ -216,6 +216,7 @@
             <div class="CrestInlineDisplay" style="width:45%;">
                 <span>Spill/Material Information</span>
                 <hr />
+                <span>Does this spill involve a shipping container?</span> <input type="checkbox" id="ContainerInvolved" onchange="ShowContainerDetails()" /> <br />
                 <span class="required-field">Material Name </span> @Html.TextBoxFor(m => m.Material_Name, new { id = "txtmaterialname", @Name = "txtmaterialname", @class = "form-control GLOFieldSpacing", style = "width:75%", required = "", tabindex = "16", maxlength="100" }) <br />
                 <span>Product Number</span> @Html.TextBoxFor(m => m.Product_Number, new { id = "txtproductnumber", @Name = "txtproductnumber", @class = "form-control GLOFieldSpacing", style = "width:75%", tabindex = "17", maxlength="100" }) <br />
                 <span>EPA Reg #</span> @Html.TextBoxFor(m => m.Epa_Reg_No, new { id = "txteparegno", @Name = "txteparegno", @class = "form-control GLOFieldSpacing", style = "width:75%", tabindex = "18", placeholder = "Not Applicable", maxlength="100"  }) <br />
@@ -237,6 +238,28 @@
             </div>
         </div>
 
+        <div id="ContainerDetails">
+            <br />
+            <div class="GLOHeader" id="GRCPHeader">Container Details</div>
+            <br />
+            <div class="CrestInlineDisplay" style="width:50%;">
+                <span>DOT Name</span>@Html.TextBoxFor(m => m.DOTName, new { id = "txtDOTName", @Name = "txtDOTName", @class = "form-control GLOFieldSpacing", style = "width:50%;", tabindex = "" }) <br />
+                <span>Trade Name</span>@Html.TextBoxFor(m => m.TradeName, new { id = "txtTradeName", @Name = "txtTradeName", @class = "form-control GLOFieldSpacing", style = "width:50%;", tabindex = "" }) <br />
+                <span>Primary Hazard Class</span>@Html.TextBoxFor(m => m.PrimaryHazardClass, new { id = "txtPrimaryHazardClass", @Name = "txtPrimaryHazardClass", @class = "form-control GLOFieldSpacing", style = "width:50%;", tabindex = "" }) <br />
+                <span>Packing Group</span>@Html.TextBoxFor(m => m.PackingGroup, new { id = "txtPackingGroup", @Name = "txtPackingGroup", @class = "form-control GLOFieldSpacing", style = "width:50%;", tabindex = "" }) <br />
+                <span>Container Type</span>@Html.TextBoxFor(m => m.ContainerType, new { id = "txtContainerType", @Name = "txtContainerType", @class = "form-control GLOFieldSpacing", style = "width:50%;", tabindex = "" }) <br />
+                <span>Residue Container</span>@Html.TextBoxFor(m => m.ResidueContainer, new { id = "txtResidueContainer", @Name = "txtResidueContainer", @class = "form-control GLOFieldSpacing", style = "width:50%;", tabindex = "" }) <br />
+            </div>
+            <div class="CrestInlineDisplay" style="width:49%;">
+                <span>Tank/Truck Number</span>@Html.TextBoxFor(m => m.TankTruckNumber, new { id = "txtTankTruckNumber", @Name = "txtTankTruckNumber", @class = "form-control GLOFieldSpacing", style = "width:50%;", tabindex = "" }) <br />
+                <span>PRO #</span>@Html.TextBoxFor(m => m.PRONumber, new { id = "txtPRONumber", @Name = "txtPRONumber", @class = "form-control GLOFieldSpacing", style = "width:50%;", tabindex = "" }) <br />
+                <span>Shipper/Manufacturer</span>@Html.TextBoxFor(m => m.ShipperManufacturer, new { id = "txtShipperManufacturer", @Name = "txtShipperManufacturer", @class = "form-control GLOFieldSpacing", style = "width:50%;", tabindex = "" }) <br />
+                <span>Shipper Location</span>@Html.TextBoxFor(m => m.ShipperLocation, new { id = "txtShipperLocation", @Name = "txtShipperLocation", @class = "form-control GLOFieldSpacing", style = "width:50%;", tabindex = "" }) <br />
+                <span>Consignee</span>@Html.TextBoxFor(m => m.Consignee, new { id = "txtConsignee", @Name = "txtConsignee", @class = "form-control GLOFieldSpacing", style = "width:50%;", tabindex = "" }) <br />
+                <span>Consignee Location</span>@Html.TextBoxFor(m => m.ConsigneeLocation, new { id = "txtConsigneeLocation", @Name = "txtConsigneeLocation", @class = "form-control GLOFieldSpacing", style = "width:50%;", tabindex = "" }) <br />
+                <span>Carrier</span>@Html.TextBoxFor(m => m.Carrier, new { id = "txtCarrier", @Name = "txtCarrier", @class = "form-control GLOFieldSpacing", style = "width:50%;", tabindex = "" }) <br />
+            </div>
+        </div>
 
         <div id="SpillStatus">
             <br />
@@ -314,6 +337,7 @@
 <script>
     $(document).ready(function () {
         $('#txtincidentProvidence').hide();
+        $('#ContainerDetails').hide();
 
         if ("@Updated" != "true") { // We do NOT want to update the IncidentID if the report is an update.
             //Keep checking for a new IncidentID number to avoid double inserts and skipping ID's
@@ -391,6 +415,15 @@
         } else {
             $('#txtincidentstate').show();
             $('#txtincidentProvidence').hide();
+        }
+    }
+
+    function ShowContainerDetails() {
+        var CIBox = document.getElementById("ContainerInvolved");
+        if (CIBox.checked) {
+            $('#ContainerDetails').show();
+        } else {
+            $('#ContainerDetails').hide();
         }
     }
 </script>

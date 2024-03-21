@@ -122,6 +122,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\CrystalDecisions.Shared.dll</HintPath>
     </Reference>
+    <Reference Include="DuoSecurity.Auth.Http, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DuoSecurity.Auth.Http.1.0.2\lib\netstandard2.0\DuoSecurity.Auth.Http.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -315,9 +318,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManagerToolsController.cs" />
     <Compile Include="Controllers\MSDSSearchController.cs" />
+    <Compile Include="Controllers\NorthwindController.cs" />
     <Compile Include="Controllers\OtherReportsController.cs" />
     <Compile Include="Controllers\TCEQController.cs" />
-    <Compile Include="Controllers\UniversalEmailController.cs" />
     <Compile Include="crest811.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
@@ -432,6 +435,8 @@
     <Compile Include="Models\MODRequest.cs" />
     <Compile Include="Models\MSDSSearch.cs" />
     <Compile Include="Models\NonCoastal.cs" />
+    <Compile Include="Models\NorthwindEmail.cs" />
+    <Compile Include="Models\NorthwindGenInc.cs" />
     <Compile Include="Models\NovartisLookup.cs" />
     <Compile Include="Models\OldGLO.cs" />
     <Compile Include="Models\OtherIDCreation.cs" />
@@ -911,6 +916,9 @@
     <Content Include="Views\MSDSSearch\Index.cshtml" />
     <Content Include="Views\Home\NovartisRegLookup.cshtml" />
     <Content Include="Views\ManagerTools\HWCGEmail.cshtml" />
+    <Content Include="Views\Northwind\GeneralIncident.cshtml" />
+    <Content Include="Views\Northwind\Pipeline.cshtml" />
+    <Content Include="Views\Northwind\EmailForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -920,6 +928,8 @@
     <Folder Include="Views\CrestwoodLog\" />
     <Folder Include="Views\DatabaseContext\" />
     <Folder Include="Views\GLOBaseReportData2\" />
+    <Folder Include="Views\NorthwindEmail\" />
+    <Folder Include="Views\NorthwindGenInc\" />
     <Folder Include="Views\NovartisLookup\" />
     <Folder Include="Views\PassEncrypt\" />
     <Folder Include="Views\UniversalEmail\" />

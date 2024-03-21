@@ -73,6 +73,16 @@
                                     </div>
                                 </li>
                                 <li class="nav-item">
+                                    <a class="nav-link text-dark" id="NorthwindMenu" href="#">Northwind</a>
+                                    <div class="NavMenuContainer">
+                                        <ul class="NavMenu" id="NorthwindOptions">
+                                            <li class="MenuOptionHeader"><h5>Reports</h5></li>
+                                            <li><a href="@Url.Action("GeneralIncident", "Northwind")">General Incident</a></li>
+                                            <li><a href="@Url.Action("PipelineReport", "Northwind")">Pipeline</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link text-dark" id="OtherReportsMenu" href="#">Other Reports/Logs</a>
                                     <div class="NavMenuContainer">
                                         <ul class="NavMenu" id="OtherReportsOptions">
@@ -115,14 +125,14 @@
                                                 <li><a href="@Url.Action("HWCGEmail", "ManagerTools", new { OtherToolSelected = "UserManagement"})">Send HWCG Email</a></li>
 
                                                 @* THESE LEGACY BUTTONS ARE NO LONGER USED AT THIS POINT
-                                                    <li><a href="#" onclick="ShowCleanShotContactInfo()">Clean Shot Contact Info</a></li>
-                                                    <li><a href="@Url.Action("Logs", "ManagerTools", new { LogsSelected = "GLO" })">GLO Logs</a></li>
-                                                    <li><a href="@Url.Action("Logs", "ManagerTools", new { LogsSelected = "CleanShot" })">Clean Shot Incident Log</a></li>
-                                                    <li><a href="@Url.Action("Logs", "ManagerTools", new { LogsSelected = "GenInc" })">General Incident Log</a></li>
-                                                    <li><a href="@Url.Action("Logs", "ManagerTools", new { LogsSelected = "Incident" })">Incident IDs</a></li>
-                                                    <li><a href="@Url.Action("Logs", "ManagerTools", new { LogsSelected = "CleanShot" })">Clean Shot IDs</a></li>
-                                                    <li><a href="@Url.Action("Logs", "ManagerTools", new { LogsSelected = "Shell" })">Shell Report Log</a></li>
-                                                    <li><a href="@Url.Action("ManagerToolsEtc", "ManagerTools", new { OtherToolSelected = "ViewReports" })">View Reports</a></li>
+                        <li><a href="#" onclick="ShowCleanShotContactInfo()">Clean Shot Contact Info</a></li>
+                        <li><a href="@Url.Action("Logs", "ManagerTools", new { LogsSelected = "GLO" })">GLO Logs</a></li>
+                        <li><a href="@Url.Action("Logs", "ManagerTools", new { LogsSelected = "CleanShot" })">Clean Shot Incident Log</a></li>
+                        <li><a href="@Url.Action("Logs", "ManagerTools", new { LogsSelected = "GenInc" })">General Incident Log</a></li>
+                        <li><a href="@Url.Action("Logs", "ManagerTools", new { LogsSelected = "Incident" })">Incident IDs</a></li>
+                        <li><a href="@Url.Action("Logs", "ManagerTools", new { LogsSelected = "CleanShot" })">Clean Shot IDs</a></li>
+                        <li><a href="@Url.Action("Logs", "ManagerTools", new { LogsSelected = "Shell" })">Shell Report Log</a></li>
+                        <li><a href="@Url.Action("ManagerToolsEtc", "ManagerTools", new { OtherToolSelected = "ViewReports" })">View Reports</a></li>
                                                 *@
                                             </ul>
                                         </div>

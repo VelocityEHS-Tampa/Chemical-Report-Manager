@@ -11,6 +11,7 @@ $(document).ready(function () {
     $("#CrestwoodOptions").hide();
     $("#OtherReportsOptions").hide();
     $("#ManagerToolsOptions").hide();
+    $("#NorthwindOptions").hide();
 
     //Show specific menu when clicked, hide all others.
     $("#GLOTCEQMenu").click(function () {
@@ -18,10 +19,19 @@ $(document).ready(function () {
         $("#CrestwoodOptions").hide();
         $("#OtherReportsOptions").hide();
         $("#ManagerToolsOptions").hide();
+        $("#NorthwindOptions").hide();
     });
 
     $("#CrestwoodMenu").click(function () {
         $("#CrestwoodOptions").toggle();
+        $("#GLOTCEQOptions").hide();
+        $("#OtherReportsOptions").hide();
+        $("#ManagerToolsOptions").hide();
+        $("#NorthwindOptions").hide();
+    });
+    $("#NorthwindMenu").click(function () {
+        $("#NorthwindOptions").toggle();
+        $("#CrestwoodOptions").hide();
         $("#GLOTCEQOptions").hide();
         $("#OtherReportsOptions").hide();
         $("#ManagerToolsOptions").hide();
@@ -32,6 +42,7 @@ $(document).ready(function () {
         $("#CrestwoodOptions").hide();
         $("#GLOTCEQOptions").hide();
         $("#ManagerToolsOptions").hide();
+        $("#NorthwindOptions").hide();
     });
 
     $("#ManagerToolsMenu").click(function () {
@@ -39,5 +50,6 @@ $(document).ready(function () {
         $("#CrestwoodOptions").hide();
         $("#OtherReportsOptions").hide();
         $("#GLOTCEQOptions").hide();
+        $("#NorthwindOptions").hide();
     });
 });

@@ -1,0 +1,328 @@
+﻿@model ChemicalLibrary.NorthwindGenInc
+
+@{
+    ViewBag.Title = "Northwind General Incident";
+
+    string constring = crm.chemtelinc.com.Properties.Settings.Default.StatesConnectionString;
+    List<string> States = new List<string>();
+    States = ChemicalLibrary.Search.GetStates(constring);
+
+    List<SelectListItem> NWEC = new List<SelectListItem>(); // Crestwood Employee, Contractor, or Private Citizen
+    NWEC.Add(new SelectListItem { Text = "", Value = "" });
+    NWEC.Add(new SelectListItem { Text = "Employee", Value = "Employee" });
+    NWEC.Add(new SelectListItem { Text = "Contractor", Value = "Contractor" });
+
+    List<SelectListItem> YesNo = new List<SelectListItem>(); //Generic Yes or No
+    YesNo.Add(new SelectListItem { Text = "", Value = "" });
+    YesNo.Add(new SelectListItem { Text = "Yes", Value = "Yes" });
+    YesNo.Add(new SelectListItem { Text = "No", Value = "No" });
+
+    List<SelectListItem> TimeZones = new List<SelectListItem>();
+    TimeZones.Add(new SelectListItem { Text = "", Value = "" });
+    TimeZones.Add(new SelectListItem { Text = "AKST", Value = "AKST" });
+    TimeZones.Add(new SelectListItem { Text = "AST", Value = "AST" });
+    TimeZones.Add(new SelectListItem { Text = "CST", Value = "CST" });
+    TimeZones.Add(new SelectListItem { Text = "EST", Value = "EST" });
+    TimeZones.Add(new SelectListItem { Text = "HAST", Value = "HAST" });
+    TimeZones.Add(new SelectListItem { Text = "MST", Value = "MST" });
+    TimeZones.Add(new SelectListItem { Text = "PST", Value = "PST" });
+    TimeZones.Add(new SelectListItem { Text = "UTC", Value = "UTC" });
+
+    List<SelectListItem> StatesDDL = new List<SelectListItem>();
+    StatesDDL.Add(new SelectListItem { Text = "", Value = "" });
+    foreach (string s in States)
+    {
+        StatesDDL.Add(new SelectListItem { Text = s, Value = s });
+    }
+
+    List<SelectListItem> YesNoNAUnk = new List<SelectListItem>();
+    YesNoNAUnk.Add(new SelectListItem { Text = "", Value = "" });
+    YesNoNAUnk.Add(new SelectListItem { Text = "N/A", Value = "N/A" });
+    YesNoNAUnk.Add(new SelectListItem { Text = "Yes", Value = "Yes" });
+    YesNoNAUnk.Add(new SelectListItem { Text = "No", Value = "No" });
+    YesNoNAUnk.Add(new SelectListItem { Text = "Unknown", Value = "Unknown" });
+}
+
+<h2>Northwind General Incident</h2>
+
+@using (Html.BeginForm("SubmitNewReport", "Northwind", FormMethod.Post, new { }))
+{
+    <div id="FormButtons" style="padding:2%;text-align:right;">
+
+        <input type="submit" value="Submit" class="form-control GRCPButtons required-field" id="btnsubmit" name="btnsubmit" onclick="return SubmitForm()" tabindex="99">
+        @Html.TextBoxFor(m => m.ERS_Operator, new { @id = "ersop", @Name = "ersop", type = "text", style = "display:none;", @Value = Session["username"].ToString() })
+        <input type="button" value="Cancel" class="form-control GRCPButtons alert-info" id="btnclose" name="btnclose" onclick="ClearForm()">
+    </div>
+    <br />
+    <div id="CallerInfo" style="text-align:center;">
+        <div class="GLOHeader" id="GRCPHeader">Caller Information</div>
+        <div class="CrestInlineDisplay">
+            <span class="required-field">Name</span>@Html.TextBoxFor(m => m.Caller_Name, new { @class = "form-control GLOFieldSpacing", required = "", @id = "txtcallername", @Name = "txtcallername", @style = "width:50%", tabindex = "1" })<br />
+            <span class="required-field">Phone Number</span>
+            @Html.TextBoxFor(m => m.Caller_Phone_Number, new { @class = "form-control GLOFieldSpacing", @Name = "txtcallerphonenumber", id = "txtcallerphonenumber", placeholder = "(___) ___-____", style = "width:50%;", onblur = "FormatPhone(this.value, this.id)", tabindex = "2" })
+        </div>
+        <div class="CrestInlineDisplay">
+            <span class="required-field">Employee or Contractor?</span>
+            @Html.DropDownListFor(m => m.EmpOrContract, NWEC, new { @class = "GLOFieldSpacing", @Name = "EmpOrContract", @id = "EmpOrContract", tabindex = "3", onchange = "ShowCompanyName(this.value)" })
+            <br />
+            <span class="required-field" id="ContractCoLbl">Contracted Co. Name?</span>
+            @Html.TextBoxFor(m => m.ContractedCompany, new { @class = "GLOFieldSpacing", @Name = "ContractedCompany", @id = "ContractedCompany", tabindex = "4" })
+        </div>
+        <div class="CrestInlineDisplay">
+            <span class="required-field">Call Date</span><br />
+            @Html.TextBoxFor(m => m.Call_Date, new { @class = "form-control GLOFieldSpacing", @Name = "txtcalldate", id = "txtcalldate", placeholder = "__/__/____", style = "width:55%;", @Value = @DateTime.Now.ToShortDateString(), onblur = "FormatDate(this.value, this.id)", tabindex = "5" })
+        </div>
+        <div class="CrestInlineDisplay">
+            <span class="required-field">Call Time</span><br />
+            @Html.TextBoxFor(m => m.Call_Time, new { @class = "form-control GLOFieldSpacing", @Name = "txtcalltime", id = "txtcalltime", placeholder = "__:__", style = "width:55%;", @Value = @DateTime.Now.ToString("HH:mm"), onblur = "FormatTime(this.value, this.id)", tabindex = "6" })
+        </div>
+    </div>
+
+    @* Incident Info *@
+    <div id="IncidentInfo">
+        <div class="GLOHeader" id="GRCPHeader">Incident Information</div>
+        <div class="CrestInlineDisplay" style="width:45%;">
+            <span class="required-field">City</span>@Html.TextBoxFor(m => m.Incident_City, new { @class = "form-control GLOFieldSpacing", required = "", style = "width:35%", @Name = "txtincidentcity", id = "txtincidentcity", tabindex = "10" })
+            <span class="required-field">State</span>@Html.DropDownListFor(m => m.Incident_State, StatesDDL, new { id = "txtstate", @Name = "txtstate", tabindex = "11" })
+            <br />
+            <span class="required-field">County</span>@Html.TextBoxFor(m => m.Incident_County, new { @class = "form-control GLOFieldSpacing", required = "", style = "width:35%", @Name = "txtincidentcounty", id = "txtincidentcounty", tabindex = "12" })
+            <br />
+            <span class="required-field">Did this occur on a Northwind Facility or Construction Project?</span>
+            @Html.DropDownListFor(m => m.FacilityOrProject, YesNo, new { @Name = "ddlFacilityOrProject", id = "ddlFacilityOrProject", @class = "GLOFieldSpacing", tabindex = "15", onchange = "ShowIncidentDateTime(this.value)" })
+            <br />
+            <span class="required-field">Where did the incident occur?</span>@Html.TextBoxFor(m => m.IncidentLocation, new { @class = "form-control GLOFieldSpacing", required = "", style = "width:40%", @Name = "txtIncidentLocation", id = "txtIncidentLocation", tabindex = "16" })
+            <br />
+            <span class="required-field" id="IncidentDateLbl">Incident Date</span>  @Html.TextBoxFor(m => m.Incident_Date, new { @class = "form-control GLOFieldSpacing", placeholder = "__/__/____", style = "width:14%", @Name = "txtincidentdate", id = "txtincidentdate", onblur = "FormatDate(this.value, this.id)", tabindex = "7", @Value = "" })
+            <span class="required-field" id="IncidentTimeLbl">Incident Time</span>@Html.TextBoxFor(m => m.Incident_Time, new { @class = "form-control GLOFieldSpacing", placeholder = "__:__", style = "width:10%", @Name = "txtincidenttime", id = "txtincidenttime", onblur = "FormatTime(this.value, this.id)", tabindex = "8" })
+            <span class="required-field" id="IncidentTimeZoneLbl">Time Zone</span>@Html.DropDownListFor(m => m.Incident_Time_Zone, TimeZones, new { @Name = "txtincidenttimezone", id = "txtincidenttimezone", tabindex = "9" })
+            <br />
+            <br />
+            <span class="required-field">Incident Details</span><br />
+            @Html.TextAreaFor(m => m.IncidentDetails, new { id = "txtincidentdetails", @Name = "txtincidentdetails", cols = "60", rows = "4", tabindex = "10" })
+        </div>
+
+        <div class="CrestInlineDisplay" style="width:50%;">
+            <span class="required-field">What is the nature of the incident? (Only select one category)</span>
+            <div id="IncidentTypeContainer" style="border: solid red 1px; border-radius:5px; font-size: 10pt; padding:10px;">
+                <div class="CrestInlineDisplay">
+                    @if (Model.IncidentType == "Workplace Violence")
+                    {<input type="radio" name="IncidentType" id="WPViolence" value="Workplace Violence" tabindex="10" checked="" /> }
+                    else
+                    { <input type="radio" name="IncidentType" id="WPViolence" value="Workplace Violence" tabindex="10" />} 1. Workplace Violence<br />
+                    @if (Model.IncidentType == "Third Party Complaint")
+                    {<input type="radio" name="IncidentType" id="TPComplaint" value="Third Party Complaint" checked="" /> }
+                    else
+                    { <input type="radio" name="IncidentType" id="TPComplaint" value="Third Party Complaint" />} 2. Third Party Complaint<br />
+                    @if (Model.IncidentType == "Vehicle Accident")
+                    {<input type="radio" name="IncidentType" id="VehicleAccident" value="Vehicle Accident" checked="" /> }
+                    else
+                    {<input type="radio" name="IncidentType" id="VehicleAccident" value="Vehicle Accident" />} 3. Vehicle Accident (in motion)<br />
+                    @if (Model.IncidentType == "Spill Or Release")
+                    {<input type="radio" name="IncidentType" id="SpillRelease" value="Spill Or Release" checked="" /> }
+                    else
+                    {<input type="radio" name="IncidentType" id="SpillRelease" value="Spill Or Release" />} 4. Spill Or Release<br />
+                    @if (Model.IncidentType == "Injury")
+                    {<input type="radio" name="IncidentType" id="Injury" value="Injury" checked="" /> }
+                    else
+                    {<input type="radio" name="IncidentType" id="Injury" value="Injury" />} 5. Injury
+                </div>
+                <div class="CrestInlineDisplay">
+                    @if (Model.IncidentType == "Illness or Chemical Exposure")
+                    {<input type="radio" name="IncidentType" id="illnessExposure" value="Illness or Chemical Exposure" checked="" /> }
+                    else
+                    {<input type="radio" name="IncidentType" id="illnessExposure" value="Illness or Chemical Exposure" />} 6. Illness or Chemical Exposure<br />
+                    @if (Model.IncidentType == "Fire")
+                    {<input type="radio" name="IncidentType" id="Fire" value="Fire" checked="" /> }
+                    else
+                    {<input type="radio" name="IncidentType" id="Fire" value="Fire" />} 7. Fire<br />
+                    @if (Model.IncidentType == "Line Strike")
+                    {<input type="radio" name="IncidentType" id="LineStrike" value="Line Strike" checked="" />}
+                    else
+                    {<input type="radio" name="IncidentType" id="LineStrike" value="Line Strike" />} 8. Line Strike<br />
+                    @if (Model.IncidentType == "Property Damage")
+                    {<input type="radio" name="IncidentType" id="PropertyDamage" value="Property Damage" checked="" />}
+                    else
+                    {<input type="radio" name="IncidentType" id="PropertyDamage" value="Property Damage" />} 9. Property Damage<br />
+                    @if (Model.IncidentType == "Theft")
+                    {<input type="radio" name="IncidentType" id="Theft" value="Theft" checked="" />}
+                    else
+                    {<input type="radio" name="IncidentType" id="Theft" value="Theft" />} 10. Theft
+                </div>
+                <div class="CrestInlineDisplay">
+                    @if (Model.IncidentType == "Reg. Visit")
+                    {<input type="radio" name="IncidentType" id="" value="Reg. Visit" checked="" />}
+                    else
+                    {<input type="radio" name="IncidentType" id="" value="Reg. Visit" />} 11. Reg. Visit <br />
+                    @if (Model.IncidentType == "Drill or Safety System Test")
+                    {<input type="radio" name="IncidentType" id="Drill" value="Drill or Safety System Test" checked="" />}
+                    else
+                    {<input type="radio" name="IncidentType" id="Drill" value="Drill or Safety System Test" />} 12. Drill or Safety System Test<br />
+                    @if (Model.IncidentType == "Hazard Report/Near Miss")
+                    {<input type="radio" name="IncidentType" id="Hazard" value="Hazard Report/Near Miss" checked="" />}
+                    else
+                    {<input type="radio" name="IncidentType" id="Hazard" value="Hazard Report/Near Miss" />} 13. Hazard Report/Near Miss<br />
+                </div>
+            </div>
+            <br />
+            <div class="CrestInlineDisplay">
+                <div id="SpillQuestions">
+                    <span class="required-field">Spill Details</span><br />
+                    <span class="required-field" id="impactedwaterbodieslbl">Are there any suspected impacts to waterbodies?</span>
+                    @Html.DropDownListFor(m => m.WaterbodiesImpacted, YesNoNAUnk, new { @Name = "WaterbodiesImpacted", id = "WaterbodiesImpacted", @class = "GLOFieldSpacing" })
+                    <br />
+                    <span class="required-field">Describe the impacted area(s)</span><br />
+                    @Html.TextAreaFor(m => m.ImpactedAreas, new { id = "txtimpactedareas", @Name = "txtimpactedareas", cols = "72", rows = "4" })
+                </div>
+                <span id="IndSafeTxtLabel" class="required-field">Was there an immediate threat to individual safety?</span>
+                @Html.DropDownListFor(m => m.IndividualSafety, new List<SelectListItem> { new SelectListItem { Text = "No", Value = "No" }, new SelectListItem { Text = "Yes", Value = "Yes" } }, new { @Name = "IndSafeTxt", id = "IndSafeTxt", @class = "GLOFieldSpacing" })
+            </div>
+        </div>
+        <hr />
+        @* High Profile Information *@
+        <div class="CrestHighProfile" style="text-align:center;">
+            <div class="GLOHeader" id="GRCPHeader" style="background-color: #ffff00; color:black;font-weight:600;width:100%;text-align:left;">High Profile Information</div>
+            <div class="CrestInlineDisplay" style="text-align:right;padding:10px;">
+                <span class="required-field">Was 9-1-1 notified?</span>
+                @Html.DropDownListFor(m => m.Notify_911, new List<SelectListItem> { new SelectListItem { Text = "No", Value = "No" }, new SelectListItem { Text = "Yes", Value = "Yes" } }, new { @Name = "txtnotify911", id = "txtnotify911", @class = "GLOFieldSpacing" })
+                <br />
+                <span class="required-field">Is news media on scene?</span>
+                @Html.DropDownListFor(m => m.Media_On_Scene, new List<SelectListItem> { new SelectListItem { Text = "No", Value = "No" }, new SelectListItem { Text = "Yes", Value = "Yes" } }, new { @Name = "txtmediaonscene", id = "txtmediaonscene", @class = "GLOFieldSpacing" })
+                <br />
+            </div>
+            <div class="CrestInlineDisplay" style="text-align: right; padding: 10px;">
+                <span class="required-field">Is an ambulance needed?</span>
+                @Html.DropDownListFor(m => m.Transport_ToHospital, new List<SelectListItem> { new SelectListItem { Text = "No", Value = "No" }, new SelectListItem { Text = "Yes", Value = "Yes" } }, new { @Name = "txttransportedtohospital", id = "txttransportedtohospital", @class = "GLOFieldSpacing" })
+                <br />
+                <span class="required-field">Have emergency responders been on-scene?</span>
+                @Html.DropDownListFor(m => m.Emergency_Responders, new List<SelectListItem> { new SelectListItem { Text = "No", Value = "No" }, new SelectListItem { Text = "Yes", Value = "Yes" } }, new { @Name = "txtemergencyresponders", id = "txtemergencyresponders", @class = "GLOFieldSpacing" })
+            </div>
+        </div>
+        <hr />
+        @* On Call Team Member Notification *@
+        <div class="CrestInlineDisplay" style="width:45%">
+            <div id="CrestOnCall">
+                <div class="GLOHeader" id="GRCPHeader">HSER Team Member contacted / Notified by Incident Hotline</div>
+                <div class="CrestInlineDisplay" style="text-align: center;width:40%;">
+                    <span class="required-field">Name</span><br />
+                    @Html.TextBoxFor(m => m.HSERName, new { @class = "GLOFieldSpacing", @Name = "txthsername", id = "txthsername", onchange = "GetInfo(this.value)", list = "ERSMembers" })
+                </div>
+                <div class="CrestInlineDisplay" style="text-align: center; width: 40%;">
+                    <span class="required-field">Contact Number</span>
+                    <br />
+                    @Html.TextBoxFor(m => m.HSERContactNumber, new { @class = "form-control GLOFieldSpacing", @Name = "txthsercontactnumber", id = "txthsercontactnumber", style = "width: 100%;", placeholder = "(___) ___-____", onblur = "FormatPhone(this.value, this.id)" })
+                </div>
+                <br />
+                <br />
+                <span class="required-field">Notifcation Date</span> @Html.TextBoxFor(m => m.NotificationDate, new { @Name = "NotificationDate", id = "NotificationDate", @class = "form-control GLOFieldSpacing", placeholder = "__/__/____", style = "width:20%;", onblur = "FormatDate(this.value, this.id)", @Value=DateTime.Now.ToShortDateString() })
+                <span class="required-field">Notifcation Time</span> @Html.TextBoxFor(m => m.NotificationTime, new { @Name = "NotificationTime", id = "NotificationTime", @class = "form-control GLOFieldSpacing", placeholder = "__:__", maxlength = "5", style = "width:20%;", onblur = "FormatTime(this.value, this.id)" })
+            </div>
+        </div>
+        <br />
+        <br />
+    </div>
+}
+
+<script>
+    $(document).ready(function () {
+        $('#ContractedCompany').prop("disabled", true);
+        //$('#ContractCoLbl').hide();
+        $('#IndSafeTxtLabel').hide();
+        $('#IndSafeTxt').hide();
+        $('#SpillQuestions').hide();
+        //$('#IncidentDateLbl').hide();
+        //$('#IncidentTimeLbl').hide();
+        //$('#txtincidentdate').hide();
+        //$('#txtincidenttime').hide();
+        //$('#IncidentTimeZoneLbl').hide();
+        //$('#txtincidenttimezone').hide();
+         
+        $("input[type='radio']").click(function () {
+            var radioValue = $("input[name='IncidentType']:checked").val();
+            if (radioValue == "Workplace Violence") {
+                $('#IndSafeTxtLabel').show();
+                $('#IndSafeTxt').show();
+            } else {
+                $('#IndSafeTxtLabel').hide();
+                $('#IndSafeTxt').hide();
+            }
+            if (radioValue == "Spill Or Release") {
+                $('#SpillQuestions').show();
+            } else {
+                $('#SpillQuestions').hide();
+            }
+        })
+    });
+
+    function ShowCompanyName(EmpOrCon) {
+        if (EmpOrCon == "Contractor") {
+            $('#ContractedCompany').prop("disabled", false);
+        } else {
+            $('#ContractedCompany').prop("disabled", true);
+        }
+    }
+    //function ShowIncidentDateTime(FacOrConProj) {
+    //    if (FacOrConProj == "No") {
+    //        $('#IncidentDateLbl').show();
+    //        $('#IncidentTimeLbl').show();
+    //        $('#txtincidentdate').show();
+    //        $('#txtincidenttime').show();
+    //        $('#IncidentTimeZoneLbl').show();
+    //        $('#txtincidenttimezone').show();
+    //    } else {
+    //        $('#IncidentDateLbl').hide();
+    //        $('#IncidentTimeLbl').hide();
+    //        $('#txtincidentdate').hide();
+    //        $('#txtincidenttime').hide();
+    //        $('#IncidentTimeZoneLbl').hide();
+    //        $('#txtincidenttimezone').hide();
+    //    }
+    //}
+
+
+
+    //Date, Time, and Phone formatting
+    function SubmitForm() {
+        var radioValue = $("input[name='IncidentType']:checked").val();
+
+        if (radioValue != null) {
+            var submit = confirm("Are you sure you want to submit this report?");
+            if (submit) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            alert("PLEASE SELECT AN INCIDENT TYPE!");
+            return false;
+        }
+    }
+    function FormatDate(Date, FieldName) {
+        //Purely number input, no slashes.
+        if (Date.length == 8 && !Date.includes("/")) {
+            var ds = Date.split("");
+            var fulldate = ds[0] + ds[1] + "/" + ds[2] + ds[3] + "/" + ds[4] + ds[5] + ds[6] + ds[7];
+            document.getElementById(FieldName).value = fulldate;
+        }
+    }
+    function FormatTime(Time, FieldName) {
+        //Purely number input, no semi-colons.
+        if (Time.length == 4 && !Time.includes(":")) {
+            var ts = Time.split("");
+            var fulltime = ts[0] + ts[1] + ":" + ts[2] + ts[3];
+            document.getElementById(FieldName).value = fulltime;
+        }
+    }
+    function FormatPhone(Phone, FieldName) {
+        //Purely number input, no parenthesis, no hyphens.
+        if (Phone.length == 10 && !Phone.includes("-") && !Phone.includes("(") && !Phone.includes(")")) {
+            var ps = Phone.split("");
+            var fullphone = "(" + ps[0] + ps[1] + ps[2] + ") " + ps[3] + ps[4] + ps[5] + "-" + ps[6] + ps[7] + ps[8] + ps[9]
+            document.getElementById(FieldName).value = fullphone;
+        }
+    }
+    function ClearForm() {
+        if (confirm("Are you sure you want to cancel this report?")) {
+            location.href = "";
+        }
+    }
+</script>

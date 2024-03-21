@@ -1251,6 +1251,53 @@ namespace ChemicalLibrary
             }                
         }
 
+        public static void AddNorthwindGenInc(string constring, NorthwindGenInc n)
+        {
+            string strsql = "INSERT INTO NorthwindGeneralIncidents (ERSOperator, CallerName,CallerPhone,EmpOrContract,ContractedCompany,CallDate,CallTime,IncidentDate," +
+                "IncidentTime,IncidentTimeZone,IncidentCity,IncidentState,IncidentCounty,FacilityOrProject,IncidentLocation,IncidentNature,WaterbodiesImpacted," +
+                "ImpactedAreaDetails,IncidentDetails,IndividualSafety,Notify911,TransportToHospital,MediaOnScene,EmergencyResponders,HSERName,HSERPhone," +
+                "NotificationDate,NotificationTime) VALUES (@ers,@callername,@callerphone,@emporcontract,@contractedcompany,@calldate,@calltime," +
+                "@incidentdate,@incidenttime,@incidenttimezone,@incidentcity,@incidentstate,@incidentcounty,@facilityorproject,@incidentlocation,@incidentnature," +
+                "@waterbodiesimpacted,@impactedareadetails,@incidentdetails,@individualsafety,@notify911,@transporttohospital,@mediaonscene,@emergencyresponders," +
+                "@hsername,@hserphone,@notificationdate,@notificationtime)";
+            using (SqlConnection cn = new SqlConnection(constring))
+            {
+                cn.Open();
+                using (SqlCommand cmd = new SqlCommand(strsql, cn))
+                {
+                    cmd.Parameters.AddWithValue("@ers", n.ERS_Operator);
+                    cmd.Parameters.AddWithValue("@callername", n.Caller_Name);
+                    cmd.Parameters.AddWithValue("@callerphone", n.Caller_Phone_Number);
+                    cmd.Parameters.AddWithValue("@emporcontract", n.EmpOrContract);
+                    cmd.Parameters.AddWithValue("@contractedcompany", n.ContractedCompany);
+                    cmd.Parameters.AddWithValue("@calldate", n.Call_Date);
+                    cmd.Parameters.AddWithValue("@calltime", n.Call_Time);
+                    cmd.Parameters.AddWithValue("@incidentdate", n.Incident_Date);
+                    cmd.Parameters.AddWithValue("@incidenttime", n.Incident_Time);
+                    cmd.Parameters.AddWithValue("@incidenttimezone", n.Incident_Time_Zone);
+                    cmd.Parameters.AddWithValue("@incidentcity", n.Incident_City);
+                    cmd.Parameters.AddWithValue("@incidentstate", n.Incident_State);
+                    cmd.Parameters.AddWithValue("@incidentcounty", n.Incident_County);
+                    cmd.Parameters.AddWithValue("@facilityorproject", n.FacilityOrProject);
+                    cmd.Parameters.AddWithValue("@incidentlocation", n.IncidentLocation);
+                    cmd.Parameters.AddWithValue("@incidentnature", n.IncidentType);
+                    cmd.Parameters.AddWithValue("@waterbodiesimpacted", n.WaterbodiesImpacted);
+                    cmd.Parameters.AddWithValue("@impactedareadetails", n.ImpactedAreas);
+                    cmd.Parameters.AddWithValue("@incidentdetails", n.IncidentDetails);
+                    cmd.Parameters.AddWithValue("@individualsafety", n.IndividualSafety);
+                    cmd.Parameters.AddWithValue("@notify911", n.Notify_911);
+                    cmd.Parameters.AddWithValue("@transporttohospital", n.Transport_ToHospital);
+                    cmd.Parameters.AddWithValue("@mediaonscene", n.Media_On_Scene);
+                    cmd.Parameters.AddWithValue("@emergencyresponders", n.Emergency_Responders);
+                    cmd.Parameters.AddWithValue("@hsername", n.HSERName);
+                    cmd.Parameters.AddWithValue("@hserphone", n.HSERContactNumber);
+                    cmd.Parameters.AddWithValue("@notificationdate", n.NotificationDate);
+                    cmd.Parameters.AddWithValue("@notificationtime", n.NotificationTime);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         #endregion
     }
 }
