@@ -429,7 +429,7 @@
           <Property Name="rotteneggodor" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="vaporormist" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="directions" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="city" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="city" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="date" Type="date" Nullable="false" />
           <Property Name="time" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="timezone" Type="nvarchar" MaxLength="10" Nullable="false" />
@@ -809,6 +809,154 @@ warning 6002: The table/view 'chemreporter.dbo.CRMWebU' does not have a primary 
             <PropertyRef Name="nonCoastalType" />
           </Key>
           <Property Name="nonCoastalType" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'chemreporter.dbo.NorthwindGeneralIncidents' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="NorthwindGeneralIncidents">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="ERSOperator" />
+            <PropertyRef Name="CallerName" />
+            <PropertyRef Name="CallerPhone" />
+            <PropertyRef Name="EmpOrContract" />
+            <PropertyRef Name="ContractedCompany" />
+            <PropertyRef Name="CallDate" />
+            <PropertyRef Name="CallTime" />
+            <PropertyRef Name="IncidentTimeZone" />
+            <PropertyRef Name="IncidentCity" />
+            <PropertyRef Name="IncidentState" />
+            <PropertyRef Name="IncidentCounty" />
+            <PropertyRef Name="FacilityOrProject" />
+            <PropertyRef Name="IncidentLocation" />
+            <PropertyRef Name="IncidentNature" />
+            <PropertyRef Name="IncidentDetails" />
+            <PropertyRef Name="Notify911" />
+            <PropertyRef Name="TransportToHospital" />
+            <PropertyRef Name="MediaOnScene" />
+            <PropertyRef Name="EmergencyResponders" />
+            <PropertyRef Name="HSERName" />
+            <PropertyRef Name="HSERPhone" />
+            <PropertyRef Name="NotificationDate" />
+            <PropertyRef Name="NotificationTime" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ERSOperator" Type="varchar(max)" Nullable="false" />
+          <Property Name="CallerName" Type="varchar(max)" Nullable="false" />
+          <Property Name="CallerPhone" Type="varchar" MaxLength="14" Nullable="false" />
+          <Property Name="EmpOrContract" Type="varchar(max)" Nullable="false" />
+          <Property Name="ContractedCompany" Type="varchar(max)" Nullable="false" />
+          <Property Name="CallDate" Type="date" Nullable="false" />
+          <Property Name="CallTime" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="IncidentDate" Type="date" />
+          <Property Name="IncidentTime" Type="varchar" MaxLength="5" />
+          <Property Name="IncidentTimeZone" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="IncidentCity" Type="varchar(max)" Nullable="false" />
+          <Property Name="IncidentState" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="IncidentCounty" Type="varchar(max)" Nullable="false" />
+          <Property Name="FacilityOrProject" Type="varchar(max)" Nullable="false" />
+          <Property Name="IncidentLocation" Type="varchar(max)" Nullable="false" />
+          <Property Name="IncidentNature" Type="varchar(max)" Nullable="false" />
+          <Property Name="WaterbodiesImpacted" Type="varchar" MaxLength="7" />
+          <Property Name="ImpactedAreaDetails" Type="varchar(max)" />
+          <Property Name="IncidentDetails" Type="varchar(max)" Nullable="false" />
+          <Property Name="IndividualSafety" Type="varchar" MaxLength="3" />
+          <Property Name="Notify911" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="TransportToHospital" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="MediaOnScene" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="EmergencyResponders" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="HSERName" Type="varchar(max)" Nullable="false" />
+          <Property Name="HSERPhone" Type="varchar" MaxLength="14" Nullable="false" />
+          <Property Name="NotificationDate" Type="date" Nullable="false" />
+          <Property Name="NotificationTime" Type="varchar" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'chemreporter.dbo.NorthwindPipelineIncidents' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="NorthwindPipelineIncidents">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="CallDate" />
+            <PropertyRef Name="CallTime" />
+            <PropertyRef Name="IncidentDate" />
+            <PropertyRef Name="IncidentTime" />
+            <PropertyRef Name="TimeZone" />
+            <PropertyRef Name="City" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="County" />
+            <PropertyRef Name="GeneralDirectionFrom" />
+            <PropertyRef Name="ClosestLandmark" />
+            <PropertyRef Name="Intersection" />
+            <PropertyRef Name="Observing" />
+            <PropertyRef Name="Smoke" />
+            <PropertyRef Name="Flames" />
+            <PropertyRef Name="Hissing" />
+            <PropertyRef Name="Liquid" />
+            <PropertyRef Name="OilSheen" />
+            <PropertyRef Name="PipelineMarkers" />
+            <PropertyRef Name="EggOdor" />
+            <PropertyRef Name="VaporMist" />
+            <PropertyRef Name="ROWorWellPad" />
+            <PropertyRef Name="Tanks" />
+            <PropertyRef Name="Landowner" />
+            <PropertyRef Name="LeaseWellName" />
+            <PropertyRef Name="CallerName" />
+            <PropertyRef Name="CallerPhone" />
+            <PropertyRef Name="Notify911" />
+            <PropertyRef Name="Injuries" />
+            <PropertyRef Name="ImmediateDanger" />
+            <PropertyRef Name="RelationToIncident" />
+            <PropertyRef Name="SafelyWarn" />
+            <PropertyRef Name="ReportTakerName" />
+            <PropertyRef Name="ReportTakerEmail" />
+            <PropertyRef Name="NotifiedName" />
+            <PropertyRef Name="NotifiedNumber" />
+            <PropertyRef Name="NotifiedEmail" />
+            <PropertyRef Name="NotificationDate" />
+            <PropertyRef Name="NotificationTime" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CallDate" Type="date" Nullable="false" />
+          <Property Name="CallTime" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="IncidentDate" Type="date" Nullable="false" />
+          <Property Name="IncidentTime" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TimeZone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="City" Type="varchar(max)" Nullable="false" />
+          <Property Name="State" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="County" Type="varchar(max)" Nullable="false" />
+          <Property Name="GeneralDirectionFrom" Type="varchar(max)" Nullable="false" />
+          <Property Name="ClosestLandmark" Type="varchar(max)" Nullable="false" />
+          <Property Name="Intersection" Type="varchar(max)" Nullable="false" />
+          <Property Name="Observing" Type="varchar(max)" Nullable="false" />
+          <Property Name="Smoke" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Flames" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Hissing" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Liquid" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="OilSheen" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="PipelineMarkers" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="EggOdor" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="VaporMist" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="ROWorWellPad" Type="varchar(max)" Nullable="false" />
+          <Property Name="Tanks" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Landowner" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="LeaseWellName" Type="varchar(max)" Nullable="false" />
+          <Property Name="CallerName" Type="varchar(max)" Nullable="false" />
+          <Property Name="CallerPhone" Type="varchar(max)" Nullable="false" />
+          <Property Name="Notify911" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Injuries" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="ImmediateDanger" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="RelationToIncident" Type="varchar(max)" Nullable="false" />
+          <Property Name="SafelyWarn" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="ReportTakerName" Type="varchar(max)" Nullable="false" />
+          <Property Name="ReportTakerEmail" Type="varchar(max)" Nullable="false" />
+          <Property Name="Temperature" Type="varchar" MaxLength="3" />
+          <Property Name="WindSpeed" Type="varchar" MaxLength="3" />
+          <Property Name="WindDirection" Type="varchar(max)" />
+          <Property Name="WeatherConditions" Type="varchar(max)" />
+          <Property Name="NotifiedName" Type="varchar(max)" Nullable="false" />
+          <Property Name="NotifiedNumber" Type="varchar(max)" Nullable="false" />
+          <Property Name="NotifiedEmail" Type="varchar(max)" Nullable="false" />
+          <Property Name="NotificationDate" Type="date" Nullable="false" />
+          <Property Name="NotificationTime" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="SeeingHearingSmelling" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="oldglo">
           <Key>
@@ -1215,6 +1363,87 @@ warning 6002: The table/view 'chemreporter.dbo.CRMWebU' does not have a primary 
     [CRMWebU].[UserType] AS [UserType], 
     [CRMWebU].[LastPassChange] AS [LastPassChange]
     FROM [dbo].[CRMWebU] AS [CRMWebU]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="NorthwindGeneralIncidents" EntityType="Self.NorthwindGeneralIncidents" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [NorthwindGeneralIncidents].[ID] AS [ID], 
+    [NorthwindGeneralIncidents].[ERSOperator] AS [ERSOperator], 
+    [NorthwindGeneralIncidents].[CallerName] AS [CallerName], 
+    [NorthwindGeneralIncidents].[CallerPhone] AS [CallerPhone], 
+    [NorthwindGeneralIncidents].[EmpOrContract] AS [EmpOrContract], 
+    [NorthwindGeneralIncidents].[ContractedCompany] AS [ContractedCompany], 
+    [NorthwindGeneralIncidents].[CallDate] AS [CallDate], 
+    [NorthwindGeneralIncidents].[CallTime] AS [CallTime], 
+    [NorthwindGeneralIncidents].[IncidentDate] AS [IncidentDate], 
+    [NorthwindGeneralIncidents].[IncidentTime] AS [IncidentTime], 
+    [NorthwindGeneralIncidents].[IncidentTimeZone] AS [IncidentTimeZone], 
+    [NorthwindGeneralIncidents].[IncidentCity] AS [IncidentCity], 
+    [NorthwindGeneralIncidents].[IncidentState] AS [IncidentState], 
+    [NorthwindGeneralIncidents].[IncidentCounty] AS [IncidentCounty], 
+    [NorthwindGeneralIncidents].[FacilityOrProject] AS [FacilityOrProject], 
+    [NorthwindGeneralIncidents].[IncidentLocation] AS [IncidentLocation], 
+    [NorthwindGeneralIncidents].[IncidentNature] AS [IncidentNature], 
+    [NorthwindGeneralIncidents].[WaterbodiesImpacted] AS [WaterbodiesImpacted], 
+    [NorthwindGeneralIncidents].[ImpactedAreaDetails] AS [ImpactedAreaDetails], 
+    [NorthwindGeneralIncidents].[IncidentDetails] AS [IncidentDetails], 
+    [NorthwindGeneralIncidents].[IndividualSafety] AS [IndividualSafety], 
+    [NorthwindGeneralIncidents].[Notify911] AS [Notify911], 
+    [NorthwindGeneralIncidents].[TransportToHospital] AS [TransportToHospital], 
+    [NorthwindGeneralIncidents].[MediaOnScene] AS [MediaOnScene], 
+    [NorthwindGeneralIncidents].[EmergencyResponders] AS [EmergencyResponders], 
+    [NorthwindGeneralIncidents].[HSERName] AS [HSERName], 
+    [NorthwindGeneralIncidents].[HSERPhone] AS [HSERPhone], 
+    [NorthwindGeneralIncidents].[NotificationDate] AS [NotificationDate], 
+    [NorthwindGeneralIncidents].[NotificationTime] AS [NotificationTime]
+    FROM [dbo].[NorthwindGeneralIncidents] AS [NorthwindGeneralIncidents]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="NorthwindPipelineIncidents" EntityType="Self.NorthwindPipelineIncidents" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [NorthwindPipelineIncidents].[ID] AS [ID], 
+    [NorthwindPipelineIncidents].[CallDate] AS [CallDate], 
+    [NorthwindPipelineIncidents].[CallTime] AS [CallTime], 
+    [NorthwindPipelineIncidents].[IncidentDate] AS [IncidentDate], 
+    [NorthwindPipelineIncidents].[IncidentTime] AS [IncidentTime], 
+    [NorthwindPipelineIncidents].[TimeZone] AS [TimeZone], 
+    [NorthwindPipelineIncidents].[City] AS [City], 
+    [NorthwindPipelineIncidents].[State] AS [State], 
+    [NorthwindPipelineIncidents].[County] AS [County], 
+    [NorthwindPipelineIncidents].[GeneralDirectionFrom] AS [GeneralDirectionFrom], 
+    [NorthwindPipelineIncidents].[ClosestLandmark] AS [ClosestLandmark], 
+    [NorthwindPipelineIncidents].[Intersection] AS [Intersection], 
+    [NorthwindPipelineIncidents].[Observing] AS [Observing], 
+    [NorthwindPipelineIncidents].[Smoke] AS [Smoke], 
+    [NorthwindPipelineIncidents].[Flames] AS [Flames], 
+    [NorthwindPipelineIncidents].[Hissing] AS [Hissing], 
+    [NorthwindPipelineIncidents].[Liquid] AS [Liquid], 
+    [NorthwindPipelineIncidents].[OilSheen] AS [OilSheen], 
+    [NorthwindPipelineIncidents].[PipelineMarkers] AS [PipelineMarkers], 
+    [NorthwindPipelineIncidents].[EggOdor] AS [EggOdor], 
+    [NorthwindPipelineIncidents].[VaporMist] AS [VaporMist], 
+    [NorthwindPipelineIncidents].[ROWorWellPad] AS [ROWorWellPad], 
+    [NorthwindPipelineIncidents].[Tanks] AS [Tanks], 
+    [NorthwindPipelineIncidents].[Landowner] AS [Landowner], 
+    [NorthwindPipelineIncidents].[LeaseWellName] AS [LeaseWellName], 
+    [NorthwindPipelineIncidents].[CallerName] AS [CallerName], 
+    [NorthwindPipelineIncidents].[CallerPhone] AS [CallerPhone], 
+    [NorthwindPipelineIncidents].[Notify911] AS [Notify911], 
+    [NorthwindPipelineIncidents].[Injuries] AS [Injuries], 
+    [NorthwindPipelineIncidents].[ImmediateDanger] AS [ImmediateDanger], 
+    [NorthwindPipelineIncidents].[RelationToIncident] AS [RelationToIncident], 
+    [NorthwindPipelineIncidents].[SafelyWarn] AS [SafelyWarn], 
+    [NorthwindPipelineIncidents].[ReportTakerName] AS [ReportTakerName], 
+    [NorthwindPipelineIncidents].[ReportTakerEmail] AS [ReportTakerEmail], 
+    [NorthwindPipelineIncidents].[Temperature] AS [Temperature], 
+    [NorthwindPipelineIncidents].[WindSpeed] AS [WindSpeed], 
+    [NorthwindPipelineIncidents].[WindDirection] AS [WindDirection], 
+    [NorthwindPipelineIncidents].[WeatherConditions] AS [WeatherConditions], 
+    [NorthwindPipelineIncidents].[NotifiedName] AS [NotifiedName], 
+    [NorthwindPipelineIncidents].[NotifiedNumber] AS [NotifiedNumber], 
+    [NorthwindPipelineIncidents].[NotifiedEmail] AS [NotifiedEmail], 
+    [NorthwindPipelineIncidents].[NotificationDate] AS [NotificationDate], 
+    [NorthwindPipelineIncidents].[NotificationTime] AS [NotificationTime], 
+    [NorthwindPipelineIncidents].[SeeingHearingSmelling] AS [SeeingHearingSmelling]
+    FROM [dbo].[NorthwindPipelineIncidents] AS [NorthwindPipelineIncidents]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -1645,7 +1874,7 @@ warning 6002: The table/view 'chemreporter.dbo.CRMWebU' does not have a primary 
           <Property Name="rotteneggodor" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="vaporormist" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="directions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="city" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="city" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="time" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="timezone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
@@ -2421,7 +2650,153 @@ warning 6002: The table/view 'chemreporter.dbo.CRMWebU' does not have a primary 
           <EntitySet Name="tickets" EntityType="Self.ticket" />
           <EntitySet Name="veolianonincidents" EntityType="Self.veolianonincident" />
           <EntitySet Name="CRMWebUs" EntityType="Self.CRMWebU" />
+          <EntitySet Name="NorthwindGeneralIncidents" EntityType="chemreporterModel.NorthwindGeneralIncident" />
+          <EntitySet Name="NorthwindPipelineIncidents" EntityType="chemreporterModel.NorthwindPipelineIncident" />
         </EntityContainer>
+        <EntityType Name="NorthwindGeneralIncident">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="ERSOperator" />
+            <PropertyRef Name="CallerName" />
+            <PropertyRef Name="CallerPhone" />
+            <PropertyRef Name="EmpOrContract" />
+            <PropertyRef Name="ContractedCompany" />
+            <PropertyRef Name="CallDate" />
+            <PropertyRef Name="CallTime" />
+            <PropertyRef Name="IncidentTimeZone" />
+            <PropertyRef Name="IncidentCity" />
+            <PropertyRef Name="IncidentState" />
+            <PropertyRef Name="IncidentCounty" />
+            <PropertyRef Name="FacilityOrProject" />
+            <PropertyRef Name="IncidentLocation" />
+            <PropertyRef Name="IncidentNature" />
+            <PropertyRef Name="IncidentDetails" />
+            <PropertyRef Name="Notify911" />
+            <PropertyRef Name="TransportToHospital" />
+            <PropertyRef Name="MediaOnScene" />
+            <PropertyRef Name="EmergencyResponders" />
+            <PropertyRef Name="HSERName" />
+            <PropertyRef Name="HSERPhone" />
+            <PropertyRef Name="NotificationDate" />
+            <PropertyRef Name="NotificationTime" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ERSOperator" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CallerName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CallerPhone" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Name="EmpOrContract" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ContractedCompany" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CallDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CallTime" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentDate" Type="DateTime" Precision="0" />
+          <Property Name="IncidentTime" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentTimeZone" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentCity" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentState" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentCounty" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FacilityOrProject" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentLocation" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentNature" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="WaterbodiesImpacted" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="ImpactedAreaDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentDetails" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IndividualSafety" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Notify911" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="TransportToHospital" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="MediaOnScene" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="EmergencyResponders" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="HSERName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="HSERPhone" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Name="NotificationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="NotificationTime" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="NorthwindPipelineIncident">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="CallDate" />
+            <PropertyRef Name="CallTime" />
+            <PropertyRef Name="IncidentDate" />
+            <PropertyRef Name="IncidentTime" />
+            <PropertyRef Name="TimeZone" />
+            <PropertyRef Name="City" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="County" />
+            <PropertyRef Name="GeneralDirectionFrom" />
+            <PropertyRef Name="ClosestLandmark" />
+            <PropertyRef Name="Intersection" />
+            <PropertyRef Name="Observing" />
+            <PropertyRef Name="Smoke" />
+            <PropertyRef Name="Flames" />
+            <PropertyRef Name="Hissing" />
+            <PropertyRef Name="Liquid" />
+            <PropertyRef Name="OilSheen" />
+            <PropertyRef Name="PipelineMarkers" />
+            <PropertyRef Name="EggOdor" />
+            <PropertyRef Name="VaporMist" />
+            <PropertyRef Name="ROWorWellPad" />
+            <PropertyRef Name="Tanks" />
+            <PropertyRef Name="Landowner" />
+            <PropertyRef Name="LeaseWellName" />
+            <PropertyRef Name="CallerName" />
+            <PropertyRef Name="CallerPhone" />
+            <PropertyRef Name="Notify911" />
+            <PropertyRef Name="Injuries" />
+            <PropertyRef Name="ImmediateDanger" />
+            <PropertyRef Name="RelationToIncident" />
+            <PropertyRef Name="SafelyWarn" />
+            <PropertyRef Name="ReportTakerName" />
+            <PropertyRef Name="ReportTakerEmail" />
+            <PropertyRef Name="NotifiedName" />
+            <PropertyRef Name="NotifiedNumber" />
+            <PropertyRef Name="NotifiedEmail" />
+            <PropertyRef Name="NotificationDate" />
+            <PropertyRef Name="NotificationTime" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CallDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CallTime" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IncidentTime" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TimeZone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="County" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="GeneralDirectionFrom" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ClosestLandmark" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Intersection" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Observing" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Smoke" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Flames" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Hissing" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Liquid" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="OilSheen" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="PipelineMarkers" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="EggOdor" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="VaporMist" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="ROWorWellPad" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Tanks" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Landowner" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="LeaseWellName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CallerName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CallerPhone" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Notify911" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Injuries" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="ImmediateDanger" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="RelationToIncident" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SafelyWarn" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="ReportTakerName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ReportTakerEmail" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Temperature" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="WindSpeed" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="WindDirection" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="WeatherConditions" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NotifiedName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NotifiedNumber" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NotifiedEmail" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NotificationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="NotificationTime" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="SeeingHearingSmelling" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3618,6 +3993,91 @@ warning 6002: The table/view 'chemreporter.dbo.CRMWebU' does not have a primary 
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="UserType" ColumnName="UserType" />
                 <ScalarProperty Name="LastPassChange" ColumnName="LastPassChange" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NorthwindGeneralIncidents">
+            <EntityTypeMapping TypeName="chemreporterModel.NorthwindGeneralIncident">
+              <MappingFragment StoreEntitySet="NorthwindGeneralIncidents">
+                <ScalarProperty Name="NotificationTime" ColumnName="NotificationTime" />
+                <ScalarProperty Name="NotificationDate" ColumnName="NotificationDate" />
+                <ScalarProperty Name="HSERPhone" ColumnName="HSERPhone" />
+                <ScalarProperty Name="HSERName" ColumnName="HSERName" />
+                <ScalarProperty Name="EmergencyResponders" ColumnName="EmergencyResponders" />
+                <ScalarProperty Name="MediaOnScene" ColumnName="MediaOnScene" />
+                <ScalarProperty Name="TransportToHospital" ColumnName="TransportToHospital" />
+                <ScalarProperty Name="Notify911" ColumnName="Notify911" />
+                <ScalarProperty Name="IndividualSafety" ColumnName="IndividualSafety" />
+                <ScalarProperty Name="IncidentDetails" ColumnName="IncidentDetails" />
+                <ScalarProperty Name="ImpactedAreaDetails" ColumnName="ImpactedAreaDetails" />
+                <ScalarProperty Name="WaterbodiesImpacted" ColumnName="WaterbodiesImpacted" />
+                <ScalarProperty Name="IncidentNature" ColumnName="IncidentNature" />
+                <ScalarProperty Name="IncidentLocation" ColumnName="IncidentLocation" />
+                <ScalarProperty Name="FacilityOrProject" ColumnName="FacilityOrProject" />
+                <ScalarProperty Name="IncidentCounty" ColumnName="IncidentCounty" />
+                <ScalarProperty Name="IncidentState" ColumnName="IncidentState" />
+                <ScalarProperty Name="IncidentCity" ColumnName="IncidentCity" />
+                <ScalarProperty Name="IncidentTimeZone" ColumnName="IncidentTimeZone" />
+                <ScalarProperty Name="IncidentTime" ColumnName="IncidentTime" />
+                <ScalarProperty Name="IncidentDate" ColumnName="IncidentDate" />
+                <ScalarProperty Name="CallTime" ColumnName="CallTime" />
+                <ScalarProperty Name="CallDate" ColumnName="CallDate" />
+                <ScalarProperty Name="ContractedCompany" ColumnName="ContractedCompany" />
+                <ScalarProperty Name="EmpOrContract" ColumnName="EmpOrContract" />
+                <ScalarProperty Name="CallerPhone" ColumnName="CallerPhone" />
+                <ScalarProperty Name="CallerName" ColumnName="CallerName" />
+                <ScalarProperty Name="ERSOperator" ColumnName="ERSOperator" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NorthwindPipelineIncidents">
+            <EntityTypeMapping TypeName="chemreporterModel.NorthwindPipelineIncident">
+              <MappingFragment StoreEntitySet="NorthwindPipelineIncidents">
+                <ScalarProperty Name="SeeingHearingSmelling" ColumnName="SeeingHearingSmelling" />
+                <ScalarProperty Name="NotificationTime" ColumnName="NotificationTime" />
+                <ScalarProperty Name="NotificationDate" ColumnName="NotificationDate" />
+                <ScalarProperty Name="NotifiedEmail" ColumnName="NotifiedEmail" />
+                <ScalarProperty Name="NotifiedNumber" ColumnName="NotifiedNumber" />
+                <ScalarProperty Name="NotifiedName" ColumnName="NotifiedName" />
+                <ScalarProperty Name="WeatherConditions" ColumnName="WeatherConditions" />
+                <ScalarProperty Name="WindDirection" ColumnName="WindDirection" />
+                <ScalarProperty Name="WindSpeed" ColumnName="WindSpeed" />
+                <ScalarProperty Name="Temperature" ColumnName="Temperature" />
+                <ScalarProperty Name="ReportTakerEmail" ColumnName="ReportTakerEmail" />
+                <ScalarProperty Name="ReportTakerName" ColumnName="ReportTakerName" />
+                <ScalarProperty Name="SafelyWarn" ColumnName="SafelyWarn" />
+                <ScalarProperty Name="RelationToIncident" ColumnName="RelationToIncident" />
+                <ScalarProperty Name="ImmediateDanger" ColumnName="ImmediateDanger" />
+                <ScalarProperty Name="Injuries" ColumnName="Injuries" />
+                <ScalarProperty Name="Notify911" ColumnName="Notify911" />
+                <ScalarProperty Name="CallerPhone" ColumnName="CallerPhone" />
+                <ScalarProperty Name="CallerName" ColumnName="CallerName" />
+                <ScalarProperty Name="LeaseWellName" ColumnName="LeaseWellName" />
+                <ScalarProperty Name="Landowner" ColumnName="Landowner" />
+                <ScalarProperty Name="Tanks" ColumnName="Tanks" />
+                <ScalarProperty Name="ROWorWellPad" ColumnName="ROWorWellPad" />
+                <ScalarProperty Name="VaporMist" ColumnName="VaporMist" />
+                <ScalarProperty Name="EggOdor" ColumnName="EggOdor" />
+                <ScalarProperty Name="PipelineMarkers" ColumnName="PipelineMarkers" />
+                <ScalarProperty Name="OilSheen" ColumnName="OilSheen" />
+                <ScalarProperty Name="Liquid" ColumnName="Liquid" />
+                <ScalarProperty Name="Hissing" ColumnName="Hissing" />
+                <ScalarProperty Name="Flames" ColumnName="Flames" />
+                <ScalarProperty Name="Smoke" ColumnName="Smoke" />
+                <ScalarProperty Name="Observing" ColumnName="Observing" />
+                <ScalarProperty Name="Intersection" ColumnName="Intersection" />
+                <ScalarProperty Name="ClosestLandmark" ColumnName="ClosestLandmark" />
+                <ScalarProperty Name="GeneralDirectionFrom" ColumnName="GeneralDirectionFrom" />
+                <ScalarProperty Name="County" ColumnName="County" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="TimeZone" ColumnName="TimeZone" />
+                <ScalarProperty Name="IncidentTime" ColumnName="IncidentTime" />
+                <ScalarProperty Name="IncidentDate" ColumnName="IncidentDate" />
+                <ScalarProperty Name="CallTime" ColumnName="CallTime" />
+                <ScalarProperty Name="CallDate" ColumnName="CallDate" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

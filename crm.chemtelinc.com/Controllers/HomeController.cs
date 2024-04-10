@@ -16,7 +16,12 @@ namespace crm.chemtelinc.com.Controllers
             Session.Add("constring", "");
             if (Request.Url.AbsoluteUri.Contains("crmtest.chemtel.net") || Request.Url.AbsoluteUri.Contains("localhost"))
             {
-                Session["constring"] = Properties.Settings.Default.chemicalTestConnectionString;
+                //Session["constring"] = Properties.Settings.Default.chemicalTestConnectionString;
+
+                //////////////////// REMOVE THIS WHEN DONE TESTING NORTHWIND!! ////////////////////
+                Session["constring"] = Properties.Settings.Default.chemicalConnectionString;
+                //////////////////// REMOVE THIS WHEN DONE TESTING NORTHWIND!! ////////////////////
+
             }
             else
             {

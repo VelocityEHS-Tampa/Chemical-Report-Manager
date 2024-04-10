@@ -1,7 +1,321 @@
-﻿
+﻿@model ChemicalLibrary.NorthwindPipeline
+
 @{
-    ViewBag.Title = "Pipeline";
+    ViewBag.Title = "Northwind Pipeline Report";
+    string Revised = ViewBag.Revised;
+
+    List<SelectListItem> TimeZones = new List<SelectListItem>();
+    TimeZones.Add(new SelectListItem { Text = "", Value = "" });
+    TimeZones.Add(new SelectListItem { Text = "AKST", Value = "AKST" });
+    TimeZones.Add(new SelectListItem { Text = "AST", Value = "AST" });
+    TimeZones.Add(new SelectListItem { Text = "CST", Value = "CST" });
+    TimeZones.Add(new SelectListItem { Text = "EST", Value = "EST" });
+    TimeZones.Add(new SelectListItem { Text = "HAST", Value = "HAST" });
+    TimeZones.Add(new SelectListItem { Text = "MST", Value = "MST" });
+    TimeZones.Add(new SelectListItem { Text = "PST", Value = "PST" });
+    TimeZones.Add(new SelectListItem { Text = "UTC", Value = "UTC" });
+
+    List<SelectListItem> YesOrNo = new List<SelectListItem>();
+    YesOrNo.Add(new SelectListItem { Text = "", Value = "" });
+    YesOrNo.Add(new SelectListItem { Text = "Yes", Value = "Yes" });
+    YesOrNo.Add(new SelectListItem { Text = "No", Value = "No" });
+
+    List<SelectListItem> ERSMembers = new List<SelectListItem>();
+    ERSMembers.Add(new SelectListItem { Text = " --- SELECT MEMBER ---", Value = "" });
+    ERSMembers.Add(new SelectListItem { Text = "Michael Payne", Value = "Michael Payne" });
+    ERSMembers.Add(new SelectListItem { Text = "Alonzo Villalobos", Value = "Alonzo Villalobos" });
+    ERSMembers.Add(new SelectListItem { Text = "Reagan Register", Value = "Reagan Register" });
+
 }
 
-<h2>Pipeline</h2>
+<h2>Northwind Pipeline Report</h2>
+@using (Html.BeginForm("SubmitNewPipelineReport", "Northwind", FormMethod.Post, new { @id = "NWPipelineForm" }))
+{
+    <div id="PipelineReportContainer">
+        <div id="FormButtons" style="padding:2%;text-align:right;">
+            <input type="hidden" name="Revised" value="@Revised" />
+            <input type="hidden" name="ReportID" value="@Model.ID" />
+            <input type="submit" value="Submit" class="form-control GRCPButtons required-field" id="btnsubmit" name="btnsubmit" onclick="return SubmitForm()" tabindex="99">
+            <input type="button" value="Cancel" class="form-control GRCPButtons alert-info" id="btnclose" name="btnclose" onclick="ClearForm()">
+        </div>
+        @* Operations Information *@
+        <div id="OperationsContainer">
+            <div class="GLOHeader" id="GRCPHeader">Operations</div>
+            <br />
+            <span class="required-field">Incident Date</span> @Html.TextBoxFor(m => m.Incident_Date, new { @class = "form-control GLOFieldSpacing", placeholder = "__/__/____", id = "txtdate", @Name = "txtdate", style = "width:8%;", onblur = "FormatDate(this.value, this.id)", required = "", tabindex = "1", @maxlength = "10", @Value = "" })
+            <span class="required-field">Incident Time</span> @Html.TextBoxFor(m => m.Incident_Time, new { @class = "form-control GLOFieldSpacing", placeholder = "__:__", id = "txttime", @Name = "txttime", style = "width:5%;", onblur = "FormatTime(this.value, this.id)", required = "", tabindex = "2" })
+            <span class="required-field">Time Zone</span>
+            @Html.DropDownListFor(m => m.TimeZone, TimeZones, new { id = "txttimezone", @Name = "txttimezone", @class = "GLOFieldSpacing", required = "", tabindex = "3" })
 
+            <span class="required-field">Call Date</span>
+            @if (Revised == "true")
+            {
+                @Html.TextBoxFor(m => m.Call_Date, new { @class = "form-control GLOFieldSpacing", placeholder = "__/__/____", id = "txtcalldate", @Name = "txtcalldate", style = "width:8%;", onblur = "FormatDate(this.value, this.id)", tabindex = "4" })
+            } 
+            else
+            {
+                @Html.TextBoxFor(m => m.Call_Date, new { @class = "form-control GLOFieldSpacing", placeholder = "__/__/____", id = "txtcalldate", @Name = "txtcalldate", style = "width:8%;", @Value = @DateTime.Now.ToShortDateString(), onblur = "FormatDate(this.value, this.id)", tabindex = "4" })
+            }
+            <span class="required-field">Call Time</span>
+            @if (Revised == "true")
+            {
+                @Html.TextBoxFor(m => m.Call_Time, new { @class = "form-control GLOFieldSpacing", placeholder = "__:__", id = "txtcalltime", @Name = "txtcalltime", style = "width:5%;", onblur = "FormatTime(this.value, this.id)", tabindex = "5" })
+            }
+            else
+            {
+                @Html.TextBoxFor(m => m.Call_Time, new { @class = "form-control GLOFieldSpacing", placeholder = "__:__", id = "txtcalltime", @Name = "txtcalltime", style = "width:5%;", @Value = @DateTime.Now.ToString("HH:mm"), onblur = "FormatTime(this.value, this.id)", tabindex = "5" })
+            }
+        </div>
+        <br />
+        @* Location Information *@
+        <div id="LocationInfoContainer" style="width:30%" class="CrestInlineDisplay">
+            <div class="GLOHeader" id="GRCPHeader">Location Information</div>
+            <br />
+            <span class="required-field">State: </span>@Html.TextBoxFor(m => m.State, new { id = "txtstate", @Name = "txtstate", @class = "form-control GLOFieldSpacing", required = "", tabindex = "6", style = "width:10%;" })
+            <span class="required-field">County: </span>@Html.TextBoxFor(m => m.County, new { id = "txtcounty", @Name = "txtcounty", @class = "form-control GLOFieldSpacing", required = "", tabindex = "7", style = "width:50%;" })
+            <span class="required-field">Town: </span> @Html.TextBoxFor(m => m.City, new { @class = "form-control GLOFieldSpacing", id = "txtcity", @Name = "txtcity", style = "width:79%;", required = "", tabindex = "8" })
+            <br />
+            <br />
+            <span class="">Closest Town/City/Landmark: </span> @Html.TextBoxFor(m => m.ClosestLandmark, new { @class = "form-control GLOFieldSpacing", id = "ClosestLandmark", @Name = "ClosestLandmark", style = "width:95%;", tabindex = "9" })
+            <br />
+            <span class="">General Direction from nearest Town/City/Landmark: </span>
+            @Html.TextBoxFor(m => m.GeneralDirectionFrom, new { id = "GenDirFrom", @Name = "GenDirFrom", @class = "GLOFieldSpacing", tabindex = "10", style = "width:95%;" })
+            <br />
+            <span class="">Distance from nearest Town/City/Landmark: </span>
+            @Html.TextBoxFor(m => m.DistanceFrom, new { id = "DistanceFrom", @Name = "DistanceFrom", @class = "GLOFieldSpacing", tabindex = "11", style = "width:95%;" })
+            <br />
+            <span class="required-field">Nearest intersection or milemarker: </span> 
+            @Html.TextBoxFor(m => m.Intersection, new { @class = "form-control GLOFieldSpacing", id = "txtintersection", @Name = "txtintersection", style = "width:95%;", required = "", tabindex = "12" })
+            <br />
+            <br />
+        </div>
+        @* Incident Details *@
+        <div id="IncidentDetailsContainer" style="width:69.5%;" class="CrestInlineDisplay">
+            <div class="GLOHeader" id="GRCPHeader">Incident Details</div>
+            <div style="width:45%;" class="CrestInlineDisplay">
+                <span class="required-field">What are you observing right now?</span><br />
+                @Html.TextAreaFor(m => m.Observing, new { @Name = "txtobserving", @class = "GLOFieldSpacing", rows = "7", cols = "35", required = "", tabindex = "13" })
+            </div>
+
+            <div style="width:54%;" class="CrestInlineDisplay">
+                <span class="required-field">Are you seeing, hearing, or smelling? (check all that apply)</span><br />
+                @* Checkboxes Left *@
+                <div class="CrestInlineDisplay">
+                    @if (Model.Smoke == "TRUE")
+                    {<input type="checkbox" id="cbblackorwhitesmoke" name="cbblackorwhitesmoke" class="GLOFieldSpacing" tabindex="14" checked="" /> }
+                    else
+                    { <input type="checkbox" id="cbblackorwhitesmoke" name="cbblackorwhitesmoke" class="GLOFieldSpacing" tabindex="14" />}
+                    <span>Black or White Smoke</span> <br />
+                    @if (Model.Flames == "TRUE")
+                    {<input type="checkbox" id="cbflames" name="cbflames" class="GLOFieldSpacing" tabindex="15" checked="" /> }
+                    else
+                    { <input type="checkbox" id="cbflames" name="cbflames" class="GLOFieldSpacing" tabindex="15" />}
+                    <span>Flames</span> <br />
+                    @if (Model.Hissing == "TRUE")
+                    {<input type="checkbox" id="cbhissing" name="cbhissing" class="GLOFieldSpacing" tabindex="16" checked="" /> }
+                    else
+                    { <input type="checkbox" id="cbhissing" name="cbhissing" class="GLOFieldSpacing" tabindex="16" />}
+                    <span>Hissing</span> <br />
+                    @if (Model.Liquid == "TRUE")
+                    {<input type="checkbox" id="cbliquid" name="cbliquid" class="GLOFieldSpacing" tabindex="17" checked="" />}
+                    else
+                    { <input type="checkbox" id="cbliquid" name="cbliquid" class="GLOFieldSpacing" tabindex="17" />}
+                    <span>Liquid</span> <br />
+                </div>
+                @* Checkboxes Right *@
+                <div class="CrestInlineDisplay">
+                    @if (Model.Oily_Sheen == "TRUE")
+                    {<input type="checkbox" id="cboilysheen" name="cboilysheen" class="GLOFieldSpacing" tabindex="18" checked="" /> }
+                    else
+                    { <input type="checkbox" id="cboilysheen" name="cboilysheen" class="GLOFieldSpacing" tabindex="18" />}
+                    <span>Oily Sheen</span> <br />
+                    @if (Model.Other_Pipeline_Markers == "TRUE")
+                    {<input type="checkbox" id="cbotherpipelinemarkers" name="cbotherpipelinemarkers" class="GLOFieldSpacing" tabindex="19" checked="" /> }
+                    else
+                    { <input type="checkbox" id="cbotherpipelinemarkers" name="cbotherpipelinemarkers" class="GLOFieldSpacing" tabindex="19" />}
+                    <span>Other Pipeline Markers</span> <br />
+                    @if (Model.Rotten_Egg_Odor == "TRUE")
+                    {<input type="checkbox" id="cbrotteneggodor" name="cbrotteneggodor" class="GLOFieldSpacing" tabindex="20" checked="" /> }
+                    else
+                    { <input type="checkbox" id="cbrotteneggodor" name="cbrotteneggodor" class="GLOFieldSpacing" tabindex="20" />}
+                    <span>Rotten Egg Odor</span> <br />
+                    @if (Model.Vapor_Or_Mist == "TRUE")
+                    {<input type="checkbox" id="cbvaporsormist" name="cbvaporsormist" class="GLOFieldSpacing" tabindex="21" checked="" /> }
+                    else
+                    { <input type="checkbox" id="cbvaporsormist" name="cbvaporsormist" class="GLOFieldSpacing" tabindex="21" />}
+                    <span>Vapors or Mist</span> <br />
+                </div>
+            </div>
+            <br />
+            <br />
+        </div>
+        @* Questionnaire *@
+        <div id="Questionnaire">
+            <div class="GLOHeader" id="GRCPHeader">Questionnaire</div><br />
+            <div id="QuestionnaireForm" class="CrestInlineDisplay" style="text-align:left; width:75%;">
+                <span class="required-field">Can you tell from your location if this is occurring on a pipeline ROW or a Well-pad location</span>
+                @Html.TextBoxFor(m => m.ROW_OR_Well_Pad, new { id = "txtroeworwellpad", @Name = "txtroeworwellpad", @class = "form-control GLOFieldSpacing", style = "width:20%;", required = "", tabindex = "22" })
+                <br />
+                <span class="required-field">Do you see ANY tanks near or at the location where this incident is occurring</span>
+                @Html.DropDownListFor(m => m.Tanks, YesOrNo, new { @Name = "txttanks", id = "txttanks", @class = "GLOFieldSpacing", required = "", tabindex = "23" })
+                <br />
+                <span class="required-field">Are you the land owner</span>
+                @Html.DropDownListFor(m => m.Landowner, YesOrNo, new { @Name = "txtlandowner", id = "txtlandowner", @class = "GLOFieldSpacing", required = "", tabindex = "24", onchange = "ShowLeaseName(this.value);" })
+                <br />
+                <div id="LeaseNameContainer">
+                    <span class="required-field" id="lblLeaseName">What is the Lease/Well name</span> @Html.TextBoxFor(m => m.Lease_Well_Name, new { id = "txtleasewellname", @Name = "txtleasewellname", @class = "form-control GLOFieldSpacing", style = "width:20%;", required = "", tabindex = "25" })<br />
+                </div>
+                <span class="required-field">What is your name (caller)</span> @Html.TextBoxFor(m => m.Caller_Name, new { id = "txtcallername", @Name = "txtcallername", @class = "form-control GLOFieldSpacing", style = "width:20%;", required = "", tabindex = "26" })<br />
+                @*<span class="required-field">What is your email address</span> @Html.TextBoxFor(m => m.Caller_Email, new { id = "txtcalleremail", @Name = "txtcalleremail", @class = "form-control GLOFieldSpacing", style = "width:20%;", placeholder = "yourname@domain.com", required = "", tabindex = "25" })<br />*@
+                <span class="required-field">What is the phone number you are calling from</span> @Html.TextBoxFor(m => m.Caller_Phone, new { id = "txtcallerphone", @Name = "txtcallerphone", @class = "form-control GLOFieldSpacing", style = "width:20%;", placeholder = "(___) ___-____", onblur = "FormatPhone(this.value, this.id)", required = "", tabindex = "27" })<br />
+                <span class="required-field">Have you already contacted 9-1-1</span>
+                @Html.DropDownListFor(m => m.Notify_911, YesOrNo, new { id = "txtnotify911", @Name = "txtnotify911", @class = "GLOFieldSpacing", required = "", tabindex = "28" })
+                <br />
+                <span class="required-field">Is anyone injured and needing medical assistance</span>
+                @Html.DropDownListFor(m => m.Anyone_Injured, YesOrNo, new { id = "txtanyoneinjured", @Name = "txtanyoneinjured", @class = "GLOFieldSpacing", required = "", tabindex = "29" })
+                <br />
+                <span class="required-field">Is anyone in immediate danger</span>
+                @Html.DropDownListFor(m => m.Immediate_Danger, YesOrNo, new { id = "txtimmediatedanger", @Name = "txtimmediatedanger", @class = "GLOFieldSpacing", required = "", tabindex = "30", onchange = "ShowIDExtras(this.value);" })
+                <br />
+                <div id="ImmediateDangerExtras">
+                    <span class="required-field">Where are they in relation to the incident</span> @Html.TextBoxFor(m => m.Relation_ToIncident, new { id = "txtrelationtoincident", @Name = "txtrelationtoincident", @class = "form-control GLOFieldSpacing", style = "width:20%;", required = "", tabindex = "31" }) <br />
+                    <span class="required-field">Can you safely warn them to stay away from the incident</span>
+                    @Html.DropDownListFor(m => m.Safely_Warn, YesOrNo, new { id = "txtsafelywarn", @Name = "txtsafelywarn", @class = "GLOFieldSpacing", required = "", tabindex = "32" })
+                </div>
+                <br />
+            </div>
+            <div class="CrestInlineDisplay" style="width:24%;">
+                <span class="required-field">Report Takers Name</span>
+                @Html.TextBoxFor(m => m.Report_Taker_Name, new { type = "text", id = "txtreporttakername", @Name = "txtreporttakername", @class = "GLOFieldSpacing", @Value = @Session["FullName"].ToString(), required = "" })
+                <br />
+                <span class="required-field">Report Takers Email</span> @Html.TextBoxFor(m => m.Report_Taker_Email, new { id = "txtreporttakeremail", @Name = "txtreporttakeremail", @class = "GLOFieldSpacing", @Value = "ers@ehs.com", @readonly = "", required = "" }) <br />
+            </div>
+        </div>
+        @* Weather Conditions *@
+    <div id="WeatherConditions">
+        @*<div class="GLOHeader" id="GRCPHeader">Weather Conditions</div>
+        <div class="CrestInlineDisplay" style="width:20%;">
+            <span class="required-field">Temp</span> @Html.TextBoxFor(m => m.Temperature, new { @class = "form-control GLOFieldSpacing", id = "txttemp", @Name = "txttemp", style = "width:30%;", required = "", tabindex = "34" })<br />
+            <span class="required-field">Wind Speed</span>  @Html.TextBoxFor(m => m.Wind_Speed, new { @class = "form-control GLOFieldSpacing", id = "txtwindspeed", @Name = "txtwindspeed", style = "width: 30%;", required = "", tabindex = "35" })<br />
+            <span class="required-field">Wind Direction</span> @Html.TextBoxFor(m => m.Wind_Direction, new { @class = "form-control GLOFieldSpacing", id = "txtwinddirection", @Name = "txtwinddirection", style = "width: 30%;", required = "", tabindex = "36" })<br />
+        </div>
+        <div class="CrestInlineDisplay" style="width:30%;">
+            <span class="required-field">Describe the weather conditions</span> <br />
+            @Html.TextAreaFor(m => m.Weather_Conditions, new { id = "txtweatherconditions", @Name = "txtweatherconditions", cols = "30", rows = "5", required = "", tabindex = "37" })
+        </div>*@
+        <div class="GLOHeader" id="GRCPHeader">Notification Information</div>
+        <div class="CrestInlineDisplay" style="width:30%;">
+            <span class="required-field">Name</span><br />
+            @Html.DropDownListFor(m => m.NotifiedName, ERSMembers,new { id = "txtname", @Name = "txtname", @class = "form-control GLOFieldSpacing", required = "", onchange = "GetPipelinePhone(this.value)", tabindex = "33", list = "ERSMembers" })
+            <br />
+            <span class="required-field">Contact Number</span><br />
+            @Html.TextBoxFor(m => m.NotifiedNumber, new { @class = "form-control GLOFieldSpacing", id = "txtcontactnumber", @Name = "txtcontactnumber", onblur = "FormatPhone(this.value, this.id)", required = "", tabindex = "34" })
+            <br />
+            <span class="required-field">Contact Email</span><br />
+            @Html.TextBoxFor(m => m.NotifiedEmail, new { @class = "form-control GLOFieldSpacing", id = "txtcontactemail", @Name = "txtcontactemail", required = "", tabindex = "35" })
+        </div>
+        <div class="CrestInlineDisplay" style="width:15%;">
+            <span class="required-field">Notification Date</span><br />
+            @Html.TextBoxFor(m => m.NotificationDate, new { @class = "form-control GLOFieldSpacing", placeholder = "__/__/____", id = "NotificationDate", @Name = "NotificationDate", onblur = "FormatDate(this.value, this.id)", required = "", tabindex = "36", @Value = DateTime.Now.ToShortDateString() })
+            <br />
+            <span class="required-field">Notification Time</span><br />
+            @Html.TextBoxFor(m => m.NotificationTime, new { @class = "form-control GLOFieldSpacing", placeholder = "__:__", id = "NotificationTime", @Name = "NotificationTime", onblur = "FormatTime(this.value, this.id)", required = "", tabindex = "37" })
+            <br />
+        </div>
+    </div>
+    </div>
+}
+
+    <script>
+        $(document).ready(function () {
+            $('#LeaseNameContainer').hide();
+            $('#txtleasewellname').attr('required', false);
+            $('#ImmediateDangerExtras').hide();
+            $('#txtsafelywarn').attr('required', false);
+            $('#txtrelationtoincident').attr('required', false);
+
+
+            if ($("#txtlandowner").val() == "Yes") {
+                $('#LeaseNameContainer').show();
+                $('#txtleasewellname').attr('required', true);
+            }
+            if ($("#txtimmediatedanger").val() == "Yes") {
+                $('#ImmediateDangerExtras').show();
+                $('#txtsafelywarn').attr('required', true);
+                $('#txtrelationtoincident').attr('required', true);
+            }
+
+        });
+
+        function ShowLeaseName(LandOwner) {
+            if (LandOwner == "Yes") {
+                $('#LeaseNameContainer').show();
+                $('#txtleasewellname').attr('required', true);
+            } else {
+                $('#LeaseNameContainer').hide();
+                $('#txtleasewellname').attr('required', false);
+            }
+        }
+        function ShowIDExtras(ImmediateDanger) {
+            if (ImmediateDanger == "Yes") {
+                $('#ImmediateDangerExtras').show();
+                $('#txtsafelywarn').attr('required', true);
+                $('#txtrelationtoincident').attr('required', true);
+            } else {
+                $('#ImmediateDangerExtras').hide();
+                $('#txtsafelywarn').attr('required', false);
+                $('#txtrelationtoincident').attr('required', false);
+            }
+        }
+        function SubmitForm() {
+            var submit = confirm("Please ensure all data entered is correct before submitting! Are you sure you want to submit this report?");
+            if (submit) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        function FormatDate(Date, FieldName) {
+            //Purely number input, no slashes.
+            if (Date.length == 8 && !Date.includes("/")) {
+                var ds = Date.split("");
+                var fulldate = ds[0] + ds[1] + "/" + ds[2] + ds[3] + "/" + ds[4] + ds[5] + ds[6] + ds[7];
+                document.getElementById(FieldName).value = fulldate;
+            }
+        }
+        function FormatTime(Time, FieldName) {
+            //Purely number input, no semi-colons.
+            if (Time.length == 4 && !Time.includes(":")) {
+                var ts = Time.split("");
+                var fulltime = ts[0] + ts[1] + ":" + ts[2] + ts[3];
+                document.getElementById(FieldName).value = fulltime;
+            }
+        }
+        function FormatPhone(Phone, FieldName) {
+            //Purely number input, no parenthesis, no hyphens.
+            if (Phone.length == 10 && !Phone.includes("-") && !Phone.includes("(") && !Phone.includes(")")) {
+                var ps = Phone.split("");
+                var fullphone = "(" + ps[0] + ps[1] + ps[2] + ") " + ps[3] + ps[4] + ps[5] + "-" + ps[6] + ps[7] + ps[8] + ps[9]
+                document.getElementById(FieldName).value = fullphone;
+            }
+        }
+        function GetPipelinePhone(Member) {
+            if (Member == "Michael Payne") {
+                document.getElementById("txtcontactnumber").value = "(806) 401-6828";
+                document.getElementById("txtcontactemail").value = "mpayne@nwmidstream.com";
+            }
+            else if (Member == "Alonzo Villalobos") {
+                document.getElementById("txtcontactnumber").value = "(432) 287-4033";
+                document.getElementById("txtcontactemail").value = "avillalobos@nwmidstream.com";
+            }
+            else if (Member == "Reagan Register") {
+                document.getElementById("txtcontactnumber").value = "(432) 250-5088";
+                document.getElementById("txtcontactemail").value = "rregister@nwmidstream.com";
+            }
+        }
+        function ClearForm() {
+            if (confirm("Are you sure you want to cancel this report?")) {
+                location.href = "";
+            }
+        }
+    </script>

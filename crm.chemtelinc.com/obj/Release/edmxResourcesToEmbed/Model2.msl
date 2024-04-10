@@ -1194,5 +1194,90 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="NorthwindGeneralIncidents">
+      <EntityTypeMapping TypeName="chemreporterModel.NorthwindGeneralIncident">
+        <MappingFragment StoreEntitySet="NorthwindGeneralIncidents">
+          <ScalarProperty Name="NotificationTime" ColumnName="NotificationTime" />
+          <ScalarProperty Name="NotificationDate" ColumnName="NotificationDate" />
+          <ScalarProperty Name="HSERPhone" ColumnName="HSERPhone" />
+          <ScalarProperty Name="HSERName" ColumnName="HSERName" />
+          <ScalarProperty Name="EmergencyResponders" ColumnName="EmergencyResponders" />
+          <ScalarProperty Name="MediaOnScene" ColumnName="MediaOnScene" />
+          <ScalarProperty Name="TransportToHospital" ColumnName="TransportToHospital" />
+          <ScalarProperty Name="Notify911" ColumnName="Notify911" />
+          <ScalarProperty Name="IndividualSafety" ColumnName="IndividualSafety" />
+          <ScalarProperty Name="IncidentDetails" ColumnName="IncidentDetails" />
+          <ScalarProperty Name="ImpactedAreaDetails" ColumnName="ImpactedAreaDetails" />
+          <ScalarProperty Name="WaterbodiesImpacted" ColumnName="WaterbodiesImpacted" />
+          <ScalarProperty Name="IncidentNature" ColumnName="IncidentNature" />
+          <ScalarProperty Name="IncidentLocation" ColumnName="IncidentLocation" />
+          <ScalarProperty Name="FacilityOrProject" ColumnName="FacilityOrProject" />
+          <ScalarProperty Name="IncidentCounty" ColumnName="IncidentCounty" />
+          <ScalarProperty Name="IncidentState" ColumnName="IncidentState" />
+          <ScalarProperty Name="IncidentCity" ColumnName="IncidentCity" />
+          <ScalarProperty Name="IncidentTimeZone" ColumnName="IncidentTimeZone" />
+          <ScalarProperty Name="IncidentTime" ColumnName="IncidentTime" />
+          <ScalarProperty Name="IncidentDate" ColumnName="IncidentDate" />
+          <ScalarProperty Name="CallTime" ColumnName="CallTime" />
+          <ScalarProperty Name="CallDate" ColumnName="CallDate" />
+          <ScalarProperty Name="ContractedCompany" ColumnName="ContractedCompany" />
+          <ScalarProperty Name="EmpOrContract" ColumnName="EmpOrContract" />
+          <ScalarProperty Name="CallerPhone" ColumnName="CallerPhone" />
+          <ScalarProperty Name="CallerName" ColumnName="CallerName" />
+          <ScalarProperty Name="ERSOperator" ColumnName="ERSOperator" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NorthwindPipelineIncidents">
+      <EntityTypeMapping TypeName="chemreporterModel.NorthwindPipelineIncident">
+        <MappingFragment StoreEntitySet="NorthwindPipelineIncidents">
+          <ScalarProperty Name="SeeingHearingSmelling" ColumnName="SeeingHearingSmelling" />
+          <ScalarProperty Name="NotificationTime" ColumnName="NotificationTime" />
+          <ScalarProperty Name="NotificationDate" ColumnName="NotificationDate" />
+          <ScalarProperty Name="NotifiedEmail" ColumnName="NotifiedEmail" />
+          <ScalarProperty Name="NotifiedNumber" ColumnName="NotifiedNumber" />
+          <ScalarProperty Name="NotifiedName" ColumnName="NotifiedName" />
+          <ScalarProperty Name="WeatherConditions" ColumnName="WeatherConditions" />
+          <ScalarProperty Name="WindDirection" ColumnName="WindDirection" />
+          <ScalarProperty Name="WindSpeed" ColumnName="WindSpeed" />
+          <ScalarProperty Name="Temperature" ColumnName="Temperature" />
+          <ScalarProperty Name="ReportTakerEmail" ColumnName="ReportTakerEmail" />
+          <ScalarProperty Name="ReportTakerName" ColumnName="ReportTakerName" />
+          <ScalarProperty Name="SafelyWarn" ColumnName="SafelyWarn" />
+          <ScalarProperty Name="RelationToIncident" ColumnName="RelationToIncident" />
+          <ScalarProperty Name="ImmediateDanger" ColumnName="ImmediateDanger" />
+          <ScalarProperty Name="Injuries" ColumnName="Injuries" />
+          <ScalarProperty Name="Notify911" ColumnName="Notify911" />
+          <ScalarProperty Name="CallerPhone" ColumnName="CallerPhone" />
+          <ScalarProperty Name="CallerName" ColumnName="CallerName" />
+          <ScalarProperty Name="LeaseWellName" ColumnName="LeaseWellName" />
+          <ScalarProperty Name="Landowner" ColumnName="Landowner" />
+          <ScalarProperty Name="Tanks" ColumnName="Tanks" />
+          <ScalarProperty Name="ROWorWellPad" ColumnName="ROWorWellPad" />
+          <ScalarProperty Name="VaporMist" ColumnName="VaporMist" />
+          <ScalarProperty Name="EggOdor" ColumnName="EggOdor" />
+          <ScalarProperty Name="PipelineMarkers" ColumnName="PipelineMarkers" />
+          <ScalarProperty Name="OilSheen" ColumnName="OilSheen" />
+          <ScalarProperty Name="Liquid" ColumnName="Liquid" />
+          <ScalarProperty Name="Hissing" ColumnName="Hissing" />
+          <ScalarProperty Name="Flames" ColumnName="Flames" />
+          <ScalarProperty Name="Smoke" ColumnName="Smoke" />
+          <ScalarProperty Name="Observing" ColumnName="Observing" />
+          <ScalarProperty Name="Intersection" ColumnName="Intersection" />
+          <ScalarProperty Name="ClosestLandmark" ColumnName="ClosestLandmark" />
+          <ScalarProperty Name="GeneralDirectionFrom" ColumnName="GeneralDirectionFrom" />
+          <ScalarProperty Name="County" ColumnName="County" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="TimeZone" ColumnName="TimeZone" />
+          <ScalarProperty Name="IncidentTime" ColumnName="IncidentTime" />
+          <ScalarProperty Name="IncidentDate" ColumnName="IncidentDate" />
+          <ScalarProperty Name="CallTime" ColumnName="CallTime" />
+          <ScalarProperty Name="CallDate" ColumnName="CallDate" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
