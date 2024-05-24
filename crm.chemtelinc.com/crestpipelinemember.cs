@@ -20,6 +20,6 @@ namespace crm.chemtelinc.com
         public string county { get; set; }
         public string contactname { get; set; }
         public string phone { get; set; }
-        public Nullable<int> contact { get; set; }
+        public int contact { get; set; }
     }
 }

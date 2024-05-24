@@ -72,7 +72,7 @@ namespace crm.chemtelinc.com
         public virtual DbSet<ticket> tickets { get; set; }
         public virtual DbSet<veolianonincident> veolianonincidents { get; set; }
         public virtual DbSet<CRMWebU> CRMWebUs { get; set; }
-        public virtual DbSet<NorthwindGeneralIncident> NorthwindGeneralIncidents { get; set; }
         public virtual DbSet<NorthwindPipelineIncident> NorthwindPipelineIncidents { get; set; }
+        public virtual DbSet<NorthwindGeneralIncident> NorthwindGeneralIncidents { get; set; }
     }
 }

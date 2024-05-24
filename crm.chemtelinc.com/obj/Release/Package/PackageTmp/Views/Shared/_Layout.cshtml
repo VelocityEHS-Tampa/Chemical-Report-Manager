@@ -79,6 +79,15 @@
                                             <li class="MenuOptionHeader"><h5>Reports</h5></li>
                                             <li><a href="@Url.Action("GeneralIncident", "Northwind")">General Incident</a></li>
                                             <li><a href="@Url.Action("Pipeline", "Northwind")">Pipeline</a></li>
+                                            <li>&nbsp;</li>
+                                            <li class="MenuOptionHeader"><h5>Logs</h5></li>
+
+                                            <li><a href="@Url.Action("NorthwindLogs", "Northwind", new { SelectedLog = "GeneralIncident" })">General Incident</a></li>
+                                            <li><a href="@Url.Action("NorthwindLogs", "Northwind", new { SelectedLog = "Pipeline" })">Pipeline</a></li>
+                                            <li>&nbsp;</li>
+
+                                            <li class="MenuOptionHeader"><h5>Other</h5></li>
+                                            <li><a href="#" onclick="ShowNWPhones()">Phone Numbers</a></li>
                                         </ul>
                                     </div>
                                 </li>
@@ -197,6 +206,10 @@
 
             function ShowCleanShotContactInfo() {
                 alert("Name: Theochem Laboratories Inc \r\n\r\n Admin Contact: Michael Schneider Ext 206 \r\n\r\n Phone: (813) 237-6463 \r\n\r\n Fax: (813) 237-2059 \r\n\r\n Email: mschneider@theochem.com \r\n\r\n Address: 7373 Rowlett Park Drive \r\n\r\n City, State, Zip: Tampa, FL, 33610-000");
+            }
+
+            function ShowNWPhones() {
+                alert("Northwind Employee Assistance Program (EAP-Counselor) - 1-866-402-0003 \r\n\r\n National Suicide Prevention Lifeline - 1-800-273-8255 or dial 9-8-8 \r\n\r\n SAMHSA National Helpline (mental health/substance use disorder) - 1-800-662-4357");
             }
 
             function OpenRegLookup() {

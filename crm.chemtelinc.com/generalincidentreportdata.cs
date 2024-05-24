@@ -60,5 +60,18 @@ namespace crm.chemtelinc.com
         public string IncidentZipCode { get; set; }
         public string ReportType { get; set; }
         public string CallersPhoneExt { get; set; }
+        public string DOTName { get; set; }
+        public string TradeName { get; set; }
+        public string PrimaryHazardClass { get; set; }
+        public string PackingGroup { get; set; }
+        public string ContainerType { get; set; }
+        public string ResidueContainer { get; set; }
+        public string TankTruckNumber { get; set; }
+        public string PRONumber { get; set; }
+        public string ShipperManufacturer { get; set; }
+        public string ShipperLocation { get; set; }
+        public string Consignee { get; set; }
+        public string ConsigneeLocation { get; set; }
+        public string Carrier { get; set; }
     }
 }

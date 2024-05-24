@@ -545,6 +545,19 @@ warning 6002: The table/view 'chemreporter.dbo.CRMWebU' does not have a primary 
     <Property Name="IncidentZipCode" Type="varchar" MaxLength="10" />
     <Property Name="ReportType" Type="varchar" MaxLength="25" />
     <Property Name="CallersPhoneExt" Type="varchar(max)" />
+    <Property Name="DOTName" Type="varchar(max)" />
+    <Property Name="TradeName" Type="varchar(max)" />
+    <Property Name="PrimaryHazardClass" Type="varchar(max)" />
+    <Property Name="PackingGroup" Type="varchar(max)" />
+    <Property Name="ContainerType" Type="varchar(max)" />
+    <Property Name="ResidueContainer" Type="varchar(max)" />
+    <Property Name="TankTruckNumber" Type="varchar(max)" />
+    <Property Name="PRONumber" Type="varchar(max)" />
+    <Property Name="ShipperManufacturer" Type="varchar(max)" />
+    <Property Name="ShipperLocation" Type="varchar(max)" />
+    <Property Name="Consignee" Type="varchar(max)" />
+    <Property Name="ConsigneeLocation" Type="varchar(max)" />
+    <Property Name="Carrier" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="globasereportdata">
     <Key>
@@ -805,36 +818,11 @@ warning 6002: The table/view 'chemreporter.dbo.CRMWebU' does not have a primary 
     </Key>
     <Property Name="nonCoastalType" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'chemreporter.dbo.NorthwindGeneralIncidents' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="NorthwindGeneralIncidents">
     <Key>
       <PropertyRef Name="ID" />
-      <PropertyRef Name="ERSOperator" />
-      <PropertyRef Name="CallerName" />
-      <PropertyRef Name="CallerPhone" />
-      <PropertyRef Name="EmpOrContract" />
-      <PropertyRef Name="ContractedCompany" />
-      <PropertyRef Name="CallDate" />
-      <PropertyRef Name="CallTime" />
-      <PropertyRef Name="IncidentTimeZone" />
-      <PropertyRef Name="IncidentCity" />
-      <PropertyRef Name="IncidentState" />
-      <PropertyRef Name="IncidentCounty" />
-      <PropertyRef Name="FacilityOrProject" />
-      <PropertyRef Name="IncidentLocation" />
-      <PropertyRef Name="IncidentNature" />
-      <PropertyRef Name="IncidentDetails" />
-      <PropertyRef Name="Notify911" />
-      <PropertyRef Name="TransportToHospital" />
-      <PropertyRef Name="MediaOnScene" />
-      <PropertyRef Name="EmergencyResponders" />
-      <PropertyRef Name="HSERName" />
-      <PropertyRef Name="HSERPhone" />
-      <PropertyRef Name="NotificationDate" />
-      <PropertyRef Name="NotificationTime" />
     </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ERSOperator" Type="varchar(max)" Nullable="false" />
     <Property Name="CallerName" Type="varchar(max)" Nullable="false" />
     <Property Name="CallerPhone" Type="varchar" MaxLength="14" Nullable="false" />
@@ -863,52 +851,14 @@ warning 6002: The table/view 'chemreporter.dbo.NorthwindGeneralIncidents' does n
     <Property Name="HSERPhone" Type="varchar" MaxLength="14" Nullable="false" />
     <Property Name="NotificationDate" Type="date" Nullable="false" />
     <Property Name="NotificationTime" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="InjuryExposureIllness" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="ChemicalSpillRelease" Type="varchar" MaxLength="5" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'chemreporter.dbo.NorthwindPipelineIncidents' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="NorthwindPipelineIncidents">
     <Key>
       <PropertyRef Name="ID" />
-      <PropertyRef Name="CallDate" />
-      <PropertyRef Name="CallTime" />
-      <PropertyRef Name="IncidentDate" />
-      <PropertyRef Name="IncidentTime" />
-      <PropertyRef Name="TimeZone" />
-      <PropertyRef Name="City" />
-      <PropertyRef Name="State" />
-      <PropertyRef Name="County" />
-      <PropertyRef Name="GeneralDirectionFrom" />
-      <PropertyRef Name="ClosestLandmark" />
-      <PropertyRef Name="Intersection" />
-      <PropertyRef Name="Observing" />
-      <PropertyRef Name="Smoke" />
-      <PropertyRef Name="Flames" />
-      <PropertyRef Name="Hissing" />
-      <PropertyRef Name="Liquid" />
-      <PropertyRef Name="OilSheen" />
-      <PropertyRef Name="PipelineMarkers" />
-      <PropertyRef Name="EggOdor" />
-      <PropertyRef Name="VaporMist" />
-      <PropertyRef Name="ROWorWellPad" />
-      <PropertyRef Name="Tanks" />
-      <PropertyRef Name="Landowner" />
-      <PropertyRef Name="LeaseWellName" />
-      <PropertyRef Name="CallerName" />
-      <PropertyRef Name="CallerPhone" />
-      <PropertyRef Name="Notify911" />
-      <PropertyRef Name="Injuries" />
-      <PropertyRef Name="ImmediateDanger" />
-      <PropertyRef Name="RelationToIncident" />
-      <PropertyRef Name="SafelyWarn" />
-      <PropertyRef Name="ReportTakerName" />
-      <PropertyRef Name="ReportTakerEmail" />
-      <PropertyRef Name="NotifiedName" />
-      <PropertyRef Name="NotifiedNumber" />
-      <PropertyRef Name="NotifiedEmail" />
-      <PropertyRef Name="NotificationDate" />
-      <PropertyRef Name="NotificationTime" />
     </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CallDate" Type="date" Nullable="false" />
     <Property Name="CallTime" Type="varchar" MaxLength="10" Nullable="false" />
     <Property Name="IncidentDate" Type="date" Nullable="false" />
@@ -917,7 +867,8 @@ warning 6002: The table/view 'chemreporter.dbo.NorthwindPipelineIncidents' does 
     <Property Name="City" Type="varchar(max)" Nullable="false" />
     <Property Name="State" Type="nchar" MaxLength="10" Nullable="false" />
     <Property Name="County" Type="varchar(max)" Nullable="false" />
-    <Property Name="GeneralDirectionFrom" Type="varchar(max)" Nullable="false" />
+    <Property Name="DirectionFromLandmark" Type="varchar(max)" Nullable="false" />
+    <Property Name="DistanceFromLandmark" Type="varchar(max)" />
     <Property Name="ClosestLandmark" Type="varchar(max)" Nullable="false" />
     <Property Name="Intersection" Type="varchar(max)" Nullable="false" />
     <Property Name="Observing" Type="varchar(max)" Nullable="false" />
@@ -932,14 +883,14 @@ warning 6002: The table/view 'chemreporter.dbo.NorthwindPipelineIncidents' does 
     <Property Name="ROWorWellPad" Type="varchar(max)" Nullable="false" />
     <Property Name="Tanks" Type="varchar" MaxLength="3" Nullable="false" />
     <Property Name="Landowner" Type="varchar" MaxLength="3" Nullable="false" />
-    <Property Name="LeaseWellName" Type="varchar(max)" Nullable="false" />
+    <Property Name="LeaseWellName" Type="varchar(max)" />
     <Property Name="CallerName" Type="varchar(max)" Nullable="false" />
     <Property Name="CallerPhone" Type="varchar(max)" Nullable="false" />
     <Property Name="Notify911" Type="varchar" MaxLength="3" Nullable="false" />
     <Property Name="Injuries" Type="varchar" MaxLength="3" Nullable="false" />
     <Property Name="ImmediateDanger" Type="varchar" MaxLength="3" Nullable="false" />
-    <Property Name="RelationToIncident" Type="varchar(max)" Nullable="false" />
-    <Property Name="SafelyWarn" Type="varchar" MaxLength="3" Nullable="false" />
+    <Property Name="RelationToIncident" Type="varchar(max)" />
+    <Property Name="SafelyWarn" Type="varchar" MaxLength="3" />
     <Property Name="ReportTakerName" Type="varchar(max)" Nullable="false" />
     <Property Name="ReportTakerEmail" Type="varchar(max)" Nullable="false" />
     <Property Name="Temperature" Type="varchar" MaxLength="3" />
@@ -952,6 +903,7 @@ warning 6002: The table/view 'chemreporter.dbo.NorthwindPipelineIncidents' does 
     <Property Name="NotificationDate" Type="date" Nullable="false" />
     <Property Name="NotificationTime" Type="varchar" MaxLength="10" Nullable="false" />
     <Property Name="SeeingHearingSmelling" Type="varchar(max)" />
+    <Property Name="AMorPM" Type="varchar" MaxLength="2" />
   </EntityType>
   <EntityType Name="oldglo">
     <Key>
@@ -1336,6 +1288,8 @@ warning 6002: The table/view 'chemreporter.dbo.NorthwindPipelineIncidents' does 
     <EntitySet Name="knowledgebase" EntityType="Self.knowledgebase" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="modrequests" EntityType="Self.modrequests" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="noncoastal" EntityType="Self.noncoastal" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NorthwindGeneralIncidents" EntityType="Self.NorthwindGeneralIncidents" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NorthwindPipelineIncidents" EntityType="Self.NorthwindPipelineIncidents" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="oldglo" EntityType="Self.oldglo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="otherids" EntityType="Self.otherids" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="reportlog" EntityType="Self.reportlog" Schema="dbo" store:Type="Tables" />
@@ -1358,87 +1312,6 @@ warning 6002: The table/view 'chemreporter.dbo.NorthwindPipelineIncidents' does 
     [CRMWebU].[UserType] AS [UserType], 
     [CRMWebU].[LastPassChange] AS [LastPassChange]
     FROM [dbo].[CRMWebU] AS [CRMWebU]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="NorthwindGeneralIncidents" EntityType="Self.NorthwindGeneralIncidents" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [NorthwindGeneralIncidents].[ID] AS [ID], 
-    [NorthwindGeneralIncidents].[ERSOperator] AS [ERSOperator], 
-    [NorthwindGeneralIncidents].[CallerName] AS [CallerName], 
-    [NorthwindGeneralIncidents].[CallerPhone] AS [CallerPhone], 
-    [NorthwindGeneralIncidents].[EmpOrContract] AS [EmpOrContract], 
-    [NorthwindGeneralIncidents].[ContractedCompany] AS [ContractedCompany], 
-    [NorthwindGeneralIncidents].[CallDate] AS [CallDate], 
-    [NorthwindGeneralIncidents].[CallTime] AS [CallTime], 
-    [NorthwindGeneralIncidents].[IncidentDate] AS [IncidentDate], 
-    [NorthwindGeneralIncidents].[IncidentTime] AS [IncidentTime], 
-    [NorthwindGeneralIncidents].[IncidentTimeZone] AS [IncidentTimeZone], 
-    [NorthwindGeneralIncidents].[IncidentCity] AS [IncidentCity], 
-    [NorthwindGeneralIncidents].[IncidentState] AS [IncidentState], 
-    [NorthwindGeneralIncidents].[IncidentCounty] AS [IncidentCounty], 
-    [NorthwindGeneralIncidents].[FacilityOrProject] AS [FacilityOrProject], 
-    [NorthwindGeneralIncidents].[IncidentLocation] AS [IncidentLocation], 
-    [NorthwindGeneralIncidents].[IncidentNature] AS [IncidentNature], 
-    [NorthwindGeneralIncidents].[WaterbodiesImpacted] AS [WaterbodiesImpacted], 
-    [NorthwindGeneralIncidents].[ImpactedAreaDetails] AS [ImpactedAreaDetails], 
-    [NorthwindGeneralIncidents].[IncidentDetails] AS [IncidentDetails], 
-    [NorthwindGeneralIncidents].[IndividualSafety] AS [IndividualSafety], 
-    [NorthwindGeneralIncidents].[Notify911] AS [Notify911], 
-    [NorthwindGeneralIncidents].[TransportToHospital] AS [TransportToHospital], 
-    [NorthwindGeneralIncidents].[MediaOnScene] AS [MediaOnScene], 
-    [NorthwindGeneralIncidents].[EmergencyResponders] AS [EmergencyResponders], 
-    [NorthwindGeneralIncidents].[HSERName] AS [HSERName], 
-    [NorthwindGeneralIncidents].[HSERPhone] AS [HSERPhone], 
-    [NorthwindGeneralIncidents].[NotificationDate] AS [NotificationDate], 
-    [NorthwindGeneralIncidents].[NotificationTime] AS [NotificationTime]
-    FROM [dbo].[NorthwindGeneralIncidents] AS [NorthwindGeneralIncidents]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="NorthwindPipelineIncidents" EntityType="Self.NorthwindPipelineIncidents" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [NorthwindPipelineIncidents].[ID] AS [ID], 
-    [NorthwindPipelineIncidents].[CallDate] AS [CallDate], 
-    [NorthwindPipelineIncidents].[CallTime] AS [CallTime], 
-    [NorthwindPipelineIncidents].[IncidentDate] AS [IncidentDate], 
-    [NorthwindPipelineIncidents].[IncidentTime] AS [IncidentTime], 
-    [NorthwindPipelineIncidents].[TimeZone] AS [TimeZone], 
-    [NorthwindPipelineIncidents].[City] AS [City], 
-    [NorthwindPipelineIncidents].[State] AS [State], 
-    [NorthwindPipelineIncidents].[County] AS [County], 
-    [NorthwindPipelineIncidents].[GeneralDirectionFrom] AS [GeneralDirectionFrom], 
-    [NorthwindPipelineIncidents].[ClosestLandmark] AS [ClosestLandmark], 
-    [NorthwindPipelineIncidents].[Intersection] AS [Intersection], 
-    [NorthwindPipelineIncidents].[Observing] AS [Observing], 
-    [NorthwindPipelineIncidents].[Smoke] AS [Smoke], 
-    [NorthwindPipelineIncidents].[Flames] AS [Flames], 
-    [NorthwindPipelineIncidents].[Hissing] AS [Hissing], 
-    [NorthwindPipelineIncidents].[Liquid] AS [Liquid], 
-    [NorthwindPipelineIncidents].[OilSheen] AS [OilSheen], 
-    [NorthwindPipelineIncidents].[PipelineMarkers] AS [PipelineMarkers], 
-    [NorthwindPipelineIncidents].[EggOdor] AS [EggOdor], 
-    [NorthwindPipelineIncidents].[VaporMist] AS [VaporMist], 
-    [NorthwindPipelineIncidents].[ROWorWellPad] AS [ROWorWellPad], 
-    [NorthwindPipelineIncidents].[Tanks] AS [Tanks], 
-    [NorthwindPipelineIncidents].[Landowner] AS [Landowner], 
-    [NorthwindPipelineIncidents].[LeaseWellName] AS [LeaseWellName], 
-    [NorthwindPipelineIncidents].[CallerName] AS [CallerName], 
-    [NorthwindPipelineIncidents].[CallerPhone] AS [CallerPhone], 
-    [NorthwindPipelineIncidents].[Notify911] AS [Notify911], 
-    [NorthwindPipelineIncidents].[Injuries] AS [Injuries], 
-    [NorthwindPipelineIncidents].[ImmediateDanger] AS [ImmediateDanger], 
-    [NorthwindPipelineIncidents].[RelationToIncident] AS [RelationToIncident], 
-    [NorthwindPipelineIncidents].[SafelyWarn] AS [SafelyWarn], 
-    [NorthwindPipelineIncidents].[ReportTakerName] AS [ReportTakerName], 
-    [NorthwindPipelineIncidents].[ReportTakerEmail] AS [ReportTakerEmail], 
-    [NorthwindPipelineIncidents].[Temperature] AS [Temperature], 
-    [NorthwindPipelineIncidents].[WindSpeed] AS [WindSpeed], 
-    [NorthwindPipelineIncidents].[WindDirection] AS [WindDirection], 
-    [NorthwindPipelineIncidents].[WeatherConditions] AS [WeatherConditions], 
-    [NorthwindPipelineIncidents].[NotifiedName] AS [NotifiedName], 
-    [NorthwindPipelineIncidents].[NotifiedNumber] AS [NotifiedNumber], 
-    [NorthwindPipelineIncidents].[NotifiedEmail] AS [NotifiedEmail], 
-    [NorthwindPipelineIncidents].[NotificationDate] AS [NotificationDate], 
-    [NorthwindPipelineIncidents].[NotificationTime] AS [NotificationTime], 
-    [NorthwindPipelineIncidents].[SeeingHearingSmelling] AS [SeeingHearingSmelling]
-    FROM [dbo].[NorthwindPipelineIncidents] AS [NorthwindPipelineIncidents]</DefiningQuery>
     </EntitySet>
   </EntityContainer>
 </Schema>

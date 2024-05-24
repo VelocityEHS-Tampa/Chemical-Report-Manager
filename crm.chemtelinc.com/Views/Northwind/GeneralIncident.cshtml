@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Northwind General Incident";
+    string Revised = ViewBag.Revised;
 
     string constring = crm.chemtelinc.com.Properties.Settings.Default.StatesConnectionString;
     List<string> States = new List<string>();
@@ -41,6 +42,31 @@
     YesNoNAUnk.Add(new SelectListItem { Text = "Yes", Value = "Yes" });
     YesNoNAUnk.Add(new SelectListItem { Text = "No", Value = "No" });
     YesNoNAUnk.Add(new SelectListItem { Text = "Unknown", Value = "Unknown" });
+
+    List<SelectListItem> ERSMembers = new List<SelectListItem>();
+    ERSMembers.Add(new SelectListItem { Text = " --- SELECT MEMBER ---", Value = "" });
+    ERSMembers.Add(new SelectListItem { Text = "Josh Barker", Value = "Josh Barker" });
+    ERSMembers.Add(new SelectListItem { Text = "Eric Camp", Value = "Eric Camp" });
+    ERSMembers.Add(new SelectListItem { Text = "David Barton", Value = "David Barton" });
+    ERSMembers.Add(new SelectListItem { Text = "Jimmy Southard", Value = "Jimmy Southard" });
+    ERSMembers.Add(new SelectListItem { Text = "Jillian Yamartino", Value = "Jillian Yamartino" });
+
+    string CallDate = DateTime.Now.ToString("MM/dd/yyyy");
+    string CallTime = DateTime.Now.ToString("HH:mm");
+    string IncidentDate = "";
+    string IncidentTime = "";
+    string NotificationDate = DateTime.Now.ToShortDateString();
+    string NotificationTime = "";
+    if (Revised == "true")
+    {
+        CallDate = Model.Call_Date.ToString("MM/dd/yyyy");
+        CallTime = Model.Call_Time.ToString();
+        IncidentDate = Model.Incident_Date.ToString("MM/dd/yyyy");
+        IncidentTime = Model.Incident_Time.ToString();
+        NotificationDate = Model.NotificationDate.ToString("MM/dd/yyyy");
+        NotificationTime = Model.NotificationTime.ToString();
+    }
+
 }
 
 <h2>Northwind General Incident</h2>
@@ -48,13 +74,15 @@
 @using (Html.BeginForm("SubmitNewGenIncReport", "Northwind", FormMethod.Post, new { }))
 {
     <div id="FormButtons" style="padding:2%;text-align:right;">
-
+        
+        <input type="hidden" name="Revised" value="@Revised" />
+        <input type="hidden" name="ReportID" value="@Model.ID" />
         <input type="submit" value="Submit" class="form-control GRCPButtons required-field" id="btnsubmit" name="btnsubmit" onclick="return SubmitForm()" tabindex="99">
         @Html.TextBoxFor(m => m.ERS_Operator, new { @id = "ersop", @Name = "ersop", type = "text", style = "display:none;", @Value = Session["username"].ToString() })
         <input type="button" value="Cancel" class="form-control GRCPButtons alert-info" id="btnclose" name="btnclose" onclick="ClearForm()">
     </div>
     <br />
-    <div id="CallerInfo" style="text-align:center;">
+    <div id="CallerInfo" >
         <div class="GLOHeader" id="GRCPHeader">Caller Information</div>
         <div class="CrestInlineDisplay">
             <span class="required-field">Name</span>@Html.TextBoxFor(m => m.Caller_Name, new { @class = "form-control GLOFieldSpacing", required = "", @id = "txtcallername", @Name = "txtcallername", @style = "width:50%", tabindex = "1" })<br />
@@ -69,12 +97,11 @@
             @Html.TextBoxFor(m => m.ContractedCompany, new { @class = "GLOFieldSpacing", @Name = "ContractedCompany", @id = "ContractedCompany", tabindex = "4" })
         </div>
         <div class="CrestInlineDisplay">
-            <span class="required-field">Call Date</span><br />
-            @Html.TextBoxFor(m => m.Call_Date, new { @class = "form-control GLOFieldSpacing", @Name = "txtcalldate", id = "txtcalldate", placeholder = "__/__/____", style = "width:55%;", @Value = @DateTime.Now.ToShortDateString(), onblur = "FormatDate(this.value, this.id)", tabindex = "5" })
-        </div>
-        <div class="CrestInlineDisplay">
-            <span class="required-field">Call Time</span><br />
-            @Html.TextBoxFor(m => m.Call_Time, new { @class = "form-control GLOFieldSpacing", @Name = "txtcalltime", id = "txtcalltime", placeholder = "__:__", style = "width:55%;", @Value = @DateTime.Now.ToString("HH:mm"), onblur = "FormatTime(this.value, this.id)", tabindex = "6" })
+            <span class="required-field">Call Date</span>
+            @Html.TextBoxFor(m => m.Call_Date, new { @class = "form-control GLOFieldSpacing", @Name = "txtcalldate", id = "txtcalldate", placeholder = "__/__/____", style = "width:55%;", @Value = CallDate, onblur = "FormatDate(this.value, this.id)", tabindex = "5" })
+            <br />
+            <span class="required-field">Call Time</span>
+            @Html.TextBoxFor(m => m.Call_Time, new { @class = "form-control GLOFieldSpacing", @Name = "txtcalltime", id = "txtcalltime", placeholder = "__:__", style = "width:55%;", @Value = CallTime, onblur = "FormatTime(this.value, this.id)", tabindex = "6" })
         </div>
     </div>
 
@@ -82,22 +109,29 @@
     <div id="IncidentInfo">
         <div class="GLOHeader" id="GRCPHeader">Incident Information</div>
         <div class="CrestInlineDisplay" style="width:45%;">
-            <span class="required-field">City</span>@Html.TextBoxFor(m => m.Incident_City, new { @class = "form-control GLOFieldSpacing", required = "", style = "width:35%", @Name = "txtincidentcity", id = "txtincidentcity", tabindex = "10" })
-            <span class="required-field">State</span>@Html.DropDownListFor(m => m.Incident_State, StatesDDL, new { id = "txtstate", @Name = "txtstate", tabindex = "11" })
-            <br />
-            <span class="required-field">County</span>@Html.TextBoxFor(m => m.Incident_County, new { @class = "form-control GLOFieldSpacing", required = "", style = "width:35%", @Name = "txtincidentcounty", id = "txtincidentcounty", tabindex = "12" })
-            <br />
-            <span class="required-field">Did this occur on a Northwind Facility or Construction Project?</span>
-            @Html.DropDownListFor(m => m.FacilityOrProject, YesNo, new { @Name = "ddlFacilityOrProject", id = "ddlFacilityOrProject", @class = "GLOFieldSpacing", tabindex = "15", onchange = "ShowIncidentDateTime(this.value)" })
-            <br />
-            <span class="required-field">Where did the incident occur?</span>@Html.TextBoxFor(m => m.IncidentLocation, new { @class = "form-control GLOFieldSpacing", required = "", style = "width:40%", @Name = "txtIncidentLocation", id = "txtIncidentLocation", tabindex = "16" })
-            <br />
-            <span class="required-field" id="IncidentDateLbl">Incident Date</span>  @Html.TextBoxFor(m => m.Incident_Date, new { @class = "form-control GLOFieldSpacing", placeholder = "__/__/____", style = "width:14%", @Name = "txtincidentdate", id = "txtincidentdate", onblur = "FormatDate(this.value, this.id)", tabindex = "7", @Value = "" })
-            <span class="required-field" id="IncidentTimeLbl">Incident Time</span>@Html.TextBoxFor(m => m.Incident_Time, new { @class = "form-control GLOFieldSpacing", placeholder = "__:__", style = "width:10%", @Name = "txtincidenttime", id = "txtincidenttime", onblur = "FormatTime(this.value, this.id)", tabindex = "8" })
+            <span class="required-field" id="IncidentDateLbl">Incident Date</span>  @Html.TextBoxFor(m => m.Incident_Date, new { @class = "form-control GLOFieldSpacing", placeholder = "__/__/____", style = "width:15%", @Name = "txtincidentdate", id = "txtincidentdate", onblur = "FormatDate(this.value, this.id)", tabindex = "7", @Value = IncidentDate })
+            <span class="required-field" id="IncidentTimeLbl">Incident Time</span>@Html.TextBoxFor(m => m.Incident_Time, new { @class = "form-control GLOFieldSpacing", placeholder = "__:__", style = "width:10%", @Name = "txtincidenttime", id = "txtincidenttime", onblur = "FormatTime(this.value, this.id)", tabindex = "8", @Value = IncidentTime })
             <span class="required-field" id="IncidentTimeZoneLbl">Time Zone</span>@Html.DropDownListFor(m => m.Incident_Time_Zone, TimeZones, new { @Name = "txtincidenttimezone", id = "txtincidenttimezone", tabindex = "9" })
             <br />
+            <span class="required-field">City/Town </span>@Html.TextBoxFor(m => m.Incident_City, new { @class = "form-control GLOFieldSpacing", required = "", style = "width:35%", @Name = "txtincidentcity", id = "txtincidentcity", tabindex = "10" })
+            <span class="required-field">State </span>@Html.DropDownListFor(m => m.Incident_State, StatesDDL, new { id = "txtstate", @Name = "txtstate", tabindex = "11" })
             <br />
-            <span class="required-field">Incident Details</span><br />
+            @*<span class="required-field">County</span>@Html.TextBoxFor(m => m.Incident_County, new { @class = "form-control GLOFieldSpacing", required = "", style = "width:35%", @Name = "txtincidentcounty", id = "txtincidentcounty", tabindex = "12" })
+        <br />*@
+            <span class="required-field">Did this occur on a Northwind Facility or Construction Project?</span>
+            @Html.DropDownListFor(m => m.FacilityOrProject, YesNo, new { @Name = "ddlFacilityOrProject", id = "ddlFacilityOrProject", @class = "GLOFieldSpacing", tabindex = "15" })
+            <br />
+            <span class="required-field">Where (specifically) did the incident occur?</span>@Html.TextBoxFor(m => m.IncidentLocation, new { @class = "form-control GLOFieldSpacing", required = "", style = "width:40%", @Name = "txtIncidentLocation", id = "txtIncidentLocation", tabindex = "16" })
+            <br />
+            <span class="required-field">Are there any known or reported injuries, exposures, or personnel illness?</span>
+            @Html.DropDownListFor(m => m.InjuryExposureIllness, YesNoNAUnk, new { @Name = "InjuryExposureIllness", id = "InjuryExposureIllness", @class = "GLOFieldSpacing" })
+
+            <br />
+            <span class="required-field">Are there any known or reported spill or release of a chemical or product?</span>
+            @Html.DropDownListFor(m => m.ChemicalSpillRelease, YesNoNAUnk, new { @Name = "ChemicalSpillRelease", id = "ChemicalSpillRelease", @class = "GLOFieldSpacing" })
+
+            <br />
+            <span class="required-field">Briefly describe what happened </span><br />
             @Html.TextAreaFor(m => m.IncidentDetails, new { id = "txtincidentdetails", @Name = "txtincidentdetails", cols = "60", rows = "4", tabindex = "10" })
         </div>
 
@@ -204,7 +238,7 @@
                 <div class="GLOHeader" id="GRCPHeader">HSER Team Member contacted / Notified by Incident Hotline</div>
                 <div class="CrestInlineDisplay" style="text-align: center;width:40%;">
                     <span class="required-field">Name</span><br />
-                    @Html.TextBoxFor(m => m.HSERName, new { @class = "GLOFieldSpacing", @Name = "txthsername", id = "txthsername", onchange = "GetInfo(this.value)", list = "ERSMembers" })
+                    @Html.DropDownListFor(m => m.HSERName, ERSMembers, new { @class = "GLOFieldSpacing", @Name = "txthsername", id = "txthsername", onchange = "GetInfo(this.value)" })
                 </div>
                 <div class="CrestInlineDisplay" style="text-align: center; width: 40%;">
                     <span class="required-field">Contact Number</span>
@@ -213,7 +247,7 @@
                 </div>
                 <br />
                 <br />
-                <span class="required-field">Notifcation Date</span> @Html.TextBoxFor(m => m.NotificationDate, new { @Name = "NotificationDate", id = "NotificationDate", @class = "form-control GLOFieldSpacing", placeholder = "__/__/____", style = "width:20%;", onblur = "FormatDate(this.value, this.id)", @Value=DateTime.Now.ToShortDateString() })
+                <span class="required-field">Notifcation Date</span> @Html.TextBoxFor(m => m.NotificationDate, new { @Name = "NotificationDate", id = "NotificationDate", @class = "form-control GLOFieldSpacing", placeholder = "__/__/____", style = "width:20%;", onblur = "FormatDate(this.value, this.id)", @Value=NotificationDate })
                 <span class="required-field">Notifcation Time</span> @Html.TextBoxFor(m => m.NotificationTime, new { @Name = "NotificationTime", id = "NotificationTime", @class = "form-control GLOFieldSpacing", placeholder = "__:__", maxlength = "5", style = "width:20%;", onblur = "FormatTime(this.value, this.id)" })
             </div>
         </div>
@@ -224,18 +258,12 @@
 
 <script>
     $(document).ready(function () {
-        $('#ContractedCompany').prop("disabled", true);
-        //$('#ContractCoLbl').hide();
+        $('#ContractedCompany').hide();
+        $('#ContractCoLbl').hide();
         $('#IndSafeTxtLabel').hide();
         $('#IndSafeTxt').hide();
         $('#SpillQuestions').hide();
-        //$('#IncidentDateLbl').hide();
-        //$('#IncidentTimeLbl').hide();
-        //$('#txtincidentdate').hide();
-        //$('#txtincidenttime').hide();
-        //$('#IncidentTimeZoneLbl').hide();
-        //$('#txtincidenttimezone').hide();
-         
+
         $("input[type='radio']").click(function () {
             var radioValue = $("input[name='IncidentType']:checked").val();
             if (radioValue == "Workplace Violence") {
@@ -247,37 +275,55 @@
             }
             if (radioValue == "Spill Or Release") {
                 $('#SpillQuestions').show();
-            } else {
+            } else if (radioValue != "Spill Or Release" && $("#ChemicalSpillRelease").val() != "Yes") {
+                $('#SpillQuestions').hide();
+            }
+        });
+
+        $("#ChemicalSpillRelease").change(function () {
+            var SpillValue = $("#ChemicalSpillRelease").val();
+            var ITValue = $("input[name='IncidentType']:checked").val();
+            if (SpillValue == "Yes") {
+                $('#SpillQuestions').show();
+            } else if (ITValue != "Spill Or Release" && $("#ChemicalSpillRelease").val() != "Yes") {
                 $('#SpillQuestions').hide();
             }
         })
+
+        if ("@Model.IncidentType" == "Spill Or Release" || "@Model.ChemicalSpillRelease" == "Yes") {
+            $('#SpillQuestions').show();
+        } else if ("@Model.IncidentType" == "Workplace Violence") {
+            $('#IndSafeTxtLabel').show();
+            $('#IndSafeTxt').show();
+        }
+
+        if ($('#EmpOrContract').val() == "Contractor") {
+            $('#ContractCoLbl').show();
+            $('#ContractedCompany').show();
+        } else {
+            $('#ContractCoLbl').hide();
+            $('#ContractedCompany').hide();
+        }
+
     });
 
     function ShowCompanyName(EmpOrCon) {
         if (EmpOrCon == "Contractor") {
-            $('#ContractedCompany').prop("disabled", false);
+            $('#ContractCoLbl').show();
+            $('#ContractedCompany').show();
         } else {
-            $('#ContractedCompany').prop("disabled", true);
+            $('#ContractCoLbl').hide();
+            $('#ContractedCompany').hide();
         }
     }
-    //function ShowIncidentDateTime(FacOrConProj) {
-    //    if (FacOrConProj == "No") {
-    //        $('#IncidentDateLbl').show();
-    //        $('#IncidentTimeLbl').show();
-    //        $('#txtincidentdate').show();
-    //        $('#txtincidenttime').show();
-    //        $('#IncidentTimeZoneLbl').show();
-    //        $('#txtincidenttimezone').show();
-    //    } else {
-    //        $('#IncidentDateLbl').hide();
-    //        $('#IncidentTimeLbl').hide();
-    //        $('#txtincidentdate').hide();
-    //        $('#txtincidenttime').hide();
-    //        $('#IncidentTimeZoneLbl').hide();
-    //        $('#txtincidenttimezone').hide();
-    //    }
-    //}
 
+    function GetInfo(member) {
+        if (member == "Josh Barker") { document.getElementById('txthsercontactnumber').value = "432-631-5164"; }
+        else if (member == "Eric Camp") { document.getElementById('txthsercontactnumber').value = "432-631-0803"; }
+        else if (member == "David Barton") { document.getElementById('txthsercontactnumber').value = "817-266-8865";}
+        else if (member == "Jimmy Southard") { document.getElementById('txthsercontactnumber').value = "432-754-7125"; }
+        else if (member == "Jillian Yamartino") { document.getElementById('txthsercontactnumber').value = "207-745-0783"; }
+    }
 
 
     //Date, Time, and Phone formatting

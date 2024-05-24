@@ -4,10 +4,18 @@
 }
 
 <h2>Northwind Email Form</h2>
-
+<br />
+@using (Html.BeginForm("BackToReport", "Northwind", FormMethod.Post))
+{
+    <input type="hidden" value="@Model.ID" name="reportid" id="reportid" />
+    <input type="hidden" value="@Model.ReportType" name="ReportType" />
+    <input type="submit" value="Back To Report" name="UpdateOrCorrect" />
+}
+<br />
 @using (Html.BeginForm("SendNorthwindEmail", "Northwind", FormMethod.Post))
 {
-    <span>To Emails: </span> @Html.TextBoxFor(m => m.ToEmails, new { @class = "form-control GLOFieldSpacing", id = "txtToEmails", @Name = "txtToEmails", required = "", tabindex = "1" })
+    <span>To Emails: </span> <input type="button" onclick="AddMVEmails()" class="form-control " style="width:10%;float:right;" value="Add MV Emails"/>
+    @Html.TextBoxFor(m => m.ToEmails, new { @class = "form-control GLOFieldSpacing", id = "txtToEmails", @Name = "txtToEmails", required = "", tabindex = "1" })
     <br />
     <span>Email Subject: </span>@Html.TextBoxFor(m => m.Subject, new { @class = "form-control GLOFieldSpacing", id = "txtSubject", @Name = "txtSubject", required = "", tabindex = "2" })
     <br />
@@ -18,4 +26,21 @@
     <br />
     <input type="submit" name="SubmitEmail" value="Send Email" class="form-control GLOFieldSpacing" style="color:blue; font-weight:bold;" />
 }
+
+<script>
+    $(document).ready(function () {
+        var FilePath = "";
+        if ("@Model.ReportType" == "Pipeline") {
+            FilePath = "https://crm.chemtel.net/Completed Reports/Northwind Incidents/Pipeline/" + @DateTime.Now.Year.ToString() + "/Northwind Pipeline - " + @Model.ID + ".pdf";
+        } else {
+            FilePath = "https://crm.chemtel.net/Completed Reports/Northwind Incidents/General Incident/" + @DateTime.Now.Year.ToString() + "/Northwind GI - " + @Model.ID + ".pdf";
+        }
+        //window.open(FilePath, "_blank");
+    });
+
+
+    function AddMVEmails() {
+        $("#txtToEmails").val($("#txtToEmails").val() + ",egarza@nwmidstream.com,npeters@nwmidstream.com");
+    }
+</script>
 

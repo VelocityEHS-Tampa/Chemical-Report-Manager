@@ -34,6 +34,8 @@ namespace crm.chemtelinc.com {
         
         private northwindpipelineincidentsDataTable tablenorthwindpipelineincidents;
         
+        private northwindgeneralincidentsDataTable tablenorthwindgeneralincidents;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -76,6 +78,9 @@ namespace crm.chemtelinc.com {
                 }
                 if ((ds.Tables["northwindpipelineincidents"] != null)) {
                     base.Tables.Add(new northwindpipelineincidentsDataTable(ds.Tables["northwindpipelineincidents"]));
+                }
+                if ((ds.Tables["northwindgeneralincidents"] != null)) {
+                    base.Tables.Add(new northwindgeneralincidentsDataTable(ds.Tables["northwindgeneralincidents"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -142,6 +147,16 @@ namespace crm.chemtelinc.com {
         public northwindpipelineincidentsDataTable northwindpipelineincidents {
             get {
                 return this.tablenorthwindpipelineincidents;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public northwindgeneralincidentsDataTable northwindgeneralincidents {
+            get {
+                return this.tablenorthwindgeneralincidents;
             }
         }
         
@@ -227,6 +242,9 @@ namespace crm.chemtelinc.com {
                 if ((ds.Tables["northwindpipelineincidents"] != null)) {
                     base.Tables.Add(new northwindpipelineincidentsDataTable(ds.Tables["northwindpipelineincidents"]));
                 }
+                if ((ds.Tables["northwindgeneralincidents"] != null)) {
+                    base.Tables.Add(new northwindgeneralincidentsDataTable(ds.Tables["northwindgeneralincidents"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -290,6 +308,12 @@ namespace crm.chemtelinc.com {
                     this.tablenorthwindpipelineincidents.InitVars();
                 }
             }
+            this.tablenorthwindgeneralincidents = ((northwindgeneralincidentsDataTable)(base.Tables["northwindgeneralincidents"]));
+            if ((initTable == true)) {
+                if ((this.tablenorthwindgeneralincidents != null)) {
+                    this.tablenorthwindgeneralincidents.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -310,6 +334,8 @@ namespace crm.chemtelinc.com {
             base.Tables.Add(this.tabletheochemcleanshotincidents);
             this.tablenorthwindpipelineincidents = new northwindpipelineincidentsDataTable();
             base.Tables.Add(this.tablenorthwindpipelineincidents);
+            this.tablenorthwindgeneralincidents = new northwindgeneralincidentsDataTable();
+            base.Tables.Add(this.tablenorthwindgeneralincidents);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -339,6 +365,12 @@ namespace crm.chemtelinc.com {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private bool ShouldSerializenorthwindpipelineincidents() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private bool ShouldSerializenorthwindgeneralincidents() {
             return false;
         }
         
@@ -411,6 +443,9 @@ namespace crm.chemtelinc.com {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public delegate void northwindpipelineincidentsRowChangeEventHandler(object sender, northwindpipelineincidentsRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public delegate void northwindgeneralincidentsRowChangeEventHandler(object sender, northwindgeneralincidentsRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -5449,7 +5484,7 @@ namespace crm.chemtelinc.com {
             
             private global::System.Data.DataColumn columnCounty;
             
-            private global::System.Data.DataColumn columnGeneralDirectionFrom;
+            private global::System.Data.DataColumn columnDirectionFromLandmark;
             
             private global::System.Data.DataColumn columnClosestLandmark;
             
@@ -5510,6 +5545,8 @@ namespace crm.chemtelinc.com {
             private global::System.Data.DataColumn columnNotificationTime;
             
             private global::System.Data.DataColumn columnSeeingHearingSmelling;
+            
+            private global::System.Data.DataColumn columnDistanceFromLandmark;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -5618,9 +5655,9 @@ namespace crm.chemtelinc.com {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn GeneralDirectionFromColumn {
+            public global::System.Data.DataColumn DirectionFromLandmarkColumn {
                 get {
-                    return this.columnGeneralDirectionFrom;
+                    return this.columnDirectionFromLandmark;
                 }
             }
             
@@ -5866,6 +5903,14 @@ namespace crm.chemtelinc.com {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn DistanceFromLandmarkColumn {
+                get {
+                    return this.columnDistanceFromLandmark;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -5911,7 +5956,7 @@ namespace crm.chemtelinc.com {
                         string City, 
                         string State, 
                         string County, 
-                        string GeneralDirectionFrom, 
+                        string DirectionFromLandmark, 
                         string ClosestLandmark, 
                         string Intersection, 
                         string Observing, 
@@ -5941,7 +5986,8 @@ namespace crm.chemtelinc.com {
                         string NotifiedEmail, 
                         string NotificationDate, 
                         string NotificationTime, 
-                        string SeeingHearingSmelling) {
+                        string SeeingHearingSmelling, 
+                        string DistanceFromLandmark) {
                 northwindpipelineincidentsRow rownorthwindpipelineincidentsRow = ((northwindpipelineincidentsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         CallDate,
@@ -5953,7 +5999,7 @@ namespace crm.chemtelinc.com {
                         City,
                         State,
                         County,
-                        GeneralDirectionFrom,
+                        DirectionFromLandmark,
                         ClosestLandmark,
                         Intersection,
                         Observing,
@@ -5983,7 +6029,8 @@ namespace crm.chemtelinc.com {
                         NotifiedEmail,
                         NotificationDate,
                         NotificationTime,
-                        SeeingHearingSmelling};
+                        SeeingHearingSmelling,
+                        DistanceFromLandmark};
                 rownorthwindpipelineincidentsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rownorthwindpipelineincidentsRow);
                 return rownorthwindpipelineincidentsRow;
@@ -6015,7 +6062,7 @@ namespace crm.chemtelinc.com {
                 this.columnCity = base.Columns["City"];
                 this.columnState = base.Columns["State"];
                 this.columnCounty = base.Columns["County"];
-                this.columnGeneralDirectionFrom = base.Columns["GeneralDirectionFrom"];
+                this.columnDirectionFromLandmark = base.Columns["DirectionFromLandmark"];
                 this.columnClosestLandmark = base.Columns["ClosestLandmark"];
                 this.columnIntersection = base.Columns["Intersection"];
                 this.columnObserving = base.Columns["Observing"];
@@ -6046,6 +6093,7 @@ namespace crm.chemtelinc.com {
                 this.columnNotificationDate = base.Columns["NotificationDate"];
                 this.columnNotificationTime = base.Columns["NotificationTime"];
                 this.columnSeeingHearingSmelling = base.Columns["SeeingHearingSmelling"];
+                this.columnDistanceFromLandmark = base.Columns["DistanceFromLandmark"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6069,8 +6117,8 @@ namespace crm.chemtelinc.com {
                 base.Columns.Add(this.columnState);
                 this.columnCounty = new global::System.Data.DataColumn("County", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCounty);
-                this.columnGeneralDirectionFrom = new global::System.Data.DataColumn("GeneralDirectionFrom", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnGeneralDirectionFrom);
+                this.columnDirectionFromLandmark = new global::System.Data.DataColumn("DirectionFromLandmark", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDirectionFromLandmark);
                 this.columnClosestLandmark = new global::System.Data.DataColumn("ClosestLandmark", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnClosestLandmark);
                 this.columnIntersection = new global::System.Data.DataColumn("Intersection", typeof(string), null, global::System.Data.MappingType.Element);
@@ -6131,6 +6179,8 @@ namespace crm.chemtelinc.com {
                 base.Columns.Add(this.columnNotificationTime);
                 this.columnSeeingHearingSmelling = new global::System.Data.DataColumn("SeeingHearingSmelling", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSeeingHearingSmelling);
+                this.columnDistanceFromLandmark = new global::System.Data.DataColumn("DistanceFromLandmark", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDistanceFromLandmark);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6217,6 +6267,704 @@ namespace crm.chemtelinc.com {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "northwindpipelineincidentsDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class northwindgeneralincidentsDataTable : global::System.Data.TypedTableBase<northwindgeneralincidentsRow> {
+            
+            private global::System.Data.DataColumn columnID;
+            
+            private global::System.Data.DataColumn columnERSOperator;
+            
+            private global::System.Data.DataColumn columnCallerName;
+            
+            private global::System.Data.DataColumn columnCallerPhone;
+            
+            private global::System.Data.DataColumn columnEmpOrContract;
+            
+            private global::System.Data.DataColumn columnContractedCompany;
+            
+            private global::System.Data.DataColumn columnCallDate;
+            
+            private global::System.Data.DataColumn columnCallTime;
+            
+            private global::System.Data.DataColumn columnIncidentDate;
+            
+            private global::System.Data.DataColumn columnIncidentTime;
+            
+            private global::System.Data.DataColumn columnIncidentTimeZone;
+            
+            private global::System.Data.DataColumn columnIncidentCity;
+            
+            private global::System.Data.DataColumn columnIncidentState;
+            
+            private global::System.Data.DataColumn columnIncidentCounty;
+            
+            private global::System.Data.DataColumn columnFacilityOrProject;
+            
+            private global::System.Data.DataColumn columnIncidentLocation;
+            
+            private global::System.Data.DataColumn columnIncidentNature;
+            
+            private global::System.Data.DataColumn columnWaterbodiesImpacted;
+            
+            private global::System.Data.DataColumn columnImpactedAreaDetails;
+            
+            private global::System.Data.DataColumn columnIncidentDetails;
+            
+            private global::System.Data.DataColumn columnIndividualSafety;
+            
+            private global::System.Data.DataColumn columnNotify911;
+            
+            private global::System.Data.DataColumn columnTransportToHospital;
+            
+            private global::System.Data.DataColumn columnMediaOnScene;
+            
+            private global::System.Data.DataColumn columnEmergencyResponders;
+            
+            private global::System.Data.DataColumn columnHSERName;
+            
+            private global::System.Data.DataColumn columnHSERPhone;
+            
+            private global::System.Data.DataColumn columnNotificationDate;
+            
+            private global::System.Data.DataColumn columnNotificationTime;
+            
+            private global::System.Data.DataColumn columnInjuryExposureIllness;
+            
+            private global::System.Data.DataColumn columnChemicalSpillRelease;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public northwindgeneralincidentsDataTable() {
+                this.TableName = "northwindgeneralincidents";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal northwindgeneralincidentsDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected northwindgeneralincidentsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn IDColumn {
+                get {
+                    return this.columnID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn ERSOperatorColumn {
+                get {
+                    return this.columnERSOperator;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn CallerNameColumn {
+                get {
+                    return this.columnCallerName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn CallerPhoneColumn {
+                get {
+                    return this.columnCallerPhone;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn EmpOrContractColumn {
+                get {
+                    return this.columnEmpOrContract;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn ContractedCompanyColumn {
+                get {
+                    return this.columnContractedCompany;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn CallDateColumn {
+                get {
+                    return this.columnCallDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn CallTimeColumn {
+                get {
+                    return this.columnCallTime;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn IncidentDateColumn {
+                get {
+                    return this.columnIncidentDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn IncidentTimeColumn {
+                get {
+                    return this.columnIncidentTime;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn IncidentTimeZoneColumn {
+                get {
+                    return this.columnIncidentTimeZone;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn IncidentCityColumn {
+                get {
+                    return this.columnIncidentCity;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn IncidentStateColumn {
+                get {
+                    return this.columnIncidentState;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn IncidentCountyColumn {
+                get {
+                    return this.columnIncidentCounty;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn FacilityOrProjectColumn {
+                get {
+                    return this.columnFacilityOrProject;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn IncidentLocationColumn {
+                get {
+                    return this.columnIncidentLocation;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn IncidentNatureColumn {
+                get {
+                    return this.columnIncidentNature;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn WaterbodiesImpactedColumn {
+                get {
+                    return this.columnWaterbodiesImpacted;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn ImpactedAreaDetailsColumn {
+                get {
+                    return this.columnImpactedAreaDetails;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn IncidentDetailsColumn {
+                get {
+                    return this.columnIncidentDetails;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn IndividualSafetyColumn {
+                get {
+                    return this.columnIndividualSafety;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn Notify911Column {
+                get {
+                    return this.columnNotify911;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn TransportToHospitalColumn {
+                get {
+                    return this.columnTransportToHospital;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn MediaOnSceneColumn {
+                get {
+                    return this.columnMediaOnScene;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn EmergencyRespondersColumn {
+                get {
+                    return this.columnEmergencyResponders;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn HSERNameColumn {
+                get {
+                    return this.columnHSERName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn HSERPhoneColumn {
+                get {
+                    return this.columnHSERPhone;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn NotificationDateColumn {
+                get {
+                    return this.columnNotificationDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn NotificationTimeColumn {
+                get {
+                    return this.columnNotificationTime;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn InjuryExposureIllnessColumn {
+                get {
+                    return this.columnInjuryExposureIllness;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn ChemicalSpillReleaseColumn {
+                get {
+                    return this.columnChemicalSpillRelease;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public northwindgeneralincidentsRow this[int index] {
+                get {
+                    return ((northwindgeneralincidentsRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event northwindgeneralincidentsRowChangeEventHandler northwindgeneralincidentsRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event northwindgeneralincidentsRowChangeEventHandler northwindgeneralincidentsRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event northwindgeneralincidentsRowChangeEventHandler northwindgeneralincidentsRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event northwindgeneralincidentsRowChangeEventHandler northwindgeneralincidentsRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void AddnorthwindgeneralincidentsRow(northwindgeneralincidentsRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public northwindgeneralincidentsRow AddnorthwindgeneralincidentsRow(
+                        string ID, 
+                        string ERSOperator, 
+                        string CallerName, 
+                        string CallerPhone, 
+                        string EmpOrContract, 
+                        string ContractedCompany, 
+                        string CallDate, 
+                        string CallTime, 
+                        string IncidentDate, 
+                        string IncidentTime, 
+                        string IncidentTimeZone, 
+                        string IncidentCity, 
+                        string IncidentState, 
+                        string IncidentCounty, 
+                        string FacilityOrProject, 
+                        string IncidentLocation, 
+                        string IncidentNature, 
+                        string WaterbodiesImpacted, 
+                        string ImpactedAreaDetails, 
+                        string IncidentDetails, 
+                        string IndividualSafety, 
+                        string Notify911, 
+                        string TransportToHospital, 
+                        string MediaOnScene, 
+                        string EmergencyResponders, 
+                        string HSERName, 
+                        string HSERPhone, 
+                        string NotificationDate, 
+                        string NotificationTime, 
+                        string InjuryExposureIllness, 
+                        string ChemicalSpillRelease) {
+                northwindgeneralincidentsRow rownorthwindgeneralincidentsRow = ((northwindgeneralincidentsRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        ID,
+                        ERSOperator,
+                        CallerName,
+                        CallerPhone,
+                        EmpOrContract,
+                        ContractedCompany,
+                        CallDate,
+                        CallTime,
+                        IncidentDate,
+                        IncidentTime,
+                        IncidentTimeZone,
+                        IncidentCity,
+                        IncidentState,
+                        IncidentCounty,
+                        FacilityOrProject,
+                        IncidentLocation,
+                        IncidentNature,
+                        WaterbodiesImpacted,
+                        ImpactedAreaDetails,
+                        IncidentDetails,
+                        IndividualSafety,
+                        Notify911,
+                        TransportToHospital,
+                        MediaOnScene,
+                        EmergencyResponders,
+                        HSERName,
+                        HSERPhone,
+                        NotificationDate,
+                        NotificationTime,
+                        InjuryExposureIllness,
+                        ChemicalSpillRelease};
+                rownorthwindgeneralincidentsRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rownorthwindgeneralincidentsRow);
+                return rownorthwindgeneralincidentsRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                northwindgeneralincidentsDataTable cln = ((northwindgeneralincidentsDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new northwindgeneralincidentsDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal void InitVars() {
+                this.columnID = base.Columns["ID"];
+                this.columnERSOperator = base.Columns["ERSOperator"];
+                this.columnCallerName = base.Columns["CallerName"];
+                this.columnCallerPhone = base.Columns["CallerPhone"];
+                this.columnEmpOrContract = base.Columns["EmpOrContract"];
+                this.columnContractedCompany = base.Columns["ContractedCompany"];
+                this.columnCallDate = base.Columns["CallDate"];
+                this.columnCallTime = base.Columns["CallTime"];
+                this.columnIncidentDate = base.Columns["IncidentDate"];
+                this.columnIncidentTime = base.Columns["IncidentTime"];
+                this.columnIncidentTimeZone = base.Columns["IncidentTimeZone"];
+                this.columnIncidentCity = base.Columns["IncidentCity"];
+                this.columnIncidentState = base.Columns["IncidentState"];
+                this.columnIncidentCounty = base.Columns["IncidentCounty"];
+                this.columnFacilityOrProject = base.Columns["FacilityOrProject"];
+                this.columnIncidentLocation = base.Columns["IncidentLocation"];
+                this.columnIncidentNature = base.Columns["IncidentNature"];
+                this.columnWaterbodiesImpacted = base.Columns["WaterbodiesImpacted"];
+                this.columnImpactedAreaDetails = base.Columns["ImpactedAreaDetails"];
+                this.columnIncidentDetails = base.Columns["IncidentDetails"];
+                this.columnIndividualSafety = base.Columns["IndividualSafety"];
+                this.columnNotify911 = base.Columns["Notify911"];
+                this.columnTransportToHospital = base.Columns["TransportToHospital"];
+                this.columnMediaOnScene = base.Columns["MediaOnScene"];
+                this.columnEmergencyResponders = base.Columns["EmergencyResponders"];
+                this.columnHSERName = base.Columns["HSERName"];
+                this.columnHSERPhone = base.Columns["HSERPhone"];
+                this.columnNotificationDate = base.Columns["NotificationDate"];
+                this.columnNotificationTime = base.Columns["NotificationTime"];
+                this.columnInjuryExposureIllness = base.Columns["InjuryExposureIllness"];
+                this.columnChemicalSpillRelease = base.Columns["ChemicalSpillRelease"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            private void InitClass() {
+                this.columnID = new global::System.Data.DataColumn("ID", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnID);
+                this.columnERSOperator = new global::System.Data.DataColumn("ERSOperator", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnERSOperator);
+                this.columnCallerName = new global::System.Data.DataColumn("CallerName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCallerName);
+                this.columnCallerPhone = new global::System.Data.DataColumn("CallerPhone", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCallerPhone);
+                this.columnEmpOrContract = new global::System.Data.DataColumn("EmpOrContract", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEmpOrContract);
+                this.columnContractedCompany = new global::System.Data.DataColumn("ContractedCompany", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnContractedCompany);
+                this.columnCallDate = new global::System.Data.DataColumn("CallDate", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCallDate);
+                this.columnCallTime = new global::System.Data.DataColumn("CallTime", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCallTime);
+                this.columnIncidentDate = new global::System.Data.DataColumn("IncidentDate", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIncidentDate);
+                this.columnIncidentTime = new global::System.Data.DataColumn("IncidentTime", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIncidentTime);
+                this.columnIncidentTimeZone = new global::System.Data.DataColumn("IncidentTimeZone", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIncidentTimeZone);
+                this.columnIncidentCity = new global::System.Data.DataColumn("IncidentCity", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIncidentCity);
+                this.columnIncidentState = new global::System.Data.DataColumn("IncidentState", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIncidentState);
+                this.columnIncidentCounty = new global::System.Data.DataColumn("IncidentCounty", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIncidentCounty);
+                this.columnFacilityOrProject = new global::System.Data.DataColumn("FacilityOrProject", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFacilityOrProject);
+                this.columnIncidentLocation = new global::System.Data.DataColumn("IncidentLocation", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIncidentLocation);
+                this.columnIncidentNature = new global::System.Data.DataColumn("IncidentNature", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIncidentNature);
+                this.columnWaterbodiesImpacted = new global::System.Data.DataColumn("WaterbodiesImpacted", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnWaterbodiesImpacted);
+                this.columnImpactedAreaDetails = new global::System.Data.DataColumn("ImpactedAreaDetails", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnImpactedAreaDetails);
+                this.columnIncidentDetails = new global::System.Data.DataColumn("IncidentDetails", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIncidentDetails);
+                this.columnIndividualSafety = new global::System.Data.DataColumn("IndividualSafety", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIndividualSafety);
+                this.columnNotify911 = new global::System.Data.DataColumn("Notify911", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNotify911);
+                this.columnTransportToHospital = new global::System.Data.DataColumn("TransportToHospital", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTransportToHospital);
+                this.columnMediaOnScene = new global::System.Data.DataColumn("MediaOnScene", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMediaOnScene);
+                this.columnEmergencyResponders = new global::System.Data.DataColumn("EmergencyResponders", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEmergencyResponders);
+                this.columnHSERName = new global::System.Data.DataColumn("HSERName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnHSERName);
+                this.columnHSERPhone = new global::System.Data.DataColumn("HSERPhone", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnHSERPhone);
+                this.columnNotificationDate = new global::System.Data.DataColumn("NotificationDate", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNotificationDate);
+                this.columnNotificationTime = new global::System.Data.DataColumn("NotificationTime", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNotificationTime);
+                this.columnInjuryExposureIllness = new global::System.Data.DataColumn("InjuryExposureIllness", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnInjuryExposureIllness);
+                this.columnChemicalSpillRelease = new global::System.Data.DataColumn("ChemicalSpillRelease", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnChemicalSpillRelease);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public northwindgeneralincidentsRow NewnorthwindgeneralincidentsRow() {
+                return ((northwindgeneralincidentsRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new northwindgeneralincidentsRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(northwindgeneralincidentsRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.northwindgeneralincidentsRowChanged != null)) {
+                    this.northwindgeneralincidentsRowChanged(this, new northwindgeneralincidentsRowChangeEvent(((northwindgeneralincidentsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.northwindgeneralincidentsRowChanging != null)) {
+                    this.northwindgeneralincidentsRowChanging(this, new northwindgeneralincidentsRowChangeEvent(((northwindgeneralincidentsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.northwindgeneralincidentsRowDeleted != null)) {
+                    this.northwindgeneralincidentsRowDeleted(this, new northwindgeneralincidentsRowChangeEvent(((northwindgeneralincidentsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.northwindgeneralincidentsRowDeleting != null)) {
+                    this.northwindgeneralincidentsRowDeleting(this, new northwindgeneralincidentsRowChangeEvent(((northwindgeneralincidentsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void RemovenorthwindgeneralincidentsRow(northwindgeneralincidentsRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                chemreporterschema ds = new chemreporterschema();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "northwindgeneralincidentsDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -14243,18 +14991,18 @@ namespace crm.chemtelinc.com {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string GeneralDirectionFrom {
+            public string DirectionFromLandmark {
                 get {
                     try {
-                        return ((string)(this[this.tablenorthwindpipelineincidents.GeneralDirectionFromColumn]));
+                        return ((string)(this[this.tablenorthwindpipelineincidents.DirectionFromLandmarkColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'GeneralDirectionFrom\' in table \'northwindpipelineincidents\'" +
-                                " is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'DirectionFromLandmark\' in table \'northwindpipelineincidents" +
+                                "\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablenorthwindpipelineincidents.GeneralDirectionFromColumn] = value;
+                    this[this.tablenorthwindpipelineincidents.DirectionFromLandmarkColumn] = value;
                 }
             }
             
@@ -14762,6 +15510,23 @@ namespace crm.chemtelinc.com {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string DistanceFromLandmark {
+                get {
+                    try {
+                        return ((string)(this[this.tablenorthwindpipelineincidents.DistanceFromLandmarkColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DistanceFromLandmark\' in table \'northwindpipelineincidents\'" +
+                                " is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablenorthwindpipelineincidents.DistanceFromLandmarkColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IsCallDateNull() {
                 return this.IsNull(this.tablenorthwindpipelineincidents.CallDateColumn);
             }
@@ -14870,14 +15635,14 @@ namespace crm.chemtelinc.com {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsGeneralDirectionFromNull() {
-                return this.IsNull(this.tablenorthwindpipelineincidents.GeneralDirectionFromColumn);
+            public bool IsDirectionFromLandmarkNull() {
+                return this.IsNull(this.tablenorthwindpipelineincidents.DirectionFromLandmarkColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetGeneralDirectionFromNull() {
-                this[this.tablenorthwindpipelineincidents.GeneralDirectionFromColumn] = global::System.Convert.DBNull;
+            public void SetDirectionFromLandmarkNull() {
+                this[this.tablenorthwindpipelineincidents.DirectionFromLandmarkColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -15239,6 +16004,926 @@ namespace crm.chemtelinc.com {
             public void SetSeeingHearingSmellingNull() {
                 this[this.tablenorthwindpipelineincidents.SeeingHearingSmellingColumn] = global::System.Convert.DBNull;
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsDistanceFromLandmarkNull() {
+                return this.IsNull(this.tablenorthwindpipelineincidents.DistanceFromLandmarkColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetDistanceFromLandmarkNull() {
+                this[this.tablenorthwindpipelineincidents.DistanceFromLandmarkColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class northwindgeneralincidentsRow : global::System.Data.DataRow {
+            
+            private northwindgeneralincidentsDataTable tablenorthwindgeneralincidents;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal northwindgeneralincidentsRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tablenorthwindgeneralincidents = ((northwindgeneralincidentsDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string ID {
+                get {
+                    try {
+                        return ((string)(this[this.tablenorthwindgeneralincidents.IDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ID\' in table \'northwindgeneralincidents\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablenorthwindgeneralincidents.IDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string ERSOperator {
+                get {
+                    try {
+                        return ((string)(this[this.tablenorthwindgeneralincidents.ERSOperatorColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ERSOperator\' in table \'northwindgeneralincidents\' is DBNull" +
+                                ".", e);
+                    }
+                }
+                set {
+                    this[this.tablenorthwindgeneralincidents.ERSOperatorColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string CallerName {
+                get {
+                    try {
+                        return ((string)(this[this.tablenorthwindgeneralincidents.CallerNameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CallerName\' in table \'northwindgeneralincidents\' is DBNull." +
+                                "", e);
+                    }
+                }
+                set {
+                    this[this.tablenorthwindgeneralincidents.CallerNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string CallerPhone {
+                get {
+                    try {
+                        return ((string)(this[this.tablenorthwindgeneralincidents.CallerPhoneColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CallerPhone\' in table \'northwindgeneralincidents\' is DBNull" +
+                                ".", e);
+                    }
+                }
+                set {
+                    this[this.tablenorthwindgeneralincidents.CallerPhoneColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string EmpOrContract {
+                get {
+                    try {
+                        return ((string)(this[this.tablenorthwindgeneralincidents.EmpOrContractColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'EmpOrContract\' in table \'northwindgeneralincidents\' is DBNu" +
+                                "ll.", e);
+                    }
+                }
+                set {
+                    this[this.tablenorthwindgeneralincidents.EmpOrContractColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string ContractedCompany {
+                get {
+                    try {
+                        return ((string)(this[this.tablenorthwindgeneralincidents.ContractedCompanyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ContractedCompany\' in table \'northwindgeneralincidents\' is " +
+                                "DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablenorthwindgeneralincidents.ContractedCompanyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string CallDate {
+                get {
+                    try {
+                        return ((string)(this[this.tablenorthwindgeneralincidents.CallDateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CallDate\' in table \'northwindgeneralincidents\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablenorthwindgeneralincidents.CallDateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string CallTime {
+                get {
+                    try {
+                        return ((string)(this[this.tablenorthwindgeneralincidents.CallTimeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CallTime\' in table \'northwindgeneralincidents\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablenorthwindgeneralincidents.CallTimeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string IncidentDate {
+                get {
+                    try {
+                        return ((string)(this[this.tablenorthwindgeneralincidents.IncidentDateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IncidentDate\' in table \'northwindgeneralincidents\' is DBNul" +
+                                "l.", e);
+                    }
+                }
+                set {
+                    this[this.tablenorthwindgeneralincidents.IncidentDateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string IncidentTime {
+                get {
+                    try {
+                        return ((string)(this[this.tablenorthwindgeneralincidents.IncidentTimeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IncidentTime\' in table \'northwindgeneralincidents\' is DBNul" +
+                                "l.", e);
+                    }
+                }
+                set {
+                    this[this.tablenorthwindgeneralincidents.IncidentTimeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string IncidentTimeZone {
+                get {
+                    try {
+                        return ((string)(this[this.tablenorthwindgeneralincidents.IncidentTimeZoneColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IncidentTimeZone\' in table \'northwindgeneralincidents\' is D" +
+                                "BNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablenorthwindgeneralincidents.IncidentTimeZoneColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string IncidentCity {
+                get {
+                    try {
+                        return ((string)(this[this.tablenorthwindgeneralincidents.IncidentCityColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IncidentCity\' in table \'northwindgeneralincidents\' is DBNul" +
+                                "l.", e);
+                    }
+                }
+                set {
+                    this[this.tablenorthwindgeneralincidents.IncidentCityColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string IncidentState {
+                get {
+                    try {
+                        return ((string)(this[this.tablenorthwindgeneralincidents.IncidentStateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IncidentState\' in table \'northwindgeneralincidents\' is DBNu" +
+                                "ll.", e);
+                    }
+                }
+                set {
+                    this[this.tablenorthwindgeneralincidents.IncidentStateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string IncidentCounty {
+                get {
+                    try {
+                        return ((string)(this[this.tablenorthwindgeneralincidents.IncidentCountyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IncidentCounty\' in table \'northwindgeneralincidents\' is DBN" +
+                                "ull.", e);
+                    }
+                }
+                set {
+                    this[this.tablenorthwindgeneralincidents.IncidentCountyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string FacilityOrProject {
+                get {
+                    try {
+                        return ((string)(this[this.tablenorthwindgeneralincidents.FacilityOrProjectColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'FacilityOrProject\' in table \'northwindgeneralincidents\' is " +
+                                "DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablenorthwindgeneralincidents.FacilityOrProjectColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string IncidentLocation {
+                get {
+                    try {
+                        return ((string)(this[this.tablenorthwindgeneralincidents.IncidentLocationColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IncidentLocation\' in table \'northwindgeneralincidents\' is D" +
+                                "BNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablenorthwindgeneralincidents.IncidentLocationColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string IncidentNature {
+                get {
+                    try {
+                        return ((string)(this[this.tablenorthwindgeneralincidents.IncidentNatureColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IncidentNature\' in table \'northwindgeneralincidents\' is DBN" +
+                                "ull.", e);
+                    }
+                }
+                set {
+                    this[this.tablenorthwindgeneralincidents.IncidentNatureColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string WaterbodiesImpacted {
+                get {
+                    try {
+                        return ((string)(this[this.tablenorthwindgeneralincidents.WaterbodiesImpactedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'WaterbodiesImpacted\' in table \'northwindgeneralincidents\' i" +
+                                "s DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablenorthwindgeneralincidents.WaterbodiesImpactedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string ImpactedAreaDetails {
+                get {
+                    try {
+                        return ((string)(this[this.tablenorthwindgeneralincidents.ImpactedAreaDetailsColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ImpactedAreaDetails\' in table \'northwindgeneralincidents\' i" +
+                                "s DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablenorthwindgeneralincidents.ImpactedAreaDetailsColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string IncidentDetails {
+                get {
+                    try {
+                        return ((string)(this[this.tablenorthwindgeneralincidents.IncidentDetailsColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IncidentDetails\' in table \'northwindgeneralincidents\' is DB" +
+                                "Null.", e);
+                    }
+                }
+                set {
+                    this[this.tablenorthwindgeneralincidents.IncidentDetailsColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string IndividualSafety {
+                get {
+                    try {
+                        return ((string)(this[this.tablenorthwindgeneralincidents.IndividualSafetyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IndividualSafety\' in table \'northwindgeneralincidents\' is D" +
+                                "BNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablenorthwindgeneralincidents.IndividualSafetyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string Notify911 {
+                get {
+                    try {
+                        return ((string)(this[this.tablenorthwindgeneralincidents.Notify911Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Notify911\' in table \'northwindgeneralincidents\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablenorthwindgeneralincidents.Notify911Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string TransportToHospital {
+                get {
+                    try {
+                        return ((string)(this[this.tablenorthwindgeneralincidents.TransportToHospitalColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TransportToHospital\' in table \'northwindgeneralincidents\' i" +
+                                "s DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablenorthwindgeneralincidents.TransportToHospitalColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string MediaOnScene {
+                get {
+                    try {
+                        return ((string)(this[this.tablenorthwindgeneralincidents.MediaOnSceneColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MediaOnScene\' in table \'northwindgeneralincidents\' is DBNul" +
+                                "l.", e);
+                    }
+                }
+                set {
+                    this[this.tablenorthwindgeneralincidents.MediaOnSceneColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string EmergencyResponders {
+                get {
+                    try {
+                        return ((string)(this[this.tablenorthwindgeneralincidents.EmergencyRespondersColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'EmergencyResponders\' in table \'northwindgeneralincidents\' i" +
+                                "s DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablenorthwindgeneralincidents.EmergencyRespondersColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string HSERName {
+                get {
+                    try {
+                        return ((string)(this[this.tablenorthwindgeneralincidents.HSERNameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'HSERName\' in table \'northwindgeneralincidents\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablenorthwindgeneralincidents.HSERNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string HSERPhone {
+                get {
+                    try {
+                        return ((string)(this[this.tablenorthwindgeneralincidents.HSERPhoneColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'HSERPhone\' in table \'northwindgeneralincidents\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablenorthwindgeneralincidents.HSERPhoneColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string NotificationDate {
+                get {
+                    try {
+                        return ((string)(this[this.tablenorthwindgeneralincidents.NotificationDateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NotificationDate\' in table \'northwindgeneralincidents\' is D" +
+                                "BNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablenorthwindgeneralincidents.NotificationDateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string NotificationTime {
+                get {
+                    try {
+                        return ((string)(this[this.tablenorthwindgeneralincidents.NotificationTimeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NotificationTime\' in table \'northwindgeneralincidents\' is D" +
+                                "BNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablenorthwindgeneralincidents.NotificationTimeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string InjuryExposureIllness {
+                get {
+                    try {
+                        return ((string)(this[this.tablenorthwindgeneralincidents.InjuryExposureIllnessColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'InjuryExposureIllness\' in table \'northwindgeneralincidents\'" +
+                                " is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablenorthwindgeneralincidents.InjuryExposureIllnessColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string ChemicalSpillRelease {
+                get {
+                    try {
+                        return ((string)(this[this.tablenorthwindgeneralincidents.ChemicalSpillReleaseColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ChemicalSpillRelease\' in table \'northwindgeneralincidents\' " +
+                                "is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablenorthwindgeneralincidents.ChemicalSpillReleaseColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsIDNull() {
+                return this.IsNull(this.tablenorthwindgeneralincidents.IDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetIDNull() {
+                this[this.tablenorthwindgeneralincidents.IDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsERSOperatorNull() {
+                return this.IsNull(this.tablenorthwindgeneralincidents.ERSOperatorColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetERSOperatorNull() {
+                this[this.tablenorthwindgeneralincidents.ERSOperatorColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsCallerNameNull() {
+                return this.IsNull(this.tablenorthwindgeneralincidents.CallerNameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetCallerNameNull() {
+                this[this.tablenorthwindgeneralincidents.CallerNameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsCallerPhoneNull() {
+                return this.IsNull(this.tablenorthwindgeneralincidents.CallerPhoneColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetCallerPhoneNull() {
+                this[this.tablenorthwindgeneralincidents.CallerPhoneColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsEmpOrContractNull() {
+                return this.IsNull(this.tablenorthwindgeneralincidents.EmpOrContractColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetEmpOrContractNull() {
+                this[this.tablenorthwindgeneralincidents.EmpOrContractColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsContractedCompanyNull() {
+                return this.IsNull(this.tablenorthwindgeneralincidents.ContractedCompanyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetContractedCompanyNull() {
+                this[this.tablenorthwindgeneralincidents.ContractedCompanyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsCallDateNull() {
+                return this.IsNull(this.tablenorthwindgeneralincidents.CallDateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetCallDateNull() {
+                this[this.tablenorthwindgeneralincidents.CallDateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsCallTimeNull() {
+                return this.IsNull(this.tablenorthwindgeneralincidents.CallTimeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetCallTimeNull() {
+                this[this.tablenorthwindgeneralincidents.CallTimeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsIncidentDateNull() {
+                return this.IsNull(this.tablenorthwindgeneralincidents.IncidentDateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetIncidentDateNull() {
+                this[this.tablenorthwindgeneralincidents.IncidentDateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsIncidentTimeNull() {
+                return this.IsNull(this.tablenorthwindgeneralincidents.IncidentTimeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetIncidentTimeNull() {
+                this[this.tablenorthwindgeneralincidents.IncidentTimeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsIncidentTimeZoneNull() {
+                return this.IsNull(this.tablenorthwindgeneralincidents.IncidentTimeZoneColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetIncidentTimeZoneNull() {
+                this[this.tablenorthwindgeneralincidents.IncidentTimeZoneColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsIncidentCityNull() {
+                return this.IsNull(this.tablenorthwindgeneralincidents.IncidentCityColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetIncidentCityNull() {
+                this[this.tablenorthwindgeneralincidents.IncidentCityColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsIncidentStateNull() {
+                return this.IsNull(this.tablenorthwindgeneralincidents.IncidentStateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetIncidentStateNull() {
+                this[this.tablenorthwindgeneralincidents.IncidentStateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsIncidentCountyNull() {
+                return this.IsNull(this.tablenorthwindgeneralincidents.IncidentCountyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetIncidentCountyNull() {
+                this[this.tablenorthwindgeneralincidents.IncidentCountyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsFacilityOrProjectNull() {
+                return this.IsNull(this.tablenorthwindgeneralincidents.FacilityOrProjectColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetFacilityOrProjectNull() {
+                this[this.tablenorthwindgeneralincidents.FacilityOrProjectColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsIncidentLocationNull() {
+                return this.IsNull(this.tablenorthwindgeneralincidents.IncidentLocationColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetIncidentLocationNull() {
+                this[this.tablenorthwindgeneralincidents.IncidentLocationColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsIncidentNatureNull() {
+                return this.IsNull(this.tablenorthwindgeneralincidents.IncidentNatureColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetIncidentNatureNull() {
+                this[this.tablenorthwindgeneralincidents.IncidentNatureColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsWaterbodiesImpactedNull() {
+                return this.IsNull(this.tablenorthwindgeneralincidents.WaterbodiesImpactedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetWaterbodiesImpactedNull() {
+                this[this.tablenorthwindgeneralincidents.WaterbodiesImpactedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsImpactedAreaDetailsNull() {
+                return this.IsNull(this.tablenorthwindgeneralincidents.ImpactedAreaDetailsColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetImpactedAreaDetailsNull() {
+                this[this.tablenorthwindgeneralincidents.ImpactedAreaDetailsColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsIncidentDetailsNull() {
+                return this.IsNull(this.tablenorthwindgeneralincidents.IncidentDetailsColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetIncidentDetailsNull() {
+                this[this.tablenorthwindgeneralincidents.IncidentDetailsColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsIndividualSafetyNull() {
+                return this.IsNull(this.tablenorthwindgeneralincidents.IndividualSafetyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetIndividualSafetyNull() {
+                this[this.tablenorthwindgeneralincidents.IndividualSafetyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsNotify911Null() {
+                return this.IsNull(this.tablenorthwindgeneralincidents.Notify911Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetNotify911Null() {
+                this[this.tablenorthwindgeneralincidents.Notify911Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsTransportToHospitalNull() {
+                return this.IsNull(this.tablenorthwindgeneralincidents.TransportToHospitalColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetTransportToHospitalNull() {
+                this[this.tablenorthwindgeneralincidents.TransportToHospitalColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsMediaOnSceneNull() {
+                return this.IsNull(this.tablenorthwindgeneralincidents.MediaOnSceneColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetMediaOnSceneNull() {
+                this[this.tablenorthwindgeneralincidents.MediaOnSceneColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsEmergencyRespondersNull() {
+                return this.IsNull(this.tablenorthwindgeneralincidents.EmergencyRespondersColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetEmergencyRespondersNull() {
+                this[this.tablenorthwindgeneralincidents.EmergencyRespondersColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsHSERNameNull() {
+                return this.IsNull(this.tablenorthwindgeneralincidents.HSERNameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetHSERNameNull() {
+                this[this.tablenorthwindgeneralincidents.HSERNameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsHSERPhoneNull() {
+                return this.IsNull(this.tablenorthwindgeneralincidents.HSERPhoneColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetHSERPhoneNull() {
+                this[this.tablenorthwindgeneralincidents.HSERPhoneColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsNotificationDateNull() {
+                return this.IsNull(this.tablenorthwindgeneralincidents.NotificationDateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetNotificationDateNull() {
+                this[this.tablenorthwindgeneralincidents.NotificationDateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsNotificationTimeNull() {
+                return this.IsNull(this.tablenorthwindgeneralincidents.NotificationTimeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetNotificationTimeNull() {
+                this[this.tablenorthwindgeneralincidents.NotificationTimeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsInjuryExposureIllnessNull() {
+                return this.IsNull(this.tablenorthwindgeneralincidents.InjuryExposureIllnessColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetInjuryExposureIllnessNull() {
+                this[this.tablenorthwindgeneralincidents.InjuryExposureIllnessColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsChemicalSpillReleaseNull() {
+                return this.IsNull(this.tablenorthwindgeneralincidents.ChemicalSpillReleaseColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetChemicalSpillReleaseNull() {
+                this[this.tablenorthwindgeneralincidents.ChemicalSpillReleaseColumn] = global::System.Convert.DBNull;
+            }
         }
         
         /// <summary>
@@ -15397,6 +17082,40 @@ namespace crm.chemtelinc.com {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public northwindpipelineincidentsRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public class northwindgeneralincidentsRowChangeEvent : global::System.EventArgs {
+            
+            private northwindgeneralincidentsRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public northwindgeneralincidentsRowChangeEvent(northwindgeneralincidentsRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public northwindgeneralincidentsRow Row {
                 get {
                     return this.eventRow;
                 }

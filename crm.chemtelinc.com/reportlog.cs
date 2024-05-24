@@ -16,8 +16,8 @@ namespace crm.chemtelinc.com
     {
         public int ReportLogID { get; set; }
         public int StartTime { get; set; }
-        public Nullable<int> EndTime { get; set; }
-        public Nullable<int> MinutesTaken { get; set; }
+        public int EndTime { get; set; }
+        public int MinutesTaken { get; set; }
         public string Operator { get; set; }
         public string ReportType { get; set; }
         public string ReportID { get; set; }

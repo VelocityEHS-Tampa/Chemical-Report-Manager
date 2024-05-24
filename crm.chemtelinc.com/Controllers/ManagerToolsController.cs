@@ -829,7 +829,7 @@ namespace crm.chemtelinc.com.Controllers
             }
             else
             {
-                emails = "ers@ehs.com,mpepitone@ehs.com,andy.jefferies@imr247.com,lance.labiche@imr247.com,Jake.Scott@imr247.com,Allen.Cowart@imr247.com,amir.paknejad@imr247.com,Hamed.mojarrad@imr247.com,Paul.drake@imr247.com,EOC@IMR247.com,mitchg@hwcg.org,anital@hwcg.org,craigc@hwcg.org,jml@beaconoffshore.com,eventnotifications@hwcg.org";
+                emails = "ers@ehs.com,mpepitone@ehs.com,andy.jefferies@imr247.com,lance.labiche@imr247.com,Allen.Cowart@imr247.com, Brian.fenner@imr247.com,Hamed.mojarrad@imr247.com,Paul.drake@imr247.com,EOC@IMR247.com,steves@hwcg.org,erikb@hwcg.org,natew@hwcg.org,mitchg@hwcg.org,anital@hwcg.org,craigc@hwcg.org,jml@beaconoffshore.com,eventnotifications@hwcg.org,travisw@hwcg.org";
                 body = "HWCG LLC Event Notification Form <br /> Please see attachment.";
                 subject = "HWCG LLC Event Notification";
             }

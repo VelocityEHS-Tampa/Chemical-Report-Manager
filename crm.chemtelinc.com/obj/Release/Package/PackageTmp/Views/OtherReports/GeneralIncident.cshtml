@@ -187,25 +187,25 @@
                 <span>Caller's Fax/Email </span> @Html.TextBoxFor(m => m.Callers_Fax_Or_Email, new { id = "txtcallersfaxoremail", @Name = "txtcallersfaxoremail", @class = "form-control GLOFieldSpacing", style = "width:90%;", tabindex = "7", maxlength="75" }) <br />
             </div>
             @* Right portion info *@
-        <div class="CrestInlineDisplay">
-            <span>Incident Specifics</span>
-            <hr />
-            <span>Incident Street</span> @Html.TextBoxFor(m => m.Incident_Street, new { @class = "form-control GLOFieldSpacing", id = "txtincidentstreet", @Name = "txtincidentstreet", style = "width:35%;", tabindex = "8", list = "NotProvided", maxlength="65" })
-            <span>Incident Country </span> @Html.DropDownListFor(m => m.Incident_Country, Countries, new { @class = "GLOFieldSpacing", id = "txtincidentcountry", @Name = "txtincidentcountry", tabindex = "12", onchange = "ChangeStateProv(this.value)" })
-            <br />
-            <span>Incident City</span> @Html.TextBoxFor(m => m.Incident_City, new { @class = "form-control GLOFieldSpacing", id = "txtincidentcity", @Name = "txtincidentcity", style = "width:35%;", tabindex = "9", maxlength="65" })
-            <span>Incident Date</span> @Html.TextBoxFor(m => m.Incident_Date, new { id = "txtincidentdate", @Name = "txtincidentdate", @class = "form-control GLOFieldSpacing", style = "width:20%;", placeholder = "__/__/____", onblur = "FormatDate(this.value, this.id)", tabindex = "13" })
-            <br />
-            <span>Incident State</span>
-            @Html.DropDownListFor(m => m.Incident_State, StatesDDL, new { id = "txtincidentstate", @Name = "txtincidentstate", @class = "GLOFieldSpacing", tabindex = "10" })
-            @Html.DropDownListFor(m => m.Incident_State, ProvincesDDL, new { id = "txtincidentProvidence", @Name = "txtincidentProvidence", @class = "GLOFieldSpacing", tabindex = "10" })
-            <span>Incident Time</span> @Html.TextBoxFor(m => m.Incident_Time, new { id = "txtincidenttime", @Name = "txtincidenttime", @class = "form-control GLOFieldSpacing", style = "width:20%;", placeholder = "__:__", onblur = "FormatTime(this.value, this.id)", tabindex = "14" })
-            <br />
-            <span>Incident Zip</span> @Html.TextBoxFor(m => m.Incident_Zip_Code, new { @class = "form-control GLOFieldSpacing", id = "txtincidentzipcode", @Name = "txtincidentzipcode", maxlength = "10", placeholder = "00000", style = "width: 25%;", tabindex = "11" })
-            <span>Incident Time Zone </span>
-            @Html.DropDownListFor(m => m.Incident_Time_Zone, TimeZones, new { @class = "GLOFieldSpacing", id = "cbincidenttimezone", @Name = "cbincidenttimezone", tabindex = "15" })
-            <br />
-        </div>
+            <div class="CrestInlineDisplay" style="width:49%;">
+                <span>Incident Specifics</span>
+                <hr />
+                <span>Incident Street</span> @Html.TextBoxFor(m => m.Incident_Street, new { @class = "form-control GLOFieldSpacing", id = "txtincidentstreet", @Name = "txtincidentstreet", style = "width:35%;", tabindex = "8", list = "NotProvided", maxlength="65" })
+                <span>Incident Country </span> @Html.DropDownListFor(m => m.Incident_Country, Countries, new { @class = "GLOFieldSpacing", id = "txtincidentcountry", @Name = "txtincidentcountry", tabindex = "12", onchange = "ChangeStateProv(this.value)" })
+                <br />
+                <span>Incident City</span> @Html.TextBoxFor(m => m.Incident_City, new { @class = "form-control GLOFieldSpacing", id = "txtincidentcity", @Name = "txtincidentcity", style = "width:35%;", tabindex = "9", maxlength="65" })
+                <span>Incident Date</span> @Html.TextBoxFor(m => m.Incident_Date, new { id = "txtincidentdate", @Name = "txtincidentdate", @class = "form-control GLOFieldSpacing", style = "width:20%;", placeholder = "__/__/____", onblur = "FormatDate(this.value, this.id)", tabindex = "13" })
+                <br />
+                <span>Incident State</span>
+                @Html.DropDownListFor(m => m.Incident_State, StatesDDL, new { id = "txtincidentstate", @Name = "txtincidentstate", @class = "GLOFieldSpacing", tabindex = "10" })
+                @Html.DropDownListFor(m => m.Incident_State, ProvincesDDL, new { id = "txtincidentProvidence", @Name = "txtincidentProvidence", @class = "GLOFieldSpacing", tabindex = "10" })
+                <span>Incident Time</span> @Html.TextBoxFor(m => m.Incident_Time, new { id = "txtincidenttime", @Name = "txtincidenttime", @class = "form-control GLOFieldSpacing", style = "width:20%;", placeholder = "__:__", onblur = "FormatTime(this.value, this.id)", tabindex = "14" })
+                <br />
+                <span>Incident Zip</span> @Html.TextBoxFor(m => m.Incident_Zip_Code, new { @class = "form-control GLOFieldSpacing", id = "txtincidentzipcode", @Name = "txtincidentzipcode", maxlength = "10", placeholder = "00000", style = "width: 25%;", tabindex = "11" })
+                <span>Incident Time Zone </span>
+                @Html.DropDownListFor(m => m.Incident_Time_Zone, TimeZones, new { @class = "GLOFieldSpacing", id = "cbincidenttimezone", @Name = "cbincidenttimezone", tabindex = "15" })
+                <br />
+            </div>
         </div>
 
         <div id="SpillInfo">
@@ -216,7 +216,7 @@
             <div class="CrestInlineDisplay" style="width:45%;">
                 <span>Spill/Material Information</span>
                 <hr />
-                <span>Does this spill involve a shipping container?</span> <input type="checkbox" id="ContainerInvolved" onchange="ShowContainerDetails()" /> <br />
+                @*<span>Does this spill involve a shipping container?</span> <input type="checkbox" id="ContainerInvolved" onchange="ShowContainerDetails()" /> <br />*@
                 <span class="required-field">Material Name </span> @Html.TextBoxFor(m => m.Material_Name, new { id = "txtmaterialname", @Name = "txtmaterialname", @class = "form-control GLOFieldSpacing", style = "width:75%", required = "", tabindex = "16", maxlength="100" }) <br />
                 <span>Product Number</span> @Html.TextBoxFor(m => m.Product_Number, new { id = "txtproductnumber", @Name = "txtproductnumber", @class = "form-control GLOFieldSpacing", style = "width:75%", tabindex = "17", maxlength="100" }) <br />
                 <span>EPA Reg #</span> @Html.TextBoxFor(m => m.Epa_Reg_No, new { id = "txteparegno", @Name = "txteparegno", @class = "form-control GLOFieldSpacing", style = "width:75%", tabindex = "18", placeholder = "Not Applicable", maxlength="100"  }) <br />
@@ -338,7 +338,10 @@
     $(document).ready(function () {
         $('#txtincidentProvidence').hide();
         $('#ContainerDetails').hide();
-
+        if ("@Model.DOTName" != "") {
+            $("#ContainerInvolved").attr("checked", true);
+            $('#ContainerDetails').show();
+        }
         if ("@Updated" != "true") { // We do NOT want to update the IncidentID if the report is an update.
             //Keep checking for a new IncidentID number to avoid double inserts and skipping ID's
             var IncidentID = "@IncidentID";

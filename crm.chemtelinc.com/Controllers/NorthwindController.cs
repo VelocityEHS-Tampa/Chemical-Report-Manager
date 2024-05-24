@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using ChemicalLibrary;
 using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
 using SendGrid;
 using SendGrid.Helpers.Mail;
+using ChemicalLibrary;
 
 namespace crm.chemtelinc.com.Controllers
 {
     public class NorthwindController : Controller
     {
+        string constring = Properties.Settings.Default.chemicalConnectionString;
         // GET: Northwind
         #region Get Views
         public ActionResult GeneralIncident()
@@ -48,8 +49,16 @@ namespace crm.chemtelinc.com.Controllers
         {
             NorthwindGenInc ngi = new NorthwindGenInc();
             ngi = GetGenIncData(fc);
-            Add.AddNorthwindGenInc(Session["constring"].ToString(), ngi); //Add new report data to the database.
-            
+
+            if (fc["Revised"].ToString() != "true")
+            {
+                Add.AddNorthwindGenInc(constring, ngi); //Add new report data to the database.
+                ngi.ID = GetLatestGenIncID();
+            } else
+            {
+                ngi.ID = Int32.Parse(fc["ReportID"].ToString());
+                Update.UpdateNorthindGeneralIncident(constring, ngi);
+            }
             //start prep for email autopopulation.
             NorthwindEmail nwe = new NorthwindEmail();
             DateTime callDate = ngi.Call_Date;
@@ -59,7 +68,17 @@ namespace crm.chemtelinc.com.Controllers
             DateTime notificationDate = ngi.NotificationDate;
             DateTime notificationTime = DateTime.Parse(ngi.NotificationTime);
 
-            nwe.ToEmails = "mpepitone@ehs.com";
+
+            string filepath = CreateGenIncReport(ngi.ID, ngi.Call_Date.Year.ToString());
+
+
+            nwe.ID = ngi.ID;
+            nwe.FilePath = filepath;
+            nwe.ToEmails = "mpepitone@ehs.com,ers@ehs.com,ben@nwmidstream.com,dbarton@nwmidstream.com,agarza@nwmidstream.com,emiller@nwmidstream.com,rregister@nwmidstream.com,ssanders@nwmidstream.com,jsouthard@nwmidstream.com,jsisk@nwmidstream.com,jyamartino@nwmidstream.com";
+            if (ngi.IncidentType == "Vehicle Accident")
+            {
+                nwe.ToEmails += ",egarza@nwmidstream.com,npeters@nwmidstream.com";
+            }
             nwe.Subject = "Incident Notification: ";
             if (fc["ddlFacilityOrProject"].ToString() == "Yes")
             {
@@ -67,11 +86,29 @@ namespace crm.chemtelinc.com.Controllers
             }
             else
             {
-                nwe.Subject += callDate.ToString("yyyyMMdd") + " | " + ngi.Incident_County + ", " + ngi.Incident_State + " | " + ngi.IncidentType;
+                nwe.Subject += callDate.ToString("yyyyMMdd") + " | " + ngi.Incident_City + ", " + ngi.Incident_State + " | " + ngi.IncidentType;
             }
-
-            nwe.Body = "The Northwind Hotline was notified at " + ngi.NotificationTime + " " + ngi.Incident_Time_Zone + " that at approximately " +
-                ngi.Incident_Time + " " + ngi.Incident_Time_Zone + " on " + incidentDate.ToString("MM/dd/yyyy");
+            nwe.Body = "The Northwind Incident Hotline was notified at " + ngi.NotificationTime + " EST that at approximately " + ngi.Incident_Time + " " +ngi.Incident_Time_Zone + " on " + incidentDate.ToString("yyyy-MM-dd") + ", " +
+               ngi.IncidentDetails + ". This occurred at " + ngi.IncidentLocation + " near " + ngi.Incident_City + ", " + ngi.Incident_State + ".";
+            if (ngi.InjuryExposureIllness == "Yes")
+            {
+                nwe.Body += " There was a report of an injury, exposure, or illness associated with this incident.";
+            } else
+            {
+                nwe.Body += " There were no injuries reported.";
+            }
+            if (ngi.ChemicalSpillRelease == "Yes") //If there was a chemical/product spill/release
+            {
+                nwe.Body += " There was a report of a chemical/product spill/release.";
+                if (ngi.WaterbodiesImpacted == "Yes") //If there were bodies 
+                {
+                    nwe.Body += " The spill/release did impact one or more water bodies. " + ngi.ImpactedAreas + ".";
+                }
+            } else
+            {
+                nwe.Body += " There was no reported spill/release.";
+            }
+            nwe.Body += " An incident report will be initiated within the Northwind Incident Management System and assigned to the EHSR Advisor for update and completion.";
             return View("EmailForm", nwe);
         }
 
@@ -79,28 +116,38 @@ namespace crm.chemtelinc.com.Controllers
         {
             NorthwindPipeline n = new NorthwindPipeline();
             NorthwindEmail nwe = new NorthwindEmail();
-
             n = GetPipelineData(fc);
-            Add.AddNorthwindPipeline(Session["constring"].ToString(), n);
-            n.ID = GetLatestPipelineID(); // Gets and sets the new ID that was just entered.
 
+            if (fc["Revised"].ToString() != "true") //New report
+            {
+                Add.AddNorthwindPipeline(constring, n);
+                n.ID = GetLatestPipelineID(); // Gets and sets the new ID that was just entered.
+            }
+            else // Updated report (user clicked Back To Report button)
+            {
+                n.ID = Int32.Parse(fc["ReportID"].ToString());
+                Update.UpdateNorthwindPipeline(constring, n);
+            }
             string filepath = CreatePipelineReport(n.ID, n.Call_Date.Year.ToString());
-            string CallTime12Hr = "";
-            if (Int32.Parse(n.Call_Time.Substring(0,2)) > 12 )
+            string LocationString = "";
+            if (n.City == "UNK")
             {
-                CallTime12Hr = (Int32.Parse(n.Call_Time.Substring(0, 2)) - 12).ToString(); // Get the 12 hr format of the time for PM.
-                CallTime12Hr += ":" + Int32.Parse(n.Call_Time.Substring(3, 2)) + " PM";
-            } else
+                LocationString = n.ClosestLandmark;
+            }
+            else
             {
-                CallTime12Hr = n.Call_Time + " AM"; // Keeps the time as is for AM.
+                LocationString = n.City;
             }
 
-            nwe.ToEmails = "mpepitone@ehs.com,ers@ehs.com,NWLeadership@nwmidstream.com," + n.NotifiedEmail;
+
+            nwe.ID = n.ID;
+            nwe.ReportType = "Pipeline";
+            nwe.ToEmails = "mpayne@nwmidstream.com,rregister@nwmidstream.com,avillalobos@nwmidstream.com,ben@nwmidstream.com,emiller@nwmidstream.com,jsouthard@nwmidstream.com,dbarton@nwmidstream.com,jyamartino@nwmidstream.com,klewis@nwmidstream.com,jsisk@nwmidstream.com,mpepitone@ehs.com,ers@ehs.com";
             nwe.FilePath = filepath;
-            nwe.Subject = "Northwind Pipeline Incident Notification: " + n.Call_Date.ToString("yyyyMMdd") + " : " + n.County + ", " + n.State;
-            nwe.Body = "The Northwind Pipeline Emergency Hotline was notified at: " + CallTime12Hr + " " + n.TimeZone + " of a potential incident occurring on or near Northwind operated assets.\n" +
-                "The Northwind Operations team has been notified of the situation and is in the process of investigating the reported issue. \n" +
-                "The initial details provided by the caller are in the attached report.  Additional information will be provided as it becomes available.";
+            nwe.Subject = "Pipeline Incident Notification: " + n.Call_Date.ToString("yyyyMMdd") + " " + n.County + ", " + n.State;
+            nwe.Body = "Northwind's Pipeline Emergency Hotline was notified at: " + DateTime.Parse(n.Call_Time).ToString("HH:mm") + " of a potential incident located in " + n.County + ", " + n.State + " near " + LocationString
+                 + ". Northwind personnel have been notified of the situation and are currently investigating the report." +
+                " Additional details are attached to this email.";
             return View("EmailForm", nwe);
         }
 
@@ -133,6 +180,20 @@ namespace crm.chemtelinc.com.Controllers
 
             return RedirectToAction("Index", "Home", new { Result = ResultCode });
         }
+
+        public ActionResult BackToReport(FormCollection fc)
+        {
+            ViewBag.Revised = "true";
+            if (fc["ReportType"].ToString() == "Pipeline")
+            {
+                NorthwindPipeline nwp = new NorthwindPipeline(constring, int.Parse(fc["reportid"].ToString()));  //Gets the desired report and puts it into a custom class variable.
+                return View("Pipeline", nwp);
+            } else
+            {
+                NorthwindGenInc ngi = new NorthwindGenInc(constring, int.Parse(fc["reportid"].ToString()));
+                return View("GeneralIncident", ngi);
+            }
+        }
         #endregion
 
         private NorthwindGenInc GetGenIncData(FormCollection fc)
@@ -150,7 +211,7 @@ namespace crm.chemtelinc.com.Controllers
             n.Incident_Time_Zone = fc["txtincidenttimezone"].ToString();
             n.Incident_City = fc["txtincidentcity"].ToString();
             n.Incident_State = fc["txtstate"].ToString();
-            n.Incident_County = fc["txtincidentcounty"].ToString();
+            //n.Incident_County = fc["txtincidentcounty"].ToString();
             n.FacilityOrProject = fc["ddlFacilityOrProject"].ToString();
             n.IncidentLocation = fc["txtIncidentLocation"].ToString();
             n.IncidentType = fc["IncidentType"].ToString();
@@ -166,6 +227,8 @@ namespace crm.chemtelinc.com.Controllers
             n.HSERContactNumber = fc["txthsercontactnumber"].ToString();
             n.NotificationDate = DateTime.Parse(fc["NotificationDate"].ToString());
             n.NotificationTime = fc["NotificationTime"].ToString();
+            n.InjuryExposureIllness = fc["InjuryExposureIllness"].ToString();
+            n.ChemicalSpillRelease = fc["ChemicalSpillRelease"].ToString();
 
             return n;
         }
@@ -180,8 +243,9 @@ namespace crm.chemtelinc.com.Controllers
             n.City = fc["txtcity"].ToString();
             n.State = fc["txtstate"].ToString();
             n.County = fc["txtcounty"].ToString();
-            n.GeneralDirectionFrom = fc["GenDirFrom"].ToString();
+            n.DirectionFromLandmark = fc["DirectionFromLandmark"].ToString();
             n.ClosestLandmark = fc["ClosestLandmark"].ToString();
+            n.DistanceFromLandmark = fc["DistanceFromLandmark"].ToString();
             n.Intersection = fc["txtintersection"].ToString();
             n.Observing = fc["txtobserving"].ToString();
 
@@ -306,7 +370,7 @@ namespace crm.chemtelinc.com.Controllers
                 }
                 ReportDocument cryRpt = new ReportDocument(); //Defines a report variable.
                 string rptLoadPath = @"\\chem-fs1.ers.local\Chemtel Apps\Crystal Reports\NorthwindPipelineIncident.rpt";  //This is the path to the report template.
-                string outPutFilePath = path + "Northwind Pipeline - " +  id.ToString() + ".pdf"; //Sets the path to the PDF file
+                string outPutFilePath = path + "Northwind Pipeline - " + id.ToString() + ".pdf"; //Sets the path to the PDF file
                 if (System.IO.File.Exists(oldpath))
                 {
                     System.IO.File.Delete(oldpath);
@@ -320,7 +384,8 @@ namespace crm.chemtelinc.com.Controllers
                     cryRpt.ExportToDisk(ExportFormatType.PortableDocFormat, outPutFilePath); //Converts the report to a PDF file.
                 }
                 return outPutFilePath; //Returns the path of the report to btnsubmit_Click so the email form can attach it.
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 string path = @"\\chem-fs1.ers.local\Log Files\Chemical.log";
                 StreamWriter log;
@@ -330,7 +395,58 @@ namespace crm.chemtelinc.com.Controllers
                     log = System.IO.File.CreateText(path);
                 //string sp = " ";
                 string mod = "CreatePipelineReport";
-                string pfile = "CrestwoodController.cs";
+                string pfile = "NorthwindController.cs";
+                log.WriteLine("Date: " + DateTime.Now.ToShortDateString() + "\n" + "Time: " + DateTime.Now.ToShortTimeString() + "\n" + "Error Message: " + ex.Message + "\n" + "File: " + pfile + "\n" + "Method: " + mod + "\n\n\n");
+                log.Close();
+
+                var client = new SendGridClient("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");
+                var from = new EmailAddress("ers@ehs.com");
+                string body = "Check the log file!\n" + ex.Message;
+                string subject = "Chemical Report Manager Error";
+                var to = new EmailAddress("mpepitone@ehs.com");
+                var msg = MailHelper.CreateSingleEmail(from, to, subject, "", body);
+                client.SendEmailAsync(msg);
+                return "false";
+            }
+        }
+        private string CreateGenIncReport(int id, string Year)
+        {
+            try
+            {
+                string path = @"\\chem-fs1.ers.local\completed reports\Northwind Incidents\General Incident\" + Year + "\\";
+                string oldpath = @"\\chem-fs1.ers.local\completed reports\Northwind Incidents\General Incident\" + Year + "\\Northwind GI - " + id.ToString() + ".pdf";
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                ReportDocument cryRpt = new ReportDocument(); //Defines a report variable.
+                string rptLoadPath = @"\\chem-fs1.ers.local\Chemtel Apps\Crystal Reports\NorthwindGenInc.rpt";  //This is the path to the report template.
+                string outPutFilePath = path + "Northwind GI - " + id.ToString() + ".pdf"; //Sets the path to the PDF file
+                if (System.IO.File.Exists(oldpath))
+                {
+                    System.IO.File.Delete(oldpath);
+                }
+                cryRpt.Load(rptLoadPath); //Loads the report template used to create the report.
+                using (chemreporterEntities context = new chemreporterEntities())  //Initializes the Entity Model.
+                {
+                    var query = (from obj in context.NorthwindGeneralIncidents where obj.ID == id select obj).ToList();  //This query will be used to retrieve the record.
+                    cryRpt.SetDataSource(query); //The report's data source is set to the query.  This executes the query and creats the report.
+                                                 // cryRpt.SetParameterValue(0, id); //Sets the parameter value.
+                    cryRpt.ExportToDisk(ExportFormatType.PortableDocFormat, outPutFilePath); //Converts the report to a PDF file.
+                }
+                return outPutFilePath; //Returns the path of the report to btnsubmit_Click so the email form can attach it.
+            }
+            catch (Exception ex)
+            {
+                string path = @"\\chem-fs1.ers.local\Log Files\Chemical.log";
+                StreamWriter log;
+                if (System.IO.File.Exists(path))
+                    log = System.IO.File.AppendText(path);
+                else
+                    log = System.IO.File.CreateText(path);
+                //string sp = " ";
+                string mod = "CreateGenIncReport";
+                string pfile = "NorthwindController.cs";
                 log.WriteLine("Date: " + DateTime.Now.ToShortDateString() + "\n" + "Time: " + DateTime.Now.ToShortTimeString() + "\n" + "Error Message: " + ex.Message + "\n" + "File: " + pfile + "\n" + "Method: " + mod + "\n\n\n");
                 log.Close();
 
@@ -348,7 +464,7 @@ namespace crm.chemtelinc.com.Controllers
         {
             int id = 0;
             string strsql = "SELECT TOP 1 id FROM NorthwindPipelineIncidents ORDER BY ID DESC";
-            using (SqlConnection cn = new SqlConnection(Session["constring"].ToString()))
+            using (SqlConnection cn = new SqlConnection(constring))
             {
                 cn.Open();
                 using (SqlCommand cmd = new SqlCommand(strsql, cn))
@@ -359,5 +475,203 @@ namespace crm.chemtelinc.com.Controllers
             }
             return id;
         }
+        private int GetLatestGenIncID()
+        {
+            int id = 0;
+            string strsql = "SELECT TOP 1 id FROM NorthwindGeneralIncidents ORDER BY ID DESC";
+            using (SqlConnection cn = new SqlConnection(constring))
+            {
+                cn.Open();
+                using (SqlCommand cmd = new SqlCommand(strsql, cn))
+                {
+
+                    id = int.Parse(cmd.ExecuteScalar().ToString());
+                }
+            }
+            return id;
+        }
+
+        #region Log Functions
+        public ActionResult NorthwindLogs()
+        {
+            string LogType = Request.QueryString["SelectedLog"].ToString();
+            ViewBag.LogSelected = LogType;
+            List<NorthwindLog> NWLogList = new List<NorthwindLog>();
+
+            if (LogType == "GeneralIncident")
+            {
+                string sqlcmd = "SELECT TOP 100 * FROM NorthwindGeneralIncidents ORDER BY id DESC";
+                using (SqlConnection con = new SqlConnection(Session["constring"].ToString()))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlcmd, con))
+                    {
+                        con.Open();
+                        SqlDataReader sdr = cmd.ExecuteReader();
+                        while (sdr.Read())
+                        {
+                            NorthwindLog c = new NorthwindLog();
+                            c.id = Int32.Parse(sdr["ID"].ToString());
+                            c.ERSOperator = sdr["ERSOperator"].ToString();
+                            c.CallerName = sdr["CallerName"].ToString();
+                            c.CallerPhone = sdr["CallerPhone"].ToString();
+                            c.Incident_Contractor_Or_Employee = sdr["EmpOrContract"].ToString();
+                            c.ContractedCompany = sdr["ContractedCompany"].ToString();
+                            c.CallDate = sdr["CallDate"].ToString().Split(' ')[0];
+                            c.CallTime = sdr["CallTime"].ToString();
+                            c.IncidentDate = sdr["IncidentDate"].ToString().Split(' ')[0];
+                            c.IncidentTime = sdr["IncidentTime"].ToString();
+                            c.IncidentTimeZone = sdr["IncidentTimeZone"].ToString();
+                            c.IncidentCity = sdr["IncidentCity"].ToString();
+                            c.State = sdr["IncidentState"].ToString();
+                            c.FacilityOrProject = sdr["FacilityOrProject"].ToString();
+                            c.IncidentLocation = sdr["IncidentLocation"].ToString();
+                            c.IncidentNature = sdr["IncidentNature"].ToString();
+                            c.InjuryExposureIllness = sdr["InjuryExposureIllness"].ToString();
+                            c.ChemicalSpillRelease = sdr["ChemicalSpillRelease"].ToString();
+                            c.WaterBodiesImpacted = sdr["WaterbodiesImpacted"].ToString();
+                            c.ImpactedArea = sdr["ImpactedAreaDetails"].ToString();
+                            c.IncidentDetails = sdr["IncidentDetails"].ToString();
+                            c.IndividualSafety = sdr["IndividualSafety"].ToString();
+                            c.Notify911 = sdr["Notify911"].ToString();
+                            c.TransportToHospital = sdr["TransportToHospital"].ToString();
+                            c.MediaOnScene = sdr["MediaOnScene"].ToString();
+                            c.EMSOnScene = sdr["EmergencyResponders"].ToString();
+                            c.HSERName = sdr["HSERName"].ToString();
+                            c.HSERPhone = sdr["HSERPhone"].ToString();
+                            c.NotificationDate = sdr["NotificationDate"].ToString().Split(' ')[0];
+                            c.NotificationTime = sdr["NotificationTime"].ToString();
+                            NWLogList.Add(c);
+                        }
+                    }
+                }
+                return View(NWLogList.ToList());
+            }
+            else if (LogType == "Pipeline")
+            {
+                string sqlcmd = "SELECT TOP 100 * FROM NorthwindPipelineIncidents ORDER BY id DESC";
+                using (SqlConnection con = new SqlConnection(constring))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlcmd, con))
+                    {
+                        con.Open();
+                        SqlDataReader sdr = cmd.ExecuteReader();
+                        while (sdr.Read())
+                        {
+                            NorthwindLog c = new NorthwindLog();
+                            c.id = Int32.Parse(sdr["ID"].ToString());
+                            c.County = sdr["County"].ToString();
+                            c.State = sdr["State"].ToString();
+                            c.Observing = sdr["Observing"].ToString();
+                            c.Date = sdr["CallDate"].ToString();
+                            c.NotificationDate = sdr["NotificationDate"].ToString();
+                            c.NotificationTime = sdr["NotificationTime"].ToString();
+                            NWLogList.Add(c);
+                        }
+                    }
+                }
+                return View(NWLogList.ToList());
+            }
+            else
+            {
+                return View(NWLogList.ToList());
+            }
+        }
+        public ActionResult ReportLogSearch(FormCollection fc)
+        {
+            List<NorthwindLog> NWLogList = new List<NorthwindLog>();
+            if (fc["submittype"].ToString() == "Search")
+            {
+                if (fc["logtype"].ToString() == "GeneralIncident")
+                {
+                    string sqlcmd = "SELECT * FROM NorthwindGeneralIncidents WHERE id LIKE '%" + fc["reportid"] + "%' ORDER BY id DESC";
+                    using (SqlConnection con = new SqlConnection(Session["constring"].ToString()))
+                    {
+                        using (SqlCommand cmd = new SqlCommand(sqlcmd, con))
+                        {
+                            con.Open();
+                            SqlDataReader sdr = cmd.ExecuteReader();
+                            while (sdr.Read())
+                            {
+                                NorthwindLog c = new NorthwindLog();
+                                c.id = Int32.Parse(sdr["ID"].ToString());
+                                c.ERSOperator = sdr["ERSOperator"].ToString();
+                                c.CallerName = sdr["CallerName"].ToString();
+                                c.CallerPhone = sdr["CallerPhone"].ToString();
+                                c.Incident_Contractor_Or_Employee = sdr["EmpOrContract"].ToString();
+                                c.ContractedCompany = sdr["ContractedCompany"].ToString();
+                                c.CallDate = sdr["CallDate"].ToString();
+                                c.CallTime = sdr["CallTime"].ToString();
+                                c.IncidentDate = sdr["IncidentDate"].ToString();
+                                c.IncidentTime = sdr["IncidentTime"].ToString();
+                                c.IncidentTimeZone = sdr["IncidentTimeZone"].ToString();
+                                c.IncidentCity = sdr["IncidentCity"].ToString();
+                                c.State = sdr["IncidentState"].ToString();
+                                c.FacilityOrProject = sdr["FacilityOrProject"].ToString();
+                                c.IncidentLocation = sdr["IncidentLocation"].ToString();
+                                c.IncidentNature = sdr["IncidentNature"].ToString();
+                                c.InjuryExposureIllness = sdr["InjuryExposureIllness"].ToString();
+                                c.ChemicalSpillRelease = sdr["ChemicalSpillRelease"].ToString();
+                                c.WaterBodiesImpacted = sdr["WaterbodiesImpacted"].ToString();
+                                c.ImpactedArea = sdr["ImpactedAreaDetails"].ToString();
+                                c.IncidentDetails = sdr["IncidentDetails"].ToString();
+                                c.IndividualSafety = sdr["IndividualSafety"].ToString();
+                                c.Notify911 = sdr["Notify911"].ToString();
+                                c.TransportToHospital = sdr["TransportToHospital"].ToString();
+                                c.MediaOnScene = sdr["MediaOnScene"].ToString();
+                                c.EMSOnScene = sdr["EmergencyResponders"].ToString();
+                                c.HSERName = sdr["HSERName"].ToString();
+                                c.HSERPhone = sdr["HSERPhone"].ToString();
+                                c.NotificationDate = sdr["NotificationDate"].ToString();
+                                c.NotificationTime = sdr["NotificationTime"].ToString();
+                                NWLogList.Add(c);
+                            }
+                        }
+                    };
+                }
+                else if (fc["logtype"].ToString() == "Pipeline")
+                {
+                    string sqlcmd = "SELECT * FROM NorthwindPipelineIncidents WHERE id LIKE '%" + fc["reportid"] + "%' ORDER BY id DESC";
+                    using (SqlConnection con = new SqlConnection(constring))
+                    {
+                        using (SqlCommand cmd = new SqlCommand(sqlcmd, con))
+                        {
+                            con.Open();
+                            SqlDataReader sdr = cmd.ExecuteReader();
+                            while (sdr.Read())
+                            {
+                                NorthwindLog c = new NorthwindLog();
+                                c.id = Int32.Parse(sdr["id"].ToString());
+                                c.County = sdr["County"].ToString();
+                                c.State = sdr["state"].ToString();
+                                c.Observing = sdr["Observing"].ToString();
+                                c.Date = sdr["CallDate"].ToString();
+                                c.NotificationDate = sdr["NotificationDate"].ToString();
+                                c.NotificationTime = sdr["NotificationTime"].ToString();
+                                NWLogList.Add(c);
+                            }
+                        }
+                    };
+                }
+                ViewBag.LogSelected = fc["logtype"].ToString();
+                return View("NorthwindLogs", NWLogList.ToList());
+            }
+            else if (fc["submittype"].ToString() == "Revise") //Revise Selected or Typed Report ID
+            {
+                if (fc["logtype"].ToString() == "Pipeline")
+                {
+                    ViewBag.Revised = "true";
+                    NorthwindPipeline nwpi = new NorthwindPipeline(constring, int.Parse(fc["reportid"].ToString()));
+                    return View("Pipeline", nwpi);
+                } else
+                {
+
+                    ViewBag.Revised = "true";
+                    NorthwindGenInc ngi = new NorthwindGenInc(constring, int.Parse(fc["reportid"].ToString()));
+                    return View("GeneralIncident", ngi);
+                }
+            }
+            return View("CrestwoodLogs");
+        }
+        #endregion
     }
 }

@@ -527,6 +527,19 @@
     <Property Name="IncidentZipCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="ReportType" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
     <Property Name="CallersPhoneExt" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="DOTName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="TradeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PrimaryHazardClass" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PackingGroup" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ContainerType" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ResidueContainer" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="TankTruckNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PRONumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ShipperManufacturer" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ShipperLocation" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Consignee" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ConsigneeLocation" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Carrier" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="globasereportdata">
     <Key>
@@ -1200,35 +1213,63 @@
     <EntitySet Name="tickets" EntityType="Self.ticket" />
     <EntitySet Name="veolianonincidents" EntityType="Self.veolianonincident" />
     <EntitySet Name="CRMWebUs" EntityType="Self.CRMWebU" />
-    <EntitySet Name="NorthwindGeneralIncidents" EntityType="chemreporterModel.NorthwindGeneralIncident" />
     <EntitySet Name="NorthwindPipelineIncidents" EntityType="chemreporterModel.NorthwindPipelineIncident" />
+    <EntitySet Name="NorthwindGeneralIncidents" EntityType="chemreporterModel.NorthwindGeneralIncident" />
   </EntityContainer>
+  <EntityType Name="NorthwindPipelineIncident">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CallDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="CallTime" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="IncidentDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="IncidentTime" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="TimeZone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="State" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="County" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="DirectionFromLandmark" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="DistanceFromLandmark" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ClosestLandmark" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Intersection" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Observing" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Smoke" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="Flames" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="Hissing" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="Liquid" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="OilSheen" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="PipelineMarkers" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="EggOdor" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="VaporMist" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="ROWorWellPad" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Tanks" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="Landowner" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="LeaseWellName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CallerName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CallerPhone" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Notify911" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="Injuries" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="ImmediateDanger" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="RelationToIncident" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="SafelyWarn" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="ReportTakerName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ReportTakerEmail" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Temperature" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="WindSpeed" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="WindDirection" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="WeatherConditions" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="NotifiedName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="NotifiedNumber" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="NotifiedEmail" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="NotificationDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="NotificationTime" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="SeeingHearingSmelling" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="AMorPM" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+  </EntityType>
   <EntityType Name="NorthwindGeneralIncident">
     <Key>
       <PropertyRef Name="ID" />
-      <PropertyRef Name="ERSOperator" />
-      <PropertyRef Name="CallerName" />
-      <PropertyRef Name="CallerPhone" />
-      <PropertyRef Name="EmpOrContract" />
-      <PropertyRef Name="ContractedCompany" />
-      <PropertyRef Name="CallDate" />
-      <PropertyRef Name="CallTime" />
-      <PropertyRef Name="IncidentTimeZone" />
-      <PropertyRef Name="IncidentCity" />
-      <PropertyRef Name="IncidentState" />
-      <PropertyRef Name="IncidentCounty" />
-      <PropertyRef Name="FacilityOrProject" />
-      <PropertyRef Name="IncidentLocation" />
-      <PropertyRef Name="IncidentNature" />
-      <PropertyRef Name="IncidentDetails" />
-      <PropertyRef Name="Notify911" />
-      <PropertyRef Name="TransportToHospital" />
-      <PropertyRef Name="MediaOnScene" />
-      <PropertyRef Name="EmergencyResponders" />
-      <PropertyRef Name="HSERName" />
-      <PropertyRef Name="HSERPhone" />
-      <PropertyRef Name="NotificationDate" />
-      <PropertyRef Name="NotificationTime" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ERSOperator" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -1259,92 +1300,7 @@
     <Property Name="HSERPhone" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
     <Property Name="NotificationDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="NotificationTime" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
-  </EntityType>
-  <EntityType Name="NorthwindPipelineIncident">
-    <Key>
-      <PropertyRef Name="ID" />
-      <PropertyRef Name="CallDate" />
-      <PropertyRef Name="CallTime" />
-      <PropertyRef Name="IncidentDate" />
-      <PropertyRef Name="IncidentTime" />
-      <PropertyRef Name="TimeZone" />
-      <PropertyRef Name="City" />
-      <PropertyRef Name="State" />
-      <PropertyRef Name="County" />
-      <PropertyRef Name="GeneralDirectionFrom" />
-      <PropertyRef Name="ClosestLandmark" />
-      <PropertyRef Name="Intersection" />
-      <PropertyRef Name="Observing" />
-      <PropertyRef Name="Smoke" />
-      <PropertyRef Name="Flames" />
-      <PropertyRef Name="Hissing" />
-      <PropertyRef Name="Liquid" />
-      <PropertyRef Name="OilSheen" />
-      <PropertyRef Name="PipelineMarkers" />
-      <PropertyRef Name="EggOdor" />
-      <PropertyRef Name="VaporMist" />
-      <PropertyRef Name="ROWorWellPad" />
-      <PropertyRef Name="Tanks" />
-      <PropertyRef Name="Landowner" />
-      <PropertyRef Name="LeaseWellName" />
-      <PropertyRef Name="CallerName" />
-      <PropertyRef Name="CallerPhone" />
-      <PropertyRef Name="Notify911" />
-      <PropertyRef Name="Injuries" />
-      <PropertyRef Name="ImmediateDanger" />
-      <PropertyRef Name="RelationToIncident" />
-      <PropertyRef Name="SafelyWarn" />
-      <PropertyRef Name="ReportTakerName" />
-      <PropertyRef Name="ReportTakerEmail" />
-      <PropertyRef Name="NotifiedName" />
-      <PropertyRef Name="NotifiedNumber" />
-      <PropertyRef Name="NotifiedEmail" />
-      <PropertyRef Name="NotificationDate" />
-      <PropertyRef Name="NotificationTime" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CallDate" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="CallTime" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-    <Property Name="IncidentDate" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="IncidentTime" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-    <Property Name="TimeZone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="City" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="State" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="County" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="GeneralDirectionFrom" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="ClosestLandmark" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="Intersection" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="Observing" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="Smoke" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
-    <Property Name="Flames" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
-    <Property Name="Hissing" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
-    <Property Name="Liquid" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
-    <Property Name="OilSheen" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
-    <Property Name="PipelineMarkers" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
-    <Property Name="EggOdor" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
-    <Property Name="VaporMist" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
-    <Property Name="ROWorWellPad" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="Tanks" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
-    <Property Name="Landowner" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
-    <Property Name="LeaseWellName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="CallerName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="CallerPhone" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="Notify911" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
-    <Property Name="Injuries" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
-    <Property Name="ImmediateDanger" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
-    <Property Name="RelationToIncident" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="SafelyWarn" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
-    <Property Name="ReportTakerName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="ReportTakerEmail" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="Temperature" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
-    <Property Name="WindSpeed" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
-    <Property Name="WindDirection" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="WeatherConditions" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="NotifiedName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="NotifiedNumber" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="NotifiedEmail" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="NotificationDate" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="NotificationTime" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-    <Property Name="SeeingHearingSmelling" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="InjuryExposureIllness" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="ChemicalSpillRelease" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

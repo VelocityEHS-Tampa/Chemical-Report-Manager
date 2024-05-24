@@ -17,8 +17,8 @@ namespace crm.chemtelinc.com
         public int id { get; set; }
         public string name { get; set; }
         public string email { get; set; }
-        public Nullable<int> Indiana { get; set; }
-        public Nullable<int> NewJersey { get; set; }
-        public Nullable<int> WestVirginia { get; set; }
+        public int Indiana { get; set; }
+        public int NewJersey { get; set; }
+        public int WestVirginia { get; set; }
     }
 }

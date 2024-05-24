@@ -1256,10 +1256,10 @@ namespace ChemicalLibrary
             string strsql = "INSERT INTO NorthwindGeneralIncidents (ERSOperator, CallerName,CallerPhone,EmpOrContract,ContractedCompany,CallDate,CallTime,IncidentDate," +
                 "IncidentTime,IncidentTimeZone,IncidentCity,IncidentState,IncidentCounty,FacilityOrProject,IncidentLocation,IncidentNature,WaterbodiesImpacted," +
                 "ImpactedAreaDetails,IncidentDetails,IndividualSafety,Notify911,TransportToHospital,MediaOnScene,EmergencyResponders,HSERName,HSERPhone," +
-                "NotificationDate,NotificationTime) VALUES (@ers,@callername,@callerphone,@emporcontract,@contractedcompany,@calldate,@calltime," +
+                "NotificationDate,NotificationTime, InjuryExposureIllness, ChemicalSpillRelease) VALUES (@ers,@callername,@callerphone,@emporcontract,@contractedcompany,@calldate,@calltime," +
                 "@incidentdate,@incidenttime,@incidenttimezone,@incidentcity,@incidentstate,@incidentcounty,@facilityorproject,@incidentlocation,@incidentnature," +
                 "@waterbodiesimpacted,@impactedareadetails,@incidentdetails,@individualsafety,@notify911,@transporttohospital,@mediaonscene,@emergencyresponders," +
-                "@hsername,@hserphone,@notificationdate,@notificationtime)";
+                "@hsername,@hserphone,@notificationdate,@notificationtime, @injuryexposureillness, @chemicalspillrelease)";
             using (SqlConnection cn = new SqlConnection(constring))
             {
                 cn.Open();
@@ -1293,6 +1293,8 @@ namespace ChemicalLibrary
                     cmd.Parameters.AddWithValue("@hserphone", n.HSERContactNumber);
                     cmd.Parameters.AddWithValue("@notificationdate", n.NotificationDate);
                     cmd.Parameters.AddWithValue("@notificationtime", n.NotificationTime);
+                    cmd.Parameters.AddWithValue("@injuryexposureillness", n.InjuryExposureIllness);
+                    cmd.Parameters.AddWithValue("@chemicalspillrelease", n.ChemicalSpillRelease);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -1300,10 +1302,10 @@ namespace ChemicalLibrary
 
         public static void AddNorthwindPipeline(string constring, NorthwindPipeline n)
         {
-            string sql = "INSERT INTO NorthwindPipelineIncidents (CallDate, CallTime, IncidentDate, IncidentTime, TimeZone, City, State, County, GeneralDirectionFrom, ClosestLandmark," +
+            string sql = "INSERT INTO NorthwindPipelineIncidents (CallDate, CallTime, IncidentDate, IncidentTime, TimeZone, City, State, County, DirectionFromLandmark, ClosestLandmark,DistanceFromLandmark," +
                 "Intersection, Observing, Smoke, Flames, Hissing, Liquid, OilSheen, PipelineMarkers, EggOdor, VaporMist, ROWorWellPad, Tanks, Landowner, LeaseWellName, CallerName," +
                 "CallerPhone, Notify911, Injuries, ImmediateDanger, RelationToIncident, SafelyWarn, ReportTakerName, ReportTakerEmail, NotifiedName, NotifiedNumber, NotifiedEmail," +
-                "NotificationDate, NotificationTime, SeeingHearingSmelling) VALUES (@CallDate,@CallTime, @IncidentDate,@IncidentTime,@TimeZone,@City,@State,@County,@GeneralDirectionFrom,@ClosestLandmark," +
+                "NotificationDate, NotificationTime, SeeingHearingSmelling) VALUES (@CallDate,@CallTime, @IncidentDate,@IncidentTime,@TimeZone,@City,@State,@County,@DirectionFromLandmark,@ClosestLandmark,@DistanceFromLandmark," +
                 "@Intersection,@Observing,@Smoke,@Flames,@Hissing,@Liquid,@OilSheen,@PipelineMarkers,@EggOdor,@VaporMist,@ROWorWellPad,@Tanks,@Landowner,@LeaseWellName,@CallerName," +
                 "@CallerPhone,@Notify911,@Injuries,@ImmediateDanger,@RelationToIncident,@SafelyWarn,@ReportTakerName,@ReportTakerEmail,@NotifiedName,@NotifiedNumber,@NotifiedEmail," +
                 "@NotificationDate,@NotificationTime, @SeeingHearingSmelling)";
@@ -1320,8 +1322,9 @@ namespace ChemicalLibrary
                     cmd.Parameters.AddWithValue("@City", n.City);
                     cmd.Parameters.AddWithValue("@State", n.State);
                     cmd.Parameters.AddWithValue("@County", n.County);
-                    cmd.Parameters.AddWithValue("@GeneralDirectionFrom", n.GeneralDirectionFrom);
+                    cmd.Parameters.AddWithValue("@DirectionFromLandmark", n.DirectionFromLandmark);
                     cmd.Parameters.AddWithValue("@ClosestLandmark", n.ClosestLandmark);
+                    cmd.Parameters.AddWithValue("@DistanceFromLandmark", n.DistanceFromLandmark);
                     cmd.Parameters.AddWithValue("@Intersection", n.Intersection);
                     cmd.Parameters.AddWithValue("@Observing", n.Observing);
                     cmd.Parameters.AddWithValue("@Smoke", n.Smoke);

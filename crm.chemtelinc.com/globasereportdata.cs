@@ -102,6 +102,6 @@ namespace crm.chemtelinc.com
         public string datTi2 { get; set; }
         public string datTi3 { get; set; }
         public string txtLastField { get; set; }
-        public Nullable<System.DateTime> DateSearch { get; set; }
+        public System.DateTime DateSearch { get; set; }
     }
 }

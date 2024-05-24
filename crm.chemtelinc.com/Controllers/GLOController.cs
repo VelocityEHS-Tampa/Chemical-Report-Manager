@@ -77,8 +77,15 @@ namespace crm.chemtelinc.com.Controllers
             {
                 updated = "true";  //Sets the corrected flag to true.
                 ViewBag.Updated = "true";
-            } else if (fc["UpdateOrCorrect"] == "Back To Report")
+            }
+            else if (fc["UpdateOrCorrect"] == "Back To Report")
             {
+                BackToReport = "true";
+                ViewBag.BackToReport = "true";
+            }
+            else if (fc["UpdateOrCorrect"] == "Void Report")
+            {
+                VoidReport(fc["cbsearch"].ToString());
                 BackToReport = "true";
                 ViewBag.BackToReport = "true";
             }
@@ -204,6 +211,13 @@ namespace crm.chemtelinc.com.Controllers
             GLOCountyList CountyInfo = new GLOCountyList(Session["constring"].ToString(), countycode.County_Code);
             return View(CountyInfo);
         }
+
+        private void VoidReport(string id)
+        {
+            GLOBaseReportData g = new GLOBaseReportData();  //Calls the custom class constructor.
+            g = GetVoidData(id);
+            Update.UpdateGLOBaseReportData(Session["constring"].ToString(), g);  //Static class method that adds the data to the database.
+        }
         #endregion
 
         #region submit new glo report
@@ -211,12 +225,23 @@ namespace crm.chemtelinc.com.Controllers
         {
             if (fc["SubmitGLOForm"].ToString() == "Commit Report")
             {
-                string NewID = CommitReport(fc); // Run function to add first half of report to database and get GLO ID
+                if (CheckForVoidID() == "")
+                {
+                    string NewID = CommitReport(fc); //Run function to add first half of report to database and get GLO ID
+                    GLOBaseReportData glo = new GLOBaseReportData(Session["constring"].ToString(), NewID);  //Gets the desired report and puts it into a custom class variable.
+                } else
+                {
+                    string VoidedID = "";
+                    VoidedID = CheckForVoidID();
+                    GLOBaseReportData g = new GLOBaseReportData();  //Calls the custom class constructor.
+                    fc["txtspillid"] = VoidedID;
+                    g = GetData(fc); //This method returns the form data and puts it in the custom class variable.
+                    Update.UpdateGLOBaseReportData(Session["constring"].ToString(), g);  //Static class method that adds the data to the database.
+                }
                 report = "All";
-                GLOBaseReportData glo = new GLOBaseReportData(Session["constring"].ToString(), NewID);  //Gets the desired report and puts it into a custom class variable.
                 ViewBag.Committed = "true";
                 return View("GLOReport", glo);
-            } 
+            }
             else
             {
                 GLOBaseReportData g = new GLOBaseReportData();  //Calls the custom class constructor.
@@ -421,7 +446,8 @@ namespace crm.chemtelinc.com.Controllers
             if (fc["Corrected"].ToString() == "true")
             {
                 user = fc["ersop"].ToString();
-            } else
+            }
+            else
             {
                 user = Session["Username"].ToString().ToUpper();
             }
@@ -566,6 +592,98 @@ namespace crm.chemtelinc.com.Controllers
                 g.Last_Field = "";
             return g;
         }
+        private GLOBaseReportData GetVoidData(string id) //Adds blank values to report, so that the next report can use this ID and use the UPDATE method.
+        {
+            GLOBaseReportData g = new GLOBaseReportData();
+            g.Spill_ID = id;
+            g.Drill_Txt = "";
+            g.Report_Taken_Date = "";
+            g.Date_Search = DateTime.Parse("1/1/1753");
+            g.Report_Taken_Time = "";
+            g.Notification_Agency = "";
+            g.Report_Taken_By = "VOID";
+            g.Discharge_Date = "";
+            g.Discharge_Time = "";
+            g.Discharge_Reported_By = "";
+            g.Report_Party_Affiliation = "";
+            g.Discharged_Phone_1 = "";
+            g.Discharged_Phone_2 = "";
+            g.Material_1 = "";
+            g.Material_2 = "";
+            g.Material_3 = "";
+            g.Material_4 = "";
+            g.Material_5 = "";
+            g.CASUN_1 = "";
+            g.CASUN_2 = "";
+            g.CASUN_3 = "";
+            g.CASUN_4 = "";
+            g.CASUN_5 = "";
+            g.Amount_Spilled_1 = "";
+            g.Amount_Spilled_2 = "";
+            g.Amount_Spilled_3 = "";
+            g.Amount_Spilled_4 = "";
+            g.Amount_Spilled_5 = "";
+            g.Unit_Recovered_1 = "";
+            g.Unit_Recovered_2 = "";
+            g.Unit_Recovered_3 = "";
+            g.Unit_Recovered_4 = "";
+            g.Unit_Recovered_5 = "";
+            g.Spill_County = "";
+            g.Origin = "";
+            g.Spill_Receiving_Water = "";
+            g.Spill_Amount_In_Water = "";
+            g.Spill_Amount_In_Water_Units = "";
+            g.Land = "";
+            g.Spill_In_Water = "";
+            g.Coastal_Water = "";
+            g.Spill_Air_Release = "";
+            g.Spill_Location = "";
+            g.NRC_Number = "";
+            g.Actions_Taken_Clean_Up_Status = "";
+            g.RRC_Lease_Name = "";
+            g.RRC_Lease_Number = "";
+            g.RRC_Field_Name = "";
+            g.Land_Owner = "";
+            g.Agency_Name_1 = "";
+            g.Agency_Name_2 = "";
+            g.Agency_Name_3 = "";
+            g.Where_1 = "";
+            g.Where_2 = "";
+            g.Where_3 = "";
+            g.Who_1 = "";
+            g.Who_2 = "";
+            g.Who_3 = "";
+            g.Date_1 = "";
+            g.Date_2 = "";
+            g.Date_3 = "";
+            g.Time_1 = "";
+            g.Time_2 = "";
+            g.Time_3 = "";
+            g.Spiller = "";
+            g.Spiller_Address = "";
+            g.Spiller_City = "";
+            g.Spiller_State = "";
+            g.Spiller_Zip_Code = "";
+            g.Spiller_Contact = "";
+            g.Spiller_Contact_Phone = "";
+            g.Agcy_Name_1 = "";
+            g.Agcy_Name_2 = "";
+            g.Agcy_Name_3 = "";
+            g.Whr1 = "";
+            g.Whr2 = "";
+            g.Whr3 = "";
+            g.W1 = "";
+            g.W2 = "";
+            g.W3 = "";
+            g.D1 = "";
+            g.D2 = "";
+            g.D3 = "";
+            g.Ti1 = "";
+            g.Ti2 = "";
+            g.Ti3 = "";
+            g.Last_Field = "";
+            return g;
+        }
         private string FormatDate(string date)
         {
             string month = "";
@@ -628,6 +746,21 @@ namespace crm.chemtelinc.com.Controllers
             return ViewingPath; //Returns the path of the report to .
         }            
 
+        private string CheckForVoidID()
+        {
+            string PreviousID = "";
+            string sql = "SELECT TOP 1 * FROM globasereportdata WhERE txtReportTakenBy = 'VOID' ORDER BY cntSpillId ASC";
+            using (SqlConnection con = new SqlConnection(constring))
+            {
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    con.Open();
+                    PreviousID = cmd.ExecuteScalar().ToString();
+                }
+            }
+            return PreviousID;
+
+        }
         #endregion
 
         #region GLO Email Form

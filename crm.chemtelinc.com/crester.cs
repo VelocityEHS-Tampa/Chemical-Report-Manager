@@ -15,8 +15,8 @@ namespace crm.chemtelinc.com
     public partial class crester
     {
         public int id { get; set; }
-        public Nullable<System.DateTime> startdate { get; set; }
-        public Nullable<System.DateTime> enddate { get; set; }
+        public System.DateTime startdate { get; set; }
+        public System.DateTime enddate { get; set; }
         public string name { get; set; }
         public string phone { get; set; }
         public string email { get; set; }

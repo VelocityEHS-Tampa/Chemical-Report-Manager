@@ -23,7 +23,8 @@ namespace crm.chemtelinc.com
         public string City { get; set; }
         public string State { get; set; }
         public string County { get; set; }
-        public string GeneralDirectionFrom { get; set; }
+        public string DirectionFromLandmark { get; set; }
+        public string DistanceFromLandmark { get; set; }
         public string ClosestLandmark { get; set; }
         public string Intersection { get; set; }
         public string Observing { get; set; }
@@ -58,5 +59,6 @@ namespace crm.chemtelinc.com
         public System.DateTime NotificationDate { get; set; }
         public string NotificationTime { get; set; }
         public string SeeingHearingSmelling { get; set; }
+        public string AMorPM { get; set; }
     }
 }

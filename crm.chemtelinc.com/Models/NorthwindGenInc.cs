@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -11,14 +12,20 @@ namespace ChemicalLibrary
 
 
         #region Private Variables
+        int _id;
         DateTime _calldate, _incidentdate, _notificationdate;
         string _ersoperator, _callername, _phonenumber, _emporcontract, _contractedcompany, _timezone, _incidentcity, _incidentstate, _incidentcounty,_facilityorproject,
             _incidentlocation, _incidenttype, _waterbodiesimpacted, _impactedareas, _incidentdetails, _individualsafety, _notify911, _transporttohospital, _mediaonscene, _emergencyresponders,
-            _hsername, _hsercontactnumber, _notificationtime, _incidenttime, _calltime;
+            _hsername, _hsercontactnumber, _notificationtime, _incidenttime, _calltime, _injuryexposureillness, _chemicalspillrelease;
         #endregion
 
 
         #region Public Variables
+        public int ID
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
         public string ERS_Operator
         {
             get { return _ersoperator; }
@@ -160,10 +167,21 @@ namespace ChemicalLibrary
             get { return _incidenttype; }
             set { _incidenttype = value; }
         }
+        public string InjuryExposureIllness
+        {
+            get { return _injuryexposureillness; }
+            set { _injuryexposureillness = value; }
+        }
+        public string ChemicalSpillRelease
+        {
+            get { return _chemicalspillrelease; }
+            set { _chemicalspillrelease = value; }
+        }
         #endregion
 
         public NorthwindGenInc()
         {
+            _id = 0;
             _ersoperator = "";
             _callername = "";
             _phonenumber = "";
@@ -176,7 +194,7 @@ namespace ChemicalLibrary
             _timezone = "";
             _incidentcity = "";
             _incidentstate = "";
-            _incidentcounty = "";
+            _incidentcounty = "N/A";
             _facilityorproject = "";
             _incidentlocation = "";
             _incidenttype = "";
@@ -191,6 +209,59 @@ namespace ChemicalLibrary
             _hsercontactnumber = "";
             _notificationdate = DateTime.Now;
             _notificationtime = "";
+            _injuryexposureillness = "";
+            _chemicalspillrelease = "";
+        }
+        public NorthwindGenInc(string constring, int id)
+        {
+            this.ID = id;
+            SearchByID(constring);
+        }
+        private void SearchByID(string constring)
+        {
+            string strsql = "SELECT * FROM NorthwindGeneralIncidents WHERE ID=@id";
+            using (SqlConnection cn = new SqlConnection(constring))
+            {
+                cn.Open();
+                using (SqlCommand cmd = new SqlCommand(strsql, cn))
+                {
+                    cmd.Parameters.AddWithValue("@id", this.ID);
+                    SqlDataReader rdr = cmd.ExecuteReader();
+                    while (rdr.Read())
+                    {
+                        this.ID = Int32.Parse(rdr["ID"].ToString());
+                        this.ERS_Operator = rdr["ERSOperator"].ToString();
+                        this.Caller_Name = rdr["CallerName"].ToString();
+                        this.Caller_Phone_Number = rdr["CallerPhone"].ToString();
+                        this.EmpOrContract = rdr["EmpOrContract"].ToString();
+                        this.ContractedCompany = rdr["ContractedCompany"].ToString();
+                        this.Call_Date = DateTime.Parse(rdr["CallDate"].ToString());
+                        this.Call_Time = rdr["CallTime"].ToString();
+                        this.Incident_Date = DateTime.Parse(rdr["IncidentDate"].ToString());
+                        this.Incident_Time = rdr["IncidentTime"].ToString();
+                        this.Incident_Time_Zone = rdr["IncidentTimeZone"].ToString();
+                        this.Incident_City= rdr["IncidentCity"].ToString();
+                        this.Incident_State = rdr["IncidentState"].ToString();
+                        this.FacilityOrProject = rdr["FacilityOrProject"].ToString();
+                        this.IncidentLocation = rdr["IncidentLocation"].ToString();
+                        this.IncidentType = rdr["IncidentNature"].ToString();
+                        this.InjuryExposureIllness = rdr["InjuryExposureIllness"].ToString();
+                        this.ChemicalSpillRelease = rdr["ChemicalSpillRelease"].ToString();
+                        this.WaterbodiesImpacted = rdr["WaterbodiesImpacted"].ToString();
+                        this.ImpactedAreas = rdr["ImpactedAreaDetails"].ToString();
+                        this.IncidentDetails = rdr["IncidentDetails"].ToString();
+                        this.IndividualSafety = rdr["IndividualSafety"].ToString();
+                        this.Notify_911 = rdr["Notify911"].ToString();
+                        this.Transport_ToHospital = rdr["TransportToHospital"].ToString();
+                        this.Media_On_Scene = rdr["MediaOnScene"].ToString();
+                        this.Emergency_Responders = rdr["EmergencyResponders"].ToString();
+                        this.HSERName = rdr["HSERName"].ToString();
+                        this.HSERContactNumber = rdr["HSERPhone"].ToString();
+                        this.NotificationDate = DateTime.Parse(rdr["NotificationDate"].ToString());
+                        this.NotificationTime = rdr["NotificationTime"].ToString();
+                    }
+                }
+            }
         }
     }
 }

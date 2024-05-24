@@ -1,0 +1,198 @@
+﻿@model IList<ChemicalLibrary.NorthwindLog>
+@{
+    ViewBag.Title = "Northwind Logs";
+    string LogSelected = ViewBag.LogSelected;
+}
+@if (LogSelected == "GeneralIncident" || LogSelected == "Pipeline")
+{
+
+    <div id="reportsearchcontainer" style="width: 49%;display:inline-block;vertical-align:top; text-align:center;">
+        @using (Html.BeginForm("ReportLogSearch", "Northwind", FormMethod.Post, new { id = "ReportSearchForm" }))
+        {
+            <span>Report Search</span>
+            <hr />
+            <br />
+            <input type="text" name="reportid" id="reportid" class="form-control GLOFieldSpacing" style="width:30%;" placeholder="ID #" />
+            <input type="hidden" name="submittype" id="submittype" />
+            <input type="hidden" name="logtype" id="logtype" value="@LogSelected" />
+            <input type="button" value="Search" class="form-control GLOFieldSpacing" style="width:20%;" onclick="Search()" />
+            <input type="button" value="Refresh" class="form-control GLOFieldSpacing" style="width: 20%;" onclick="ViewPDF()" />
+            <input type="button" value="Revise" class="form-control GLOFieldSpacing" style="width: 20%;" onclick="Revise()" />
+        }
+    </div>
+    <div id="generatereportcontainer" style="width: 50%; display: inline-block; text-align: center;">
+        <span>Monthly Report</span>
+        <hr />
+        <div style="display: inline-block; width: 50%;">
+            <span>Start Date:</span>
+            <input type="date" name="startdate" id="startdate" class="form-control GLOFieldSpacing" style="width:60%;" />
+            <br />
+            <span>End Date:</span>
+            <input type="date" name="enddate" id="enddate" class="form-control GLOFieldSpacing" style="width:60%;" />
+            <input type="button" value="Generate Report" class="form-control GLOFieldSpacing" onclick="GenerateReport('@LogSelected')" />
+        </div>
+    </div>
+    <hr />
+}
+
+@if (LogSelected == "GeneralIncident")
+{
+    <h2 style="text-align:center;">Northwind General Incident Logs</h2>
+    <br />
+    <table cellpadding="3" style="width: 100%; max-width:!important none; ">
+        <tr>
+            <th></th>
+            <th class="LogTableHeaders">ID</th>
+            <th class="LogTableHeaders">ERS Operator</th>
+            <th class="LogTableHeaders">Caller Name</th>
+            <th class="LogTableHeaders">Caller Phone</th>
+            <th class="LogTableHeaders">Employee or Contractor</th>
+            <th class="LogTableHeaders">Contracted Company Name</th>
+            <th class="LogTableHeaders">Call Date</th>
+            <th class="LogTableHeaders">Call Time</th>
+            <th class="LogTableHeaders">Incident Date</th>
+            <th class="LogTableHeaders">Incident Time</th>
+            <th class="LogTableHeaders">Incident Time Zone</th>
+            <th class="LogTableHeaders">Incident City</th>
+            <th class="LogTableHeaders">Incident State</th>
+            <th class="LogTableHeaders">Facility or NW Project</th>
+            <th class="LogTableHeaders">Incident Location</th>
+            <th class="LogTableHeaders">Incident Nature</th>
+            <th class="LogTableHeaders">Injury, Exposure, or Illness</th>
+            <th class="LogTableHeaders">Chemical Spill</th>
+            <th class="LogTableHeaders">Waterbodies Impacted</th>
+            <th class="LogTableHeaders">Impacted Areas</th>
+            <th class="LogTableHeaders">Incident Details</th>
+            <th class="LogTableHeaders">Threat to Safety</th>
+            <th class="LogTableHeaders">Notified 911</th>
+            <th class="LogTableHeaders">Transport to Hospital</th>
+            <th class="LogTableHeaders">Media on Scene</th>
+            <th class="LogTableHeaders">EMS On Scene</th>
+            <th class="LogTableHeaders">HSER Name</th>
+            <th class="LogTableHeaders">HSER Number</th>
+            <th class="LogTableHeaders">Notification Date</th>
+            <th class="LogTableHeaders">Notification Time</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr id="Row_@item.id">
+                <td><input type="radio" name="IDSelected" value="@item.id" onclick="FillTCEQID(this.value)" /></td>
+                <td>@item.id</td>
+                <td>@item.ERSOperator</td>
+                <td>@item.CallerName</td>
+                <td>@item.CallerPhone</td>
+                <td>@item.Incident_Contractor_Or_Employee</td>
+                <td>@item.ContractedCompany</td>
+                <td>@item.CallDate</td>
+                <td>@item.CallTime</td>
+                <td>@item.IncidentDate</td>
+                <td>@item.IncidentTime</td>
+                <td>@item.IncidentTimeZone</td>
+                <td>@item.IncidentCity</td>
+                <td>@item.State</td>
+                <td>@item.FacilityOrProject</td>
+                <td>@item.IncidentLocation</td>
+                <td>@item.IncidentNature</td>
+                <td>@item.InjuryExposureIllness</td>
+                <td>@item.ChemicalSpillRelease</td>
+                <td>@item.WaterBodiesImpacted</td>
+                <td>@item.ImpactedArea</td>
+                <td>@item.IncidentDetails</td>
+                <td>@item.IndividualSafety</td>
+                <td>@item.Notify911</td>
+                <td>@item.TransportToHospital</td>
+                <td>@item.MediaOnScene</td>
+                <td>@item.EMSOnScene</td>
+                <td>@item.HSERName</td>
+                <td>@item.HSERPhone</td>
+                <td>@item.NotificationDate</td>
+                <td>@item.NotificationTime</td>
+            </tr>
+        }
+    </table>
+}
+else if (LogSelected == "Pipeline")
+{
+    <h2>Northwind Pipeline Logs</h2>
+    <br />
+    <table cellpadding="3" style="width: 100%; max-width:!important none; ">
+        <tr>
+            <th class="LogTableHeaders"></th>
+            <th class="LogTableHeaders">id</th>
+            <th class="LogTableHeaders">County</th>
+            <th class="LogTableHeaders">State</th>
+            <th class="LogTableHeaders">Observing</th>
+            <th class="LogTableHeaders">Call Date</th>
+            <th class="LogTableHeaders">NotificationDate</th>
+            <th class="LogTableHeaders">NotificationTime</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr id="Row_@item.id">
+                <td><input type="radio" name="IDSelected" value="@item.id" onclick="FillTCEQID(@item.id)" /></td>
+                <td>@item.id</td>
+                <td>@item.County</td>
+                <td>@item.State</td>
+                <td>@item.Observing</td>
+                <td>@item.Date.Split(' ')[0]</td>
+                <td>@item.NotificationDate</td>
+                <td>@item.NotificationTime</td>
+            </tr>
+        }
+    </table>
+}
+
+
+<script>
+    function GenerateReport() {
+        var x = document.getElementById('startdate').value;
+        var y = document.getElementById('enddate').value;
+        return true;
+    }
+    function Search() {
+        document.getElementById("submittype").value = "Search";
+        document.getElementById("ReportSearchForm").submit();
+
+    }
+    function ViewPDF() {
+        location.reload();
+    }
+    function Revise() {
+        document.getElementById("submittype").value = "Revise";
+        document.getElementById("ReportSearchForm").submit();
+    }
+    function FillTCEQID(id) {
+        document.getElementById("reportid").value = id;
+    }
+    @*function UpdateCrestInitials(id) {
+        var NewInitials = document.getElementById('Initials_' + id).value;
+
+        $.ajax({
+            url: '/Crestwood/UpdateCrestwoodInitials',
+            data: { IncidentID: id, Initials: NewInitials, ReportType: "@LogSelected" },
+            type: 'GET',
+            success: function (data) {
+                alert("The report has been updated.");
+            },
+            error: function (date) {
+                alert("ERROR!");
+            }
+        })
+    }
+
+    function GenerateReport(LogType) {
+        $.ajax({
+            url: '/Crestwood/GenerateReport',
+            data: { StartDate: document.getElementById('startdate').value, EndDate: document.getElementById('enddate').value, ReportType: LogType },
+            type: 'GET',
+            success: function (data) {
+                alert("Report Generated Successfully!");
+                window.open(data.file);
+            },
+            error: function (date) {
+                alert("ERROR!");
+            }
+        })
+    }*@
+
+</script>

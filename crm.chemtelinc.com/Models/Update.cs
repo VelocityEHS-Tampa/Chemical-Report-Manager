@@ -1214,6 +1214,118 @@ namespace ChemicalLibrary
             
         }
         
+        public static void UpdateNorthwindPipeline(string constring, NorthwindPipeline n)
+        {
+            string sql = "UPDATE NorthwindPipelineIncidents SET CallDate = @CallDate,CallTime = @CallTime,IncidentDate = @IncidentDate," +
+                "IncidentTime = @IncidentTime,TimeZone = @TimeZone,City = @City,State = @State,County = @County,DirectionFromLandmark = @DirectionFromLandmark," +
+                "ClosestLandmark = @ClosestLandmark,DistanceFromLandmark = @DistanceFromLandmark,Intersection = @Intersection,Observing = @Observing," +
+                "Smoke = @Smoke,Flames = @Flames,Hissing = @Hissing,Liquid = @Liquid,OilSheen = @OilSheen,PipelineMarkers = @PipelineMarkers," +
+                "EggOdor = @EggOdor,VaporMist = @VaporMist,ROWorWellPad = @ROWorWellPad,Tanks = @Tanks,Landowner = @Landowner,LeaseWellName = @LeaseWellName," +
+                "CallerName = @CallerName,CallerPhone = @CallerPhone,Notify911 = @Notify911,Injuries = @Injuries,ImmediateDanger = @ImmediateDanger," +
+                "RelationToIncident = @RelationToIncident,SafelyWarn = @SafelyWarn,ReportTakerName = @ReportTakerName,ReportTakerEmail = @ReportTakerEmail," +
+                "NotifiedName = @NotifiedName,NotifiedNumber = @NotifiedNumber,NotifiedEmail = @NotifiedEmail,NotificationDate = @NotificationDate," +
+                "NotificationTime = @NotificationTime,SeeingHearingSmelling = @SeeingHearingSmelling " +
+                "WHERE ID=@ID";
+            using (SqlConnection conn = new SqlConnection(constring))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@ID", n.ID);
+                    cmd.Parameters.AddWithValue("@CallDate", n.Call_Date);
+                    cmd.Parameters.AddWithValue("@CallTime", n.Call_Time);
+                    cmd.Parameters.AddWithValue("@IncidentDate", n.Incident_Date);
+                    cmd.Parameters.AddWithValue("@IncidentTime", n.Incident_Time);
+                    cmd.Parameters.AddWithValue("@TimeZone", n.TimeZone);
+                    cmd.Parameters.AddWithValue("@City", n.City);
+                    cmd.Parameters.AddWithValue("@State", n.State);
+                    cmd.Parameters.AddWithValue("@County", n.County);
+                    cmd.Parameters.AddWithValue("@DirectionFromLandmark", n.DirectionFromLandmark);
+                    cmd.Parameters.AddWithValue("@ClosestLandmark", n.ClosestLandmark);
+                    cmd.Parameters.AddWithValue("@DistanceFromLandmark", n.DistanceFromLandmark);
+                    cmd.Parameters.AddWithValue("@Intersection", n.Intersection);
+                    cmd.Parameters.AddWithValue("@Observing", n.Observing);
+                    cmd.Parameters.AddWithValue("@Smoke", n.Smoke);
+                    cmd.Parameters.AddWithValue("@Flames", n.Flames);
+                    cmd.Parameters.AddWithValue("@Hissing", n.Hissing);
+                    cmd.Parameters.AddWithValue("@Liquid", n.Liquid);
+                    cmd.Parameters.AddWithValue("@OilSheen", n.Oily_Sheen);
+                    cmd.Parameters.AddWithValue("@PipelineMarkers", n.Other_Pipeline_Markers);
+                    cmd.Parameters.AddWithValue("@EggOdor", n.Rotten_Egg_Odor);
+                    cmd.Parameters.AddWithValue("@VaporMist", n.Vapor_Or_Mist);
+                    cmd.Parameters.AddWithValue("@ROWorWellPad", n.ROW_OR_Well_Pad);
+                    cmd.Parameters.AddWithValue("@Tanks", n.Tanks);
+                    cmd.Parameters.AddWithValue("@Landowner", n.Landowner);
+                    cmd.Parameters.AddWithValue("@LeaseWellName", n.Lease_Well_Name);
+                    cmd.Parameters.AddWithValue("@CallerName", n.Caller_Name);
+                    cmd.Parameters.AddWithValue("@CallerPhone", n.Caller_Phone);
+                    cmd.Parameters.AddWithValue("@Notify911", n.Notify_911);
+                    cmd.Parameters.AddWithValue("@Injuries", n.Anyone_Injured);
+                    cmd.Parameters.AddWithValue("@ImmediateDanger", n.Immediate_Danger);
+                    cmd.Parameters.AddWithValue("@RelationToIncident", n.Relation_ToIncident);
+                    cmd.Parameters.AddWithValue("@SafelyWarn", n.Safely_Warn);
+                    cmd.Parameters.AddWithValue("@ReportTakerName", n.Report_Taker_Name);
+                    cmd.Parameters.AddWithValue("@ReportTakerEmail", n.Report_Taker_Email);
+                    cmd.Parameters.AddWithValue("@NotifiedName", n.NotifiedName);
+                    cmd.Parameters.AddWithValue("@NotifiedNumber", n.NotifiedNumber);
+                    cmd.Parameters.AddWithValue("@NotifiedEmail", n.NotifiedEmail);
+                    cmd.Parameters.AddWithValue("@NotificationDate", n.NotificationDate);
+                    cmd.Parameters.AddWithValue("@NotificationTime", n.NotificationTime);
+                    cmd.Parameters.AddWithValue("@SeeingHearingSmelling", n.SeeingHearingSmelling);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public static void UpdateNorthindGeneralIncident(string constring, NorthwindGenInc n)
+        {
+            string sql = "UPDATE NorthwindGeneralIncidents SET CallerName=@CallerName, CallerPhone=@CallerPhone, EmpOrContract=@EmpOrContract, " +
+                "ContractedCompany=@ContractedCompany, CallDate=@CallDate, CallTime=@CallTime, IncidentDate=@IncidentDate, " +
+                "IncidentTime=@IncidentTime, IncidentTimeZone=@IncidentTimeZone, IncidentCity=@IncidentCity, IncidentState=@IncidentState, " +
+                "FacilityOrProject=@FacilityOrProject, IncidentLocation=@IncidentLocation, " +
+                "IncidentNature=@IncidentNature, WaterbodiesImpacted=@WaterbodiesImpacted, ImpactedAreaDetails=@ImpactedAreaDetails, " +
+                "IncidentDetails=@IncidentDetails, IndividualSafety=@IndividualSafety, Notify911=@Notify911, " +
+                "TransportToHospital=@TransportToHospital, MediaOnScene=@MediaOnScene, EmergencyResponders=@EmergencyResponders, " +
+                "HSERName=@HSERName, HSERPhone=@HSERPhone, NotificationDate=@NotificationDate, NotificationTime=@NotificationTime, " +
+                "InjuryExposureIllness=@InjuryExposureIllness, ChemicalSpillRelease=@ChemicalSpillRelease WHERE ID=@ID";
+            using (SqlConnection cn = new SqlConnection(constring))
+            {
+                cn.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, cn))
+                {
+                    cmd.Parameters.AddWithValue("@ID", n.ID);
+                    cmd.Parameters.AddWithValue("@CallerName", n.Caller_Name);
+                    cmd.Parameters.AddWithValue("@CallerPhone", n.Caller_Phone_Number);
+                    cmd.Parameters.AddWithValue("@EmpOrContract", n.EmpOrContract);
+                    cmd.Parameters.AddWithValue("@ContractedCompany", n.ContractedCompany);
+                    cmd.Parameters.AddWithValue("@CallDate", n.Call_Date);
+                    cmd.Parameters.AddWithValue("@CallTime", n.Call_Time);
+                    cmd.Parameters.AddWithValue("@IncidentDate", n.Incident_Date);
+                    cmd.Parameters.AddWithValue("@IncidentTime", n.Incident_Time);
+                    cmd.Parameters.AddWithValue("@IncidentTimeZone", n.Incident_Time_Zone);
+                    cmd.Parameters.AddWithValue("@IncidentCity", n.Incident_City);
+                    cmd.Parameters.AddWithValue("@IncidentState", n.Incident_State);
+                    cmd.Parameters.AddWithValue("@FacilityOrProject", n.FacilityOrProject);
+                    cmd.Parameters.AddWithValue("@IncidentLocation", n.IncidentLocation);
+                    cmd.Parameters.AddWithValue("@IncidentNature", n.IncidentType);
+                    cmd.Parameters.AddWithValue("@WaterbodiesImpacted", n.WaterbodiesImpacted);
+                    cmd.Parameters.AddWithValue("@ImpactedAreaDetails", n.ImpactedAreas);
+                    cmd.Parameters.AddWithValue("@IncidentDetails", n.IncidentDetails);
+                    cmd.Parameters.AddWithValue("@IndividualSafety", n.IndividualSafety);
+                    cmd.Parameters.AddWithValue("@Notify911", n.Notify_911);
+                    cmd.Parameters.AddWithValue("@TransportToHospital", n.Transport_ToHospital);
+                    cmd.Parameters.AddWithValue("@MediaOnScene", n.Media_On_Scene);
+                    cmd.Parameters.AddWithValue("@EmergencyResponders", n.Emergency_Responders);
+                    cmd.Parameters.AddWithValue("@HSERName", n.HSERName);
+                    cmd.Parameters.AddWithValue("@HSERPhone", n.HSERContactNumber);
+                    cmd.Parameters.AddWithValue("@NotificationDate", n.NotificationDate);
+                    cmd.Parameters.AddWithValue("@NotificationTime", n.NotificationTime);
+                    cmd.Parameters.AddWithValue("@InjuryExposureIllness", n.InjuryExposureIllness);
+                    cmd.Parameters.AddWithValue("@ChemicalSpillRelease", n.ChemicalSpillRelease);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
         #endregion
     }
 }

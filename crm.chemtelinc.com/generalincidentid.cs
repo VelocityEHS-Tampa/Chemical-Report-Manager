@@ -15,7 +15,7 @@ namespace crm.chemtelinc.com
     public partial class generalincidentid
     {
         public string id { get; set; }
-        public Nullable<int> available { get; set; }
+        public int available { get; set; }
         public string user { get; set; }
     }
 }

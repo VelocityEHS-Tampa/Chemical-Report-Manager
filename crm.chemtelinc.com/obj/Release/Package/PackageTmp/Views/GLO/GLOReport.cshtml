@@ -347,15 +347,15 @@
                         <span class="required-field">City</span>
                         @Html.TextBoxFor(m => m.Spiller_City, new { @class = "form-control GLOFieldSpacing", style = "width: 35%; text-transform:uppercase;", id = "txtspillercity", @Name = "txtspillercity", tabindex = 56, maxlength = "50" })
                         <span class="required-field">State</span>
-                        @Html.TextBoxFor(m => m.Spiller_State, new { @class = "form-control GLOFieldSpacing", style = "width: 7%; text-transform:uppercase;", id = "txtspillerstate", @Name = "txtspillerstate", tabindex = 57, maxlength = "2" })
+                        @Html.TextBoxFor(m => m.Spiller_State, new { @class = "form-control GLOFieldSpacing", style = "width: 10%; text-transform:uppercase;", id = "txtspillerstate", @Name = "txtspillerstate", tabindex = 57, maxlength = "2" })
                         <span class="required-field">Zip Code</span>
-                        @Html.TextBoxFor(m => m.Spiller_Zip_Code, new { @class = "form-control GLOFieldSpacing", style = "width: 15%;", id = "txtspillerzipcode", @Name = "txtspillerzipcode", tabindex = 58, @maxlength = "10", @onblur= "FormatZipCode(this.value, this.id)" })
+                        @Html.TextBoxFor(m => m.Spiller_Zip_Code, new { @class = "form-control GLOFieldSpacing", style = "width: 18%;", id = "txtspillerzipcode", @Name = "txtspillerzipcode", tabindex = 58, @maxlength = "10", @onblur= "FormatZipCode(this.value, this.id)" })
                         <br />
                     </div>
                     <span class="required-field">Contact Person</span>
                     @Html.TextBoxFor(m => m.Spiller_Contact, new { @class = "form-control GLOFieldSpacing", style = "width: 35%; text-transform:uppercase;", id = "txtcontactperson", @Name = "txtcontactperson", tabindex = 59, maxlength = "250" })
                     <span class="required-field">Phone</span>
-                    @Html.TextBoxFor(m => m.Spiller_Contact_Phone, new { @class = "form-control GLOFieldSpacing", style = "width: 25%;", id = "txtcontactphone", @Name = "txtcontactphone", tabindex = 60, onblur = "FormatPhone(this.value, this.id)", @maxlength = "14" })
+                    @Html.TextBoxFor(m => m.Spiller_Contact_Phone, new { @class = "form-control GLOFieldSpacing", style = "width: 27%;", id = "txtcontactphone", @Name = "txtcontactphone", tabindex = 60, onblur = "FormatPhone(this.value, this.id)", @maxlength = "14" })
                 </div>
             </div>
         </div>
@@ -608,7 +608,7 @@
             document.getElementById(FieldName).value = fulldate;
             document.getElementById(FieldName).style.backgroundColor = "white";
             document.getElementById(FieldName).setAttribute("isvalid", "true");
-        } else {
+        } else if (Date.length != 8 && Date.length != 10) {
             document.getElementById(FieldName).style.backgroundColor = "pink";
             document.getElementById(FieldName).setAttribute("isvalid", "false");
         }

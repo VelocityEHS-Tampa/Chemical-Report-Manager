@@ -15,7 +15,7 @@ namespace crm.chemtelinc.com
     public partial class availablespillid
     {
         public string Id { get; set; }
-        public Nullable<int> available { get; set; }
+        public int available { get; set; }
         public string usedBy { get; set; }
     }
 }

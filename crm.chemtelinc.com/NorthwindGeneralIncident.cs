@@ -22,7 +22,7 @@ namespace crm.chemtelinc.com
         public string ContractedCompany { get; set; }
         public System.DateTime CallDate { get; set; }
         public string CallTime { get; set; }
-        public Nullable<System.DateTime> IncidentDate { get; set; }
+        public System.DateTime IncidentDate { get; set; }
         public string IncidentTime { get; set; }
         public string IncidentTimeZone { get; set; }
         public string IncidentCity { get; set; }
@@ -43,5 +43,7 @@ namespace crm.chemtelinc.com
         public string HSERPhone { get; set; }
         public System.DateTime NotificationDate { get; set; }
         public string NotificationTime { get; set; }
+        public string InjuryExposureIllness { get; set; }
+        public string ChemicalSpillRelease { get; set; }
     }
 }
