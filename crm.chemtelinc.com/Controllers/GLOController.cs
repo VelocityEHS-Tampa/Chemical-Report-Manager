@@ -59,6 +59,7 @@ namespace crm.chemtelinc.com.Controllers
             ViewBag.Updated = "false";
             ViewBag.Corrected = "false";
             ViewBag.BackToReport = "false";
+            ViewBag.VoidedReport = "false";
             return View(new GLOBaseReportData());
         }
         public ActionResult CorrectedGLO(FormCollection fc)
@@ -73,7 +74,8 @@ namespace crm.chemtelinc.com.Controllers
             {
                 corrected = "true";  //Sets the corrected flag to true.
                 ViewBag.Corrected = "true";
-            } else if (fc["UpdateOrCorrect"] == "Updated")
+            }
+            else if (fc["UpdateOrCorrect"] == "Updated")
             {
                 updated = "true";  //Sets the corrected flag to true.
                 ViewBag.Updated = "true";
@@ -212,11 +214,13 @@ namespace crm.chemtelinc.com.Controllers
             return View(CountyInfo);
         }
 
-        private void VoidReport(string id)
+        public ActionResult VoidReport(string id)
         {
             GLOBaseReportData g = new GLOBaseReportData();  //Calls the custom class constructor.
             g = GetVoidData(id);
             Update.UpdateGLOBaseReportData(Session["constring"].ToString(), g);  //Static class method that adds the data to the database.
+            GLOBaseReportData g2 = new GLOBaseReportData(); // reset the model to clear out the ID before returning to the GLO report.
+            return View("GLOReport", g2);
         }
         #endregion
 
@@ -225,21 +229,22 @@ namespace crm.chemtelinc.com.Controllers
         {
             if (fc["SubmitGLOForm"].ToString() == "Commit Report")
             {
+                string ReportID = "";
                 if (CheckForVoidID() == "")
                 {
-                    string NewID = CommitReport(fc); //Run function to add first half of report to database and get GLO ID
-                    GLOBaseReportData glo = new GLOBaseReportData(Session["constring"].ToString(), NewID);  //Gets the desired report and puts it into a custom class variable.
+                    ReportID = CommitReport(fc); //Run function to add first half of report to database and get GLO ID
                 } else
                 {
-                    string VoidedID = "";
-                    VoidedID = CheckForVoidID();
+                    ReportID = CheckForVoidID();
                     GLOBaseReportData g = new GLOBaseReportData();  //Calls the custom class constructor.
-                    fc["txtspillid"] = VoidedID;
                     g = GetData(fc); //This method returns the form data and puts it in the custom class variable.
+                    g.Spill_ID = ReportID; //Set the ID in the model to the voided ID to update the proper ID.
                     Update.UpdateGLOBaseReportData(Session["constring"].ToString(), g);  //Static class method that adds the data to the database.
+                    ViewBag.VoidedReport = "true";
                 }
                 report = "All";
                 ViewBag.Committed = "true";
+                GLOBaseReportData glo = new GLOBaseReportData(Session["constring"].ToString(), ReportID);  //Gets the desired report and puts it into a custom class variable.
                 return View("GLOReport", glo);
             }
             else
@@ -745,12 +750,11 @@ namespace crm.chemtelinc.com.Controllers
             }
             return ViewingPath; //Returns the path of the report to .
         }            
-
         private string CheckForVoidID()
         {
             string PreviousID = "";
             string sql = "SELECT TOP 1 * FROM globasereportdata WhERE txtReportTakenBy = 'VOID' ORDER BY cntSpillId ASC";
-            using (SqlConnection con = new SqlConnection(constring))
+            using (SqlConnection con = new SqlConnection(Session["constring"].ToString()))
             {
                 using (SqlCommand cmd = new SqlCommand(sql, con))
                 {

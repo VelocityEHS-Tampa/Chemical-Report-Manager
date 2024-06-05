@@ -11,6 +11,7 @@
     string Updated = ViewBag.Updated;
     string BackToReport = ViewBag.BackToReport;
     string Committed = ViewBag.Committed;
+    string VoidedReport = ViewBag.VoidedReport;
     List<SelectListItem> UnitTypes = new List<SelectListItem>();
     UnitTypes.Add(new SelectListItem { Text = "", Value = "" });
     UnitTypes.Add(new SelectListItem { Text = "bbl", Value = "bbl" });
@@ -87,6 +88,7 @@
             <span style="width:5%; float:left;">Search: </span>@Html.TextBox("cbsearch", "", new { @class = "form-control", style = "width: 15%; display:inline;", id = "cbsearch", @Name= "cbsearch" })
             <input type="submit" value="Correct" class="form-control GRCPButtons" id="btncorrect" name="btncorrect" onclick="CorrectedGLO()">
             <input type="submit" value="Update" class="form-control GRCPButtons" id="btnupdate" name="btnupdate" onclick="UpdatedGLO()">
+            <input type="submit" value="Void Report" class="form-control GRCPButtons" id="btnvoid" name="btnvoid" onclick="VoidGLO()"/>
             <input type="button" value="Phone" class="form-control GRCPButtons" id="btnphone" name="btnphone" onclick="PhoneButton()">
             <input type="hidden" name="HiddenTxtSpillID" id="HiddenTxtSpillID" value="@txtspillid" />
             <input type="hidden" name="CommittedTxt" id="CommittedTxt" value="false" />
@@ -365,6 +367,10 @@
             <div style="text-align: center;">
                 <input type="submit" name="SubmitGLOForm" id="CommitReportbtn" value="Commit Report" class="form-control GLOMargin alert-success" tabindex="61" /><br />
                 <span id="NewID"></span>
+                @if (VoidedReport == "true")
+                {
+                 <br /><span>You are currently using a previously voided report ID.</span>
+                }
                 <input type="hidden" id="HiddenNewID" name="HiddenNewID" />
             </div>
             <hr />
@@ -595,6 +601,16 @@
             return true;
         }
     }
+    function VoidGLO() {
+        if (confirm("Are you sure you want to Void the selected report?")) {
+            $("#UpdateOrCorrect").val("Void Report");
+            var cbsearch = document.getElementById('cbsearch').value;
+            var txtspillid = document.getElementById('txtspillid').value;
+            document.getElementById('txtspillid').value = cbsearch;
+            return true;
+        }
+    }
+
     function ClearForm() {
         if (confirm("Are you sure you want to cancel this report?")) {
                     location.href = "";

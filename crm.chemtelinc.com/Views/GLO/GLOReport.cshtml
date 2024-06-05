@@ -11,6 +11,7 @@
     string Updated = ViewBag.Updated;
     string BackToReport = ViewBag.BackToReport;
     string Committed = ViewBag.Committed;
+    string VoidedReport = ViewBag.VoidedReport;
     List<SelectListItem> UnitTypes = new List<SelectListItem>();
     UnitTypes.Add(new SelectListItem { Text = "", Value = "" });
     UnitTypes.Add(new SelectListItem { Text = "bbl", Value = "bbl" });
@@ -366,6 +367,10 @@
             <div style="text-align: center;">
                 <input type="submit" name="SubmitGLOForm" id="CommitReportbtn" value="Commit Report" class="form-control GLOMargin alert-success" tabindex="61" /><br />
                 <span id="NewID"></span>
+                @if (VoidedReport == "true")
+                {
+                 <br /><span>You are currently using a previously voided report ID.</span>
+                }
                 <input type="hidden" id="HiddenNewID" name="HiddenNewID" />
             </div>
             <hr />
