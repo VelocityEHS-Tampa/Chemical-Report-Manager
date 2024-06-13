@@ -35,6 +35,7 @@ namespace crm.chemtelinc.com.Models
         public string WaterbodiesImpacted { get; set; }
         public string ContainedOnSite { get; set; }
         public string SpillContainedSecondary { get; set; }
+        public string EmailSent { get; set; }
 
         //Pipeline Fields
         public string State { get; set; }

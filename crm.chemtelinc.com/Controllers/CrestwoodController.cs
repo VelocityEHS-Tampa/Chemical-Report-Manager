@@ -82,6 +82,7 @@ namespace crm.chemtelinc.com.Controllers
                             c.WaterbodiesImpacted = sdr["WaterbodiesImpacted"].ToString();
                             c.ContainedOnSite = sdr["ContainedOnSite"].ToString();
                             c.SpillContainedSecondary = sdr["SpillContainedSecondary"].ToString();
+                            c.EmailSent = sdr["EmailSent"].ToString();
                             CrestLogList.Add(c);
                         }
                     }
@@ -108,6 +109,7 @@ namespace crm.chemtelinc.com.Controllers
                             c.NotificationDate = sdr["NotificationDate"].ToString();
                             c.NotificationTime = sdr["NotificationTime"].ToString();
                             c.Drill = sdr["Drill"].ToString();
+                            c.EmailSent = sdr["EmailSent"].ToString();
                             CrestLogList.Add(c);
                         }
                     }
@@ -224,6 +226,7 @@ namespace crm.chemtelinc.com.Controllers
                                 c.WaterbodiesImpacted = sdr["WaterbodiesImpacted"].ToString();
                                 c.ContainedOnSite = sdr["ContainedOnSite"].ToString();
                                 c.SpillContainedSecondary = sdr["SpillContainedSecondary"].ToString();
+                                c.EmailSent = sdr["EmailSent"].ToString();
                                 CrestLogList.Add(c);
                             }
                         }
@@ -249,6 +252,7 @@ namespace crm.chemtelinc.com.Controllers
                                 c.NotificationDate = sdr["NotificationDate"].ToString();
                                 c.NotificationTime = sdr["NotificationTime"].ToString();
                                 c.Drill = sdr["Drill"].ToString();
+                                c.EmailSent = sdr["EmailSent"].ToString();
                                 CrestLogList.Add(c);
                             }
                         }
@@ -1594,6 +1598,17 @@ namespace crm.chemtelinc.com.Controllers
             log.Close();
 
             string ResultCode = response.Result.StatusCode.ToString();
+
+            if (ResultCode == "Accepted")
+            {
+                if (fc["ReportType"].ToString() == "General Incident")
+                {
+                    Update.UpdateEmailSent("crestgeneralincidents", "id", fc["reportid"].ToString(), Session["constring"].ToString());
+                } else if (fc["ReportType"].ToString() == "Pipeline")
+                {
+                    Update.UpdateEmailSent("crestpiplineincidents", "id", fc["reportid"].ToString(), Session["constring"].ToString());
+                }
+            }
 
             return RedirectToAction("Index", "Home", new { Result = ResultCode });
         }

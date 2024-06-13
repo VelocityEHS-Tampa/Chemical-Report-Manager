@@ -521,13 +521,13 @@ namespace crm.chemtelinc.com.Controllers
                         g.Sent_Date = sdr["SentDate"].ToString();
                         g.Comments = sdr["Comments"].ToString();
                         g.Report_Type = sdr["ReportType"].ToString();
+                        g.EmailSent = sdr["EmailSent"].ToString();
                         GenIncidList.Add(g);
                     }
                 }
             }
             return GenIncidList;
         }
-
         public ActionResult SearchGenIncids(FormCollection fc)
         {
             if (fc["btnCorrect"].ToString() == "Search")
@@ -608,11 +608,23 @@ namespace crm.chemtelinc.com.Controllers
                 return RedirectToAction("Logs", new { LogsSelected = "GenInc" });
             }
         }
-
-
         public JsonResult UpdateGenInc(string IncidentID, string Comments, string ReviewedDate, string SentDate)
         {
             string sql = "UPDATE generalincidentreportdata SET Comments = '" + Comments + "', ReviewedDate = '" + ReviewedDate + "', SentDate = '" + SentDate + "' WHERE IncidentID = '" + IncidentID + "'";
+            using (SqlConnection con = new SqlConnection(Session["constring"].ToString()))
+            {
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            return Json(new { success = "Success" }, JsonRequestBehavior.AllowGet);
+        }
+        
+        public JsonResult DeleteGenInc(string IncidentID)
+        {
+            string sql = "DELETE FROM generalincidentreportdata WHERE IncidentID = '" + IncidentID + "'";
             using (SqlConnection con = new SqlConnection(Session["constring"].ToString()))
             {
                 using (SqlCommand cmd = new SqlCommand(sql, con))

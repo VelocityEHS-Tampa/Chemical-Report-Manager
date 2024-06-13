@@ -70,6 +70,10 @@
     <textarea name="txtemailbody" id="txtemailbody" class="form-control GLOFieldSpacing"></textarea>
     <br />
     <div style="text-align:center;">
+        @if (Model != null)
+        {
+            <input type="hidden" value="@Model.Spill_ID" name="reportid" id="reportid" />
+        }
         <input type="submit" value="Send" class="form-control GLOFieldSpacing" id="SubmitBtn" style="width:25%;color:red;font-weight:600;" />
     </div>
 }

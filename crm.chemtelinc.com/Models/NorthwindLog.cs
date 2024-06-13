@@ -37,6 +37,7 @@ namespace ChemicalLibrary
         public string ChemicalSpillRelease { get; set; }
         public string NotificationDate { get; set; }
         public string NotificationTime { get; set; }
+        public string EmailSent { get; set; }
 
         //Pipeline Fields
         public string State { get; set; }

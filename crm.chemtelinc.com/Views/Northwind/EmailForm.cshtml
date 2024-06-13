@@ -24,6 +24,8 @@
     <span>Email Body: </span>@Html.TextAreaFor(m => m.Body, new { @class = "form-control GLOFieldSpacing", id = "txtBody", @Name = "txtBody", required = "", tabindex = "4", rows = "5" })
     <br />
     <br />
+    <input type="hidden" value="@Model.ID" name="reportid" id="reportid" />
+    <input type="hidden" value="@Model.ReportType" name="ReportType" />
     <input type="submit" name="SubmitEmail" value="Send Email" class="form-control GLOFieldSpacing" style="color:blue; font-weight:bold;" />
 }
 
@@ -35,7 +37,7 @@
         } else {
             FilePath = "https://crm.chemtel.net/Completed Reports/Northwind Incidents/General Incident/" + @DateTime.Now.Year.ToString() + "/Northwind GI - " + @Model.ID + ".pdf";
         }
-        //window.open(FilePath, "_blank");
+        window.open(FilePath, "_blank");
     });
 
 

@@ -222,6 +222,23 @@ namespace crm.chemtelinc.com.Controllers
             GLOBaseReportData g2 = new GLOBaseReportData(); // reset the model to clear out the ID before returning to the GLO report.
             return View("GLOReport", g2);
         }
+
+        public JsonResult CheckEmailSent(string id)
+        {
+            string EmailSent = "No";
+            string sql = "SELECT EmailSent FROM globasereportdata WHERE cntSpillId = " + id;
+            
+            using (SqlConnection con = new SqlConnection(Session["constring"].ToString()))
+            {
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    con.Open();
+                    EmailSent = cmd.ExecuteScalar().ToString();
+                }
+            }
+
+            return Json(new { EmailSent = EmailSent }, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         #region submit new glo report
@@ -753,13 +770,23 @@ namespace crm.chemtelinc.com.Controllers
         private string CheckForVoidID()
         {
             string PreviousID = "";
-            string sql = "SELECT TOP 1 * FROM globasereportdata WhERE txtReportTakenBy = 'VOID' ORDER BY cntSpillId ASC";
+            string sql = "SELECT TOP 1 cntSpillId FROM globasereportdata WhERE txtReportTakenBy = 'VOID' ORDER BY cntSpillId ASC";
             using (SqlConnection con = new SqlConnection(Session["constring"].ToString()))
             {
                 using (SqlCommand cmd = new SqlCommand(sql, con))
                 {
                     con.Open();
-                    PreviousID = cmd.ExecuteScalar().ToString();
+                    SqlDataReader sdr = cmd.ExecuteReader();
+                    if (sdr.HasRows)
+                    {
+                        while(sdr.Read())
+                        {
+                            if (sdr["cntSpillId"].ToString() != null)
+                            {
+                                PreviousID = sdr["cntSpillId"].ToString();
+                            }
+                        }
+                    }
                 }
             }
             return PreviousID;
@@ -1019,7 +1046,7 @@ namespace crm.chemtelinc.com.Controllers
                         to.Add(new EmailAddress(e.Trim()));
                     }
                 }
-                to.Add(new EmailAddress("ers@ehs.com"));
+                //to.Add(new EmailAddress("ers@ehs.com"));
                 to.Add(new EmailAddress("mpepitone@ehs.com"));
 
                 var msg = MailHelper.CreateSingleEmailToMultipleRecipients(from, to, subject, "", body, true);
@@ -1041,6 +1068,11 @@ namespace crm.chemtelinc.com.Controllers
                 log.Close();
 
                 string ResultCode = response.Result.StatusCode.ToString();
+
+                if (ResultCode == "Accepted" && fc["reportid"] != null)
+                {
+                    Update.UpdateEmailSent("globasereportdata", "cntSpillId", fc["reportid"].ToString(), Session["constring"].ToString());
+                }
 
                 return RedirectToAction("Index", "Home", new { Result = ResultCode });
 

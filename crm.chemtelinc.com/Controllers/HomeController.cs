@@ -14,10 +14,12 @@ namespace crm.chemtelinc.com.Controllers
 
     public class HomeController : Controller
     {
-        string ClientId = "DIQS0UQHXND4SXC3YMZN"; //Setting from Duo
-        string ClientSecret = "IOTgcps6k2qvJtQzz0I07QXNLrhjev34dDP9XhZl"; //Setting from Duo
+        string ClientId = "DIXAIJZXU2J7LJJ9PZRW"; //Setting from Duo
+        //NEW OIDC SECRET 1Fa73J1WgMbccHoBWTpR8ijwnfznDLjgTX8rGP4P
+        //OLD SECRET IOTgcps6k2qvJtQzz0I07QXNLrhjev34dDP9XhZl
+        string ClientSecret = "1Fa73J1WgMbccHoBWTpR8ijwnfznDLjgTX8rGP4P"; //Setting from Duo
         string ApiHost = "api-64691b0c.duosecurity.com"; //Setting from Duo
-        string RedirectUri = "https://localhost:44310/Redirect.cshtml"; //This is the URL you will redirect to after authentication. It does not need to be publically accessible.
+        string RedirectUri = ""; //This is the URL you will redirect to after authentication. It does not need to be publically accessible.
         public ActionResult Index()
         {
             Session.Add("constring", "");
@@ -54,19 +56,24 @@ namespace crm.chemtelinc.com.Controllers
             if (LoginValidated == "Yes")
             {
                 Session.Add("SessionStartTime", DateTime.Now);
+                Session.Add("Username", username);
+                
+                HttpCookie UserCookie = new HttpCookie("UserCookie");
+                UserCookie.Value = username;
+                UserCookie.Expires = DateTime.Now.AddHours(1);
+
                 GetAcctInfo(username);
                 if (password == "Password1" || Int32.Parse(Session["DaysBetween"].ToString()) >= 90)
                 {
-                    Session.Add("Username", username);
+                    RedirectUri = "https://crm.chemtel.net/Home/ResetPassword";
                     //InitiateDuo(username); //User should be the username trying to login.
                     return View("ResetPassword");
                 } else
                 {
                     ViewBag.ErrorMessage = "Successful Login!";
-
+                    RedirectUri = "https://crm.chemtel.net/Home/Index";
                     //Add DUO MFA Code here
                     //InitiateDuo(username); //User should be the username trying to login.
-                    //If successful, return to index view.
                     return View("Index");
                 }
             }
@@ -78,30 +85,30 @@ namespace crm.chemtelinc.com.Controllers
         }
 
 
-        //public void InitiateDuo(string User)
-        //{
-        //    //Create client using config settings
-        //    Client duoClient = new ClientBuilder(ClientId, ClientSecret, ApiHost, RedirectUri).Build();
-        //    Session["client"] = duoClient;
+        public void InitiateDuo(string User)
+        {
+            //Create client using config settings
+            Client duoClient = new ClientBuilder(ClientId, ClientSecret, ApiHost, RedirectUri).Build();
+            Session["client"] = duoClient;
 
-        //    // Check if Duo seems to be healthy and able to service authentications.
-        //    // If Duo were unhealthy, you could possibly send user to an error page, or implement a fail mode
-        //    var isDuoHealthy = duoClient.DoHealthCheck();
+            // Check if Duo seems to be healthy and able to service authentications.
+            // If Duo were unhealthy, you could possibly send user to an error page, or implement a fail mode
+            var isDuoHealthy = duoClient.DoHealthCheck();
 
-        //    // Generate a random state value to tie the authentication steps together
-        //    string state = Client.GenerateState();
-        //    // Save the state and username in the session for later
-        //    Session["STATE_SESSION_KEY"] = state;
-        //    Session["USERNAME_SESSION_KEY"] = User;
+            // Generate a random state value to tie the authentication steps together
+            string state = Client.GenerateState();
+            // Save the state and username in the session for later
+            Session["STATE_SESSION_KEY"] = state;
+            Session["USERNAME_SESSION_KEY"] = User;
 
-        //    // Get the URI of the Duo prompt from the client.  This includes an embedded authentication request.
-        //    string promptUri = duoClient.GenerateAuthUri(User, state);
+            // Get the URI of the Duo prompt from the client.  This includes an embedded authentication request.
+            string promptUri = duoClient.GenerateAuthUri(User, state);
 
-        //    // Redirect the user's browser to the Duo prompt.
-        //    // The Duo prompt, after authentication, will redirect back to the configured Redirect URI to complete the authentication flow.
-        //    // In this example, that is /duo_callback, which is implemented in Callback.cshtml.cs.
-        //    Response.Redirect(promptUri, false);
-        //}
+            // Redirect the user's browser to the Duo prompt.
+            // The Duo prompt, after authentication, will redirect back to the configured Redirect URI to complete the authentication flow.
+            // In this example, that is /duo_callback, which is implemented in Callback.cshtml.cs.
+            Response.Redirect(promptUri, false);
+        }
 
         public ActionResult ResetPassword()
         {

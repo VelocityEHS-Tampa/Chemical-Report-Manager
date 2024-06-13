@@ -157,6 +157,8 @@
     <span>Email Body:</span>
     <br />
     <textarea id="txtemailbody" name="txtemailbody" style="width:85%" rows="5"></textarea>
+    <input type="hidden" name="ReportType" value="@Model.Type" />
+    <input type="hidden" value="@Model.ID" name="reportid" id="reportid" />
     <input type="submit" value="Send" class="form-control GLOFieldSpacing required-field" style="width: 10%" />
 
 }

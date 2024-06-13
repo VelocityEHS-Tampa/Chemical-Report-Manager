@@ -76,13 +76,23 @@ else if (LogsSelected == "CleanShot")
         {
             <tr id="Row_@item.Incident_ID">
                 <td><input type="radio" name="IDSelected" value="@item.Incident_ID" onclick="CleanshotFillSearchBox(this.value)" /></td> @* Have to split the date string and grab the year in order to send it to javascript *@
-                <td>@item.Incident_ID</td>
+                <td style="width:10%">
+                    @if (item.Email_Sent != "" && item.Email_Sent != null) //Email was sent
+                    {
+                        <span style="color:green">&#10003;</span>
+                    }
+                    else // Email has not been sent
+                    {
+                        <span style="color:red">&#x2715;</span>
+                    }
+                    &nbsp;@item.Incident_ID
+                </td>
                 <td><input type="text" id="Comments_@item.Incident_ID" value="@item.Comments" /></td>
                 <td><input type="text" id="Email_Sent_@item.Incident_ID" value="@item.Email_Sent" /></td>
                 <td>@item.Ers_Operator</td>
                 <td>@item.Report_Date</td>
                 <td>@item.Type</td>
-                <td> <input type="button" value="update" onclick="UpdateCleanshotRecord('@item.Incident_ID')"/> </td>
+                <td> <input type="button" value="update" onclick="UpdateCleanshotRecord('@item.Incident_ID')" /> </td>
             </tr>
         }
     </table>
@@ -123,8 +133,23 @@ else if (LogsSelected == "GenInc")
         {
             <tr id="Row_@item.Incident_ID">
                 <td><input type="radio" name="IDSelected" value="@item.Incident_ID" onclick="GenIncFillSearchBox(this.value)" /></td> @* Have to split the date string and grab the year in order to send it to javascript *@
-                <td>@item.Incident_ID</td>
-                <td><input type="text" id="Comments_@item.Incident_ID" value="@item.Comments"/></td>
+                <td style="width:10%">
+                    @if (item.EmailSent == "1") //Email was sent
+                    {
+                        <span style="color:green">&#10003;</span>
+                    }
+                    else if (item.EmailSent == "0") // Email has not been sent
+                    {
+                        <span style="color:red">&#x2715;</span>
+                    }
+                    else // value is null due to it being a new field.
+                    {
+                        <span style="color:yellow">&#9711;</span>
+                    }
+                    &nbsp;@item.Incident_ID
+
+                </td>
+                <td><input type="text" id="Comments_@item.Incident_ID" value="@item.Comments" /></td>
                 <td><input type="text" id="ReviewedDate_@item.Incident_ID" value="@item.Reviewed_Date" /></td>
                 <td><input type="text" id="SentDate_@item.Incident_ID" value="@item.Sent_Date" /></td>
                 <td>@item.Ers_Operator</td>
@@ -132,7 +157,11 @@ else if (LogsSelected == "GenInc")
                 <td>@item.Subscribers_Name</td>
                 <td>@item.Reviewed_By</td>
                 <td>@item.Report_Type</td>
-                <td> <input type="button" value="update" onclick="UpdateGenIncRecord(@item.Incident_ID)"/> </td>
+                <td> <input type="button" value="Update" onclick="UpdateGenIncRecord(@item.Incident_ID)" /> </td>
+                @if (Session["Username"].ToString() == "mpepitone")
+                {
+                    <td> <input type="button" value="Delete" onclick="DeleteGenIncRecord(@item.Incident_ID)" /> </td>
+                }
             </tr>
         }
     </table>
@@ -170,17 +199,32 @@ else if (LogsSelected == "Shell")
         {
             <tr id="Row_@item.Inc_ID">
                 <td><input type="radio" name="IDSelected" value="@item.Inc_ID" onclick="ShellFillSearchBox(this.value)" /></td> @* Have to split the date string and grab the year in order to send it to javascript *@
-                <td>@item.Inc_ID</td>
+                <td>
+                    @if (item.Email_Sent != "" && item.Email_Sent != null) //Email was sent
+                    {
+                        <span style="color:green">&#10003;</span>
+                    }
+                    else // Email has not been sent
+                    {
+                        <span style="color:red">&#x2715;</span>
+                    }
+                    &nbsp;@item.Inc_ID
+                </td>
                 <td><input type="text" id="Comments_@item.Inc_ID" value="@item.Notes" /></td>
                 <td><input type="text" id="Email_Sent_@item.Inc_ID" value="@item.Email_Sent" /></td>
                 <td>@item.ERS_Operator</td>
                 <td>@item.Date</td>
-                <td><input type="button" value="update" onclick="UpdateShellRecord(@item.Inc_ID)"/> </td>
+                <td><input type="button" value="update" onclick="UpdateShellRecord(@item.Inc_ID)" /> </td>
             </tr>
         }
     </table>
 }
 
+<p>
+    <span style="color:green">&#10003;</span> - Email has been sent. <br />
+    <span style="color:red">&#x2715;</span> - Email has NOT been sent. <br />
+    <span style="color:yellow">&#9711;</span> - Unable to track if email was sent.
+</p>
 
 
 <script>
@@ -197,7 +241,7 @@ else if (LogsSelected == "Shell")
         $("#Shellcbsearch").val(id);
     }
     function UpdateGenIncRecord(id) {
-        var NewComments = document.getElementById('Comments_'+id).value;
+        var NewComments = document.getElementById('Comments_' + id).value;
         var NewReviewedDate = document.getElementById('ReviewedDate_' + id).value;
         var NewSentDate = document.getElementById('SentDate_' + id).value;
 
@@ -213,6 +257,22 @@ else if (LogsSelected == "Shell")
             }
         })
     }
+
+    function DeleteGenIncRecord(id) {
+        $.ajax({
+            url: '/ManagerTools/DeleteGenInc',
+            data: { IncidentID: id },
+            type: 'GET',
+            success: function (data) {
+                alert("The report has been deleted.");
+                window.location.reload();
+            },
+            error: function (date) {
+                alert("ERROR!");
+            }
+        })
+    }
+
     function UpdateCleanshotRecord(id) {
 
         var NewComments = document.getElementById('Comments_' + id).value;
@@ -247,5 +307,5 @@ else if (LogsSelected == "Shell")
             }
         })
     }
-    
+
 </script>

@@ -739,6 +739,7 @@
     <Content Include="chemreporterschema.xsc">
       <DependentUpon>chemreporterschema.xsd</DependentUpon>
     </Content>
+    <None Include=".bin\node.cmd" />
     <None Include="chemreporterschema.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>

@@ -73,7 +73,21 @@
         {
             <tr id="Row_@item.id">
                 <td><input type="radio" name="IDSelected" value="@item.id" onclick="FillTCEQID(this.value)" /></td>
-                <td>@item.id</td>
+                <td style="width:10%">
+                    @if (item.EmailSent == "1") //Email was sent
+                    {
+                        <span style="color:green">&#10003;</span>
+                    }
+                    else if (item.EmailSent == "0") // Email has not been sent
+                    {
+                        <span style="color:red">&#x2715;</span>
+                    }
+                    else // value is null due to it being a new field.
+                    {
+                        <span style="color:yellow">&#9711;</span>
+                    }
+                    &nbsp;@item.id
+                </td>
                 <td>@item.CallerName</td>
                 <td>@item.IncidentDate.Split(' ')[0]</td>
                 <td>@item.IncidentNature</td>
@@ -124,7 +138,21 @@ else if (LogSelected == "Pipeline")
         {
             <tr id="Row_@item.id">
                 <td><input type="radio" name="IDSelected" value="@item.id" onclick="FillTCEQID(@item.id)" /></td>
-                <td>@item.id</td>
+                <td style="width:10%">
+                    @if (item.EmailSent == "1") //Email was sent
+                    {
+                        <span style="color:green">&#10003;</span>
+                    }
+                    else if (item.EmailSent == "0") // Email has not been sent
+                    {
+                        <span style="color:red">&#x2715;</span>
+                    }
+                    else // value is null due to it being a new field.
+                    {
+                        <span style="color:yellow">&#9711;</span>
+                    }
+                    &nbsp;@item.id
+                </td>
                 <td><input type="text" id="Initials_@item.id" value="@item.Initials" style="width:50%;" /><br /><br /><input type="button" value="Update" onclick="UpdateCrestInitials(@item.id)"/></td>
                 <td>@item.County</td>
                 <td>@item.State</td>
@@ -219,7 +247,11 @@ else if (LogSelected == "LockedGate")
         }
     </table>
 }
-
+<p>
+    <span style="color:green">&#10003;</span> - Email has been sent. <br />
+    <span style="color:red">&#x2715;</span> - Email has NOT been sent. <br />
+    <span style="color:yellow">&#9711;</span> - Unable to track if email was sent.
+</p>
 <script>
     function GenerateReport() {
         var x = document.getElementById('startdate').value;

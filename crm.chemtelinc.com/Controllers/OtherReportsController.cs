@@ -256,7 +256,7 @@ namespace crm.chemtelinc.com.Controllers
                 }
             }
             to.Add(new EmailAddress("mpepitone@ehs.com"));
-            to.Add(new EmailAddress("ers@ehs.com"));
+            //to.Add(new EmailAddress("ers@ehs.com"));
             var msg = MailHelper.CreateSingleEmailToMultipleRecipients(from, to, fc["txtemailsubject"].ToString(), "", body, true);
             //Attach Saved PDF to email
             var filename = Path.GetFileName(fc["txtemailattachment"].ToString());
@@ -949,6 +949,13 @@ namespace crm.chemtelinc.com.Controllers
             log.Close();
 
             string ResultCode = response.Result.StatusCode.ToString();
+
+            if (ResultCode == "Accepted")
+            {
+                //If the email gets send, mark the field in the database to show in the log page.
+                //Must have the Table name, the ID Field Name, and the ID.
+                Update.UpdateEmailSent("generalincidentreportdata", "IncidentId", fc["IncidentID"].ToString(), Session["constring"].ToString());
+            }
 
             return RedirectToAction("Index", "Home", new { Result = ResultCode });
         }

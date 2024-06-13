@@ -52,12 +52,12 @@ namespace crm.chemtelinc.com.Controllers
 
             if (fc["Revised"].ToString() != "true")
             {
-                Add.AddNorthwindGenInc(constring, ngi); //Add new report data to the database.
+                Add.AddNorthwindGenInc(Session["constring"].ToString(), ngi); //Add new report data to the database.
                 ngi.ID = GetLatestGenIncID();
             } else
             {
                 ngi.ID = Int32.Parse(fc["ReportID"].ToString());
-                Update.UpdateNorthindGeneralIncident(constring, ngi);
+                Update.UpdateNorthindGeneralIncident(Session["constring"].ToString(), ngi);
             }
             //start prep for email autopopulation.
             NorthwindEmail nwe = new NorthwindEmail();
@@ -73,6 +73,7 @@ namespace crm.chemtelinc.com.Controllers
 
 
             nwe.ID = ngi.ID;
+            nwe.ReportType = "General Incident";
             nwe.FilePath = filepath;
             nwe.ToEmails = "mpepitone@ehs.com,ers@ehs.com,ben@nwmidstream.com,dbarton@nwmidstream.com,agarza@nwmidstream.com,emiller@nwmidstream.com,rregister@nwmidstream.com,ssanders@nwmidstream.com,jsouthard@nwmidstream.com,jsisk@nwmidstream.com,jyamartino@nwmidstream.com";
             if (ngi.IncidentType == "Vehicle Accident")
@@ -120,13 +121,13 @@ namespace crm.chemtelinc.com.Controllers
 
             if (fc["Revised"].ToString() != "true") //New report
             {
-                Add.AddNorthwindPipeline(constring, n);
+                Add.AddNorthwindPipeline(Session["constring"].ToString(), n);
                 n.ID = GetLatestPipelineID(); // Gets and sets the new ID that was just entered.
             }
             else // Updated report (user clicked Back To Report button)
             {
                 n.ID = Int32.Parse(fc["ReportID"].ToString());
-                Update.UpdateNorthwindPipeline(constring, n);
+                Update.UpdateNorthwindPipeline(Session["constring"].ToString(), n);
             }
             string filepath = CreatePipelineReport(n.ID, n.Call_Date.Year.ToString());
             string LocationString = "";
@@ -178,6 +179,17 @@ namespace crm.chemtelinc.com.Controllers
 
             string ResultCode = response.Result.StatusCode.ToString();
 
+            if (ResultCode == "Accepted")
+            {
+                if (fc["ReportType"] == "General Incident")
+                {
+                    Update.UpdateEmailSent("NorthwindGeneralIncidents", "ID", fc["reportid"].ToString(), Session["constring"].ToString());
+                } else
+                {
+                    Update.UpdateEmailSent("NorthwindPipelineIncidents", "ID", fc["reportid"].ToString(), Session["constring"].ToString());
+                }
+            }
+
             return RedirectToAction("Index", "Home", new { Result = ResultCode });
         }
 
@@ -186,11 +198,11 @@ namespace crm.chemtelinc.com.Controllers
             ViewBag.Revised = "true";
             if (fc["ReportType"].ToString() == "Pipeline")
             {
-                NorthwindPipeline nwp = new NorthwindPipeline(constring, int.Parse(fc["reportid"].ToString()));  //Gets the desired report and puts it into a custom class variable.
+                NorthwindPipeline nwp = new NorthwindPipeline(Session["constring"].ToString(), int.Parse(fc["reportid"].ToString()));  //Gets the desired report and puts it into a custom class variable.
                 return View("Pipeline", nwp);
             } else
             {
-                NorthwindGenInc ngi = new NorthwindGenInc(constring, int.Parse(fc["reportid"].ToString()));
+                NorthwindGenInc ngi = new NorthwindGenInc(Session["constring"].ToString(), int.Parse(fc["reportid"].ToString()));
                 return View("GeneralIncident", ngi);
             }
         }
@@ -464,7 +476,7 @@ namespace crm.chemtelinc.com.Controllers
         {
             int id = 0;
             string strsql = "SELECT TOP 1 id FROM NorthwindPipelineIncidents ORDER BY ID DESC";
-            using (SqlConnection cn = new SqlConnection(constring))
+            using (SqlConnection cn = new SqlConnection(Session["constring"].ToString()))
             {
                 cn.Open();
                 using (SqlCommand cmd = new SqlCommand(strsql, cn))
@@ -479,7 +491,7 @@ namespace crm.chemtelinc.com.Controllers
         {
             int id = 0;
             string strsql = "SELECT TOP 1 id FROM NorthwindGeneralIncidents ORDER BY ID DESC";
-            using (SqlConnection cn = new SqlConnection(constring))
+            using (SqlConnection cn = new SqlConnection(Session["constring"].ToString()))
             {
                 cn.Open();
                 using (SqlCommand cmd = new SqlCommand(strsql, cn))
@@ -540,6 +552,7 @@ namespace crm.chemtelinc.com.Controllers
                             c.HSERPhone = sdr["HSERPhone"].ToString();
                             c.NotificationDate = sdr["NotificationDate"].ToString().Split(' ')[0];
                             c.NotificationTime = sdr["NotificationTime"].ToString();
+                            c.EmailSent = sdr["EmailSent"].ToString();
                             NWLogList.Add(c);
                         }
                     }
@@ -549,7 +562,7 @@ namespace crm.chemtelinc.com.Controllers
             else if (LogType == "Pipeline")
             {
                 string sqlcmd = "SELECT TOP 100 * FROM NorthwindPipelineIncidents ORDER BY id DESC";
-                using (SqlConnection con = new SqlConnection(constring))
+                using (SqlConnection con = new SqlConnection(Session["constring"].ToString()))
                 {
                     using (SqlCommand cmd = new SqlCommand(sqlcmd, con))
                     {
@@ -565,6 +578,7 @@ namespace crm.chemtelinc.com.Controllers
                             c.Date = sdr["CallDate"].ToString();
                             c.NotificationDate = sdr["NotificationDate"].ToString();
                             c.NotificationTime = sdr["NotificationTime"].ToString();
+                            c.EmailSent = sdr["EmailSent"].ToString();
                             NWLogList.Add(c);
                         }
                     }
@@ -623,6 +637,7 @@ namespace crm.chemtelinc.com.Controllers
                                 c.HSERPhone = sdr["HSERPhone"].ToString();
                                 c.NotificationDate = sdr["NotificationDate"].ToString();
                                 c.NotificationTime = sdr["NotificationTime"].ToString();
+                                c.EmailSent = sdr["EmailSent"].ToString();
                                 NWLogList.Add(c);
                             }
                         }
@@ -631,7 +646,7 @@ namespace crm.chemtelinc.com.Controllers
                 else if (fc["logtype"].ToString() == "Pipeline")
                 {
                     string sqlcmd = "SELECT * FROM NorthwindPipelineIncidents WHERE id LIKE '%" + fc["reportid"] + "%' ORDER BY id DESC";
-                    using (SqlConnection con = new SqlConnection(constring))
+                    using (SqlConnection con = new SqlConnection(Session["constring"].ToString()))
                     {
                         using (SqlCommand cmd = new SqlCommand(sqlcmd, con))
                         {
@@ -647,6 +662,7 @@ namespace crm.chemtelinc.com.Controllers
                                 c.Date = sdr["CallDate"].ToString();
                                 c.NotificationDate = sdr["NotificationDate"].ToString();
                                 c.NotificationTime = sdr["NotificationTime"].ToString();
+                                c.EmailSent = sdr["EmailSent"].ToString();
                                 NWLogList.Add(c);
                             }
                         }
@@ -660,13 +676,13 @@ namespace crm.chemtelinc.com.Controllers
                 if (fc["logtype"].ToString() == "Pipeline")
                 {
                     ViewBag.Revised = "true";
-                    NorthwindPipeline nwpi = new NorthwindPipeline(constring, int.Parse(fc["reportid"].ToString()));
+                    NorthwindPipeline nwpi = new NorthwindPipeline(Session["constring"].ToString(), int.Parse(fc["reportid"].ToString()));
                     return View("Pipeline", nwpi);
                 } else
                 {
 
                     ViewBag.Revised = "true";
-                    NorthwindGenInc ngi = new NorthwindGenInc(constring, int.Parse(fc["reportid"].ToString()));
+                    NorthwindGenInc ngi = new NorthwindGenInc(Session["constring"].ToString(), int.Parse(fc["reportid"].ToString()));
                     return View("GeneralIncident", ngi);
                 }
             }

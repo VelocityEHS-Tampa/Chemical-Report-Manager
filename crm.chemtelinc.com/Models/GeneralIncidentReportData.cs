@@ -10,6 +10,7 @@ namespace ChemicalLibrary
     {
         #region Private Fields
 
+        private string _emailsent;
         private string _incidentid, _ersoperator, _date, _time, _callersname, _callersphone, _callersaffiliation, _callersfaxoremail, _incidentstreet, _incidentcity, _incidentstate;
         private string _incidentcountry, _incidentdate, _incidenttime, _incidenttimezone, _materialname, _productnumber, _quantityspilled, _cleanupcrewreqs, _agenciesonsite;
         private string _accidentordeliberate, _incidentdetails, _involvefire, _wheredidyougetournumber, _subscribersname, _subscribersmis, _spillorexposure, _typeofexposure;
@@ -20,7 +21,11 @@ namespace ChemicalLibrary
         #endregion
         #region Public Properties
         #region Strings
-
+        public string EmailSent
+        {
+            get { return _emailsent; }
+            set { _emailsent = value; }
+        }
         public string Incident_ID
         {
             get { return _incidentid; }

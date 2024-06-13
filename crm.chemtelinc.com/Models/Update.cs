@@ -1326,6 +1326,19 @@ namespace ChemicalLibrary
                 }
             }
         }
+
+        public static void UpdateEmailSent(string TableName, string IDFieldName, string ID, string constring)
+        {
+            string sql = "UPDATE " + TableName + " SET EmailSent = 1 WHERE " + IDFieldName + " = '" + ID + "'";
+            using (SqlConnection cn = new SqlConnection(constring))
+            {
+                cn.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, cn))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
         #endregion
     }
 }

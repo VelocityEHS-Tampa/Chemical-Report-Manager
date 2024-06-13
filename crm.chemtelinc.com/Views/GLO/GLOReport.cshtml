@@ -85,10 +85,17 @@
         <div class="GLOHeader" id="GRCPHeader">GLO Report Control Panel</div>
         <div class="ContentSection">
             <br />
-            <span style="width:5%; float:left;">Search: </span>@Html.TextBox("cbsearch", "", new { @class = "form-control", style = "width: 15%; display:inline;", id = "cbsearch", @Name= "cbsearch" })
+            <span style="width:5%; float:left;">Search: </span>@Html.TextBox("cbsearch", "", new { @class = "form-control", style = "width: 15%; display:inline;", id = "cbsearch", @Name = "cbsearch", onblur = "CheckEmailSent(this.value)" })
+            <span id="EmailSentMarker" style="display:none; color:green;">&#10003;</span>
+            <span id="EmailNotSentMarker"style="display: none; color: red">&#x2715;</span>
+            <span id="EmailUnkSentMarker" style="display: none; color: yellow">&#9711;</span>
+
             <input type="submit" value="Correct" class="form-control GRCPButtons" id="btncorrect" name="btncorrect" onclick="CorrectedGLO()">
             <input type="submit" value="Update" class="form-control GRCPButtons" id="btnupdate" name="btnupdate" onclick="UpdatedGLO()">
-            <input type="submit" value="Void Report" class="form-control GRCPButtons" id="btnvoid" name="btnvoid" onclick="VoidGLO()"/>
+            @if (Session["username"].ToString() == "jharvey" || Session["username"].ToString() == "jperdomo" || Session["username"].ToString() == "cbotelho" || Session["username"].ToString() == "mpepitone")
+            {
+                <input type="submit" value="Void Report" class="form-control GRCPButtons" id="btnvoid" name="btnvoid" onclick="VoidGLO()" />
+            }
             <input type="button" value="Phone" class="form-control GRCPButtons" id="btnphone" name="btnphone" onclick="PhoneButton()">
             <input type="hidden" name="HiddenTxtSpillID" id="HiddenTxtSpillID" value="@txtspillid" />
             <input type="hidden" name="CommittedTxt" id="CommittedTxt" value="false" />
@@ -610,7 +617,6 @@
             return true;
         }
     }
-
     function ClearForm() {
         if (confirm("Are you sure you want to cancel this report?")) {
                     location.href = "";
@@ -679,5 +685,29 @@
     }
     function PhoneButton() {
         window.open("/GLO/GLOPhoneNumbers?County=" + document.getElementById('cbcounty').value, "google", "height=1000,width=500,menubar=no,toolbar=no,titlebar=no,location=no");
+    }
+    function CheckEmailSent(id) {
+        $.ajax({
+            url: '/GLO/CheckEmailSent',
+            data: { id: id },
+            type: "GET",
+            success: function (data) {
+                if (data.EmailSent == "1") {
+                    $("#EmailSentMarker").show();
+                    $("#EmailUnkSentMarker").hide();
+                    $("#EmailNotSentMarker").hide();
+                } else if (data.EmailSent == "0") {
+                    $("#EmailNotSentMarker").show();
+                    $("#EmailSentMarker").hide();
+                }
+                else {
+                    $("#EmailUnkSentMarker").show();
+                    $("#EmailNotSentMarker").hide();
+                    $("#EmailSentMarker").hide();
+                }
+            },
+            error: function (data) {
+            }
+        });
     }
 </script>

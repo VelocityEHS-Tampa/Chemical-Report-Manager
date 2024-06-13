@@ -13,7 +13,8 @@
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
                 <div class="container">
                     <a class="navbar-brand" href="@Url.Action("Index", "Home")">Chemical Report Manager</a>
-                    @if (Session["Username"] != null) {
+                    @if (Session["Username"] != null)
+                    {
                         <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                             <ul class="navbar-nav flex-grow-1">
                                 <li class="nav-item">
@@ -28,10 +29,10 @@
                                             <li><a href="#" onclick="ShowPDF('Texas General Land Office-TGLO-0004121/After Hours Contacts.pdf')">After Hours Contacts</a></li>
                                             <li>&nbsp;</li>
                                             @*<li class="MenuOptionHeader"><h5>TCEQ</h5></li>
-                                            <li><a href="@Url.Action("TCEQReport", "TCEQ")">TCEQ Report</a></li>
-                                            <li><a href="~/PDFs/TCEQ/TCEQ After Hours Complaint Line Script.pdf" target="_blank">TCEQ Complaint Line Script</a></li>
-                                            <li><a href="@Url.Action("TCEQReportLog", "TCEQ")">TCEQ Log</a></li>
-                                            <li><a href="~/PDFs/TCEQ/TCEQ Regional ER Contact List.pdf" target="_blank">TCEQ After Hours Contacts</a></li>*@
+                                <li><a href="@Url.Action("TCEQReport", "TCEQ")">TCEQ Report</a></li>
+                                <li><a href="~/PDFs/TCEQ/TCEQ After Hours Complaint Line Script.pdf" target="_blank">TCEQ Complaint Line Script</a></li>
+                                <li><a href="@Url.Action("TCEQReportLog", "TCEQ")">TCEQ Log</a></li>
+                                <li><a href="~/PDFs/TCEQ/TCEQ Regional ER Contact List.pdf" target="_blank">TCEQ After Hours Contacts</a></li>*@
                                         </ul>
                                     </div>
                                 </li>
@@ -134,14 +135,14 @@
                                                 <li><a href="@Url.Action("HWCGEmail", "ManagerTools", new { OtherToolSelected = "UserManagement"})">Send HWCG Email</a></li>
 
                                                 @* THESE LEGACY BUTTONS ARE NO LONGER USED AT THIS POINT
-                        <li><a href="#" onclick="ShowCleanShotContactInfo()">Clean Shot Contact Info</a></li>
-                        <li><a href="@Url.Action("Logs", "ManagerTools", new { LogsSelected = "GLO" })">GLO Logs</a></li>
-                        <li><a href="@Url.Action("Logs", "ManagerTools", new { LogsSelected = "CleanShot" })">Clean Shot Incident Log</a></li>
-                        <li><a href="@Url.Action("Logs", "ManagerTools", new { LogsSelected = "GenInc" })">General Incident Log</a></li>
-                        <li><a href="@Url.Action("Logs", "ManagerTools", new { LogsSelected = "Incident" })">Incident IDs</a></li>
-                        <li><a href="@Url.Action("Logs", "ManagerTools", new { LogsSelected = "CleanShot" })">Clean Shot IDs</a></li>
-                        <li><a href="@Url.Action("Logs", "ManagerTools", new { LogsSelected = "Shell" })">Shell Report Log</a></li>
-                        <li><a href="@Url.Action("ManagerToolsEtc", "ManagerTools", new { OtherToolSelected = "ViewReports" })">View Reports</a></li>
+                                    <li><a href="#" onclick="ShowCleanShotContactInfo()">Clean Shot Contact Info</a></li>
+                                    <li><a href="@Url.Action("Logs", "ManagerTools", new { LogsSelected = "GLO" })">GLO Logs</a></li>
+                                    <li><a href="@Url.Action("Logs", "ManagerTools", new { LogsSelected = "CleanShot" })">Clean Shot Incident Log</a></li>
+                                    <li><a href="@Url.Action("Logs", "ManagerTools", new { LogsSelected = "GenInc" })">General Incident Log</a></li>
+                                    <li><a href="@Url.Action("Logs", "ManagerTools", new { LogsSelected = "Incident" })">Incident IDs</a></li>
+                                    <li><a href="@Url.Action("Logs", "ManagerTools", new { LogsSelected = "CleanShot" })">Clean Shot IDs</a></li>
+                                    <li><a href="@Url.Action("Logs", "ManagerTools", new { LogsSelected = "Shell" })">Shell Report Log</a></li>
+                                    <li><a href="@Url.Action("ManagerToolsEtc", "ManagerTools", new { OtherToolSelected = "ViewReports" })">View Reports</a></li>
                                                 *@
                                             </ul>
                                         </div>
