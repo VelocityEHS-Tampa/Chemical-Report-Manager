@@ -26,10 +26,12 @@ namespace crm.chemtelinc.com.Controllers
             if (Request.Url.AbsoluteUri.Contains("crmtest.chemtel.net") || Request.Url.AbsoluteUri.Contains("localhost"))
             {
                 Session["constring"] = Properties.Settings.Default.chemicalTestConnectionString;
+                RedirectUri = "https://crmtest.chemtel.net";
             }
             else
             {
                 Session["constring"] = Properties.Settings.Default.chemicalConnectionString;
+                RedirectUri = "https://crm.chemtel.net";
             }
             return View();
         }
@@ -66,14 +68,14 @@ namespace crm.chemtelinc.com.Controllers
                 if (password == "Password1" || Int32.Parse(Session["DaysBetween"].ToString()) >= 90)
                 {
                     RedirectUri = "https://crm.chemtel.net/Home/ResetPassword";
-                    //InitiateDuo(username); //User should be the username trying to login.
+                    InitiateDuo(username); //User should be the username trying to login.
                     return View("ResetPassword");
                 } else
                 {
                     ViewBag.ErrorMessage = "Successful Login!";
                     RedirectUri = "https://crm.chemtel.net/Home/Index";
                     //Add DUO MFA Code here
-                    //InitiateDuo(username); //User should be the username trying to login.
+                    InitiateDuo(username); //User should be the username trying to login.
                     return View("Index");
                 }
             }
@@ -83,8 +85,6 @@ namespace crm.chemtelinc.com.Controllers
                 return View();
             }
         }
-
-
         public void InitiateDuo(string User)
         {
             //Create client using config settings
@@ -109,7 +109,6 @@ namespace crm.chemtelinc.com.Controllers
             // In this example, that is /duo_callback, which is implemented in Callback.cshtml.cs.
             Response.Redirect(promptUri, false);
         }
-
         public ActionResult ResetPassword()
         {
             return View();

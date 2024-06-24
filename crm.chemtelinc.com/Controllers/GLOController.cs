@@ -1046,7 +1046,7 @@ namespace crm.chemtelinc.com.Controllers
                         to.Add(new EmailAddress(e.Trim()));
                     }
                 }
-                //to.Add(new EmailAddress("ers@ehs.com"));
+                to.Add(new EmailAddress("ers@ehs.com"));
                 to.Add(new EmailAddress("mpepitone@ehs.com"));
 
                 var msg = MailHelper.CreateSingleEmailToMultipleRecipients(from, to, subject, "", body, true);
