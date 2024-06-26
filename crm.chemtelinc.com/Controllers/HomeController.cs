@@ -60,12 +60,13 @@ namespace crm.chemtelinc.com.Controllers
                 Session.Add("SessionStartTime", DateTime.Now);
                 Session.Add("Username", username);
                 
+                //Add Cookie for longer session time
                 HttpCookie UserCookie = new HttpCookie("UserCookie");
                 UserCookie.Value = username;
-                UserCookie.Expires = DateTime.Now.AddHours(1);
+                UserCookie.Expires = DateTime.Now.AddHours(2);
 
                 GetAcctInfo(username);
-                if (password == "Password1" || Int32.Parse(Session["DaysBetween"].ToString()) >= 90)
+                if (password == "Password1" || Int32.Parse(Session["DaysBetween"].ToString()) >= 10)
                 {
                     RedirectUri = "https://crm.chemtel.net/Home/ResetPassword";
                     InitiateDuo(username); //User should be the username trying to login.
